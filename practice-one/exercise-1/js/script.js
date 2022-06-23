@@ -12,12 +12,12 @@ homeTown.textContent = 'Quang Nam';
 // Iterate through each li and change the class to "listitem". 
 // Add a style tag that sets a rule for "listitem" to make the color red.
 const userInfoListItems = document.querySelectorAll('li');
-userInfoListItems.forEach(listItems  => {
-  listItems.className = 'listitem';
+userInfoListItems.forEach(listItem  => {
+  listItem.className = 'list-item';
 })
-const displayListUserInfoItems = document.querySelectorAll('.listitem')
-displayListUserInfoItems.forEach(items => {
-  items.style.color = 'red';
+const displayListUserInfoItems = document.querySelectorAll('.list-item')
+displayListUserInfoItems.forEach(item => {
+  item.style.color = 'red';
 })
 
 //Create a new img element and set its src attribute to a picture of you. 
