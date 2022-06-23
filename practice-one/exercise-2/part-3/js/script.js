@@ -1,6 +1,9 @@
-const set_background = () => {
-  const fontBackground = document.querySelectorAll ('p');
-  fontBackground.forEach (bgr => {
-    bgr.style.background = 'green';
+const setBackground = () => {
+  const paragraphs = document.querySelectorAll('p');
+  paragraphs.forEach(paragraph => {
+    paragraph.style.background = 'green';
   })
 };
+
+const textColorChangeButton = document.querySelector('input');
+textColorChangeButton = addEventListener('click', setBackground);

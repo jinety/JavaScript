@@ -1,9 +1,9 @@
-const js_style = () => {
-  const changeStyle = document.querySelector ('#text');
-  changeStyle.style.fontFamily = 'Arial, sans-serif';
-  changeStyle.style.fontSize = '23px';
-  changeStyle.style.color = 'red';
+const getInfo = () => {
+  let info = document.getElementById('text');
+  info.style.fontFamily = 'Arial, sans-serif';
+  info.style.fontSize = '23px';
+  info.style.color = 'red';
 };
 
-const btn = document.querySelector('button');
-btn.addEventListener('click', js_style);
+const changeButtonStyle = document.querySelector('button');
+changeButtonStyle.addEventListener('click', getInfo);

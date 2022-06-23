@@ -1,4 +1,4 @@
-const insert_Row = () => {
+const insertRow = () => {
   const table = document.getElementById('sampleTable')
   let row = table.insertRow(0);
   let cell1 = row.insertCell(0);
@@ -7,5 +7,5 @@ const insert_Row = () => {
   cell2.innerHTML = "NEW CELL2";
 }
 
-const btn = document.querySelector ('input');
-btn.addEventListener('click', insert_Row);
+const addRowButton = document.querySelector('input');
+addRowButton.addEventListener('click', insertRow);
