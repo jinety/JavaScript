@@ -11,12 +11,12 @@ homeTown.textContent = 'Quang Nam';
 
 // Iterate through each li and change the class to "listitem". 
 // Add a style tag that sets a rule for "listitem" to make the color red.
-const infoDisplay = document.querySelectorAll('li');
-infoDisplay.forEach(applyClass  => {
+const userInfoListItems = document.querySelectorAll('li');
+userInfoListItems.forEach(applyClass  => {
   applyClass.className = 'listitem';
 })
-const userInfo = document.querySelectorAll('.listitem')
-userInfo.forEach(applyColor => {
+const showItemsUserInfoList = document.querySelectorAll('.listitem')
+showItemsUserInfoList.forEach(applyColor => {
   applyColor.style.color = 'red';
 })
 
