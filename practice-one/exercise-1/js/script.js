@@ -15,8 +15,8 @@ const userInfoListItems = document.querySelectorAll('li');
 userInfoListItems.forEach(listItem  => {
   listItem.className = 'list-item';
 })
-const displayListUserInfoItems = document.querySelectorAll('.list-item')
-displayListUserInfoItems.forEach(item => {
+const userInfoElements = document.querySelectorAll('.list-item')
+userInfoElements.forEach(item => {
   item.style.color = 'red';
 })
 
