@@ -5,5 +5,5 @@ const stylingParagraphs = () => {
   info.style.color = 'red';
 };
 
-const updateFormBtn = document.querySelector('button');
-updateFormBtn.addEventListener('click', stylingParagraphs);
+const styleButton = document.querySelector('button');
+styleButton.addEventListener('click', stylingParagraphs);
