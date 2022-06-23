@@ -1,9 +1,9 @@
-const getInfo = () => {
+const stylingParagraphs = () => {
   let info = document.getElementById('text');
   info.style.fontFamily = 'Arial, sans-serif';
   info.style.fontSize = '23px';
   info.style.color = 'red';
 };
 
-const changeButtonStyle = document.querySelector('button');
-changeButtonStyle.addEventListener('click', getInfo);
+const updateFormBtn = document.querySelector('button');
+updateFormBtn.addEventListener('click', stylingParagraphs);
