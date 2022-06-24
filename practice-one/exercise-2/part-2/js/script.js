@@ -1,10 +1,8 @@
 const getFormValue = () => {
-  let form = document.getElementById("nameSubmissionForm");
-  for(let i = 0; i < form.length; i++) {
-   if(form.elements[i].value!='Submit') {  
-      alert(form.elements[i].value);
-    }  
-  }
+  let firstName = document.getElementById('firstName').value;
+  alert(`First name: ${firstName}`);
+  let lastName = document.getElementById('lastName').value;
+  alert(`Last name: ${lastName}`);
 }
 
 const formSubmit = document.querySelector('form');
