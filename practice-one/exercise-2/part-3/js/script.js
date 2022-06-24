@@ -1,9 +1,9 @@
 const setBackground = () => {
   const paragraphs = document.querySelectorAll('p');
   paragraphs.forEach(paragraph => {
-    paragraph.style.background = 'green';
+    paragraph.style.backgroundColor = 'green';
   })
 };
 
-const styleBtn = document.querySelector('input');
-styleBtn = addEventListener('click', setBackground);
+const styleBtn = document.querySelector('button');
+styleBtn.addEventListener('click', setBackground);
