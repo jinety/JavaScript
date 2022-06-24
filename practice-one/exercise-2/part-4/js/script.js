@@ -1,16 +1,11 @@
 const getAttributes = () => {
   const attributes = document.getElementById('information');
-  const href = attributes.href
-  const target = attributes.target
-  const rel = attributes.rel
-  const hreflang = attributes.hreflang
-  const type = attributes.type
-
-  alert(`href: ${href}`);
-  alert(`target: ${target}`);
-  alert(`rel: ${rel}`);
-  alert(`hreflang: ${hreflang}`);
-  alert(`type: ${type}`);
+ 
+  alert(`href: ${attributes.href}`);
+  alert(`target: ${attributes.target}`);
+  alert(`rel: ${attributes.rel}`);
+  alert(`hreflang: ${attributes.hreflang}`);
+  alert(`type: ${attributes.type}`);
 }
 
 const getAttributeBtn = document.querySelector('.attributes-btn');
