@@ -1,16 +1,17 @@
 const getAttributes = () => {
-  const attributesHref = document.getElementById('information').href;
-  const attributesTarget = document.getElementById('information').target;
-  const attributesRel = document.getElementById('information').rel;
-  const attributesHreflang = document.getElementById('information').hreflang;
-  const attributesType = document.getElementById('information').type;
+  const attributes = document.getElementById('information');
+  const href = attributes.href
+  const target = attributes.target
+  const rel = attributes.rel
+  const hreflang = attributes.hreflang
+  const type = attributes.type
 
-  alert('designated link: ' + attributesHref);
-  alert('designated link: ' + attributesTarget);
-  alert('designated link: ' + attributesRel);
-  alert('designated link: ' + attributesHreflang);
-  alert('designated link: ' + attributesType);
+  alert('href: ' + href);
+  alert('target: ' + target);
+  alert('rel: ' + rel);
+  alert('hreflang: ' + hreflang);
+  alert('type: ' + type);
 }
 
-const attributGetBtn = document.querySelector('button');
-attributGetBtn.addEventListener('click', getAttributes);
+const attributeGetBtn = document.querySelector('button');
+attributeGetBtn.addEventListener('click', getAttributes);
