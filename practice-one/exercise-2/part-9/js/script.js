@@ -1,5 +1,5 @@
 const getOptions = () => {
-  let colorSelection = document.getElementById('mySelect');
+  const colorSelection = document.getElementById('mySelect');
   let txt = 'No. of items in dropdown is: ';
   let list = document.getElementById('mySelect').length;
   txt = txt + list;
