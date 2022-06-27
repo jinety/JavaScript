@@ -3,5 +3,5 @@ const removeItem = () => {
   colorSelection.remove(colorSelection.selectedIndex);
 }
 
-const removeFromBtn = document.querySelector('.item-remove-btn');
+const removeFromBtn = document.getElementById('itemRemoveBtn');
 removeFromBtn.addEventListener('click', removeItem);
