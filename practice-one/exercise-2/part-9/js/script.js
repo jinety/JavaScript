@@ -1,13 +1,14 @@
 const getOptions = () => {
-  const colorSelection = document.getElementById('mySelect');
-  let txt = 'No. of items in dropdown is: ';
-  let list = document.getElementById('mySelect').length;
-  txt = txt + list;
+  const colorSelection = document.getElementById('colorList');
+  txt = 'No. of items in dropdown is: ';
+  let colorList = document.getElementById('colorList').length;
+  txt = txt + colorList;
   for(let i = 0; i < colorSelection.length; i++) {
-    txt = txt + '\n' + colorSelection.options[i].text;
+    txt = `${txt}
+    ${colorSelection.options[i].text}`;
   }
   alert(txt);
 }
 
-const countAndDisplayItemsBtn = document.getElementById('countAndDisplayItemsBtn');
-countAndDisplayItemsBtn.addEventListener('click', getOptions);
+const countAndDisplayBtn = document.getElementById('countAndDisplayBtn');
+countAndDisplayBtn.addEventListener('click', getOptions);
