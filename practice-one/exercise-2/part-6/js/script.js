@@ -1,10 +1,9 @@
 const changeTable = () => {
     const rows = document.getElementById('table').rows;
-
     const targetRow  = document.getElementById('rowNumber').value;
     const targetCol = document.getElementById('columnNumber').value;
-
     let text;
+
     if(rows[targetRow]) {
         const targetRowCells = rows[targetRow].cells;
         if(targetRowCells[targetCol]) {
