@@ -6,13 +6,15 @@ const changeTable = () => {
 
     let text;
     if(rows[targetRow]) {
-        let targetRowCells = rows[targetRow].cells;
+        const targetRowCells = rows[targetRow].cells;
         if(targetRowCells[targetCol]) {
             targetRowCells[targetCol].innerHTML = document.getElementById('cellContent').value;
             text = 'Successful';
-        }
+        } else {
+            
+        } 
     } else {
-        
+        text = 'Incorrect, please re-enter'
     }
    
     document.getElementById("notification").innerHTML = text;
