@@ -10,5 +10,5 @@ const createTable = () => {
         }
     }
 } 
-const tableUpdateBtn = document.getElementById('tableUpdateBtn');
-tableUpdateBtn.addEventListener('click', createTable);
+const tableCreateBtn = document.getElementById('tableCreateBtn');
+tableCreateBtn.addEventListener('click', createTable);
