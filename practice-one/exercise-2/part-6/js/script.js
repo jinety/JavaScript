@@ -5,12 +5,14 @@ const changeTable = () => {
     let targetCol = document.getElementById('columnNumber').value;
 
     let text;
-    if(rows[targetRow] && rows[targetCol]) {
+    if(rows[targetRow]) {
         let targetRowCells = rows[targetRow].cells;
-        targetRowCells[targetCol].innerHTML = document.getElementById('cellContent').value;
-        text = 'Successful';
+        if(targetRowCells[targetCol]) {
+            targetRowCells[targetCol].innerHTML = document.getElementById('cellContent').value;
+            text = 'Successful';
+        }
     } else {
-        text = 'Failure!!! Please re-enter';
+        
     }
    
     document.getElementById("notification").innerHTML = text;
