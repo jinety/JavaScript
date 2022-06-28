@@ -2,14 +2,13 @@ const changeTable = () => {
     const rows = document.getElementById('table').rows;
 
     let targetRow  = document.getElementById('rowNumber').value;
-    let targetCol   = document.getElementById('columnNumber').value;
+    let targetCol = document.getElementById('columnNumber').value;
 
     let text;
-    if(targetRow >= 0 && targetRow <= 2 && targetCol >= 0 && targetCol <= 1) {
+    if(rows[targetRow] && rows[targetCol]) {
         let targetRowCells = rows[targetRow].cells;
         targetRowCells[targetCol].innerHTML = document.getElementById('cellContent').value;
         text = 'Successful';
-        
     } else {
         text = 'Failure!!! Please re-enter';
     }
