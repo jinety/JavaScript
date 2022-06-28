@@ -11,12 +11,9 @@ const changeTable = () => {
             targetRowCells[targetCol].innerHTML = document.getElementById('cellContent').value;
             text = 'Successful';
         } else {
-            
+            text = 'Incorrect, please re-enter'
         } 
-    } else {
-        text = 'Incorrect, please re-enter'
-    }
-   
+    } 
     document.getElementById("notification").innerHTML = text;
 }
 
