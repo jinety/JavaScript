@@ -1,8 +1,8 @@
 const changeTable = () => {
     const rows = document.getElementById('table').rows;
 
-    let targetRow  = document.getElementById('rowNumber').value;
-    let targetCol = document.getElementById('columnNumber').value;
+    const targetRow  = document.getElementById('rowNumber').value;
+    const targetCol = document.getElementById('columnNumber').value;
 
     let text;
     if(rows[targetRow]) {
@@ -11,8 +11,10 @@ const changeTable = () => {
             targetRowCells[targetCol].innerHTML = document.getElementById('cellContent').value;
             text = 'Successful';
         } else {
-            text = 'Incorrect, please re-enter'
+            text = 'Incorrect, please re-enter';
         } 
+    } else {
+        text = 'Incorrect or missing input, please re-enter';
     } 
     document.getElementById("notification").innerHTML = text;
 }
