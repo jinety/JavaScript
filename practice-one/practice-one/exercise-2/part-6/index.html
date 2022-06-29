@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Change the content of a cell</title>
+  </head>
+  <body>
+    <table id="table" border="1">
+      <tr>
+        <td>Row1 cell1</td>
+        <td>Row1 cell2</td>
+      </tr>
+      <tr>
+        <td>Row2 cell1</td>
+        <td>Row2 cell2</td>
+      </tr>
+      <tr>
+        <td>Row3 cell1</td>
+        <td>Row3 cell2</td>
+      </tr>
+    </table>
+    <form>
+      <label>Input the Row number</label>
+      <input type="number" id="rowNumber">
+      <label>Input the Column number</label>
+      <input type="number" id="columnNumber">
+      <label>Input the Cell content</label>
+      <input type="text" id="cellContent">
+      <button type="button" id="changeContentBtn">Change content</button>
+      <p id="notification"></p>
+    </form>
+
+    <script src="./js/script.js"></script>
+  </body>
+</html>
