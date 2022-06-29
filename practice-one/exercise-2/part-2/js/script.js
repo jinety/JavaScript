@@ -7,4 +7,5 @@ const getFormValue = () => {
 }
 
 const formSubmit = document.querySelector('form');
+
 formSubmit.addEventListener('submit', getFormValue);

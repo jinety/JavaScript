@@ -9,4 +9,5 @@ const getAttributes = () => {
 }
 
 const getAttributeBtn = document.querySelector('.attributes-btn');
+
 getAttributeBtn.addEventListener('click', getAttributes);
