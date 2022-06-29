@@ -1,5 +1,6 @@
 const getOptions = () => {
   const colorSelection = document.getElementById('colorList');
+
   txt = 'No. of items in dropdown is: ';
   const listLength = document.getElementById('colorList').length;
 
@@ -11,4 +12,5 @@ const getOptions = () => {
 }
 
 const showButton = document.getElementById('showBtn');
+
 showButton.addEventListener('click', getOptions);

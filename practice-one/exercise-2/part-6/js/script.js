@@ -19,4 +19,5 @@ const changeTable = () => {
 }
 
 const changeContentBtn = document.getElementById('changeContentBtn');
+
 changeContentBtn.addEventListener('click', changeTable);
