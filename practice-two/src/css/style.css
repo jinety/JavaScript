@@ -1,0 +1,35 @@
+form {
+  border: 5px solid black;
+  width: 712px;
+  height: 355px;
+  margin: 0 auto;
+  text-align: right;
+}
+.container {
+  margin: 10px 20px;
+  text-align: left;
+}
+
+warn-msg {
+  color: red;
+  font-size: 15px;
+}
+
+.input-label {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.data-input {
+  width: 666px;
+  height: 20px;
+}
+
+#submitBtn {
+  margin: 0px 20px 10px;
+  padding: 10px 50px;
+  background-color: black;
+  color: white;
+  float: right;
+}

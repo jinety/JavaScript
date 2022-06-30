@@ -1,0 +1,11 @@
+{
+  "name": "practice-three",
+  "version": "1.0.0",
+  "scripts": {
+    "start" : "parcel src/index.html"
+  },
+  "author": "Hoa Nguyen <vhoa1000@gmail.com>",
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  }
+}
