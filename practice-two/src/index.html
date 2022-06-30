@@ -5,25 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/reset.css">
     <title>Information input form</title>
   </head>
   <body>
-    <form action="">
-      <div class="container">
-        <label class="input-label">Full Name*</label>
-        <input type="text" id="fullName" class="data-input"/>
-        <p id="warnMsgFullName" class="warn-msg"></p>
-        <label class="input-label">Email Id</label>
-        <input type="email" id="email" class="data-input"/>
-        <p id="warnMsgEmail" class="warn-msg"></p>
-        <label class="input-label">Salary</label>
-        <input type="number" id="salary" class="data-input"/>
-        <p id="warnMsgSalary" class="warn-msg"></p>
-        <label class="input-label">City</label>
-        <input type="text" id="city" class="data-input"/>
-        <p id="warnMsgCity" class="warn-msg"></p>
-      </div> 
-      <button type="submit" id="submitBtn">Submit</button>
+    <form>
+      <div class="input-container-and-button">
+        <div class="input-box">
+          <label class="input-label">Full Name*</label>
+          <input type="text" id="fullName" class="data-input"/>
+          <p id="warnMsgFullName" class="warn-msg"></p>
+          <label class="input-label">Email Id</label>
+          <input type="email" id="email" class="data-input"/>
+          <p id="warnMsgEmail" class="warn-msg"></p>
+          <label class="input-label">Salary</label>
+          <input type="number" id="salary" class="data-input"/>
+          <p id="warnMsgSalary" class="warn-msg"></p>
+          <label class="input-label">City</label>
+          <input type="text" id="city" class="data-input"/>
+          <p id="warnMsgCity" class="warn-msg"></p>
+        </div> 
+        <button type="submit" id="submitBtn">Submit</button>
+      </div>
     </form>
   </body>
 </html>
