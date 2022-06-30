@@ -28,13 +28,13 @@ Before you continue, ensure you meet the following requirements:
 ### Executing program
 * Step 1: Clone repository 
   `git clone https://github.com/jinety/JavaScript/tree/feature/practice-two`
-* Step 2: Cd folder practice-two 
+* Step 2: Change directory to practice-two folder 
   `cd practice-two`
-* Step 3: Install node package and Parcel 
+* Step 3: Install node packages 
   `npm install`
 * Step 4: Run project 
   `npm start`
-* Step 5: Open this file in a browser to see the results 
+* Step 5: Open browser with the link below 
   `http://localhost:1234`
 
 ## Author
