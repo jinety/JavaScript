@@ -1,5 +1,8 @@
 # Practice two
 > A simple page.
+
+Build a simple page to practice applying what you've learned in JavaScript
+
 ## Getting Started 
 
 ### Design
@@ -16,9 +19,6 @@ Before you continue, ensure you meet the following requirements:
 * Store data using localStorage.
 * Improve code styles.
   
-### Installation
-* You can download my code [here](https://github.com/jinety/JavaScript/tree/feature/practice-two)
-
 ### Technologies
 * HTML5
 * CSS3
@@ -26,11 +26,11 @@ Before you continue, ensure you meet the following requirements:
 * JavaScript
 
 ### Executing program
-* Step 1: clone repository 
+* Step 1: Clone repository 
   `git clone https://github.com/jinety/JavaScript/tree/feature/practice-two`
-* Step 2: cd folder practice-1 
+* Step 2: Cd folder practice-two 
   `cd practice-two`
-* Step 3: Setting Parcel 
+* Step 3: Install node package and Parcel 
   `npm install`
 * Step 4: Run project 
   `npm start`
