@@ -4,18 +4,18 @@
   --primary-color-200: white;
   --secondary-color-100: red;
 
-
   /*FONT SIZE*/
   --font-size-s: 18px;
   --font-size-m: 24px;
 }
 
-.input-container-and-button {
+.registration-form {
   border: 5px solid var(--primary-color-100);
   width: 50%;
   text-align: right;
   margin: 0 auto;
 }
+
 .input-box {
   margin: 10px 20px;
   text-align: left;
