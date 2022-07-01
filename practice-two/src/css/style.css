@@ -1,0 +1,50 @@
+:root {
+  /* COLOR */
+  --primary-color-100: black;
+  --primary-color-200: white;
+  --secondary-color-100: red;
+
+  /*FONT SIZE*/
+  --font-size-s: 18px;
+  --font-size-m: 24px;
+}
+
+.registration-form {
+  border: 5px solid var(--primary-color-100);
+  width: 50%;
+  margin: 0 auto;
+}
+
+.input-box {
+  margin: 10px 20px;
+}
+
+.input-label {
+  display: block;
+  font-size: var(--font-size-m);
+  margin-bottom: 10px;
+}
+
+.data-input {
+  margin-left: 1px;
+  margin-bottom: 5px;
+  width: 98%;
+  font-size: var(--font-size-s);
+}
+
+.warn-msg {
+  font-size: var(--font-size-m);
+  color: var(--secondary-color-100);
+}
+
+.button-box {
+  text-align: right;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+#submitBtn {
+  padding: 10px 50px;
+  background-color: var(--primary-color-100);
+  color: var(--primary-color-200);
+}
