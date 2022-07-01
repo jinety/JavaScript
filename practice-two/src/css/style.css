@@ -12,13 +12,11 @@
 .registration-form {
   border: 5px solid var(--primary-color-100);
   width: 50%;
-  text-align: right;
   margin: 0 auto;
 }
 
 .input-box {
   margin: 10px 20px;
-  text-align: left;
 }
 
 .input-label {
@@ -39,9 +37,13 @@
   color: var(--secondary-color-100);
 }
 
-#submitBtn {
+.button-box {
+  text-align: right;
   margin-right: 20px;
   margin-bottom: 10px;
+}
+
+#submitBtn {
   padding: 10px 50px;
   background-color: var(--primary-color-100);
   color: var(--primary-color-200);
