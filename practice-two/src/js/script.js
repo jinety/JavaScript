@@ -1,64 +1,62 @@
-const getInfo = () => {
-  //Query to id
-  const fullName = document.getElementById('fullName');
-  const email = document.getElementById('email');
-  const salary = document.getElementById('salary');
-  const city = document.getElementById('city');
-  //From the initial id return the parent element then query the child class
-  const errMsgFullName = fullName.parentElement.querySelector('.warn-msg');
-  const errMsgEmail = email.parentElement.querySelector('.warn-msg');
-  const errMsgSalary = salary.parentElement.querySelector('.warn-msg');
-  const errMsgCity = city.parentElement.querySelector('.warn-msg');
-  //Check the input condition
-  const regalphabet = /^[a-zA-Z]+ [a-zA-Z]+$/;
-  const regEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+//QUERY TO ID
+const fullNameInput = document.getElementById('fullName');
+const emailInput = document.getElementById('email');
+const salaryInput = document.getElementById('salary');
+const cityInput = document.getElementById('city');
+//CHECK THE INPUT CONDITION
+const alphabetRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
+const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+//FIXED VALUE
+const notification = {
+  emptyFormat: 'Empty format',
+  wrongFormat: 'Enter the wrong format. Please re-enter',
+  correctFormat: ''
+};
 
-  //FULL NAME
-  if(fullName.value === '') {
-    errMsgFullName.innerHTML = 'Full name is empty';
-  } else {
-    if(regalphabet.test(fullName.value)) {
-      errMsgFullName.innerHTML = '';
-    } else {
-      errMsgFullName.innerHTML = 'Enter the wrong format. Please re-enter';
-    }
+const confirmInfo = () => {
+  function showErrorMessage(input, msg) {
+    const errMessageEl = input.parentElement.querySelector('.warn-msg');
+    errMessageEl.innerHTML = msg;
   }
 
-  //EMAIL
-  if(email.value === '') {
-    errMsgEmail.innerHTML = 'Email is empty';
+  //FULL NAME IS REQUIRED
+  if (fullNameInput.value === '' || fullNameInput.value === undefined || fullNameInput.value === null) {
+    showErrorMessage(fullNameInput, notification.emptyFormat);
+  } else if (!alphabetRegex.test(fullNameInput.value)) {
+    showErrorMessage(fullNameInput, notification.wrongFormat);
   } else {
-    if(regEmail.test(email.value)) {
-      errMsgEmail.innerHTML = '';
-    } else {
-      errMsgEmail.innerHTML = 'Enter the wrong format. Please re-enter';
-    }
+    showErrorMessage(fullNameInput, notification.correctFormat);
+  }
+  
+  //EMAIL IS REQUIRED
+  if (emailInput.value === '' || emailInput.value === undefined || emailInput.value === null) {
+    showErrorMessage(emailInput, notification.emptyFormat);
+  } else if (!emailRegex.test(emailInput.value)) {
+    showErrorMessage(emailInput, notification.wrongFormat)
+  } else {
+    showErrorMessage(emailInput, notification.correctFormat);
   }
 
-  //SALARY
-  if(Math.sign(salary.value) === '') {
-    errMsgSalary.innerHTML = 'Salary is empty';
+  //SALARY IS REQUIRED AND MUST BE GREATER THAN 0
+  if (salaryInput.value === '' || salaryInput.value === undefined || salaryInput.value === null) {
+    showErrorMessage(salaryInput, notification.emptyFormat);
+  } else if (Math.sign(salaryInput.value) < 0) {
+    showErrorMessage(salaryInput, notification.wrongFormat);
   } else {
-    if(Math.sign(salary.value) > 0) {
-      errMsgSalary.innerHTML = '';
-    } else {
-      errMsgSalary.innerHTML = 'Enter the wrong format. Please re-enter';
-    }
+    showErrorMessage(salaryInput, notification.correctFormat);
   }
 
-  //CITY
-  if(city.value === '') {
-    errMsgCity.innerHTML = 'City is empty';
+  //CITY IS REQUIRED 
+  if (cityInput.value === '' || cityInput.value === undefined || cityInput.value === null) {
+    showErrorMessage(cityInput, notification.emptyFormat);
+  } else if (!alphabetRegex.test(cityInput.value)) {
+    showErrorMessage(cityInput, notification.wrongFormat);
   } else {
-    if(regalphabet.test(city.value)) {
-      errMsgCity.innerHTML = '';
-    } else {
-      errMsgCity.innerHTML = 'Enter the wrong format. Please re-enter';
-    }
-  }  
-}
+    showErrorMessage(cityInput, notification.correctFormat);
+  }
+} 
 
-const submitbtn = document.getElementById('submitBtn');
+const submitBtn = document.getElementById('submitBtn');
 
-submitbtn.addEventListener('click', getInfo);
+submitBtn.addEventListener('click', confirmInfo);
 
