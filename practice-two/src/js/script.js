@@ -59,4 +59,3 @@ const confirmInfo = () => {
 const submitBtn = document.getElementById('submitBtn');
 
 submitBtn.addEventListener('click', confirmInfo);
-
