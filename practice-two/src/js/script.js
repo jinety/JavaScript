@@ -1,61 +1,109 @@
-//QUERY TO ID
+// Query to id
 const fullNameInput = document.getElementById('fullName');
 const emailInput = document.getElementById('email');
 const salaryInput = document.getElementById('salary');
 const cityInput = document.getElementById('city');
-//CHECK THE INPUT CONDITION
-const alphabetRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
-const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-//FIXED VALUE
-const notification = {
-  emptyFormat: 'Empty format',
-  wrongFormat: 'Enter the wrong format. Please re-enter',
-  correctFormat: ''
+
+// Check the input condition
+const REGEX = {
+  alphabetRegex: /^[a-zA-Z]+ [a-zA-Z]+$/,
+  emailRegex: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+}
+
+// Fixed value
+const MESSAGE = {
+  empty: 'Empty format',
+  wrongFormat: 'Enter the wrong format. Please re-enter', 
 };
 
-const confirmInfo = () => {
-  function showErrorMessage(input, msg) {
-    const errMessageEl = input.parentElement.querySelector('.warn-msg');
-    errMessageEl.innerHTML = msg;
-  }
+const GENERAL = {
+  correct: ''
+};
 
-  //FULL NAME IS REQUIRED
-  if (fullNameInput.value === '' || fullNameInput.value === undefined || fullNameInput.value === null) {
-    showErrorMessage(fullNameInput, notification.emptyFormat);
-  } else if (!alphabetRegex.test(fullNameInput.value)) {
-    showErrorMessage(fullNameInput, notification.wrongFormat);
+function showErrorMessage(input, msg) {
+  const errMessageEl = input.parentElement.querySelector('.warn-msg');
+  errMessageEl.innerHTML = msg;
+}
+
+function isEmpty (input) {
+  if(!input.value) {
+    return true;
   } else {
-    showErrorMessage(fullNameInput, notification.correctFormat);
+    return false;
+  }
+}
+
+function isValidAlphabet(input) {
+  if (!REGEX.alphabetRegex.test(input.value)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function isValidEmail(input) {
+  if (!REGEX.emailRegex.test(input.value)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function isValidSalary(input) {
+  if (input.value <= 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+const validateForm = () => {
+
+  // Full name is required
+  if (isEmpty(fullNameInput)) {
+    showErrorMessage(fullNameInput, MESSAGE.empty);
+  } else if (isValidAlphabet(fullNameInput)) {
+    showErrorMessage(fullNameInput, MESSAGE.wrongFormat);
+  } else {
+    showErrorMessage(fullNameInput, GENERAL.correct);
   }
   
-  //EMAIL IS REQUIRED
-  if (emailInput.value === '' || emailInput.value === undefined || emailInput.value === null) {
-    showErrorMessage(emailInput, notification.emptyFormat);
-  } else if (!emailRegex.test(emailInput.value)) {
-    showErrorMessage(emailInput, notification.wrongFormat)
+  // Email is required
+  if (isEmpty(emailInput)) {
+    showErrorMessage(emailInput, MESSAGE.empty);
+  } else if (isValidEmail(emailInput)) {
+    showErrorMessage(emailInput, MESSAGE.wrongFormat)
   } else {
-    showErrorMessage(emailInput, notification.correctFormat);
+    showErrorMessage(emailInput, GENERAL.correct);
   }
 
-  //SALARY IS REQUIRED AND MUST BE GREATER THAN 0
-  if (salaryInput.value === '' || salaryInput.value === undefined || salaryInput.value === null) {
-    showErrorMessage(salaryInput, notification.emptyFormat);
-  } else if (Math.sign(salaryInput.value) < 0) {
-    showErrorMessage(salaryInput, notification.wrongFormat);
+  // Salary is required
+  if (isEmpty(salaryInput)) {
+    showErrorMessage(salaryInput, MESSAGE.empty);
+  } else if (isValidSalary(salaryInput)) {
+    // Must be greater than 0
+
+    showErrorMessage(salaryInput, MESSAGE.wrongFormat);
   } else {
-    showErrorMessage(salaryInput, notification.correctFormat);
+    showErrorMessage(salaryInput, GENERAL.correct);
   }
 
-  //CITY IS REQUIRED 
-  if (cityInput.value === '' || cityInput.value === undefined || cityInput.value === null) {
-    showErrorMessage(cityInput, notification.emptyFormat);
-  } else if (!alphabetRegex.test(cityInput.value)) {
-    showErrorMessage(cityInput, notification.wrongFormat);
+  // City is required 
+  if (isEmpty(cityInput)) {
+    showErrorMessage(cityInput, MESSAGE.empty);
+  } else if (isValidAlphabet(cityInput)) {
+    showErrorMessage(cityInput, MESSAGE.wrongFormat);
   } else {
-    showErrorMessage(cityInput, notification.correctFormat);
+    showErrorMessage(cityInput, GENERAL.correct);
   }
 } 
 
+function submitForm() {
+
+  // Validate form data
+  validateForm();
+}
 const submitBtn = document.getElementById('submitBtn');
 
-submitBtn.addEventListener('click', confirmInfo);
+submitBtn.addEventListener('click', submitForm);
