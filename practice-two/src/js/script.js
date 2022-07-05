@@ -1,106 +1,139 @@
-// Query to id
+// Query element
 const fullNameInput = document.getElementById('fullName');
 const emailInput = document.getElementById('email');
 const salaryInput = document.getElementById('salary');
 const cityInput = document.getElementById('city');
 
-// Check the input condition
+//Regex for validating a value/text format
 const REGEX = {
   alphabetRegex: /^[a-zA-Z]+ [a-zA-Z]+$/,
   emailRegex: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
 }
 
-// Fixed value
+// Message
 const MESSAGE = {
   empty: 'Empty format',
   wrongFormat: 'Enter the wrong format. Please re-enter', 
 };
 
-const GENERAL = {
+const EmptyText = {
   correct: ''
 };
 
-function showErrorMessage(input, msg) {
+/**
+ * Display error message when user enters wrong input
+ * 
+ * @param {string} input Query to element
+ * @param {string} msg Show message
+ */
+const showErrorMessage = (input, msg) => {
   const errMessageEl = input.parentElement.querySelector('.warn-msg');
   errMessageEl.innerHTML = msg;
 }
 
-function isEmpty (input) {
-  if(!input.value) {
+/**
+ * Check for empty, null, undefined
+ * 
+ * @param {string} value 
+ */
+const isEmpty = (value) => {
+  if(!value) {
     return true;
   } else {
     return false;
   }
 }
 
-function isValidAlphabet(input) {
+/**
+ * Check input only letters without numbers
+ * 
+ * @param {string} input Input value
+ */
+const isValidAlphabet = (input) => {
   if (!REGEX.alphabetRegex.test(input.value)) {
     return true;
-  } else {
-    return false;
   }
+    
+  return false;
 }
 
-function isValidEmail(input) {
+/**
+ * Check the format of the email
+ * 
+ * @param {string} input Input value
+ */
+const isValidEmail = (input) => {
   if (!REGEX.emailRegex.test(input.value)) {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 }
 
-function isValidSalary(input) {
+
+/**
+ * Check salary less than or equal to 0
+ * 
+ * @param {number} input Input value
+ */
+const isValidSalary = (input) => {
   if (input.value <= 0) {
     return true;
-  } else {
-    return false;
-  }
+  } 
+
+  return false;
 }
 
+/**
+ * Validate form data
+ */
 const validateForm = () => {
-
-  // Full name is required
-  if (isEmpty(fullNameInput)) {
+  //Full name is required
+  if (isEmpty(fullNameInput.value)) {
     showErrorMessage(fullNameInput, MESSAGE.empty);
   } else if (isValidAlphabet(fullNameInput)) {
+    // Full name can't have number
     showErrorMessage(fullNameInput, MESSAGE.wrongFormat);
   } else {
-    showErrorMessage(fullNameInput, GENERAL.correct);
+    showErrorMessage(fullNameInput, EmptyText.correct);
   }
   
-  // Email is required
-  if (isEmpty(emailInput)) {
+  //Email is required
+  if (isEmpty(emailInput.value)) {
     showErrorMessage(emailInput, MESSAGE.empty);
   } else if (isValidEmail(emailInput)) {
+    // Email must be in the correct format
     showErrorMessage(emailInput, MESSAGE.wrongFormat)
   } else {
-    showErrorMessage(emailInput, GENERAL.correct);
+    showErrorMessage(emailInput, EmptyText.correct);
   }
 
-  // Salary is required
-  if (isEmpty(salaryInput)) {
+  //Salary is required
+  if (isEmpty(salaryInput.value)) {
     showErrorMessage(salaryInput, MESSAGE.empty);
   } else if (isValidSalary(salaryInput)) {
     // Must be greater than 0
-
     showErrorMessage(salaryInput, MESSAGE.wrongFormat);
   } else {
-    showErrorMessage(salaryInput, GENERAL.correct);
+    showErrorMessage(salaryInput, EmptyText.correct);
   }
 
-  // City is required 
-  if (isEmpty(cityInput)) {
+  //City is required
+  if (isEmpty(cityInput.value)) {
     showErrorMessage(cityInput, MESSAGE.empty);
   } else if (isValidAlphabet(cityInput)) {
+    // City names can't have numbers
     showErrorMessage(cityInput, MESSAGE.wrongFormat);
   } else {
-    showErrorMessage(cityInput, GENERAL.correct);
+    showErrorMessage(cityInput, EmptyText.correct);
   }
 } 
 
-function submitForm() {
-
-  // Validate form data
+/**
+ * Submit form
+ */
+const submitForm = () => {
+  //Validate form data
   validateForm();
 }
 const submitBtn = document.getElementById('submitBtn');
