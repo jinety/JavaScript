@@ -57,7 +57,6 @@ function isValidSalary(input) {
   }
 }
 
-
 const validateForm = () => {
 
   // Full name is required
