@@ -1,22 +1,22 @@
-// Query element
+// Query elements
 const fullNameInput = document.getElementById('fullName');
 const emailInput = document.getElementById('email');
 const salaryInput = document.getElementById('salary');
 const cityInput = document.getElementById('city');
 
-//Regex for validating a value/text format
+// Regex for validating a value/text format
 const REGEX = {
   alphabetRegex: /^[a-zA-Z]+ [a-zA-Z]+$/,
   emailRegex: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
 }
 
-// Message
-const MESSAGE = {
+// Messages
+const MESSAGES = {
   empty: 'Empty format',
   wrongFormat: 'Enter the wrong format. Please re-enter', 
 };
 
-const EmptyText = {
+const EMPTYTEXT = {
   correct: ''
 };
 
@@ -34,10 +34,10 @@ const showErrorMessage = (input, msg) => {
 /**
  * Check for empty, null, undefined
  * 
- * @param {string} value 
+ * @param {string} value Comparative value
  */
 const isEmpty = (value) => {
-  if(!value) {
+  if (!value) {
     return true;
   } else {
     return false;
@@ -45,12 +45,12 @@ const isEmpty = (value) => {
 }
 
 /**
- * Check input only letters without numbers
+ * Check input only letters without number
  * 
- * @param {string} input Input value
+ * @param {string} value Comparative value
  */
-const isValidAlphabet = (input) => {
-  if (!REGEX.alphabetRegex.test(input.value)) {
+const isValidAlphabet = (value) => {
+  if (!REGEX.alphabetRegex.test(value)) {
     return true;
   }
     
@@ -60,10 +60,10 @@ const isValidAlphabet = (input) => {
 /**
  * Check the format of the email
  * 
- * @param {string} input Input value
+ * @param {string} value Comparative value
  */
-const isValidEmail = (input) => {
-  if (!REGEX.emailRegex.test(input.value)) {
+const isValidEmail = (value) => {
+  if (!REGEX.emailRegex.test(value)) {
     return true;
   }
 
@@ -74,10 +74,10 @@ const isValidEmail = (input) => {
 /**
  * Check salary less than or equal to 0
  * 
- * @param {number} input Input value
+ * @param {number} value Comparative value
  */
-const isValidSalary = (input) => {
-  if (input.value <= 0) {
+const isValidSalary = (value) => {
+  if (value <= 0) {
     return true;
   } 
 
@@ -88,44 +88,44 @@ const isValidSalary = (input) => {
  * Validate form data
  */
 const validateForm = () => {
-  //Full name is required
+  // Full name is required
   if (isEmpty(fullNameInput.value)) {
-    showErrorMessage(fullNameInput, MESSAGE.empty);
-  } else if (isValidAlphabet(fullNameInput)) {
+    showErrorMessage(fullNameInput, MESSAGES.empty);
+  } else if (isValidAlphabet(fullNameInput.value)) {
     // Full name can't have number
-    showErrorMessage(fullNameInput, MESSAGE.wrongFormat);
+    showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
   } else {
-    showErrorMessage(fullNameInput, EmptyText.correct);
+    showErrorMessage(fullNameInput, EMPTYTEXT.correct);
   }
   
-  //Email is required
+  // Email is required
   if (isEmpty(emailInput.value)) {
-    showErrorMessage(emailInput, MESSAGE.empty);
-  } else if (isValidEmail(emailInput)) {
+    showErrorMessage(emailInput, MESSAGES.empty);
+  } else if (isValidEmail(emailInput.value)) {
     // Email must be in the correct format
-    showErrorMessage(emailInput, MESSAGE.wrongFormat)
+    showErrorMessage(emailInput, MESSAGES.wrongFormat)
   } else {
-    showErrorMessage(emailInput, EmptyText.correct);
+    showErrorMessage(emailInput, EMPTYTEXT.correct);
   }
 
-  //Salary is required
+  // Salary is required
   if (isEmpty(salaryInput.value)) {
-    showErrorMessage(salaryInput, MESSAGE.empty);
-  } else if (isValidSalary(salaryInput)) {
+    showErrorMessage(salaryInput, MESSAGES.empty);
+  } else if (isValidSalary(salaryInput.value)) {
     // Must be greater than 0
-    showErrorMessage(salaryInput, MESSAGE.wrongFormat);
+    showErrorMessage(salaryInput, MESSAGES.wrongFormat);
   } else {
-    showErrorMessage(salaryInput, EmptyText.correct);
+    showErrorMessage(salaryInput, EMPTYTEXT.correct);
   }
 
-  //City is required
+  // City is required
   if (isEmpty(cityInput.value)) {
-    showErrorMessage(cityInput, MESSAGE.empty);
-  } else if (isValidAlphabet(cityInput)) {
-    // City names can't have numbers
-    showErrorMessage(cityInput, MESSAGE.wrongFormat);
+    showErrorMessage(cityInput, MESSAGES.empty);
+  } else if (isValidAlphabet(cityInput.value)) {
+    // City names can't have number
+    showErrorMessage(cityInput, MESSAGES.wrongFormat);
   } else {
-    showErrorMessage(cityInput, EmptyText.correct);
+    showErrorMessage(cityInput, EMPTYTEXT.correct);
   }
 } 
 
@@ -133,7 +133,7 @@ const validateForm = () => {
  * Submit form
  */
 const submitForm = () => {
-  //Validate form data
+  // Validate form data
   validateForm();
 }
 const submitBtn = document.getElementById('submitBtn');
