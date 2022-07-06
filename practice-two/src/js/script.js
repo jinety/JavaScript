@@ -12,18 +12,16 @@ const REGEX = {
 
 // Messages
 const MESSAGES = {
-  empty: 'Empty format',
+  empty: 'Empty',
   wrongFormat: 'Enter the wrong format. Please re-enter', 
 };
 
-const EMPTYTEXT = {
-  correct: ''
-};
+const EmptyText = '';
 
 /**
  * Display error message when user enters wrong input
  * 
- * @param {string} input Query to element
+ * @param {*} input Input element
  * @param {string} msg Show message
  */
 const showErrorMessage = (input, msg) => {
@@ -32,7 +30,7 @@ const showErrorMessage = (input, msg) => {
 }
 
 /**
- * Check for empty, null, undefined
+ * Check empty
  * 
  * @param {string} value Comparative value
  */
@@ -45,11 +43,11 @@ const isEmpty = (value) => {
 }
 
 /**
- * Check input only letters without number
+ * Invalid alphabet check
  * 
  * @param {string} value Comparative value
  */
-const isValidAlphabet = (value) => {
+const isInvalidAlphabet = (value) => {
   if (!REGEX.alphabetRegex.test(value)) {
     return true;
   }
@@ -58,11 +56,11 @@ const isValidAlphabet = (value) => {
 }
 
 /**
- * Check the format of the email
+ * Check email is not valid
  * 
  * @param {string} value Comparative value
  */
-const isValidEmail = (value) => {
+const isInvalidEmail = (value) => {
   if (!REGEX.emailRegex.test(value)) {
     return true;
   }
@@ -74,9 +72,9 @@ const isValidEmail = (value) => {
 /**
  * Check salary less than or equal to 0
  * 
- * @param {number} value Comparative value
+ * @param {number} value Salary value
  */
-const isValidSalary = (value) => {
+const isInvalidSalary = (value) => {
   if (value <= 0) {
     return true;
   } 
@@ -88,44 +86,49 @@ const isValidSalary = (value) => {
  * Validate form data
  */
 const validateForm = () => {
+  const nameValue = fullNameInput.value;
+  const emailValue = emailInput.value;
+  const salaryValue = salaryInput.value;
+  const cityValue = cityInput.value;
+
   // Full name is required
-  if (isEmpty(fullNameInput.value)) {
+  if (isEmpty(nameValue)) {
     showErrorMessage(fullNameInput, MESSAGES.empty);
-  } else if (isValidAlphabet(fullNameInput.value)) {
-    // Full name can't have number
+  } else if (isInvalidAlphabet(nameValue)) {
+    // Fullname is not in the correct format
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
   } else {
-    showErrorMessage(fullNameInput, EMPTYTEXT.correct);
+    showErrorMessage(fullNameInput, EmptyText);
   }
   
   // Email is required
-  if (isEmpty(emailInput.value)) {
+  if (isEmpty(emailValue)) {
     showErrorMessage(emailInput, MESSAGES.empty);
-  } else if (isValidEmail(emailInput.value)) {
-    // Email must be in the correct format
-    showErrorMessage(emailInput, MESSAGES.wrongFormat)
+  } else if (isInvalidEmail(emailValue)) {
+    // Email is not in the correct format
+    showErrorMessage(emailInput, MESSAGES.wrongFormat);
   } else {
-    showErrorMessage(emailInput, EMPTYTEXT.correct);
+    showErrorMessage(emailInput, EmptyText);
   }
 
   // Salary is required
-  if (isEmpty(salaryInput.value)) {
+  if (isEmpty(salaryValue)) {
     showErrorMessage(salaryInput, MESSAGES.empty);
-  } else if (isValidSalary(salaryInput.value)) {
-    // Must be greater than 0
+  } else if (isInvalidSalary(salaryValue)) {
+    // Salary less than or equal to 0
     showErrorMessage(salaryInput, MESSAGES.wrongFormat);
   } else {
-    showErrorMessage(salaryInput, EMPTYTEXT.correct);
+    showErrorMessage(salaryInput, EmptyText);
   }
 
   // City is required
-  if (isEmpty(cityInput.value)) {
+  if (isEmpty(cityValue)) {
     showErrorMessage(cityInput, MESSAGES.empty);
-  } else if (isValidAlphabet(cityInput.value)) {
-    // City names can't have number
+  } else if (isInvalidAlphabet(cityValue)) {
+    // City name is not in the correct format
     showErrorMessage(cityInput, MESSAGES.wrongFormat);
   } else {
-    showErrorMessage(cityInput, EMPTYTEXT.correct);
+    showErrorMessage(cityInput, EmptyText);
   }
 } 
 
