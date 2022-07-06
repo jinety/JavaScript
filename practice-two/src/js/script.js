@@ -30,7 +30,7 @@ const showErrorMessage = (input, msg) => {
 }
 
 /**
- * Check empty
+ * Function that checks for an empty value
  * 
  * @param {string} value - Comparative value
  */
@@ -43,7 +43,7 @@ const isEmpty = (value) => {
 }
 
 /**
- * Invalid alphabet check
+ * Invalid alphabet check function
  * 
  * @param {string} value - Comparative value
  */
@@ -56,7 +56,7 @@ const isInvalidAlphabet = (value) => {
 }
 
 /**
- * Check email is not valid
+ * Email check function is not valid
  * 
  * @param {string} value - Comparative value
  */
