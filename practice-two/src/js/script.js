@@ -12,7 +12,7 @@ const REGEX = {
 
 // Messages
 const MESSAGES = {
-  empty: 'Empty',
+  empty: 'Value should be not empty',
   wrongFormat: 'Enter the wrong format. Please re-enter', 
 };
 
@@ -21,8 +21,8 @@ const EmptyText = '';
 /**
  * Display error message when user enters wrong input
  * 
- * @param {*} input Input element
- * @param {string} msg Show message
+ * @param {HtmlInputElement} input - Input element
+ * @param {string} msg - Show message
  */
 const showErrorMessage = (input, msg) => {
   const errMessageEl = input.parentElement.querySelector('.warn-msg');
@@ -32,20 +32,20 @@ const showErrorMessage = (input, msg) => {
 /**
  * Check empty
  * 
- * @param {string} value Comparative value
+ * @param {string} value - Comparative value
  */
 const isEmpty = (value) => {
   if (!value) {
     return true;
-  } else {
-    return false;
-  }
+  } 
+
+  return false;
 }
 
 /**
  * Invalid alphabet check
  * 
- * @param {string} value Comparative value
+ * @param {string} value - Comparative value
  */
 const isInvalidAlphabet = (value) => {
   if (!REGEX.alphabetRegex.test(value)) {
@@ -58,7 +58,7 @@ const isInvalidAlphabet = (value) => {
 /**
  * Check email is not valid
  * 
- * @param {string} value Comparative value
+ * @param {string} value - Comparative value
  */
 const isInvalidEmail = (value) => {
   if (!REGEX.emailRegex.test(value)) {
@@ -72,7 +72,7 @@ const isInvalidEmail = (value) => {
 /**
  * Check salary less than or equal to 0
  * 
- * @param {number} value Salary value
+ * @param {number} value - Salary value
  */
 const isInvalidSalary = (value) => {
   if (value <= 0) {
