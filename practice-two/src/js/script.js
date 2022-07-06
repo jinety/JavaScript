@@ -18,6 +18,14 @@ const MESSAGES = {
 
 const EmptyText = '';
 
+// Names of keys stored in localStorage
+const KEY = {
+  fullName: 'fullName',
+  email: 'email',
+  salary: 'salary',
+  city: 'city',
+}
+
 /**
  * Display error message when user enters wrong input
  * 
@@ -83,6 +91,16 @@ const isInvalidSalary = (value) => {
 }
 
 /**
+ * Function used to save data to localStorage
+ * 
+ * @param {string} key - the name of the key
+ * @param {string} value - value passed in
+ */
+ const saveData = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+/**
  * Validate form data
  */
 const validateForm = () => {
@@ -99,6 +117,7 @@ const validateForm = () => {
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(fullNameInput, EmptyText);
+    saveData(KEY.fullName, nameValue);
   }
   
   // Email is required
@@ -109,6 +128,7 @@ const validateForm = () => {
     showErrorMessage(emailInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(emailInput, EmptyText);
+    saveData(KEY.email, emailValue);
   }
 
   // Salary is required
@@ -119,6 +139,7 @@ const validateForm = () => {
     showErrorMessage(salaryInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(salaryInput, EmptyText);
+    saveData(KEY.salary, salaryValue);
   }
 
   // City is required
@@ -129,6 +150,7 @@ const validateForm = () => {
     showErrorMessage(cityInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(cityInput, EmptyText);
+    saveData(KEY.city, cityValue);
   }
 } 
 
