@@ -19,12 +19,12 @@ const MESSAGES = {
 const EmptyText = '';
 
 // Names of keys stored in localStorage
-const KEY = {
-  fullName: 'fullName',
-  email: 'email',
-  salary: 'salary',
-  city: 'city',
-}
+// const KEY = {
+//   fullName: 'fullName',
+//   email: 'email',
+//   salary: 'salary',
+//   city: 'city',
+// }
 
 /**
  * Display error message when user enters wrong input
@@ -76,7 +76,6 @@ const isInvalidEmail = (value) => {
   return false;
 }
 
-
 /**
  * Check salary less than or equal to 0
  * 
@@ -96,9 +95,9 @@ const isInvalidSalary = (value) => {
  * @param {string} key - the name of the key
  * @param {string} value - value passed in
  */
- const saveData = (key, value) => {
-  localStorage.setItem(key, JSON.stringify(value));
-}
+//  const saveData = (key, value) => {
+//   localStorage.setItem(key, JSON.stringify(value));
+// }
 
 /**
  * Validate form data
@@ -117,7 +116,6 @@ const validateForm = () => {
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(fullNameInput, EmptyText);
-    saveData(KEY.fullName, nameValue);
   }
   
   // Email is required
@@ -128,7 +126,6 @@ const validateForm = () => {
     showErrorMessage(emailInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(emailInput, EmptyText);
-    saveData(KEY.email, emailValue);
   }
 
   // Salary is required
@@ -139,7 +136,6 @@ const validateForm = () => {
     showErrorMessage(salaryInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(salaryInput, EmptyText);
-    saveData(KEY.salary, salaryValue);
   }
 
   // City is required
@@ -150,9 +146,30 @@ const validateForm = () => {
     showErrorMessage(cityInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(cityInput, EmptyText);
-    saveData(KEY.city, cityValue);
   }
-} 
+
+  // If conditions are true, save to localStorage
+  if (!isInvalidAlphabet(nameValue) && !isInvalidEmail(emailValue) && !isInvalidSalary(salaryValue) && !isInvalidAlphabet(cityValue)) {
+    // Parse any JSON previously stored in allEntries
+    let storageArray = JSON.parse(localStorage.getItem("allEntries"));
+    if (storageArray == null) {
+      storageArray = [];
+    } else {
+      const entry = {
+        'fullName': nameValue,
+          'email': emailValue,
+          'salary': salaryValue,
+          'city': cityValue 
+      };
+      localStorage.setItem("entry", JSON.stringify(entry));
+      // Save allEntries back to local storage
+      storageArray.push(entry);
+      localStorage.setItem("allEntries", JSON.stringify(storageArray));
+    }
+  } else {
+    return false;
+  }
+}
 
 /**
  * Submit form
