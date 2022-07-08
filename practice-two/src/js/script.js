@@ -81,6 +81,9 @@ const isInvalidSalary = (value) => {
   return false;
 }
 
+// Name of the key in localStorage
+const textKey = 'allEntries';
+
 /**
  * Validate form data
  */
@@ -96,8 +99,8 @@ const isvalidateForm = () => {
     isvalid = false;
     showErrorMessage(fullNameInput, MESSAGES.empty);
   } else if (isInvalidAlphabet(nameValue)) {
-    isvalid = false;
     // Fullname is not in the correct format
+    isvalid = false;
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(fullNameInput, EmptyText);
@@ -108,8 +111,8 @@ const isvalidateForm = () => {
     isvalid = false;
     showErrorMessage(emailInput, MESSAGES.empty);
   } else if (isInvalidEmail(emailValue)) {
-    isvalid = false;
     // Email is not in the correct format
+    isvalid = false;
     showErrorMessage(emailInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(emailInput, EmptyText);
@@ -120,10 +123,10 @@ const isvalidateForm = () => {
     isvalid = false;
     showErrorMessage(salaryInput, MESSAGES.empty);
   } else if (isInvalidSalary(salaryValue)) {
-    isvalid = false;
     // Salary less than or equal to 0
+    isvalid = false;
     showErrorMessage(salaryInput, MESSAGES.wrongFormat);
-    } else {
+  } else {
     showErrorMessage(salaryInput, EmptyText);
   }
 
@@ -132,13 +135,13 @@ const isvalidateForm = () => {
     isvalid = false;
     showErrorMessage(cityInput, MESSAGES.empty);
   } else if (isInvalidAlphabet(cityValue)) {
-    isvalid = false;
     // City name is not in the correct format
+    isvalid = false;
     showErrorMessage(cityInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(cityInput, EmptyText);
   }
-  
+
   return isvalid;
 }
 
@@ -146,9 +149,9 @@ const isvalidateForm = () => {
  * Function to save data to localStorage
  * 
  */
-function saveData() {
+const saveData = () => {
   // Parse any JSON previously stored in allEntries
-  let existingEntries = JSON.parse(localStorage.getItem("allEntries"));
+  let existingEntries = JSON.parse(localStorage.getItem(textKey));
 
   // If existingEntries is null, array will be created
   if(existingEntries === null) {
@@ -162,14 +165,13 @@ function saveData() {
       'city': cityInput.value
     });
   }
-  localStorage.setItem("allEntries", JSON.stringify(existingEntries));
+  localStorage.setItem(textKey, JSON.stringify(existingEntries));
 }
 
 /**
  * Submit form
  */
 const submitForm = () => {
-
   // Validate form data
   if (isvalidateForm()) {
     //Save form data
