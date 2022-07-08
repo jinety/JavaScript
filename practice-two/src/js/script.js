@@ -19,7 +19,7 @@ const MESSAGES = {
 const EmptyText = '';
 
 // Name of the key in localStorage
-const users = 'usersKey';
+const UsersKey = 'users';
 
 /**
  * Display error message when user enters wrong input
@@ -151,7 +151,7 @@ const isvalidateForm = () => {
  */
 const saveData = () => {
   // Parse any JSON previously stored in allEntries
-  let existingEntries = JSON.parse(localStorage.getItem(users));
+  let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
 
   // If existingEntries is null, array will be created
   if(existingEntries === null) {
@@ -165,7 +165,7 @@ const saveData = () => {
       city: cityInput.value
     });
   }
-  localStorage.setItem(users, JSON.stringify(existingEntries));
+  localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
 }
 
 /**
