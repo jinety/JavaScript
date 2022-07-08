@@ -21,7 +21,11 @@
 }
 
 .input-box {
-  margin: 10px 20px;
+  padding: 10px 20px;
+}
+
+.form-field {
+  margin-bottom: 20px;
 }
 
 .input-label {
@@ -32,7 +36,7 @@
 
 .data-input {
   margin-left: 1px;
-  margin-bottom: 5px;
+  padding-bottom: 10px;
   width: 98%;
   font-size: var(--font-size-s);
 }
@@ -44,18 +48,19 @@
 
 .button-box {
   text-align: right;
-  margin-right: 20px;
-  margin-bottom: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
 }
 
 #submitBtn {
-  padding: 10px 50px;
+  padding: 10px 85px;
   background-color: var(--primary-color-100);
   color: var(--primary-color-200);
 }
 
 .list-users {
   width: 70%;
+  padding: 20px;
 }
 
 .list-users-table,
@@ -64,9 +69,9 @@
 }
 
 .list-users-table {
-  margin: 20px;
+  width: 100%;
 }
 
 .item-header {
-  padding: 10px 134px 10px 10px;
+  padding: 10px;
 }
