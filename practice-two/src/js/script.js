@@ -18,14 +18,6 @@ const MESSAGES = {
 
 const EmptyText = '';
 
-// Names of keys stored in localStorage
-// const KEY = {
-//   fullName: 'fullName',
-//   email: 'email',
-//   salary: 'salary',
-//   city: 'city',
-// }
-
 /**
  * Display error message when user enters wrong input
  * 
@@ -90,28 +82,21 @@ const isInvalidSalary = (value) => {
 }
 
 /**
- * Function used to save data to localStorage
- * 
- * @param {string} key - the name of the key
- * @param {string} value - value passed in
- */
-//  const saveData = (key, value) => {
-//   localStorage.setItem(key, JSON.stringify(value));
-// }
-
-/**
  * Validate form data
  */
-const validateForm = () => {
+const isvalidateForm = () => {
   const nameValue = fullNameInput.value;
   const emailValue = emailInput.value;
   const salaryValue = salaryInput.value;
   const cityValue = cityInput.value;
+  let isvalid = true;
 
   // Full name is required
   if (isEmpty(nameValue)) {
+    isvalid = false;
     showErrorMessage(fullNameInput, MESSAGES.empty);
   } else if (isInvalidAlphabet(nameValue)) {
+    isvalid = false;
     // Fullname is not in the correct format
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
   } else {
@@ -120,8 +105,10 @@ const validateForm = () => {
   
   // Email is required
   if (isEmpty(emailValue)) {
+    isvalid = false;
     showErrorMessage(emailInput, MESSAGES.empty);
   } else if (isInvalidEmail(emailValue)) {
+    isvalid = false;
     // Email is not in the correct format
     showErrorMessage(emailInput, MESSAGES.wrongFormat);
   } else {
@@ -130,53 +117,64 @@ const validateForm = () => {
 
   // Salary is required
   if (isEmpty(salaryValue)) {
+    isvalid = false;
     showErrorMessage(salaryInput, MESSAGES.empty);
   } else if (isInvalidSalary(salaryValue)) {
+    isvalid = false;
     // Salary less than or equal to 0
     showErrorMessage(salaryInput, MESSAGES.wrongFormat);
-  } else {
+    } else {
     showErrorMessage(salaryInput, EmptyText);
   }
 
   // City is required
   if (isEmpty(cityValue)) {
+    isvalid = false;
     showErrorMessage(cityInput, MESSAGES.empty);
   } else if (isInvalidAlphabet(cityValue)) {
+    isvalid = false;
     // City name is not in the correct format
     showErrorMessage(cityInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(cityInput, EmptyText);
   }
+  
+  return isvalid;
+}
 
-  // If conditions are true, save to localStorage
-  if (!isInvalidAlphabet(nameValue) && !isInvalidEmail(emailValue) && !isInvalidSalary(salaryValue) && !isInvalidAlphabet(cityValue)) {
-    // Parse any JSON previously stored in allEntries
-    let storageArray = JSON.parse(localStorage.getItem("allEntries"));
-    if (storageArray == null) {
-      storageArray = [];
-    } else {
-      const entry = {
-        'fullName': nameValue,
-          'email': emailValue,
-          'salary': salaryValue,
-          'city': cityValue 
-      };
-      localStorage.setItem("entry", JSON.stringify(entry));
-      // Save allEntries back to local storage
-      storageArray.push(entry);
-      localStorage.setItem("allEntries", JSON.stringify(storageArray));
-    }
+/**
+ * Function to save data to localStorage
+ * 
+ */
+function saveData() {
+  // Parse any JSON previously stored in allEntries
+  let existingEntries = JSON.parse(localStorage.getItem("allEntries"));
+
+  // If existingEntries is null, array will be created
+  if(existingEntries === null) {
+    existingEntries = [];
   } else {
-    return false;
+    // Append values ​​to array 
+    existingEntries.push({
+      'fullName': fullNameInput.value,
+      'email': emailInput.value,
+      'salary': salaryInput.value,
+      'city': cityInput.value
+    });
   }
+  localStorage.setItem("allEntries", JSON.stringify(existingEntries));
 }
 
 /**
  * Submit form
  */
 const submitForm = () => {
+
   // Validate form data
-  validateForm();
+  if (isvalidateForm()) {
+    //Save form data
+    saveData();
+  }
 }
 const submitBtn = document.getElementById('submitBtn');
 
