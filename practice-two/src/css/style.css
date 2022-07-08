@@ -8,11 +8,15 @@
   --font-size-s: 18px;
   --font-size-m: 24px;
 }
+.registration-form,
+.list-users {
+  border: 5px solid var(--primary-color-100);
+  margin: 0 auto;
+}
 
 .registration-form {
   width: 50%;
-  border: 5px solid var(--primary-color-100);
-  margin: 0 auto 30px;
+  margin-bottom: 30px;
 }
 
 .input-box {
@@ -51,16 +55,14 @@
 
 .list-users {
   width: 70%;
-  border: 5px solid var(--primary-color-100);
-  margin: 0 auto;
 }
 
+.list-users-table,
 .item-header {
   border: 1px solid var(--primary-color-100);
 }
 
 .list-users-table {
   width: 95%;
-  border: 1px solid var(--primary-color-100);
   margin: 20px;
 }
