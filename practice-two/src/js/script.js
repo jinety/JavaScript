@@ -18,6 +18,9 @@ const MESSAGES = {
 
 const EmptyText = '';
 
+// Name of the key in localStorage
+const users = 'usersKey';
+
 /**
  * Display error message when user enters wrong input
  * 
@@ -80,9 +83,6 @@ const isInvalidSalary = (value) => {
 
   return false;
 }
-
-// Name of the key in localStorage
-const userInfoKey = 'allEntries';
 
 /**
  * Validate form data
@@ -151,7 +151,7 @@ const isvalidateForm = () => {
  */
 const saveData = () => {
   // Parse any JSON previously stored in allEntries
-  let existingEntries = JSON.parse(localStorage.getItem(userInfoKey));
+  let existingEntries = JSON.parse(localStorage.getItem(users));
 
   // If existingEntries is null, array will be created
   if(existingEntries === null) {
@@ -165,7 +165,7 @@ const saveData = () => {
       city: cityInput.value
     });
   }
-  localStorage.setItem(userInfoKey, JSON.stringify(existingEntries));
+  localStorage.setItem(users, JSON.stringify(existingEntries));
 }
 
 /**
