@@ -8,6 +8,7 @@
   --font-size-s: 18px;
   --font-size-m: 24px;
 }
+
 .registration-form,
 .list-users {
   border: 5px solid var(--primary-color-100);
@@ -63,6 +64,9 @@
 }
 
 .list-users-table {
-  width: 95%;
   margin: 20px;
+}
+
+.item-header {
+  padding: 10px 134px 10px 10px;
 }
