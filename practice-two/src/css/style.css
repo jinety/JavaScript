@@ -9,7 +9,7 @@
   --font-size-m: 24px;
 }
 
-.general {
+.border {
   border: 5px solid var(--primary-color-100);
   margin: 0 auto;
 }
@@ -61,11 +61,7 @@
   border: 1px solid var(--primary-color-100);
 }
 
-.users-list-table {
+.list-users-table {
+  width: 95%;
   margin: 20px;
-}
-
-.items-content {
-  width: 192px;
-  text-align: center;
 }
