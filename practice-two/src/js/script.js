@@ -82,7 +82,7 @@ const isInvalidSalary = (value) => {
 }
 
 // Name of the key in localStorage
-const keyName = 'allEntries';
+const userInfoKey = 'allEntries';
 
 /**
  * Validate form data
@@ -151,7 +151,7 @@ const isvalidateForm = () => {
  */
 const saveData = () => {
   // Parse any JSON previously stored in allEntries
-  let existingEntries = JSON.parse(localStorage.getItem(keyName));
+  let existingEntries = JSON.parse(localStorage.getItem(userInfoKey));
 
   // If existingEntries is null, array will be created
   if(existingEntries === null) {
@@ -165,7 +165,7 @@ const saveData = () => {
       city: cityInput.value
     });
   }
-  localStorage.setItem(keyName, JSON.stringify(existingEntries));
+  localStorage.setItem(userInfoKey, JSON.stringify(existingEntries));
 }
 
 /**
