@@ -58,12 +58,12 @@
   padding: 20px;
 }
 
-.list-users-table,
+.users-table,
 .item-header {
   border: 1px solid var(--primary-color-100);
 }
 
-.list-users-table {
+.users-table {
   width: 100%;
 }
 
