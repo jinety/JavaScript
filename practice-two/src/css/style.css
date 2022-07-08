@@ -9,10 +9,14 @@
   --font-size-m: 24px;
 }
 
-.registration-form {
+.general {
   border: 5px solid var(--primary-color-100);
-  width: 50%;
   margin: 0 auto;
+}
+
+.registration-form {
+  width: 50%;
+  margin-bottom: 30px;
 }
 
 .input-box {
@@ -47,4 +51,21 @@
   padding: 10px 50px;
   background-color: var(--primary-color-100);
   color: var(--primary-color-200);
+}
+
+.list-users {
+  width: 70%;
+}
+
+.line {
+  border: 1px solid var(--primary-color-100);
+}
+
+.users-list-table {
+  margin: 20px;
+}
+
+.items-content {
+  width: 192px;
+  text-align: center;
 }
