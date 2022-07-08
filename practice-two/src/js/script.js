@@ -82,7 +82,7 @@ const isInvalidSalary = (value) => {
 }
 
 // Name of the key in localStorage
-const textKey = 'allEntries';
+const keyName = 'allEntries';
 
 /**
  * Validate form data
@@ -151,7 +151,7 @@ const isvalidateForm = () => {
  */
 const saveData = () => {
   // Parse any JSON previously stored in allEntries
-  let existingEntries = JSON.parse(localStorage.getItem(textKey));
+  let existingEntries = JSON.parse(localStorage.getItem(keyName));
 
   // If existingEntries is null, array will be created
   if(existingEntries === null) {
@@ -159,13 +159,13 @@ const saveData = () => {
   } else {
     // Append values ​​to array 
     existingEntries.push({
-      'fullName': fullNameInput.value,
-      'email': emailInput.value,
-      'salary': salaryInput.value,
-      'city': cityInput.value
+      fullName: fullNameInput.value,
+      email: emailInput.value,
+      salary: salaryInput.value,
+      city: cityInput.value
     });
   }
-  localStorage.setItem(textKey, JSON.stringify(existingEntries));
+  localStorage.setItem(keyName, JSON.stringify(existingEntries));
 }
 
 /**
@@ -174,7 +174,7 @@ const saveData = () => {
 const submitForm = () => {
   // Validate form data
   if (isvalidateForm()) {
-    //Save form data
+    // Save form data
     saveData();
   }
 }
