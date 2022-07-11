@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./css/style.css" />
     <title>Information input form</title>
   </head>
-  <body>
+  <body onload="renderUser()">
     <form class="registration-form">
       <div class="input-box">
         <div class="form-field">
@@ -38,14 +38,7 @@
     </form>
 
     <div class="list-users">
-      <table class="users-table">
-        <tr class="header-row">
-          <td class="item-header">Full Name</td>
-          <td class="item-header">Email Id</td>
-          <td class="item-header">Salary</td>
-          <td class="item-header">City</td>
-          <td class="item-header">Actions</td>
-        </tr>
+      <table class="users-table" id="usersTable">
       </table>
     </div>
     <script src="./js/script.js"></script>

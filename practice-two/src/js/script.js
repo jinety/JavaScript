@@ -21,6 +21,9 @@ const EmptyText = '';
 // Name of the key in localStorage
 const UsersKey = 'users';
 
+// Parse any JSON previously stored in allEntries
+let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
+
 /**
  * Display error message when user enters wrong input
  * 
@@ -150,9 +153,6 @@ const isvalidateForm = () => {
  * 
  */
 const saveData = () => {
-  // Parse any JSON previously stored in allEntries
-  let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
-
   // If existingEntries is null, array will be created
   if(existingEntries === null) {
     existingEntries = [];
@@ -166,6 +166,35 @@ const saveData = () => {
     });
   }
   localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
+  renderUser();
+}
+
+/**
+ * Show user data in table
+ */
+const renderUser = () => {
+  let user = `  
+    <tr>
+      <th class="item-header">Full Name</th>
+      <th class="item-header">Email Id</th>
+      <th class="item-header">Salary</th>
+      <th class="item-header">City</th>
+      <th class="item-header">Actions</th>
+    </tr>`;
+
+  existingEntries.map((value) => {
+    user += `  
+      <tr>
+        <td>${value.fullName}</td>
+        <td>${value.email}</td>
+        <td>${value.salary}</td>
+        <td>${value.city}</td>
+        <td>
+          <button>Delete</button>
+        </td>
+      </tr>`
+  });
+  document.getElementById('usersTable').innerHTML = user;
 }
 
 /**
