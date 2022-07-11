@@ -21,6 +21,9 @@ const EmptyText = '';
 // Name of the key in localStorage
 const UsersKey = 'users';
 
+ // Parse any JSON previously stored in users
+ let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
+
 /**
  * Display error message when user enters wrong input
  * 
@@ -150,9 +153,6 @@ const isvalidateForm = () => {
  * 
  */
 const saveData = () => {
-  // Parse any JSON previously stored in allEntries
-  let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
-
   // If existingEntries is null, array will be created
   if(existingEntries === null) {
     existingEntries = [];
@@ -172,40 +172,28 @@ const saveData = () => {
 /**
  * Show user data in table
  */
-const renderUserTable = () => {
-  // Parse any JSON previously stored in allEntries
-  let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
-
+window.onload = renderUserTable = () => {
    // If existingEntries is null, array will be created
    if(existingEntries === null) {
     existingEntries = [];
   } else {
-    let tableInstead = `
-    <tbody> 
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>`;
+    let tableTemplate = ``;
   
-    existingEntries.map((value) => {
-      tableInstead += ` 
+    existingEntries.forEach(element => {
+      tableTemplate += ` 
       <tbody> 
         <tr>
-          <td>${value.fullName}</td>
-          <td>${value.email}</td>
-          <td>${value.salary}</td>
-          <td>${value.city}</td>
+          <td>${element.fullName}</td>
+          <td>${element.email}</td>
+          <td>${element.salary}</td>
+          <td>${element.city}</td>
           <td>
             <button>Delete</button>
           </td>
         </tr>
       </tbody>`;
     });
-    document.getElementById('userTableBody').innerHTML = tableInstead;    
+    document.getElementById('userTableBody').innerHTML = tableTemplate;    
   }
 }
 
