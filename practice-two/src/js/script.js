@@ -23,6 +23,11 @@ const UsersKey = 'users';
 
  // Parse any JSON previously stored in users
  let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
+ 
+ // If existingEntries is null, array will be created
+ if(existingEntries === null) {
+  existingEntries = [];
+}
 
 /**
  * Display error message when user enters wrong input
@@ -153,18 +158,13 @@ const isvalidateForm = () => {
  * 
  */
 const saveData = () => {
-  // If existingEntries is null, array will be created
-  if(existingEntries === null) {
-    existingEntries = [];
-  } else {
-    // Append values ​​to array 
-    existingEntries.push({
-      fullName: fullNameInput.value,
-      email: emailInput.value,
-      salary: salaryInput.value,
-      city: cityInput.value
-    });
-  }
+  // Append values ​​to array 
+  existingEntries.push({
+    fullName: fullNameInput.value,
+    email: emailInput.value,
+    salary: salaryInput.value,
+    city: cityInput.value
+  });
   localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
   renderUserTable();
 }
@@ -173,12 +173,7 @@ const saveData = () => {
  * Show user data in table
  */
 window.onload = renderUserTable = () => {
-   // If existingEntries is null, array will be created
-   if(existingEntries === null) {
-    existingEntries = [];
-  } else {
-    let tableTemplate = ``;
-  
+  let tableTemplate = ``;
     existingEntries.forEach(element => {
       tableTemplate += ` 
       <tbody> 
@@ -193,8 +188,7 @@ window.onload = renderUserTable = () => {
         </tr>
       </tbody>`;
     });
-    document.getElementById('userTableBody').innerHTML = tableTemplate;    
-  }
+  document.getElementById('userTableBody').innerHTML = tableTemplate;    
 }
 
 /**
