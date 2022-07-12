@@ -175,7 +175,7 @@ const saveData = () => {
 const renderUserTable = () => {
   let tableTemplate = '';
 
-  existingEntries.forEach(element => {
+  existingEntries.forEach((element, index) => {
     tableTemplate += ` 
       <tbody> 
         <tr>
@@ -184,13 +184,28 @@ const renderUserTable = () => {
           <td>${element.salary}</td>
           <td>${element.city}</td>
           <td>
-            <button>Delete</button>
+            <button onclick = "deleteData(${index})">Delete</button>
           </td>
         </tr>
       </tbody>`;
   });
 
   document.getElementById('userTableBody').innerHTML = tableTemplate;    
+}
+
+/**
+ * Function to delete data from table and localStorage
+ * 
+ * @param {number} index Key of array
+ */
+const deleteData = (index) => {
+  if (confirm('Are you sure?')) {
+    //Delete table row
+    existingEntries.splice(index, 1);
+  }
+
+  localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
+  renderUserTable();
 }
 
 /**
