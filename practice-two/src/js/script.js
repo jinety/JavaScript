@@ -174,6 +174,7 @@ const saveData = () => {
  */
 const renderUserTable = () => {
   let tableTemplate = '';
+
   existingEntries.forEach(element => {
     tableTemplate += ` 
       <tbody> 
@@ -188,11 +189,9 @@ const renderUserTable = () => {
         </tr>
       </tbody>`;
   });
-  
+
   document.getElementById('userTableBody').innerHTML = tableTemplate;    
 }
-
-renderUserTable();
 
 /**
  * Submit form
@@ -207,4 +206,6 @@ const submitForm = () => {
 }
 
 const submitBtn = document.getElementById('submitBtn');
+
 submitBtn.addEventListener('click', submitForm);
+renderUserTable();
