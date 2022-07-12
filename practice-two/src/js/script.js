@@ -25,7 +25,7 @@ const UsersKey = 'users';
  let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
  
  // If existingEntries is null, array will be created
- if(existingEntries === null) {
+ if (existingEntries === null) {
   existingEntries = [];
 }
 
@@ -165,6 +165,7 @@ const saveData = () => {
     salary: salaryInput.value,
     city: cityInput.value
   });
+
   localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
 }
 
@@ -172,7 +173,7 @@ const saveData = () => {
  * Show user data in table
  */
 const renderUserTable = () => {
-  let tableTemplate = ``;
+  let tableTemplate = '';
   existingEntries.forEach(element => {
     tableTemplate += ` 
       <tbody> 
@@ -187,6 +188,7 @@ const renderUserTable = () => {
         </tr>
       </tbody>`;
   });
+  
   document.getElementById('userTableBody').innerHTML = tableTemplate;    
 }
 
