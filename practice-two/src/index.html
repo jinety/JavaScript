@@ -37,15 +37,19 @@
       </div>
     </form>
 
-    <div class="list-users">
-      <table class="users-table">
-        <tr class="header-row">
-          <td class="item-header">Full Name</td>
-          <td class="item-header">Email Id</td>
-          <td class="item-header">Salary</td>
-          <td class="item-header">City</td>
-          <td class="item-header">Actions</td>
-        </tr>
+    <div class="list-users" id="listUsers">
+      <table class="users-table" id="usersTable">
+        <thead>
+          <tr>
+            <th class="item-header">Full Name</th>
+            <th class="item-header">Email Id</th>
+            <th class="item-header">Salary</th>
+            <th class="item-header">City</th>
+            <th class="item-header">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody">
+        </tbody>
       </table>
     </div>
     <script src="./js/script.js"></script>

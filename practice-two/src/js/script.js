@@ -21,6 +21,14 @@ const EmptyText = '';
 // Name of the key in localStorage
 const UsersKey = 'users';
 
+ // Parse any JSON previously stored in users
+ let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
+ 
+ // If existingEntries is null, array will be created
+ if (existingEntries === null) {
+  existingEntries = [];
+}
+
 /**
  * Display error message when user enters wrong input
  * 
@@ -150,22 +158,39 @@ const isvalidateForm = () => {
  * 
  */
 const saveData = () => {
-  // Parse any JSON previously stored in allEntries
-  let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
+  // Append values ​​to array 
+  existingEntries.push({
+    fullName: fullNameInput.value,
+    email: emailInput.value,
+    salary: salaryInput.value,
+    city: cityInput.value
+  });
 
-  // If existingEntries is null, array will be created
-  if(existingEntries === null) {
-    existingEntries = [];
-  } else {
-    // Append values ​​to array 
-    existingEntries.push({
-      fullName: fullNameInput.value,
-      email: emailInput.value,
-      salary: salaryInput.value,
-      city: cityInput.value
-    });
-  }
   localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
+}
+
+/**
+ * Show user data in table
+ */
+const renderUserTable = () => {
+  let tableTemplate = '';
+
+  existingEntries.forEach(element => {
+    tableTemplate += ` 
+      <tbody> 
+        <tr>
+          <td>${element.fullName}</td>
+          <td>${element.email}</td>
+          <td>${element.salary}</td>
+          <td>${element.city}</td>
+          <td>
+            <button>Delete</button>
+          </td>
+        </tr>
+      </tbody>`;
+  });
+
+  document.getElementById('userTableBody').innerHTML = tableTemplate;    
 }
 
 /**
@@ -176,8 +201,11 @@ const submitForm = () => {
   if (isvalidateForm()) {
     // Save form data
     saveData();
+    renderUserTable(); 
   }
 }
+
 const submitBtn = document.getElementById('submitBtn');
 
 submitBtn.addEventListener('click', submitForm);
+renderUserTable();
