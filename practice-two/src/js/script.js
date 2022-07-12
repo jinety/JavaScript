@@ -166,16 +166,15 @@ const saveData = () => {
     city: cityInput.value
   });
   localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
-  renderUserTable();
 }
 
 /**
  * Show user data in table
  */
-window.onload = renderUserTable = () => {
+const renderUserTable = () => {
   let tableTemplate = ``;
-    existingEntries.forEach(element => {
-      tableTemplate += ` 
+  existingEntries.forEach(element => {
+    tableTemplate += ` 
       <tbody> 
         <tr>
           <td>${element.fullName}</td>
@@ -187,9 +186,11 @@ window.onload = renderUserTable = () => {
           </td>
         </tr>
       </tbody>`;
-    });
+  });
   document.getElementById('userTableBody').innerHTML = tableTemplate;    
 }
+
+renderUserTable();
 
 /**
  * Submit form
@@ -199,8 +200,9 @@ const submitForm = () => {
   if (isvalidateForm()) {
     // Save form data
     saveData();
+    renderUserTable(); 
   }
 }
-const submitBtn = document.getElementById('submitBtn');
 
+const submitBtn = document.getElementById('submitBtn');
 submitBtn.addEventListener('click', submitForm);
