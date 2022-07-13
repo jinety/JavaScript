@@ -21,7 +21,7 @@ const EmptyText = '';
 // Name of the key in localStorage
 const UsersKey = 'users';
 
- // Parse any JSON previously stored in users
+// Parse any JSON previously stored in users
  let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
  
  // If existingEntries is null, array will be created
@@ -184,28 +184,35 @@ const renderUserTable = () => {
           <td>${element.salary}</td>
           <td>${element.city}</td>
           <td>
-            <button onclick = "deleteData(${index})">Delete</button>
+            <button type="button"
+            class="delete-btn"
+            data-columns=${index}>Delete</button>
           </td>
         </tr>
-      </tbody>`;
+      </tbody>
+    `;
   });
 
-  document.getElementById('userTableBody').innerHTML = tableTemplate;    
+  document.getElementById('userTableBody').innerHTML = tableTemplate;
+  const deleteBtn = document.querySelectorAll('.delete-btn');
+
+  deleteBtn.forEach(item => {
+    item.dataset.columns;
+    item.addEventListener('click', deleteData);
+  })
 }
 
 /**
  * Function to delete data from table and localStorage
- * 
- * @param {number} index Key of array
  */
 const deleteData = (index) => {
   if (confirm('Are you sure?')) {
-    //Delete table row
-    existingEntries.splice(index, 1);
+    // Delete table row
+    existingEntries.splice (index, 1);
   }
 
   localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
-  renderUserTable();
+  document.location.reload();
 }
 
 /**
@@ -216,11 +223,12 @@ const submitForm = () => {
   if (isvalidateForm()) {
     // Save form data
     saveData();
-    renderUserTable(); 
+    renderUserTable();
   }
 }
 
 const submitBtn = document.getElementById('submitBtn');
 
 submitBtn.addEventListener('click', submitForm);
+
 renderUserTable();
