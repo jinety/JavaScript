@@ -178,15 +178,13 @@ const renderUserTable = () => {
   existingEntries.forEach((element, index) => {
     tableTemplate += ` 
       <tbody> 
-        <tr>
+        <tr data-columns=${index} class="contentRow">
           <td>${element.fullName}</td>
           <td>${element.email}</td>
           <td>${element.salary}</td>
           <td>${element.city}</td>
           <td>
-            <button type="button"
-            class="delete-btn"
-            data-columns=${index}>Delete</button>
+            <button type="button" class="delete-btn">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -199,20 +197,19 @@ const renderUserTable = () => {
   deleteBtn.forEach(item => {
     item.dataset.columns;
     item.addEventListener('click', deleteData);
-  })
+  });
 }
 
 /**
  * Function to delete data from table and localStorage
  */
-const deleteData = (index) => {
+const deleteData = () => {
   if (confirm('Are you sure?')) {
     // Delete table row
-    existingEntries.splice (index, 1);
+    document.querySelector('.contentRow').remove();
   }
 
   localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
-  document.location.reload();
 }
 
 /**
