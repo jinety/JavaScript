@@ -21,7 +21,7 @@ const EmptyText = '';
 // Name of the key in localStorage
 const UsersKey = 'users';
 
- // Parse any JSON previously stored in users
+// Parse any JSON previously stored in users
  let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
  
  // If existingEntries is null, array will be created
@@ -175,22 +175,43 @@ const saveData = () => {
 const renderUserTable = () => {
   let tableTemplate = '';
 
-  existingEntries.forEach(element => {
+  existingEntries.forEach((element, index) => {
     tableTemplate += ` 
-      <tbody> 
-        <tr>
+        <tr class="content-row">
           <td>${element.fullName}</td>
           <td>${element.email}</td>
           <td>${element.salary}</td>
           <td>${element.city}</td>
-          <td>
-            <button>Delete</button>
+          <td class="td-btn">
+            <button type="button" class="delete-btn" data-columns=${index}>Delete</button>
           </td>
         </tr>
-      </tbody>`;
+    `;
   });
 
-  document.getElementById('userTableBody').innerHTML = tableTemplate;    
+  document.getElementById('userTableBody').innerHTML = tableTemplate;
+  const deleteBtn = document.querySelectorAll('.delete-btn');
+  
+  deleteBtn.forEach(item => {
+    item.dataset.columns;
+    console.log(item.dataset.columns);
+    item.addEventListener('click', function() {
+      item.parentElement.parentElement.remove();
+      existingEntries.splice(item.dataset.columns, 1);
+      localStorage.setItem(UsersKey, JSON.stringify(existingEntries))
+    });
+  });
+}
+
+/**
+ * Function to delete data from table and localStorage
+ */
+const deleteData = () => {
+  if (confirm('Are you sure?')) {
+    document.querySelector('.delete-btn');
+  }
+
+  localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
 }
 
 /**
@@ -201,11 +222,12 @@ const submitForm = () => {
   if (isvalidateForm()) {
     // Save form data
     saveData();
-    renderUserTable(); 
+    renderUserTable();
   }
 }
 
 const submitBtn = document.getElementById('submitBtn');
 
 submitBtn.addEventListener('click', submitForm);
+
 renderUserTable();
