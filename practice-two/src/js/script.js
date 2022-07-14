@@ -177,26 +177,29 @@ const renderUserTable = () => {
 
   existingEntries.forEach((element, index) => {
     tableTemplate += ` 
-      <tbody> 
-        <tr data-columns=${index} class="contentRow">
+        <tr class="content-row">
           <td>${element.fullName}</td>
           <td>${element.email}</td>
           <td>${element.salary}</td>
           <td>${element.city}</td>
-          <td>
-            <button type="button" class="delete-btn">Delete</button>
+          <td class="td-btn">
+            <button type="button" class="delete-btn" data-columns=${index}>Delete</button>
           </td>
         </tr>
-      </tbody>
     `;
   });
 
   document.getElementById('userTableBody').innerHTML = tableTemplate;
   const deleteBtn = document.querySelectorAll('.delete-btn');
-
+  
   deleteBtn.forEach(item => {
     item.dataset.columns;
-    item.addEventListener('click', deleteData);
+    console.log(item.dataset.columns);
+    item.addEventListener('click', function() {
+      item.parentElement.parentElement.remove();
+      existingEntries.splice(item.dataset.columns, 1);
+      localStorage.setItem(UsersKey, JSON.stringify(existingEntries))
+    });
   });
 }
 
@@ -205,8 +208,7 @@ const renderUserTable = () => {
  */
 const deleteData = () => {
   if (confirm('Are you sure?')) {
-    // Delete table row
-    document.querySelector('.contentRow').remove();
+    document.querySelector('.delete-btn');
   }
 
   localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
