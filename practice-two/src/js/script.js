@@ -8,7 +8,7 @@ const submitBtn = document.getElementById('submitBtn');
 // Regex for validating a value/text format
 const REGEX = {
   alphabetRegex: /^[a-zA-Z]+ [a-zA-Z]+$/,
-  alphabetShortRegex: /^[a-zA-Z]+$/,
+  alphabetShortRegex: /^[A-Za-z\s]+$/,
   emailRegex: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
 }
 
@@ -61,8 +61,8 @@ const isEmpty = (value) => {
  * 
  * @param {string} value - Comparative value
  */
-const isInvalidAlphabet = (value) => {
-  if (!REGEX.alphabetRegex.test(value)) {
+const isValidAlphabet = (value) => {
+  if (REGEX.alphabetRegex.test(value)) {
     return true;
   } 
   
@@ -117,16 +117,17 @@ const isValidForm = () => {
   if (isEmpty(nameValue)) {
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.empty);
+  } else if (isValidAlphabet(nameValue)) {
+    // Valid name
+    showErrorMessage(fullNameInput, EmptyText);
   } else if (isValidName(nameValue)) {
     // Invalid full name
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.invalidFormat);
-  } else if (isInvalidAlphabet(nameValue)) {
+  } else {
     // Full name is not in the correct format
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
-  } else {
-    showErrorMessage(fullNameInput, EmptyText);
   }
   
   // Email is required
@@ -158,14 +159,12 @@ const isValidForm = () => {
     isValid = false;
     showErrorMessage(cityInput, MESSAGES.empty);
   } else if (isValidName(cityValue)) {
-    // Valid city name
-    showErrorMessage(cityInput, EmptyText)
-  } else if (isInvalidAlphabet(cityValue)) {
+    // City name in correct format
+    showErrorMessage(cityInput, EmptyText);
+  } else {
     // City name is not in the correct format
     isValid = false;
     showErrorMessage(cityInput, MESSAGES.wrongFormat);
-  } else {
-    showErrorMessage(cityInput, EmptyText);
   }
 
   return isValid;
