@@ -16,7 +16,7 @@ const REGEX = {
 const MESSAGES = {
   empty: 'Value should be not empty',
   wrongFormat: 'Enter the wrong format. Please re-enter',
-  lackFormat: 'The name must have two words. Please enter two full words' 
+  invalidFormat: 'The name must have two words. Please enter two full words' 
 };
 
 const EmptyText = '';
@@ -69,7 +69,7 @@ const isInvalidAlphabet = (value) => {
   return false;
 }
 
-const isInvalidNumberWords = (value) => {
+const isValidName = (value) => {
   if (REGEX.alphabetShortRegex.test(value)) {
     return true;
   }
@@ -117,15 +117,15 @@ const isValidForm = () => {
   if (isEmpty(nameValue)) {
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.empty);
-  } else if (isInvalidNumberWords(nameValue)) {
+  } else if (isValidName(nameValue)) {
     // Full name cannot be less than two words
     isValid = false;
-    showErrorMessage(fullNameInput, MESSAGES.lackFormat);
+    showErrorMessage(fullNameInput, MESSAGES.invalidFormat);
   } else if (isInvalidAlphabet(nameValue)) {
-    // Full name is not in the correct format
+    // Invalid full name
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
-  }  else {
+  } else {
     showErrorMessage(fullNameInput, EmptyText);
   }
   
@@ -157,8 +157,8 @@ const isValidForm = () => {
   if (isEmpty(cityValue)) {
     isValid = false;
     showErrorMessage(cityInput, MESSAGES.empty);
-  } else if (isInvalidNumberWords(cityValue)) {
-    // City names are allowed to be one word
+  } else if (isValidName(cityValue)) {
+    // Valid city name
     showErrorMessage(cityInput, EmptyText)
   } else if (isInvalidAlphabet(cityValue)) {
     // City name is not in the correct format
@@ -201,17 +201,17 @@ const renderUserTable = () => {
         <td>${element.salary}</td>
         <td>${element.city}</td>
         <td class="td-btn">
-          <button type="button" class="delete-btns" data-columns=${index}>Delete</button>
+          <button type="button" class="delete-buttons" data-columns=${index}>Delete</button>
         </td>
       </tr>
     `;
   });
 
   document.getElementById('userTableBody').innerHTML = tableTemplate;
-  const deleteBtn = document.querySelectorAll('.delete-btns');
+  const deleteButtons = document.querySelectorAll('.delete-buttons');
 
   // Delete data from table and localStorage
-  deleteBtn.forEach(item => {
+  deleteButtons.forEach(item => {
     item.addEventListener('click', function() {
       if (confirm('Are you sure?')) {
         item.parentElement.parentElement.remove();
