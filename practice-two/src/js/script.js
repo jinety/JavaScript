@@ -118,11 +118,11 @@ const isValidForm = () => {
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.empty);
   } else if (isValidName(nameValue)) {
-    // Full name cannot be less than two words
+    // Invalid full name
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.invalidFormat);
   } else if (isInvalidAlphabet(nameValue)) {
-    // Invalid full name
+    // Full name is not in the correct format
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
   } else {
