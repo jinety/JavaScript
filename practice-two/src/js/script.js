@@ -3,17 +3,20 @@ const fullNameInput = document.getElementById('fullName');
 const emailInput = document.getElementById('email');
 const salaryInput = document.getElementById('salary');
 const cityInput = document.getElementById('city');
+const submitBtn = document.getElementById('submitBtn');
 
 // Regex for validating a value/text format
 const REGEX = {
   alphabetRegex: /^[a-zA-Z]+ [a-zA-Z]+$/,
+  alphabetShortRegex: /^[a-zA-Z]+$/,
   emailRegex: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
 }
 
 // Messages
 const MESSAGES = {
   empty: 'Value should be not empty',
-  wrongFormat: 'Enter the wrong format. Please re-enter', 
+  wrongFormat: 'Enter the wrong format. Please re-enter',
+  lackFormat: 'The name must have two words. Please enter two full words' 
 };
 
 const EmptyText = '';
@@ -22,11 +25,11 @@ const EmptyText = '';
 const UsersKey = 'users';
 
 // Parse any JSON previously stored in users
- let existingEntries = JSON.parse(localStorage.getItem(UsersKey));
+let userDatabase = JSON.parse(localStorage.getItem(UsersKey));
  
- // If existingEntries is null, array will be created
- if (existingEntries === null) {
-  existingEntries = [];
+// If existingEntries is null, array will be created
+if (userDatabase === null) {
+  userDatabase = [];
 }
 
 /**
@@ -61,8 +64,16 @@ const isEmpty = (value) => {
 const isInvalidAlphabet = (value) => {
   if (!REGEX.alphabetRegex.test(value)) {
     return true;
+  } 
+  
+  return false;
+}
+
+const isInvalidNumberWords = (value) => {
+  if (REGEX.alphabetShortRegex.test(value)) {
+    return true;
   }
-    
+
   return false;
 }
 
@@ -95,32 +106,36 @@ const isInvalidSalary = (value) => {
 /**
  * Validate form data
  */
-const isvalidateForm = () => {
+const isValidForm = () => {
   const nameValue = fullNameInput.value;
   const emailValue = emailInput.value;
   const salaryValue = salaryInput.value;
   const cityValue = cityInput.value;
-  let isvalid = true;
+  let isValid = true;
 
   // Full name is required
   if (isEmpty(nameValue)) {
-    isvalid = false;
+    isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.empty);
+  } else if (isInvalidNumberWords(nameValue)) {
+    // Full name cannot be less than two words
+    isValid = false;
+    showErrorMessage(fullNameInput, MESSAGES.lackFormat);
   } else if (isInvalidAlphabet(nameValue)) {
-    // Fullname is not in the correct format
-    isvalid = false;
+    // Full name is not in the correct format
+    isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
-  } else {
+  }  else {
     showErrorMessage(fullNameInput, EmptyText);
   }
   
   // Email is required
   if (isEmpty(emailValue)) {
-    isvalid = false;
+    isValid = false;
     showErrorMessage(emailInput, MESSAGES.empty);
   } else if (isInvalidEmail(emailValue)) {
     // Email is not in the correct format
-    isvalid = false;
+    isValid = false;
     showErrorMessage(emailInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(emailInput, EmptyText);
@@ -128,11 +143,11 @@ const isvalidateForm = () => {
 
   // Salary is required
   if (isEmpty(salaryValue)) {
-    isvalid = false;
+    isValid = false;
     showErrorMessage(salaryInput, MESSAGES.empty);
   } else if (isInvalidSalary(salaryValue)) {
     // Salary less than or equal to 0
-    isvalid = false;
+    isValid = false;
     showErrorMessage(salaryInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(salaryInput, EmptyText);
@@ -140,17 +155,20 @@ const isvalidateForm = () => {
 
   // City is required
   if (isEmpty(cityValue)) {
-    isvalid = false;
+    isValid = false;
     showErrorMessage(cityInput, MESSAGES.empty);
+  } else if (isInvalidNumberWords(cityValue)) {
+    // City names are allowed to be one word
+    showErrorMessage(cityInput, EmptyText)
   } else if (isInvalidAlphabet(cityValue)) {
     // City name is not in the correct format
-    isvalid = false;
+    isValid = false;
     showErrorMessage(cityInput, MESSAGES.wrongFormat);
   } else {
     showErrorMessage(cityInput, EmptyText);
   }
 
-  return isvalid;
+  return isValid;
 }
 
 /**
@@ -159,14 +177,14 @@ const isvalidateForm = () => {
  */
 const saveData = () => {
   // Append values ​​to array 
-  existingEntries.push({
+  userDatabase.push({
     fullName: fullNameInput.value,
     email: emailInput.value,
     salary: salaryInput.value,
     city: cityInput.value
   });
 
-  localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
+  localStorage.setItem(UsersKey, JSON.stringify(userDatabase));
 }
 
 /**
@@ -175,43 +193,33 @@ const saveData = () => {
 const renderUserTable = () => {
   let tableTemplate = '';
 
-  existingEntries.forEach((element, index) => {
+  userDatabase.forEach((element, index) => {
     tableTemplate += ` 
-        <tr class="content-row">
-          <td>${element.fullName}</td>
-          <td>${element.email}</td>
-          <td>${element.salary}</td>
-          <td>${element.city}</td>
-          <td class="td-btn">
-            <button type="button" class="delete-btn" data-columns=${index}>Delete</button>
-          </td>
-        </tr>
+      <tr class="content-row">
+        <td>${element.fullName}</td>
+        <td>${element.email}</td>
+        <td>${element.salary}</td>
+        <td>${element.city}</td>
+        <td class="td-btn">
+          <button type="button" class="delete-btns" data-columns=${index}>Delete</button>
+        </td>
+      </tr>
     `;
   });
 
   document.getElementById('userTableBody').innerHTML = tableTemplate;
-  const deleteBtn = document.querySelectorAll('.delete-btn');
-  
+  const deleteBtn = document.querySelectorAll('.delete-btns');
+
+  // Delete data from table and localStorage
   deleteBtn.forEach(item => {
-    item.dataset.columns;
-    console.log(item.dataset.columns);
     item.addEventListener('click', function() {
-      item.parentElement.parentElement.remove();
-      existingEntries.splice(item.dataset.columns, 1);
-      localStorage.setItem(UsersKey, JSON.stringify(existingEntries))
+      if (confirm('Are you sure?')) {
+        item.parentElement.parentElement.remove();
+        userDatabase.splice(item.dataset.columns, 1);
+        localStorage.setItem(UsersKey, JSON.stringify(userDatabase))
+      }
     });
   });
-}
-
-/**
- * Function to delete data from table and localStorage
- */
-const deleteData = () => {
-  if (confirm('Are you sure?')) {
-    document.querySelector('.delete-btn');
-  }
-
-  localStorage.setItem(UsersKey, JSON.stringify(existingEntries));
 }
 
 /**
@@ -219,15 +227,12 @@ const deleteData = () => {
  */
 const submitForm = () => {
   // Validate form data
-  if (isvalidateForm()) {
+  if (isValidForm()) {
     // Save form data
     saveData();
     renderUserTable();
   }
 }
 
-const submitBtn = document.getElementById('submitBtn');
-
 submitBtn.addEventListener('click', submitForm);
-
 renderUserTable();
