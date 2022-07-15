@@ -54,8 +54,8 @@ const isEmpty = (value) => {
   return false;
 }
 
-const isValidName = (value) => {
-  if (REGEX.alphabetShortRegex.test(value)) {
+const isInvalidName = (value) => {
+  if (!REGEX.alphabetShortRegex.test(value)) {
     return true;
   }
 
@@ -102,7 +102,7 @@ const isValidForm = () => {
   if (isEmpty(nameValue)) {
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.empty);
-  } else if (!isValidName(nameValue)) {
+  } else if (isInvalidName(nameValue)) {
     // Full name is not in the correct format
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
@@ -138,7 +138,7 @@ const isValidForm = () => {
   if (isEmpty(cityValue)) {
     isValid = false;
     showErrorMessage(cityInput, MESSAGES.empty);
-  } else if (!isValidName(cityValue)) {
+  } else if (isInvalidName(cityValue)) {
     // City name is not in the correct format
     isValid = false;
     showErrorMessage(cityInput, MESSAGES.wrongFormat);
@@ -180,14 +180,14 @@ const renderUserTable = () => {
         <td>${element.salary}</td>
         <td>${element.city}</td>
         <td class="td-btn">
-          <button type="button" class="delete-buttons" data-columns=${index}>Delete</button>
+          <button type="button" class="delete-button" data-columns=${index}>Delete</button>
         </td>
       </tr>
     `;
   });
 
   document.getElementById('userTableBody').innerHTML = tableTemplate;
-  const deleteButtons = document.querySelectorAll('.delete-buttons');
+  const deleteButtons = document.querySelectorAll('.delete-button');
 
   // Delete data from table and localStorage
   deleteButtons.forEach(item => {
