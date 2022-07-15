@@ -27,7 +27,9 @@ Before you continue, ensure you meet the following requirements:
 
 ### Executing program
 * Step 1: Clone repository 
-  `git clone https://github.com/jinety/JavaScript/tree/feature/practice-two`
+  `git clone https://github.com/jinety/JavaScript
+* Step 2: Checkout branch `feature/practice-two`
+  `git checkout feature/practice-two`
 * Step 2: Change directory to practice-two folder 
   `cd practice-two`
 * Step 3: Install node packages 
