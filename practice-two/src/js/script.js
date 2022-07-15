@@ -7,7 +7,6 @@ const submitBtn = document.getElementById('submitBtn');
 
 // Regex for validating a value/text format
 const REGEX = {
-  alphabetRegex: /^[a-zA-Z]+ [a-zA-Z]+$/,
   alphabetShortRegex: /^[A-Za-z\s]+$/,
   emailRegex: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
 }
@@ -15,8 +14,7 @@ const REGEX = {
 // Messages
 const MESSAGES = {
   empty: 'Value should be not empty',
-  wrongFormat: 'Enter the wrong format. Please re-enter',
-  invalidFormat: 'The name must have two words. Please enter two full words' 
+  wrongFormat: 'Enter the wrong format. Please re-enter'
 };
 
 const EmptyText = '';
@@ -53,19 +51,6 @@ const isEmpty = (value) => {
     return true;
   } 
 
-  return false;
-}
-
-/**
- * Invalid alphabet check function
- * 
- * @param {string} value - Comparative value
- */
-const isValidAlphabet = (value) => {
-  if (REGEX.alphabetRegex.test(value)) {
-    return true;
-  } 
-  
   return false;
 }
 
@@ -117,17 +102,12 @@ const isValidForm = () => {
   if (isEmpty(nameValue)) {
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.empty);
-  } else if (isValidAlphabet(nameValue)) {
-    // Valid name
-    showErrorMessage(fullNameInput, EmptyText);
-  } else if (isValidName(nameValue)) {
-    // Invalid full name
-    isValid = false;
-    showErrorMessage(fullNameInput, MESSAGES.invalidFormat);
-  } else {
+  } else if (!isValidName(nameValue)) {
     // Full name is not in the correct format
     isValid = false;
     showErrorMessage(fullNameInput, MESSAGES.wrongFormat);
+  } else {
+    showErrorMessage(fullNameInput, EmptyText);
   }
   
   // Email is required
@@ -158,13 +138,13 @@ const isValidForm = () => {
   if (isEmpty(cityValue)) {
     isValid = false;
     showErrorMessage(cityInput, MESSAGES.empty);
-  } else if (isValidName(cityValue)) {
-    // City name in correct format
-    showErrorMessage(cityInput, EmptyText);
-  } else {
+  } else if (!isValidName(cityValue)) {
     // City name is not in the correct format
     isValid = false;
     showErrorMessage(cityInput, MESSAGES.wrongFormat);
+  } else {
+    // City name in correct format
+    showErrorMessage(cityInput, EmptyText);
   }
 
   return isValid;
