@@ -5,12 +5,12 @@ const name = 'Hoa';
 const car = {type: 'Fiat', model: '500', color: 'while'};
 
 const person = {firstName: 'Nguyen',
-    lastName: 'Hoa',
-    age: '22',
-    eyeColor: 'while',
-    fullName: function() {
-        console.log(`${this.firstName} ${this.lastName}`);
-    }
+  lastName: 'Hoa',
+  age: '22',
+  eyeColor: 'while',
+  fullName: function() {
+    console.log(`${this.firstName} ${this.lastName}`);
+  }
 };
 
 person.fullName();
@@ -25,4 +25,3 @@ console.log(person['firstName']);
 // Remove attribute from object
 delete person.age;
 console.log(person);
-

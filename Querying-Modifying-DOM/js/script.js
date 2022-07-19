@@ -23,8 +23,7 @@ a.classList.remove('demo-1');
 
 a.parentElement.querySelector('.demo').innerHTML = 'VAN HOA';
 
-
 const b = document.querySelectorAll('.demo-class');
 b.forEach(Element => {
-    Element.innerHTML = 'HOA NGUYEN';
+  Element.innerHTML = 'HOA NGUYEN';
 })
