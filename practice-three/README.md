@@ -34,23 +34,27 @@ Before you continue, ensure you meet the following requirements:
   ```
   git checkout feature/practice-three
   ```
-* Step 2: Change directory to practice-two folder 
+* Step 3: Change directory to practice-two folder 
   ```
   cd practice-three
   ```
-* Step 3: Install node packages 
+* Step 4: Install node packages 
   ```
   npm install
   ```
-* Step 4: Run JSON server
+* Step 5: Install JSON Server
+  ```
+  npm install -g json-server
+  ```
+* Step 6: Run JSON server
   ```
   npx json-server --watch ./db.json
   ```
-* Step 5: Run application 
+* Step 7: Run application 
   ```
   npm start
   ```
-* Step 6: Open browser with the link below 
+* Step 8: Open browser with the link below 
   ```
   http://localhost:1234
   ```
