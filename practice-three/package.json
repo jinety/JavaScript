@@ -1,8 +1,10 @@
 {
   "name": "practice-two",
   "version": "1.0.0",
+  "source": "src/index.html",
   "scripts": {
-    "start" : "parcel src/index.html"
+    "start": "json-server --watch db.json",
+    "dev": "parcel"
   },
   "author": "Hoa Nguyen <vhoa1000@gmail.com>",
   "devDependencies": {

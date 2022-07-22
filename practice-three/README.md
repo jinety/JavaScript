@@ -27,17 +27,33 @@ Before you continue, ensure you meet the following requirements:
 
 ### Executing program
 * Step 1: Clone repository 
-  `git clone https://github.com/jinety/JavaScript
+  ```
+  git clone https://github.com/jinety/JavaScript
+  ```
 * Step 2: Checkout branch `feature/practice-three`
-  `git checkout feature/practice-three`
+  ```
+  git checkout feature/practice-three
+  ```
 * Step 2: Change directory to practice-two folder 
-  `cd practice-three`
+  ```
+  cd practice-three
+  ```
 * Step 3: Install node packages 
-  `npm install`
-* Step 4: Run project 
-  `npm start`
-* Step 5: Open browser with the link below 
-  `http://localhost:1234`
+  ```
+  npm install
+  ```
+* Step 4: Run application
+  ```
+  npm start
+  ```
+* Step 5: Run server 
+  ```
+  npm run dev
+  ```
+* Step 6: Open browser with the link below 
+  ```
+  http://localhost:1234
+  ```
 
 ## Author
 **Hoa Nguyen**
