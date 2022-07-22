@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Information input form</title>
+  </head>
+  <body>
+    <form class="registration-form">
+      <div class="input-box">
+        <div class="form-field">
+          <label class="input-label">Full Name*</label>
+          <input type="text" id="fullName" class="data-input" />
+          <p class="warn-msg"></p>
+        </div>
+        <div class="form-field">
+          <label class="input-label">Email Id</label>
+          <input type="email" id="email" class="data-input" />
+          <p class="warn-msg"></p>
+        </div>
+        <div class="form-field">
+          <label class="input-label">Salary</label>
+          <input type="number" id="salary" class="data-input" />
+          <p class="warn-msg"></p>
+        </div>
+        <div class="form-field">
+          <label class="input-label">City</label>
+          <input type="text" id="city" class="data-input" />
+          <p class="warn-msg"></p>
+        </div>
+      </div>
+      <div class="button-box">
+        <button type="button" id="submitBtn">Submit</button>
+      </div>
+    </form>
+
+    <div class="list-users" id="listUsers">
+      <table class="users-table" id="usersTable">
+        <thead>
+          <tr>
+            <th class="item-header">Full Name</th>
+            <th class="item-header">Email Id</th>
+            <th class="item-header">Salary</th>
+            <th class="item-header">City</th>
+            <th class="item-header">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody"></tbody>
+      </table>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

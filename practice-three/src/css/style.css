@@ -1,0 +1,72 @@
+:root {
+  /* COLOR */
+  --primary-color-100: black;
+  --primary-color-200: white;
+  --secondary-color-100: red;
+
+  /*FONT SIZE*/
+  --font-size-s: 18px;
+  --font-size-m: 24px;
+}
+
+.registration-form,
+.list-users {
+  border: 5px solid var(--primary-color-100);
+  margin: 0 auto;
+}
+
+.registration-form {
+  width: 50%;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-label {
+  display: block;
+  font-size: var(--font-size-m);
+  margin-bottom: 10px;
+}
+
+.data-input {
+  padding: 10px 30px;
+  font-size: var(--font-size-s);
+}
+
+.warn-msg {
+  font-size: var(--font-size-m);
+  color: var(--secondary-color-100);
+}
+
+.button-box {
+  text-align: right;
+}
+
+#submitBtn {
+  padding: 10px 85px;
+  background-color: var(--primary-color-100);
+  color: var(--primary-color-200);
+}
+
+.list-users {
+  width: 70%;
+  padding: 20px;
+}
+
+.users-table,
+.item-header {
+  border: 1px solid var(--primary-color-100);
+}
+
+.users-table {
+  width: 100%;
+}
+
+.item-header {
+  padding: 10px;
+}
