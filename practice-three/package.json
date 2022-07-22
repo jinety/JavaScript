@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "source": "src/index.html",
   "scripts": {
-    "start": "json-server --watch db.json",
-    "dev": "parcel"
+    "start": "npx parcel src/index.html"
   },
   "author": "Hoa Nguyen <vhoa1000@gmail.com>",
   "devDependencies": {

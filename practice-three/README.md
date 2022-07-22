@@ -42,13 +42,13 @@ Before you continue, ensure you meet the following requirements:
   ```
   npm install
   ```
-* Step 4: Run application
+* Step 4: Run JSON server
+  ```
+  npx json-server --watch ./db.json
+  ```
+* Step 5: Run application 
   ```
   npm start
-  ```
-* Step 5: Run server 
-  ```
-  npm run dev
   ```
 * Step 6: Open browser with the link below 
   ```
