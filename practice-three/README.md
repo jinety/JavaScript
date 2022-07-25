@@ -42,23 +42,19 @@ Before you continue, ensure you meet the following requirements:
   ```
   npm install
   ```
-* Step 5: Install JSON Server
+* Step 5: Run JSON server
   ```
-  npm install -g json-server
+  npm run server
   ```
-* Step 6: Run JSON server
-  ```
-  npx json-server --watch ./db.json
-  ```
-* Step 7: Run application 
+* Step 6: Run application
   ```
   npm start
   ```
-* Step 8: Open browser with the link below 
+* Step 7: Open browser with the link below
   ```
   http://localhost:1234
   ```
-
+  
 ## Author
 **Hoa Nguyen**
 * Email: <vhoa1000@gmail.com>

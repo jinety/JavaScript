@@ -5,7 +5,7 @@ const salaryInput = document.getElementById('salary');
 const cityInput = document.getElementById('city');
 const submitBtn = document.getElementById('submitBtn');
 const userTableBody = document.getElementById('userTableBody')
-let courseApi = 'http://localhost:3000/userDatabase'
+const userApi = ' http://localhost:3000/users'
 
 // Regex for validating a value/text format
 const REGEX = {
@@ -178,7 +178,7 @@ const renderUserTable = () => {
 /**
  * Function POST data to userDatabase 
  */
- const createUsers = (data, callback) => {
+ const createUser = (data) => {
   const options = {
     method: 'POST',
     headers: {
@@ -186,11 +186,11 @@ const renderUserTable = () => {
     },
     body: JSON.stringify(data)
   };
-  fetch(courseApi, options)
+
+  fetch(userApi, options)
     .then(function(response) {
       response.json();
     })
-    .then(callback);
 }
 
 const handleCreateForm = () => {
@@ -198,14 +198,9 @@ const handleCreateForm = () => {
   const email = emailInput.value;
   const salary = salaryInput.value;
   const city = cityInput.value;
-  const formData = {
-    name: name,
-    email: email,
-    salary: salary,
-    city: city
-  };
+  const formData = {name, email, salary, city};
 
-  createUsers(formData);
+  createUser(formData);
 }
 
 const submitForm = () => {

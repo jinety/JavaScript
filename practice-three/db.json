@@ -1,5 +1,5 @@
 {
-  "userDatabase": [
+  "users": [
     {
       "id": 1,
       "fullname": "Hoa Nguyen",
@@ -48,6 +48,20 @@
       "salary": "12",
       "city": "Quang Nam",
       "id": 7
+    },
+    {
+      "name": "Hoa",
+      "email": "gatrong357@gmail.com",
+      "salary": "123",
+      "city": "Hue",
+      "id": 8
+    },
+    {
+      "name": "Van Hoa",
+      "email": "vhoa1000@gmail.com",
+      "salary": "90",
+      "city": "Quang Nam",
+      "id": 9
     }
   ]
 }
