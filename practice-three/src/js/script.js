@@ -4,6 +4,8 @@ const emailInput = document.getElementById('email');
 const salaryInput = document.getElementById('salary');
 const cityInput = document.getElementById('city');
 const submitBtn = document.getElementById('submitBtn');
+const userTableBody = document.getElementById('userTableBody')
+let courseApi = 'http://localhost:3000/userDatabase'
 
 // Regex for validating a value/text format
 const REGEX = {
@@ -18,17 +20,6 @@ const MESSAGES = {
 };
 
 const EmptyText = '';
-
-// Name of the key in localStorage
-const UsersKey = 'users';
-
-// Parse any JSON previously stored in users
-let userDatabase = JSON.parse(localStorage.getItem(UsersKey));
- 
-// If existingEntries is null, array will be created
-if (userDatabase === null) {
-  userDatabase = [];
-}
 
 /**
  * Display error message when user enters wrong input
@@ -151,67 +142,42 @@ const isValidForm = () => {
 }
 
 /**
- * Function to save data to localStorage
- * 
+ * Function POST data to userDatabase 
  */
-const saveData = () => {
-  // Append values ​​to array 
-  userDatabase.push({
-    fullName: fullNameInput.value,
-    email: emailInput.value,
-    salary: salaryInput.value,
-    city: cityInput.value
-  });
-
-  localStorage.setItem(UsersKey, JSON.stringify(userDatabase));
+const createUsers = (data, callback) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  };
+  fetch(courseApi, options)
+    .then(function(response) {
+      response.json();
+    })
+    .then(callback);
 }
 
-/**
- * Show user data in table
- */
-const renderUserTable = () => {
-  let tableTemplate = '';
+const handleCreateForm = () => {
+  const name = fullNameInput.value;
+  const email = emailInput.value;
+  const salary = salaryInput.value;
+  const city = cityInput.value;
+  const formData = {
+    name: name,
+    email: email,
+    salary: salary,
+    city: city
+  };
 
-  userDatabase.forEach((element, index) => {
-    tableTemplate += ` 
-      <tr class="content-row">
-        <td>${element.fullName}</td>
-        <td>${element.email}</td>
-        <td>${element.salary}</td>
-        <td>${element.city}</td>
-        <td class="td-btn">
-          <button type="button" class="delete-button" data-columns=${index}>Delete</button>
-        </td>
-      </tr>
-    `;
-  });
-
-  document.getElementById('userTableBody').innerHTML = tableTemplate;
-  const deleteButtons = document.querySelectorAll('.delete-button');
-
-  // Delete data from table and localStorage
-  deleteButtons.forEach(item => {
-    item.addEventListener('click', function() {
-      if (confirm('Are you sure?')) {
-        item.parentElement.parentElement.remove();
-        userDatabase.splice(item.dataset.columns, 1);
-        localStorage.setItem(UsersKey, JSON.stringify(userDatabase))
-      }
-    });
-  });
+  createUsers(formData);
 }
 
-/**
- * Submit form
- */
 const submitForm = () => {
-  // Validate form data
   if (isValidForm()) {
-    // Save form data
-    saveData();
-    renderUserTable();
+    handleCreateForm();
   }
 }
 
 submitBtn.addEventListener('click', submitForm);
-renderUserTable();

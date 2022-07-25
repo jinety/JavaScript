@@ -1,9 +1,10 @@
 {
-  "name": "practice-two",
+  "name": "practice-three",
   "version": "1.0.0",
   "source": "src/index.html",
   "scripts": {
-    "start": "npx parcel src/index.html"
+    "start": "npx parcel src/index.html",
+    "server": "npx json-server --watch ./db.json" 
   },
   "author": "Hoa Nguyen <vhoa1000@gmail.com>",
   "devDependencies": {
