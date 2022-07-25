@@ -188,9 +188,8 @@ const renderUserTable = () => {
   };
 
   fetch(userApi, options)
-    .then(function(response) {
-      response.json();
-    })
+    .then((response) => response.json())
+    .catch((error) => alert('An error occurred while creating user', error));
 }
 
 const handleCreateForm = () => {
@@ -199,8 +198,8 @@ const handleCreateForm = () => {
   const salary = salaryInput.value;
   const city = cityInput.value;
   const formData = {name, email, salary, city};
-
-  createUser(formData);
+    
+  createUser(formData); 
 }
 
 const submitForm = () => {
