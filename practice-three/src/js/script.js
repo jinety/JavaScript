@@ -179,6 +179,7 @@ const renderUserTable = () => {
  * Function POST data to userDatabase 
  */
  const createUser = (data) => {
+  // POST method implementation
   const options = {
     method: 'POST',
     headers: {
@@ -188,10 +189,15 @@ const renderUserTable = () => {
   };
 
   fetch(userApi, options)
+    // Parses JSON response into native JavaScript objects 
     .then((response) => response.json())
+    // Show error message when API call is wrong
     .catch((error) => alert('An error occurred while creating user', error));
 }
 
+/**
+ * Function handle create form
+ */
 const handleCreateForm = () => {
   const name = fullNameInput.value;
   const email = emailInput.value;
