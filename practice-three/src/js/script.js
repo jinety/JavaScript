@@ -4,6 +4,8 @@ const emailInput = document.getElementById('email');
 const salaryInput = document.getElementById('salary');
 const cityInput = document.getElementById('city');
 const submitBtn = document.getElementById('submitBtn');
+const userTableBody = document.getElementById('userTableBody')
+let courseApi = 'http://localhost:3000/userDatabase'
 
 // Regex for validating a value/text format
 const REGEX = {
@@ -151,22 +153,6 @@ const isValidForm = () => {
 }
 
 /**
- * Function to save data to localStorage
- * 
- */
-const saveData = () => {
-  // Append values ​​to array 
-  userDatabase.push({
-    fullName: fullNameInput.value,
-    email: emailInput.value,
-    salary: salaryInput.value,
-    city: cityInput.value
-  });
-
-  localStorage.setItem(UsersKey, JSON.stringify(userDatabase));
-}
-
-/**
  * Show user data in table
  */
 const renderUserTable = () => {
@@ -187,31 +173,45 @@ const renderUserTable = () => {
   });
 
   document.getElementById('userTableBody').innerHTML = tableTemplate;
-  const deleteButtons = document.querySelectorAll('.delete-button');
-
-  // Delete data from table and localStorage
-  deleteButtons.forEach(item => {
-    item.addEventListener('click', function() {
-      if (confirm('Are you sure?')) {
-        item.parentElement.parentElement.remove();
-        userDatabase.splice(item.dataset.columns, 1);
-        localStorage.setItem(UsersKey, JSON.stringify(userDatabase))
-      }
-    });
-  });
 }
 
 /**
- * Submit form
+ * Function POST data to userDatabase 
  */
+ const createUsers = (data, callback) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  };
+  fetch(courseApi, options)
+    .then(function(response) {
+      response.json();
+    })
+    .then(callback);
+}
+
+const handleCreateForm = () => {
+  const name = fullNameInput.value;
+  const email = emailInput.value;
+  const salary = salaryInput.value;
+  const city = cityInput.value;
+  const formData = {
+    name: name,
+    email: email,
+    salary: salary,
+    city: city
+  };
+
+  createUsers(formData);
+}
+
 const submitForm = () => {
-  // Validate form data
   if (isValidForm()) {
-    // Save form data
-    saveData();
-    renderUserTable();
+    handleCreateForm();
   }
 }
 
 submitBtn.addEventListener('click', submitForm);
-renderUserTable();
