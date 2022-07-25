@@ -5,7 +5,7 @@ const salaryInput = document.getElementById('salary');
 const cityInput = document.getElementById('city');
 const submitBtn = document.getElementById('submitBtn');
 const userTableBody = document.getElementById('userTableBody')
-const userApi = ' http://localhost:3000/users'
+const userApi = 'http://localhost:3000/users'
 
 // Regex for validating a value/text format
 const REGEX = {

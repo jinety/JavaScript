@@ -2,29 +2,23 @@
 > A simple page.
 
 Build a simple page to practice applying what you've learned in JavaScript
-
 ## Getting Started 
-
 ### Design
 Sample design: [here](https://1.bp.blogspot.com/--IZPk65USOk/X7TPu3ZDy_I/AAAAAAAAIZI/YM2o886lyCMzLbVG8iVm0QilX-SFHq3NQCLcBGAsYHQ/s1532/javascript-crud-example-list-page.png)
-
 ### Prerequisites
 Before you continue, ensure you meet the following requirements:
 * You have installed the latest VScode.
 * Use the latest browser version (Chrome, Firefox, MS Edge)
-
 ### Requirement
   Convert current application to use fetch API, that applied
 * [Json-server](https://github.com/typicode/json-server)
 * Fetch
 * Async/await
-  
 ### Technologies
 * HTML5
 * CSS3
 * Parcel
 * JavaScript
-
 ### Executing program
 * Step 1: Clone repository 
   ```
@@ -54,7 +48,6 @@ Before you continue, ensure you meet the following requirements:
   ```
   http://localhost:1234
   ```
-  
 ## Author
 **Hoa Nguyen**
 * Email: <vhoa1000@gmail.com>
