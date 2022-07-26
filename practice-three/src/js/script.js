@@ -177,13 +177,13 @@ const handleCreateForm = () => {
 /**
  * The function takes data from the API and displays it on a table in HTML
  */
- const renderUserTable = () => {
+const renderUserTable = () => {
   fetch(userApi)
     // Parses JSON response into native JavaScript objects 
     .then((response) => response.json())
     .then((users) => {
       let tableTemplate = '';
-         
+
       users.forEach(user => {
         tableTemplate += ` 
           <tr class="content-row">
@@ -191,13 +191,42 @@ const handleCreateForm = () => {
             <td>${user.email}</td>
             <td>${user.salary}</td>
             <td>${user.city}</td>
+            <td class="td-btn">
+              <button type="button" class="delete-button" data-id=${user.id}>Delete</button>
+            </td>
           </tr>
         `;
       });
 
       userTableBody.innerHTML = tableTemplate;
+      const deleteButtons = document.querySelectorAll('.delete-button');
+
+      // Iterate over each delete button in the deleteButtons array
+      deleteButtons.forEach((item) => {
+        item.addEventListener('click', () => {
+          deleteUser(item);
+        })
+      })
     })
     .catch((error) => alert('An error occurred while getting user', error));
+}
+
+/**
+ * Function to remove user from json server
+ */
+const deleteUser = (item) => {
+  // DELETE method implementation
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  };
+  const userId = item.dataset.id;
+
+  fetch(userApi + '/' + userId, options)
+    .then()
+    .catch((error) => alert('An error occurred while removing user', error));
 }
 
 const submitForm = () => {
