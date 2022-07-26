@@ -181,18 +181,19 @@ const handleCreateForm = () => {
   fetch(userApi)
     // Parses JSON response into native JavaScript objects 
     .then((response) => response.json())
-    .then((userDatabase) => {
+    .then((users) => {
       let tableTemplate = '';
          
-      userDatabase.forEach(element => {
+      users.forEach(user => {
         tableTemplate += ` 
           <tr class="content-row">
-            <td>${element.name}</td>
-            <td>${element.email}</td>
-            <td>${element.salary}</td>
-            <td>${element.city}</td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>${user.salary}</td>
+            <td>${user.city}</td>
             <td class="td-btn">
               <button type="button" class="delete-button">Delete</button>
+              <button type="button" class="update-button">Update</button>
             </td>
           </tr>
         `;
