@@ -201,8 +201,9 @@ const renderUserTable = () => {
       userTableBody.innerHTML = tableTemplate;
       const deleteButtons = document.querySelectorAll('.delete-button');
 
+      // Iterate over each delete button in the deleteButtons array
       deleteButtons.forEach((item) => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', () => {
           deleteUser(item);
         })
       })
@@ -224,10 +225,8 @@ const deleteUser = (item) => {
   const userId = item.dataset.id;
 
   fetch(userApi + '/' + userId, options)
-    .then(function() {
-
-    })
-    .catch((error) => alert('An error occurred while creating user', error));
+    .then()
+    .catch((error) => alert('An error occurred while removing user', error));
 }
 
 const submitForm = () => {
