@@ -210,6 +210,9 @@ const renderUserTable = () => {
     .catch((error) => alert('An error occurred while getting user', error));
 }
 
+/**
+ * Function to remove user from json server
+ */
 const deleteUser = (item) => {
   // DELETE method implementation
   const options = {
@@ -219,7 +222,7 @@ const deleteUser = (item) => {
     },
   };
   const userId = item.dataset.id;
-  
+
   fetch(userApi + '/' + userId, options)
     .then(function() {
 
