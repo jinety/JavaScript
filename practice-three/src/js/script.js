@@ -191,6 +191,9 @@ const handleCreateForm = () => {
             <td>${user.email}</td>
             <td>${user.salary}</td>
             <td>${user.city}</td>
+            <td class="td-btn">
+              <button type="button" class="delete-button" data-id=${user.id}>Delete</button>
+            </td>
           </tr>
         `;
       });
@@ -198,6 +201,32 @@ const handleCreateForm = () => {
       userTableBody.innerHTML = tableTemplate;
     })
     .catch((error) => alert('An error occurred while getting user', error));
+}
+
+const handleDeleteUser = (id) => {
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  };
+
+  fetch(userApi + '/' + id, options)
+    // Parses JSON response into native JavaScript objects 
+    .then((response) => response.json())
+    // Show error message when API call is wrong
+    .then(function () {
+      const deleteButtons = document.querySelectorAll('.delete-button');
+      deleteButtons.forEach(item => {
+        item.addEventListener('click', function () {
+          if (confirm('Are you sure?')) {
+            item.parentElement.parentElement.remove();
+            userDatabase.splice(item.dataset.columns, 1);
+          }
+        });
+      });
+    })
+    .catch((error) => alert('An error occurred while creating user', error));
 }
 
 const submitForm = () => {
