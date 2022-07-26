@@ -16,6 +16,34 @@
     },
     {
       "name": "Hoa Nguyen",
+      "email": "vhoa1000@gmail.com",
+      "salary": "4",
+      "city": "Hue",
+      "id": 3
+    },
+    {
+      "name": "Jine Ty",
+      "email": "gatrong357@gmail.com",
+      "salary": "124",
+      "city": "Hue Mong Mo",
+      "id": 4
+    },
+    {
+      "name": "Hoa Nguyen",
+      "email": "vhoa1000@gmail.com",
+      "salary": "12",
+      "city": "Da Nang",
+      "id": 5
+    },
+    {
+      "name": "Hoa Nguyen",
+      "email": "vhoa1000@gmail.com",
+      "salary": "1234",
+      "city": "Quang Nam",
+      "id": 6
+    },
+    {
+      "name": "Hoa Nguyen",
       "email": "gatrong357@gmail.com",
       "salary": "1245",
       "city": "Da Nang",
