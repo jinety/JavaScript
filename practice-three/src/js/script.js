@@ -21,17 +21,6 @@ const MESSAGES = {
 
 const EmptyText = '';
 
-// Name of the key in localStorage
-const UsersKey = 'users';
-
-// Parse any JSON previously stored in users
-let userDatabase = JSON.parse(localStorage.getItem(UsersKey));
- 
-// If existingEntries is null, array will be created
-if (userDatabase === null) {
-  userDatabase = [];
-}
-
 /**
  * Display error message when user enters wrong input
  * 
@@ -192,10 +181,10 @@ const handleCreateForm = () => {
   fetch(userApi)
     // Parses JSON response into native JavaScript objects 
     .then((response) => response.json())
-    .then((user) => {
+    .then((userDatabase) => {
       let tableTemplate = '';
          
-      user.forEach(element => {
+      userDatabase.forEach(element => {
         tableTemplate += ` 
           <tr class="content-row">
             <td>${element.name}</td>
@@ -209,7 +198,7 @@ const handleCreateForm = () => {
         `;
       });
 
-      document.getElementById('userTableBody').innerHTML = tableTemplate;
+      userTableBody.innerHTML = tableTemplate;
     })
     .catch((error) => alert('An error occurred while getting user', error));
 }
