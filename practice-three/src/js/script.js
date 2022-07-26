@@ -21,17 +21,6 @@ const MESSAGES = {
 
 const EmptyText = '';
 
-// Name of the key in localStorage
-const UsersKey = 'users';
-
-// Parse any JSON previously stored in users
-let userDatabase = JSON.parse(localStorage.getItem(UsersKey));
- 
-// If existingEntries is null, array will be created
-if (userDatabase === null) {
-  userDatabase = [];
-}
-
 /**
  * Display error message when user enters wrong input
  * 
@@ -153,29 +142,6 @@ const isValidForm = () => {
 }
 
 /**
- * Show user data in table
- */
-const renderUserTable = () => {
-  let tableTemplate = '';
-
-  userDatabase.forEach((element, index) => {
-    tableTemplate += ` 
-      <tr class="content-row">
-        <td>${element.fullName}</td>
-        <td>${element.email}</td>
-        <td>${element.salary}</td>
-        <td>${element.city}</td>
-        <td class="td-btn">
-          <button type="button" class="delete-button" data-columns=${index}>Delete</button>
-        </td>
-      </tr>
-    `;
-  });
-
-  document.getElementById('userTableBody').innerHTML = tableTemplate;
-}
-
-/**
  * Function POST data to userDatabase 
  */
  const createUser = (data) => {
@@ -208,6 +174,32 @@ const handleCreateForm = () => {
   createUser(formData); 
 }
 
+/**
+ * The function takes data from the API and displays it on a table in HTML
+ */
+ const renderUserTable = () => {
+  fetch(userApi)
+    // Parses JSON response into native JavaScript objects 
+    .then((response) => response.json())
+    .then((users) => {
+      let tableTemplate = '';
+         
+      users.forEach(user => {
+        tableTemplate += ` 
+          <tr class="content-row">
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>${user.salary}</td>
+            <td>${user.city}</td>
+          </tr>
+        `;
+      });
+
+      userTableBody.innerHTML = tableTemplate;
+    })
+    .catch((error) => alert('An error occurred while getting user', error));
+}
+
 const submitForm = () => {
   if (isValidForm()) {
     handleCreateForm();
@@ -215,3 +207,4 @@ const submitForm = () => {
 }
 
 submitBtn.addEventListener('click', submitForm);
+renderUserTable();

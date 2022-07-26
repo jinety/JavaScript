@@ -36,60 +36,18 @@
       "id": 5
     },
     {
-      "name": "Hoa Nguyen 1",
-      "email": "gatrong357@gmail.com",
-      "salary": "1",
+      "name": "Hoa Nguyen",
+      "email": "vhoa1000@gmail.com",
+      "salary": "1234",
       "city": "Quang Nam",
       "id": 6
     },
     {
       "name": "Hoa Nguyen",
-      "email": "vhoa1000@gmail.com",
-      "salary": "12",
-      "city": "Quang Nam",
+      "email": "gatrong357@gmail.com",
+      "salary": "1245",
+      "city": "Da Nang",
       "id": 7
-    },
-    {
-      "name": "Hoa",
-      "email": "gatrong357@gmail.com",
-      "salary": "123",
-      "city": "Hue",
-      "id": 8
-    },
-    {
-      "name": "Van Hoa",
-      "email": "vhoa1000@gmail.com",
-      "salary": "90",
-      "city": "Quang Nam",
-      "id": 9
-    },
-    {
-      "name": "Hoa Nguyen",
-      "email": "vhoa1000@gmail.com",
-      "salary": "2",
-      "city": "Da Nang",
-      "id": 10
-    },
-    {
-      "name": "Jine Ty",
-      "email": "gatrong357@gmail.com",
-      "salary": "123",
-      "city": "Da Nang",
-      "id": 11
-    },
-    {
-      "name": "Hoa Nguyen",
-      "email": "vhoa1000@gmail.com",
-      "salary": "123",
-      "city": "Da Nang",
-      "id": 12
-    },
-    {
-      "name": "Hoa Nguyen",
-      "email": "vhoa1000@gmail.com",
-      "salary": "123",
-      "city": "Da Nang",
-      "id": 13
     }
   ]
 }
