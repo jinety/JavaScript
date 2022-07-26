@@ -177,13 +177,13 @@ const handleCreateForm = () => {
 /**
  * The function takes data from the API and displays it on a table in HTML
  */
- const renderUserTable = () => {
+const renderUserTable = () => {
   fetch(userApi)
     // Parses JSON response into native JavaScript objects 
     .then((response) => response.json())
     .then((users) => {
       let tableTemplate = '';
-         
+
       users.forEach(user => {
         tableTemplate += ` 
           <tr class="content-row">
@@ -199,32 +199,30 @@ const handleCreateForm = () => {
       });
 
       userTableBody.innerHTML = tableTemplate;
+      const deleteButtons = document.querySelectorAll('.delete-button');
+
+      deleteButtons.forEach((item) => {
+        item.addEventListener('click', function() {
+          deleteUser(item);
+        })
+      })
     })
     .catch((error) => alert('An error occurred while getting user', error));
 }
 
-const handleDeleteUser = (id) => {
+const deleteUser = (item) => {
+  // DELETE method implementation
   const options = {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
     },
   };
+  const userId = item.dataset.id;
+  
+  fetch(userApi + '/' + userId, options)
+    .then(function() {
 
-  fetch(userApi + '/' + id, options)
-    // Parses JSON response into native JavaScript objects 
-    .then((response) => response.json())
-    // Show error message when API call is wrong
-    .then(function () {
-      const deleteButtons = document.querySelectorAll('.delete-button');
-      deleteButtons.forEach(item => {
-        item.addEventListener('click', function () {
-          if (confirm('Are you sure?')) {
-            item.parentElement.parentElement.remove();
-            userDatabase.splice(item.dataset.columns, 1);
-          }
-        });
-      });
     })
     .catch((error) => alert('An error occurred while creating user', error));
 }
