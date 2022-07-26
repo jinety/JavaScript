@@ -191,10 +191,6 @@ const handleCreateForm = () => {
             <td>${user.email}</td>
             <td>${user.salary}</td>
             <td>${user.city}</td>
-            <td class="td-btn">
-              <button type="button" class="delete-button">Delete</button>
-              <button type="button" class="update-button">Update</button>
-            </td>
           </tr>
         `;
       });
