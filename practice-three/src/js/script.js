@@ -238,21 +238,8 @@ const deleteUser = (item) => {
 }
 
 const updateUser = (item) => {
-  // PUT method implementation
-  const options = {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  };
-  const userId = item.dataset.id;
-
-  fetch(userApi + '/' + userId, options)
-    // Parses JSON response into native JavaScript objects 
-    .then((response) => response.json())
-    // Show error message when API call is wrong
-    .catch((error) => alert('An error occurred while update user', error));
+  // Get the id of the update button when clicked
+  item.dataset.id;
 }
 
 const submitForm = () => {

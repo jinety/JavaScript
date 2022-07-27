@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "fullname": "Hoa Nguyen",
+      "name": "Hoa Nguyen",
       "email": "vhoa1000@gmail.com",
       "salary": "1000",
       "city": "Quang Nam"
