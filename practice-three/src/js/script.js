@@ -193,6 +193,7 @@ const renderUserTable = () => {
             <td>${user.city}</td>
             <td class="td-btn">
               <button type="button" class="delete-button" data-id=${user.id}>Delete</button>
+              <button type="button" class="update-button" data-id=${user.id}>Update</button>
             </td>
           </tr>
         `;
@@ -200,11 +201,18 @@ const renderUserTable = () => {
 
       userTableBody.innerHTML = tableTemplate;
       const deleteButtons = document.querySelectorAll('.delete-button');
+      const updateButtons = document.querySelectorAll('.update-button');
 
       // Iterate over each delete button in the deleteButtons array
       deleteButtons.forEach((item) => {
         item.addEventListener('click', () => {
           deleteUser(item);
+        })
+      })
+
+      updateButtons.forEach((item) => {
+        item.addEventListener('click', () => {
+          updateUser(item);
         })
       })
     })
@@ -227,6 +235,11 @@ const deleteUser = (item) => {
   fetch(userApi + '/' + userId, options)
     .then()
     .catch((error) => alert('An error occurred while removing user', error));
+}
+
+const updateUser = (item) => {
+  // Get the id of the update button when clicked
+  item.dataset.id;
 }
 
 const submitForm = () => {
