@@ -213,6 +213,8 @@ const renderUserTable = () => {
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
           updateUser(item);
+          
+          
         })
       })
     })
@@ -239,7 +241,19 @@ const deleteUser = (item) => {
 
 const updateUser = (item) => {
   // Get the id of the update button when clicked
-  item.dataset.id;
+  const userId = item.dataset.id;
+  const objects = {
+    method: 'GET'
+  }
+  fetch (userApi + '/' + userId, objects)
+    .then((response) => response.json())
+    .then(data => {
+      fullNameInput.value = data.name;
+      emailInput.value = data.email;
+      salaryInput.value = data.salary;
+      cityInput.value = data.city;
+    })
+    .catch((error) => alert('Error! An error occurred.', error));
 }
 
 const submitForm = () => {
