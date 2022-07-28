@@ -47,7 +47,7 @@
   text-align: right;
 }
 
-#submitBtn {
+.button {
   padding: 10px 85px;
   background-color: var(--primary-color-100);
   color: var(--primary-color-200);
@@ -69,4 +69,12 @@
 
 .item-header {
   padding: 10px;
+}
+
+.user-table-body {
+  text-align: center;
+}
+
+.hide {
+  display: none;
 }
