@@ -213,8 +213,6 @@ const renderUserTable = () => {
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
           updateUser(item);
-          
-          
         })
       })
     })
@@ -242,16 +240,17 @@ const deleteUser = (item) => {
 const updateUser = (item) => {
   // Get the id of the update button when clicked
   const userId = item.dataset.id;
-  const objects = {
+  const options = {
     method: 'GET'
   }
-  fetch (userApi + '/' + userId, objects)
+  
+  fetch (userApi + '/' + userId, options)
     .then((response) => response.json())
-    .then(data => {
-      fullNameInput.value = data.name;
-      emailInput.value = data.email;
-      salaryInput.value = data.salary;
-      cityInput.value = data.city;
+    .then(userData => {
+      fullNameInput.value = userData.name;
+      emailInput.value = userData.email;
+      salaryInput.value = userData.salary;
+      cityInput.value = userData.city;
     })
     .catch((error) => alert('Error! An error occurred.', error));
 }
