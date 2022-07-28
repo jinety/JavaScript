@@ -242,7 +242,7 @@ const updateUser = (item) => {
   const userId = item.dataset.id;
   const options = {
     method: 'GET'
-  }
+  };
   
   fetch (userApi + '/' + userId, options)
     .then((response) => response.json())
