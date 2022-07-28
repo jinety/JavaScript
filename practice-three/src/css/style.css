@@ -47,7 +47,9 @@
   text-align: right;
 }
 
-#submitBtn {
+#submitBtn,
+#updateBtn,
+#cancelBtn {
   padding: 10px 85px;
   background-color: var(--primary-color-100);
   color: var(--primary-color-200);
@@ -69,4 +71,20 @@
 
 .item-header {
   padding: 10px;
+}
+
+#userTableBody {
+  text-align: center;
+}
+
+.hide-button {
+  display: none;
+}
+
+.show-button {
+  display: inline-block;
+}
+
+.update-btn {
+  display: none;
 }

@@ -5,6 +5,9 @@ const salaryInput = document.getElementById('salary');
 const cityInput = document.getElementById('city');
 const submitBtn = document.getElementById('submitBtn');
 const userTableBody = document.getElementById('userTableBody');
+const updateBtnForm = document.getElementById('updateBtn');
+const registrationForm = document.querySelector('.registration-form')
+const cancelBtn = document.getElementById('cancelBtn');
 const userApi = 'http://localhost:3000/users';
 
 // Regex for validating a value/text format
@@ -212,9 +215,34 @@ const renderUserTable = () => {
 
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
-          updateUser(item);
+          getUser(item);
+          submitBtn.className = 'hide-button';
+          updateBtnForm.className = 'show-button';
         })
       })
+
+      updateBtnForm.addEventListener('click', () => {
+        // PUT method implementation
+        const options = {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: fullNameInput.value,
+            email: emailInput.value,
+            salary: salaryInput.value,
+            city: cityInput.value
+          })
+        };
+      
+        fetch(userApi + '/' + registrationForm.getAttribute('data-id'), options)
+          // Parses JSON response into native JavaScript objects 
+          .then((response) => response.json())
+          .then()
+          // Show error message when API call is wrong
+          .catch((error) => alert('An error occurred while update user', error));
+      })   
     })
     .catch((error) => alert('An error occurred while getting user', error));
 }
@@ -237,7 +265,10 @@ const deleteUser = (item) => {
     .catch((error) => alert('An error occurred while removing user', error));
 }
 
-const updateUser = (item) => {
+/**
+ * function to get user data
+ */
+const getUser = (item) => {
   // Get the id of the update button when clicked
   const userId = item.dataset.id;
   const options = {
@@ -246,11 +277,13 @@ const updateUser = (item) => {
   
   fetch (userApi + '/' + userId, options)
     .then((response) => response.json())
+    // Push user data to form input
     .then(userData => {
       fullNameInput.value = userData.name;
       emailInput.value = userData.email;
       salaryInput.value = userData.salary;
       cityInput.value = userData.city;
+      registrationForm.setAttribute('data-id', userId);
     })
     .catch((error) => alert('Error! An error occurred.', error));
 }
@@ -260,6 +293,11 @@ const submitForm = () => {
     handleCreateForm();
   }
 }
+
+cancelBtn.addEventListener('click', () => {
+  submitBtn.className = 'show-button';
+  updateBtnForm.className = 'hide-button';
+})
 
 submitBtn.addEventListener('click', submitForm);
 renderUserTable();
