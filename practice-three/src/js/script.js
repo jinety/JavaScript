@@ -222,26 +222,28 @@ const renderUserTable = () => {
       })
 
       updateBtnForm.addEventListener('click', () => {
-        // PUT method implementation
-        const options = {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            name: fullNameInput.value,
-            email: emailInput.value,
-            salary: salaryInput.value,
-            city: cityInput.value
-          })
-        };
+        if (isValidForm()) {
+          // PUT method implementation
+          const options = {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: fullNameInput.value,
+              email: emailInput.value,
+              salary: salaryInput.value,
+              city: cityInput.value
+            })
+          };
       
-        fetch(userApi + '/' + registrationForm.getAttribute('data-id'), options)
-          // Parses JSON response into native JavaScript objects 
-          .then((response) => response.json())
-          .then()
-          // Show error message when API call is wrong
-          .catch((error) => alert('An error occurred while update user', error));
+          fetch(userApi + '/' + registrationForm.getAttribute('data-id'), options)
+            // Parses JSON response into native JavaScript objects 
+            .then((response) => response.json())
+            .then()
+            // Show error message when API call is wrong
+            .catch((error) => alert('An error occurred while update user', error));
+        }
       })   
     })
     .catch((error) => alert('An error occurred while getting user', error));
@@ -266,7 +268,7 @@ const deleteUser = (item) => {
 }
 
 /**
- * function to get user data
+ * Function to get user data
  */
 const getUser = (item) => {
   // Get the id of the update button when clicked
