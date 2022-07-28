@@ -47,9 +47,7 @@
   text-align: right;
 }
 
-#submitBtn,
-#updateBtn,
-#cancelBtn {
+.button {
   padding: 10px 85px;
   background-color: var(--primary-color-100);
   color: var(--primary-color-200);
@@ -73,18 +71,14 @@
   padding: 10px;
 }
 
-#userTableBody {
+.user-table-body {
   text-align: center;
 }
 
-.hide-button {
+.hide {
   display: none;
 }
 
-.show-button {
+.show {
   display: inline-block;
-}
-
-.update-btn {
-  display: none;
 }

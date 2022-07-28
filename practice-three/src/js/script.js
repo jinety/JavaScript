@@ -216,8 +216,8 @@ const renderUserTable = () => {
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
           getUser(item);
-          submitBtn.className = 'hide-button';
-          updateBtnForm.className = 'show-button';
+          submitBtn.classList.add('hide');
+          updateBtnForm.classList.remove('hide');
         })
       })
 
@@ -295,8 +295,8 @@ const submitForm = () => {
 }
 
 cancelBtn.addEventListener('click', () => {
-  submitBtn.className = 'show-button';
-  updateBtnForm.className = 'hide-button';
+  submitBtn.classList.remove('hide');
+  updateBtnForm.classList.add('hide');
 })
 
 submitBtn.addEventListener('click', submitForm);
