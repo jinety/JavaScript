@@ -1,11 +1,11 @@
 {
   "users": [
     {
-      "id": 1,
       "name": "Hoa Nguyen",
       "email": "vhoa1000@gmail.com",
       "salary": "1000",
-      "city": "Quang Nam"
+      "city": "Quang Nam",
+      "id": 1
     },
     {
       "name": "Hoa Nguyen",

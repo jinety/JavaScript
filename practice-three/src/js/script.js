@@ -239,7 +239,20 @@ const deleteUser = (item) => {
 
 const updateUser = (item) => {
   // Get the id of the update button when clicked
-  item.dataset.id;
+  const userId = item.dataset.id;
+  const options = {
+    method: 'GET'
+  };
+  
+  fetch (userApi + '/' + userId, options)
+    .then((response) => response.json())
+    .then(userData => {
+      fullNameInput.value = userData.name;
+      emailInput.value = userData.email;
+      salaryInput.value = userData.salary;
+      cityInput.value = userData.city;
+    })
+    .catch((error) => alert('Error! An error occurred.', error));
 }
 
 const submitForm = () => {
