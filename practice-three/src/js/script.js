@@ -160,7 +160,7 @@ const isValidForm = () => {
   fetch(userApi, options)
     // Parses JSON response into native JavaScript objects 
     .then((response) => response.json())
-    .then(userTableBody.insertRow(renderUserTable))
+    .then(() => renderUserTable())
     // Show error message when API call is wrong
     .catch((error) => alert('An error occurred while creating user', error));
 }
@@ -196,8 +196,8 @@ const renderUserTable = () => {
             <td>${user.salary}</td>
             <td>${user.city}</td>
             <td class="td-btn">
-              <button type="button" class="btn-table delete-button" data-id=${user.id}>Delete</button>
-              <button type="button" class="btn-table update-button" data-id=${user.id}>Update</button>
+              <button type="button" class="secondary-btn delete-button" data-id=${user.id}>Delete</button>
+              <button type="button" class="secondary-btn update-button" data-id=${user.id}>Update</button>
             </td>
           </tr>
         `;
@@ -242,7 +242,7 @@ const renderUserTable = () => {
           fetch(userApi + '/' + registrationForm.getAttribute('data-id'), options)
             // Parses JSON response into native JavaScript objects 
             .then((response) => response.json())
-            .then(renderUserTable())
+            .then(() => renderUserTable())
             // Show error message when API call is wrong
             .catch((error) => alert('An error occurred while update user', error));
         }
@@ -265,7 +265,7 @@ const deleteUser = (item) => {
   const userId = item.dataset.id;
 
   fetch(userApi + '/' + userId, options)
-    .then(item.parentElement.parentElement.remove())
+    .then(() => item.parentElement.parentElement.remove())
     .catch((error) => alert('An error occurred while removing user', error));
 }
 
