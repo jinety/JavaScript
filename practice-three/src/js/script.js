@@ -242,7 +242,10 @@ const renderUserTable = () => {
           fetch(userApi + '/' + registrationForm.getAttribute('data-id'), options)
             // Parses JSON response into native JavaScript objects 
             .then((response) => response.json())
-            .then(() => renderUserTable())
+            .then(() => {
+              registrationForm.reset();
+              renderUserTable();
+            })
             // Show error message when API call is wrong
             .catch((error) => alert('An error occurred while update user', error));
         }
@@ -295,7 +298,8 @@ const getUser = (item) => {
 const submitForm = () => {
   if (isValidForm()) {
     handleCreateForm();
-    renderUserTable()
+    renderUserTable();
+    registrationForm.reset();
   }
 }
 
@@ -303,6 +307,7 @@ cancelBtn.addEventListener('click', () => {
   submitBtn.classList.remove('hide');
   updateBtnForm.classList.add('hide');
   cancelBtn.classList.add('hide');
+  registrationForm.reset();
 })
 
 submitBtn.addEventListener('click', submitForm);
