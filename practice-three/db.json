@@ -18,14 +18,14 @@
       "name": "Hoa Nguyen",
       "email": "vhoa1000@gmail.com",
       "salary": "4",
-      "city": "Da Nang",
+      "city": "Hue",
       "id": 3
     },
     {
       "name": "Jine Ty",
       "email": "gatrong357@gmail.com",
       "salary": "124",
-      "city": "Hue",
+      "city": "Hue Mong Mo",
       "id": 4
     },
     {
@@ -48,13 +48,6 @@
       "salary": "1245",
       "city": "Da Nang",
       "id": 7
-    },
-    {
-      "name": "Jine Ty",
-      "email": "gatrong357@gmail.com",
-      "salary": "1234",
-      "city": "Da Nang",
-      "id": 8
     }
   ]
 }

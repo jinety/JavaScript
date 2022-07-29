@@ -51,11 +51,6 @@
   padding: 10px 85px;
   background-color: var(--primary-color-100);
   color: var(--primary-color-200);
-  cursor: pointer;
-}
-
-.secondary-btn {
-  cursor: pointer;
 }
 
 .list-users {

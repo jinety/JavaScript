@@ -160,7 +160,6 @@ const isValidForm = () => {
   fetch(userApi, options)
     // Parses JSON response into native JavaScript objects 
     .then((response) => response.json())
-    .then(() => renderUserTable())
     // Show error message when API call is wrong
     .catch((error) => alert('An error occurred while creating user', error));
 }
@@ -196,8 +195,8 @@ const renderUserTable = () => {
             <td>${user.salary}</td>
             <td>${user.city}</td>
             <td class="td-btn">
-              <button type="button" class="secondary-btn delete-button" data-id=${user.id}>Delete</button>
-              <button type="button" class="secondary-btn update-button" data-id=${user.id}>Update</button>
+              <button type="button" class="delete-button" data-id=${user.id}>Delete</button>
+              <button type="button" class="update-button" data-id=${user.id}>Update</button>
             </td>
           </tr>
         `;
@@ -219,7 +218,6 @@ const renderUserTable = () => {
           getUser(item);
           submitBtn.classList.add('hide');
           updateBtnForm.classList.remove('hide');
-          cancelBtn.classList.remove('hide');
         })
       })
 
@@ -242,10 +240,7 @@ const renderUserTable = () => {
           fetch(userApi + '/' + registrationForm.getAttribute('data-id'), options)
             // Parses JSON response into native JavaScript objects 
             .then((response) => response.json())
-            .then(() => {
-              registrationForm.reset();
-              renderUserTable();
-            })
+            .then()
             // Show error message when API call is wrong
             .catch((error) => alert('An error occurred while update user', error));
         }
@@ -268,7 +263,7 @@ const deleteUser = (item) => {
   const userId = item.dataset.id;
 
   fetch(userApi + '/' + userId, options)
-    .then(() => item.parentElement.parentElement.remove())
+    .then()
     .catch((error) => alert('An error occurred while removing user', error));
 }
 
@@ -285,7 +280,7 @@ const getUser = (item) => {
   fetch (userApi + '/' + userId, options)
     .then((response) => response.json())
     // Push user data to form input
-    .then((userData) => {
+    .then(userData => {
       fullNameInput.value = userData.name;
       emailInput.value = userData.email;
       salaryInput.value = userData.salary;
@@ -298,16 +293,12 @@ const getUser = (item) => {
 const submitForm = () => {
   if (isValidForm()) {
     handleCreateForm();
-    renderUserTable();
-    registrationForm.reset();
   }
 }
 
 cancelBtn.addEventListener('click', () => {
   submitBtn.classList.remove('hide');
   updateBtnForm.classList.add('hide');
-  cancelBtn.classList.add('hide');
-  registrationForm.reset();
 })
 
 submitBtn.addEventListener('click', submitForm);
