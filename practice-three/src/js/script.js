@@ -282,7 +282,7 @@ const getUser = (item) => {
   fetch (userApi + '/' + userId, options)
     .then((response) => response.json())
     // Push user data to form input
-    .then(userData => {
+    .then((userData) => {
       fullNameInput.value = userData.name;
       emailInput.value = userData.email;
       salaryInput.value = userData.salary;
