@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "name": "Hoa",
+      "name": "Hoa Nguyen",
       "email": "vhoa1000@gmail.com",
       "salary": "1000",
       "city": "Quang Nam",
@@ -15,14 +15,21 @@
       "id": 2
     },
     {
-      "name": "Phuoc",
-      "email": "phuoc1234@gmail.com",
-      "salary": "1123445",
+      "name": "Hoa Nguyen",
+      "email": "vhoa1000@gmail.com",
+      "salary": "4",
       "city": "Da Nang",
       "id": 3
     },
     {
-      "name": "Nguyen",
+      "name": "Jine Ty",
+      "email": "gatrong357@gmail.com",
+      "salary": "124",
+      "city": "Hue",
+      "id": 4
+    },
+    {
+      "name": "Hoa Nguyen",
       "email": "vhoa1000@gmail.com",
       "salary": "12",
       "city": "Da Nang",
@@ -36,11 +43,18 @@
       "id": 6
     },
     {
-      "name": "Hoa",
+      "name": "Hoa Nguyen",
       "email": "gatrong357@gmail.com",
       "salary": "1245",
-      "city": "Quang Nam",
+      "city": "Da Nang",
       "id": 7
+    },
+    {
+      "name": "Jine Ty",
+      "email": "gatrong357@gmail.com",
+      "salary": "1234",
+      "city": "Da Nang",
+      "id": 8
     }
   ]
 }
