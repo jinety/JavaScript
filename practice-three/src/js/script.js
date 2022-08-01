@@ -5,7 +5,7 @@ const salaryInput = document.getElementById('salary');
 const cityInput = document.getElementById('city');
 const submitBtn = document.getElementById('submitBtn');
 const userTableBody = document.getElementById('userTableBody');
-const updateBtnForm = document.getElementById('updateBtn');
+const formUpdateBtn = document.getElementById('updateBtn');
 const registrationForm = document.querySelector('.registration-form')
 const cancelBtn = document.getElementById('cancelBtn');
 const userApi = 'http://localhost:3000/users';
@@ -145,7 +145,7 @@ const isValidForm = () => {
 }
 
 /**
- * Function POST data to userDatabase 
+ * Create user save to database 
  */
  const createUser = (data) => {
   // POST method implementation
@@ -166,7 +166,7 @@ const isValidForm = () => {
 }
 
 /**
- * Function handle create form
+ * Handle create form
  */
 const handleCreateForm = () => {
   const name = fullNameInput.value;
@@ -179,7 +179,7 @@ const handleCreateForm = () => {
 }
 
 /**
- * The function takes data from the API and displays it on a table in HTML
+ * Takes data from the API and displays it on a table in HTML
  */
 const renderUserTable = () => {
   fetch(userApi)
@@ -218,44 +218,16 @@ const renderUserTable = () => {
         item.addEventListener('click', () => {
           getUser(item);
           submitBtn.classList.add('hide');
-          updateBtnForm.classList.remove('hide');
+          formUpdateBtn.classList.remove('hide');
           cancelBtn.classList.remove('hide');
         })
       })
-
-      updateBtnForm.addEventListener('click', () => {
-        if (isValidForm()) {
-          // PUT method implementation
-          const options = {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              name: fullNameInput.value,
-              email: emailInput.value,
-              salary: salaryInput.value,
-              city: cityInput.value
-            })
-          };
-      
-          fetch(userApi + '/' + registrationForm.getAttribute('data-id'), options)
-            // Parses JSON response into native JavaScript objects 
-            .then((response) => response.json())
-            .then(() => {
-              registrationForm.reset();
-              renderUserTable();
-            })
-            // Show error message when API call is wrong
-            .catch((error) => alert('An error occurred while update user', error));
-        }
-      })   
-    })
+    })   
     .catch((error) => alert('An error occurred while getting user', error));
 }
 
 /**
- * Function to remove user from json server
+ * Remove user from json server
  */
 const deleteUser = (item) => {
   // DELETE method implementation
@@ -267,13 +239,13 @@ const deleteUser = (item) => {
   };
   const userId = item.dataset.id;
 
-  fetch(userApi + '/' + userId, options)
+  fetch(`${userApi}/${userId}`, options)
     .then(() => item.parentElement.parentElement.remove())
     .catch((error) => alert('An error occurred while removing user', error));
 }
 
 /**
- * Function to get user data
+ * Get user data
  */
 const getUser = (item) => {
   // Get the id of the update button when clicked
@@ -282,7 +254,7 @@ const getUser = (item) => {
     method: 'GET'
   };
   
-  fetch (userApi + '/' + userId, options)
+  fetch (`${userApi}/${userId}`, options)
     .then((response) => response.json())
     // Push user data to form input
     .then((userData) => {
@@ -303,12 +275,42 @@ const submitForm = () => {
   }
 }
 
+const UpdateForm = () => {
+  if (!isValidForm()) {
+    return;
+  }
+
+  const customUserId = registrationForm.getAttribute('data-id')
+
+  // PUT method implementation
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: fullNameInput.value,
+      email: emailInput.value,
+      salary: salaryInput.value,
+      city: cityInput.value
+    })
+  };
+
+  fetch(`${userApi}/${customUserId}`, options)
+    // Parses JSON response into native JavaScript objects 
+    .then((response) => response.json())
+    .then(() => renderUserTable())
+    // Show error message when API call is wrong
+    .catch((error) => alert('An error occurred while update user', error));
+}
+
 cancelBtn.addEventListener('click', () => {
   submitBtn.classList.remove('hide');
-  updateBtnForm.classList.add('hide');
+  formUpdateBtn.classList.add('hide');
   cancelBtn.classList.add('hide');
   registrationForm.reset();
 })
 
 submitBtn.addEventListener('click', submitForm);
+formUpdateBtn.addEventListener('click',UpdateForm);
 renderUserTable();

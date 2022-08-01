@@ -35,6 +35,7 @@
 
 .data-input {
   padding: 10px 30px;
+  margin-bottom: 10px;
   font-size: var(--font-size-s);
 }
 
