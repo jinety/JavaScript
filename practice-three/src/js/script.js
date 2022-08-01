@@ -275,7 +275,7 @@ const submitForm = () => {
   }
 }
 
-const UpdateForm = () => {
+const updateForm = () => {
   if (!isValidForm()) {
     return;
   }
@@ -312,5 +312,5 @@ cancelBtn.addEventListener('click', () => {
 })
 
 submitBtn.addEventListener('click', submitForm);
-formUpdateBtn.addEventListener('click',UpdateForm);
+formUpdateBtn.addEventListener('click', updateForm);
 renderUserTable();
