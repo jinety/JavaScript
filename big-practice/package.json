@@ -1,0 +1,13 @@
+{
+  "name": "big-practice",
+  "version": "1.0.0",
+  "source": "src/index.html",
+  "scripts": {
+    "server": "npx json-server --watch ./db.json",
+    "start": "npx parcel src/login.html"
+  },
+  "author": "Hoa Nguyen <vhoa1000@gmail.com>",
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  }
+}
