@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "source": "src/index.html",
   "scripts": {
+    "eslint": "eslint path/ to / src",
     "server": "npx json-server --watch ./db.json",
     "start": "npx parcel src/login.html"
   },
   "author": "Hoa Nguyen <vhoa1000@gmail.com>",
   "devDependencies": {
+    "eslint": "^8.21.0",
     "parcel": "^2.6.2"
   }
 }

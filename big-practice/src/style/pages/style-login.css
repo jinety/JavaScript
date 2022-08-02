@@ -1,0 +1,84 @@
+/* START LOGIN FORM  */
+/* STYLE APPLIED TO THE MOBILE */
+.login-form {
+  margin: 75px auto;
+  width: 80%;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  font-size: 38px;
+  line-height: var(--line-height-m);
+  font-weight: var(--font-weight-l);
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+  font-weight: var(--font-weight-s);
+  margin-bottom: 10px;
+}
+
+.input-label {
+  font-size: 15px;
+  line-height: var(--line-height-s);
+  margin-bottom: 10px;
+  color: var(--primary-color-700);
+}
+
+.data-input {
+  padding: 10px 30px;
+  margin-bottom: 30px;
+}
+
+.login-btn {
+  background: var(--secondary-color-400);
+  color: var(--secondary-color-100);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #7e7373;
+  border-radius: 6px;
+}
+
+/* STYLE APPLIED TO THE DESKTOP */
+@media (min-width: 1024px) {
+  .login-form {
+    margin: 150px auto;
+  }
+
+  .title {
+    font-size: var(--line-height-l);
+    line-height: var(--line-height-l);
+  }
+
+  .description {
+    font-size: var(--font-size-m);
+    line-height: var(--line-height-m);
+    margin-bottom: 24px;
+  }
+
+  .login-btn {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .input-label {
+    margin-bottom: 15px;
+  }
+
+  .data-input {
+    margin-bottom: 70px;
+  }
+}
+/* START LOGIN FORM */
