@@ -1,7 +1,7 @@
 /* START LOGIN FORM  */
 /* STYLE APPLIED TO THE MOBILE */
 .login-body {
-  margin: 75px auto 20px;
+  margin: 75px auto 0;
   width: 80%;
   max-width: 572px;
   min-width: 300px;
@@ -57,7 +57,7 @@
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1024px) {
   .login-body {
-    margin: 150px auto 50px;
+    margin: 150px auto 0;
   }
 
   .login-title {
