@@ -56,6 +56,12 @@
   cursor: pointer;
 }
 
+.warn-msg {
+  color: red;
+  font-size: var(--font-size-m);
+  margin-bottom: 20px;
+}
+
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1024px) {
   .login-form {
