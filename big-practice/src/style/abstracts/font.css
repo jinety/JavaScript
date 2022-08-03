@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+
+:root {
+  /* FONT SIZE */
+  --font-size-s: 14px;
+  --font-size-m: 20px;
+  --font-size-l: 24px;
+  --font-size-xl: 40px;
+
+  /* LINE HEIGHT */
+  --line-height-s: 18px;
+  --line-height-m: 24px;
+  --line-height-l: 48px;
+
+  /* FONT WEIGHT */
+  --font-weight-s: 400;
+  --font-weight-m: 500;
+  --font-weight-l: 700;
+
+  /* FONT FAMILY */
+  --primary-font: "Inter", sans-serif;
+}
