@@ -1,7 +1,7 @@
 /* START LOGIN FORM  */
 /* STYLE APPLIED TO THE MOBILE */
 .login-form {
-  margin: 75px auto 0;
+  margin: 100px auto 0;
   max-width: 572px;
   min-width: 300px;
   padding: 0 10px;
@@ -26,7 +26,7 @@
   font-size: var(--font-size-s);
   line-height: var(--line-height-s);
   font-weight: var(--font-weight-s);
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .input-label {
