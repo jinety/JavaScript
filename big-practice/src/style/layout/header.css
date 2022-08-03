@@ -9,5 +9,13 @@
 }
 
 .logo-box {
-  padding-left: 45px;
+  padding-left: 25px;
 }
+
+/* STYLE APPLIED TO THE DESKTOP */
+@media (min-width: 1024px) {
+  .logo-box {
+    padding-left: 45px;
+  }
+}
+/* END HEADER */
