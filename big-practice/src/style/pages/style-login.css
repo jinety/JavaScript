@@ -1,29 +1,29 @@
 /* START LOGIN FORM  */
 /* STYLE APPLIED TO THE MOBILE */
-.login-form {
+.login-body {
   margin: 75px auto;
   width: 80%;
   max-width: 600px;
   min-width: 300px;
 }
 
-.form-field {
+.form-field { 
   display: flex;
   flex-direction: column;
 }
 
-.content {
+.login-header {
   text-align: center;
 }
 
-.title {
+.login-title {
   font-size: 38px;
   line-height: var(--line-height-m);
   font-weight: var(--font-weight-l);
   margin-bottom: 20px;
 }
 
-.description {
+.login-content {
   font-size: var(--font-size-s);
   line-height: var(--line-height-s);
   font-weight: var(--font-weight-s);
@@ -34,7 +34,7 @@
   font-size: 15px;
   line-height: var(--line-height-s);
   margin-bottom: 10px;
-  color: var(--primary-color-700);
+  color: var(--secondary-color-200);
 }
 
 .data-input {
@@ -43,26 +43,27 @@
 }
 
 .login-btn {
-  background: var(--secondary-color-400);
-  color: var(--secondary-color-100);
+  background: #00B7F1;
+  color: var(--secondary-color-50);
   padding-top: 10px;
   padding-bottom: 10px;
   border: 1px solid #7e7373;
   border-radius: 6px;
+  width: 100%;
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1024px) {
-  .login-form {
+  .login-body {
     margin: 150px auto;
   }
 
-  .title {
+  .login-title {
     font-size: var(--line-height-l);
     line-height: var(--line-height-l);
   }
 
-  .description {
+  .login-content {
     font-size: var(--font-size-m);
     line-height: var(--line-height-m);
     margin-bottom: 24px;

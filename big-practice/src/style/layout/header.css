@@ -1,10 +1,10 @@
 /* START HEADER */
 /* STYLE APPLIED TO THE MOBILE */
-.head-bar {
-  background: var(--secondary-color-100);
+.logo-header {
+  background: var(--secondary-color-50);
   box-shadow: 0px 1px 0px #e5e5e5;
 }
 
-.img-box {
+.logo-box {
   padding-left: 45px;
 }
