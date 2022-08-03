@@ -1,13 +1,14 @@
 /* START LOGIN FORM  */
 /* STYLE APPLIED TO THE MOBILE */
 .login-body {
-  margin: 75px auto;
+  margin: 75px auto 20px;
   width: 80%;
   max-width: 600px;
   min-width: 300px;
 }
 
-.form-field { 
+.form-field,
+.btn-box { 
   display: flex;
   flex-direction: column;
 }
@@ -49,13 +50,12 @@
   padding-bottom: 10px;
   border: 1px solid #7e7373;
   border-radius: 6px;
-  width: 100%;
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1024px) {
   .login-body {
-    margin: 150px auto;
+    margin: 150px auto 50px;
   }
 
   .login-title {
