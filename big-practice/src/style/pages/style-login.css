@@ -3,7 +3,7 @@
 .login-body {
   margin: 75px auto 20px;
   width: 80%;
-  max-width: 600px;
+  max-width: 572px;
   min-width: 300px;
 }
 
@@ -41,6 +41,8 @@
 .data-input {
   padding: 10px 30px;
   margin-bottom: 30px;
+  border: 1px solid #7E7373;
+  border-radius: 6px;
 }
 
 .login-btn {
@@ -79,7 +81,7 @@
   }
 
   .data-input {
-    margin-bottom: 70px;
+    margin-bottom: 53px;
   }
 }
 /* START LOGIN FORM */
