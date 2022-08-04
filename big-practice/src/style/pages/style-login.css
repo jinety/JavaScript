@@ -57,7 +57,7 @@
 }
 
 .warn-msg {
-  color: red;
+  color: var(--warning-color-100);
   font-size: var(--font-size-m);
   margin-bottom: 20px;
 }
