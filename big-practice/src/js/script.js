@@ -1,3 +1,4 @@
+// Query elements
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const warnMsg = document.getElementById('warnMsg');
@@ -8,10 +9,9 @@ const EmptyText = '';
 
 // Messages
 const MESSAGES = {
-  emptyFormat: 'Please enter all email and password',
-  wrongFormat: 'Email entered in the wrong format. Please re-enter',
-  wrongEmail: 'Login email is incorrect. Please re-enter',
-  wrongPassword: 'Login password is incorrect. Please re-enter',
+  emailPasswordEmpty: 'Please enter all email and password',
+  emailWrongFormat: 'Email entered in the wrong format. Please re-enter',
+  errorMessage: 'Email or password is incorrect. Please re-enter',
 };
 
 /**
@@ -28,30 +28,38 @@ const isEmpty = (value) => {
  *
  * @param {string} value - Comparative value
  */
-const isInvalidEmail = (value) => {
-  if (!EmailRegex.test(value)) {
-    return true;
-  }
-
-  return false;
+const isValidEmail = (value) => {
+  !!EmailRegex.test(value);
 };
 
+/**
+ * Get admin account from json server
+ */
 const getDataAccount = () => {
+  const urlAdmin = `${accountApi}?email=vhoa1000@gmail.com&password=123456`;
   const options = {
     method: 'GET',
   };
-  fetch(`${accountApi}/1`, options)
+
+  fetch(urlAdmin, options)
     .then((response) => response.json())
     .then((account) => {
       loginBtn.addEventListener('click', () => {
         const email = emailInput.value;
         const password = passwordInput.value;
 
-        isEmpty(email) || isEmpty(password) ? warnMsg.innerHTML = MESSAGES.emptyFormat
-          : isInvalidEmail(email) ? warnMsg.innerHTML = MESSAGES.wrongFormat
-            : account.email !== email ? warnMsg.innerHTML = MESSAGES.wrongEmail
-              : account.email === email && account.password !== password ? warnMsg.innerHTML = MESSAGES.wrongPassword
-                : warnMsg.innerHTML = EmptyText;
+        // Email or password cannot be blank
+        if (isEmpty(email) || isEmpty(password)) {
+          warnMsg.innerHTML = MESSAGES.emailPasswordEmpty;
+        } else if (isValidEmail(email)) {
+          // Email is not in the correct format
+          warnMsg.innerHTML = MESSAGES.emailWrongFormat;
+        } else if (account[0].email !== email || account[0].password !== password) {
+          // Email and password do not match database
+          warnMsg.innerHTML = MESSAGES.errorMessage;
+        } else {
+          warnMsg.innerHTML = EmptyText;
+        }
       });
     })
     .catch((error) => alert('Error! An error occurred.', error));

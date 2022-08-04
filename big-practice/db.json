@@ -3,12 +3,8 @@
     {
       "email": "vhoa1000@gmail.com",
       "password": "123456",
+      "isAdmin": true,
       "id": 1
-    },
-    {
-      "email": "vhoa@gmail.com",
-      "password": "123456",
-      "id": 2
     }
   ]
 }
