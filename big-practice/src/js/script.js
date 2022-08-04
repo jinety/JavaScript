@@ -18,9 +18,7 @@ const MESSAGES = {
  *  Checks for an empty value
  */
 const isEmpty = (value) => {
-  if (!value) {
-    return true;
-  }
+  !value;
 };
 
 /**
@@ -49,7 +47,7 @@ const getDataAccount = () => {
         const password = passwordInput.value;
 
         // Email or password cannot be blank
-        if (isEmpty(email) || isEmpty(password)) {
+        if (!isEmpty(email) || !isEmpty(password)) {
           warnMsg.innerHTML = MESSAGES.emailPasswordEmpty;
         } else if (isValidEmail(email)) {
           // Email is not in the correct format
