@@ -5,6 +5,7 @@ const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
 const accountApi = 'http://localhost:3000/accounts';
 const EmailRegex = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
+const dashboardPage = 'dashboard.html';
 const EmptyText = '';
 
 // Messages
@@ -74,7 +75,9 @@ const login = () => {
         warnMsg.innerHTML = MESSAGES.notAdminAccount;
       } else {
         warnMsg.innerHTML = EmptyText;
-        window.location.href = 'dashboard.html';
+
+        // Switch to dashboard page
+        window.location.href = dashboardPage;
       }
     });
 };
