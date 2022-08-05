@@ -11,7 +11,7 @@ const EmptyText = '';
 const MESSAGES = {
   loginFormEmpty: 'Please enter all email and password',
   emailWrongFormat: 'Email is invalid format',
-  incorrectLoginForm: 'Email or password is incorrect. Please re-enter',
+  incorrectLoginAccount: 'Email or password is incorrect. Please re-enter',
   notAdminAccount: 'The account is not admin account, please re-enter',
 };
 
@@ -27,6 +27,9 @@ const isEmpty = (value) => (!value);
  */
 const isValidEmail = (value) => (EmailRegex.test(value));
 
+/**
+ * Validate form data
+ */
 const validateForm = (email, password) => {
   isValidForm = false;
 
@@ -43,21 +46,27 @@ const validateForm = (email, password) => {
   return isValidForm;
 };
 
-const loginAdmin = () => {
+/**
+ * Handling account login to dashboard
+ */
+const login = () => {
   const email = emailInput.value;
   const password = passwordInput.value;
   const url = `${accountApi}?email=${email}&password=${password}`;
+
+  // Validate form data
   const isValidForm = validateForm(email, password);
 
   if (!isValidForm) {
     return;
   }
 
+  // Check valid user
   fetch(url, { method: 'GET' })
     .then((response) => response.json())
     .then((userList) => {
       if (userList.length === 0) {
-        warnMsg.innerHTML = MESSAGES.incorrectLoginForm;
+        warnMsg.innerHTML = MESSAGES.incorrectLoginAccount;
       }
 
       // Non-admin account
@@ -70,5 +79,5 @@ const loginAdmin = () => {
 };
 
 loginBtn.addEventListener('click', () => {
-  loginAdmin();
+  login();
 });
