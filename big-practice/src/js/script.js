@@ -12,55 +12,63 @@ const MESSAGES = {
   emailPasswordEmpty: 'Please enter all email and password',
   emailWrongFormat: 'Email entered in the wrong format. Please re-enter',
   errorMessage: 'Email or password is incorrect. Please re-enter',
+  notAdminAccount: 'The account is not admin account, please re-enter',
 };
 
 /**
  *  Checks for an empty value
  */
-const isEmpty = (value) => {
-  !value;
-};
+const isEmpty = (value) => (!value);
 
 /**
  * Email check function is not valid
  *
  * @param {string} value - Comparative value
  */
-const isValidEmail = (value) => {
-  !!EmailRegex.test(value);
+const isValidEmail = (value) => (EmailRegex.test(value));
+
+const validateForm = (email, password) => {
+  isValidForm = false;
+
+  // Email or password cannot be blank
+  if (isEmpty(email) || isEmpty(password)) {
+    warnMsg.innerHTML = MESSAGES.emailPasswordEmpty;
+  } else if (!isValidEmail(email)) {
+    // Email is not in the correct format
+    warnMsg.innerHTML = MESSAGES.emailWrongFormat;
+  } else {
+    isValidForm = true;
+  }
+
+  return isValidForm;
 };
 
-/**
- * Get admin account from json server
- */
-const getDataAccount = () => {
-  const urlAdmin = `${accountApi}?email=vhoa1000@gmail.com&password=123456`;
-  const options = {
-    method: 'GET',
-  };
+const loginAdmin = () => {
+  const email = emailInput.value;
+  const password = passwordInput.value;
+  const url = `${accountApi}?email=${email}&password=${password}`;
+  const isValidForm = validateForm(email, password);
 
-  fetch(urlAdmin, options)
+  if (!isValidForm) {
+    return;
+  }
+
+  fetch(url, { method: 'GET' })
     .then((response) => response.json())
     .then((account) => {
-      loginBtn.addEventListener('click', () => {
-        const email = emailInput.value;
-        const password = passwordInput.value;
+      if (account.length === 0) {
+        warnMsg.innerHTML = MESSAGES.errorMessage;
+      }
 
-        // Email or password cannot be blank
-        if (!isEmpty(email) || !isEmpty(password)) {
-          warnMsg.innerHTML = MESSAGES.emailPasswordEmpty;
-        } else if (isValidEmail(email)) {
-          // Email is not in the correct format
-          warnMsg.innerHTML = MESSAGES.emailWrongFormat;
-        } else if (account[0].email !== email || account[0].password !== password) {
-          // Email and password do not match database
-          warnMsg.innerHTML = MESSAGES.errorMessage;
-        } else {
-          warnMsg.innerHTML = EmptyText;
-        }
-      });
-    })
-    .catch((error) => alert('Error! An error occurred.', error));
+      // Non-admin account
+      if (!account[0].isAdmin) {
+        warnMsg.innerHTML = MESSAGES.notAdminAccount;
+      } else {
+        warnMsg.innerHTML = EmptyText;
+      }
+    });
 };
 
-getDataAccount();
+loginBtn.addEventListener('click', () => {
+  loginAdmin();
+});
