@@ -4,7 +4,7 @@ const passwordInput = document.getElementById('password');
 const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
 const accountApi = 'http://localhost:3000/accounts';
-const EmailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+const EmailRegex = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
 const EmptyText = '';
 
 // Messages
@@ -31,7 +31,7 @@ const isValidEmail = (value) => (EmailRegex.test(value));
  * Validate form data
  */
 const validateForm = (email, password) => {
-  isValidForm = false;
+  let isValidForm = false;
 
   // Email or password cannot be blank
   if (isEmpty(email) || isEmpty(password)) {
@@ -74,6 +74,7 @@ const login = () => {
         warnMsg.innerHTML = MESSAGES.notAdminAccount;
       } else {
         warnMsg.innerHTML = EmptyText;
+        window.location.href = 'dashboard.html';
       }
     });
 };

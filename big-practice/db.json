@@ -5,12 +5,6 @@
       "password": "123456",
       "isAdmin": true,
       "id": 1
-    },
-    {
-      "email": "hoa.com",
-      "password": "123456",
-      "isAdmin": false,
-      "id": 2
     }
   ]
 }
