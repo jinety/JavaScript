@@ -1,3 +1,4 @@
+/* START DASHBOARD */
 /* STYLE APPLIED TO THE MOBILE */
 .container {
   margin-top: 55px;
@@ -78,6 +79,7 @@
 .moviesTableBody {
   text-align: center;
 }
+
 table tr td {
   padding-top: 16px;
   padding-bottom: 16px;
@@ -94,6 +96,7 @@ table tr td {
   color: var(--secondary-color-50);
   border-radius: 50%;
 }
+
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1200px) {
   .side-bar {
@@ -124,4 +127,4 @@ table tr td {
     border: none;
   }
 }
-
+/* END DASHBOARD */
