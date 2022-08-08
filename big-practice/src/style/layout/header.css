@@ -6,16 +6,30 @@
   width: 100%;
   background: var(--secondary-color-50);
   box-shadow: 0px 1px 0px var(--secondary-color-100);
+  display: flex;
+  justify-content: space-between;
 }
 
 .logo-box {
   padding-left: 25px;
 }
 
+.hamburger-box {
+  display: none;
+  padding-right: 47px;
+  padding-top: 13px;
+}
+
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1024px) {
   .logo-box {
     padding-left: 45px;
+  }
+
+  .hamburger-box {
+    display: inline-block;
+    padding-right: 47px;
+    padding-top: 13px;
   }
 }
 /* END HEADER */

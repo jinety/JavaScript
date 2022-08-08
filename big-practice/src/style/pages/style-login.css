@@ -18,7 +18,7 @@
 .login-title {
   font-size: 38px;
   line-height: var(--line-height-m);
-  font-weight: var(--font-weight-l);
+  font-weight: var(--font-weight-xl);
   margin-bottom: 20px;
 }
 
@@ -54,6 +54,7 @@
   border: 1px solid var(--secondary-color-200);
   border-radius: 6px;
   cursor: pointer;
+  font-weight: var(--font-weight-xl);
 }
 
 .warn-msg {

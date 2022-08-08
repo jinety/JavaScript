@@ -1,0 +1,5 @@
+.secondary-btn {
+  padding: 10px 15px;
+  font-size: var(--font-size-s);
+  cursor: pointer;
+}

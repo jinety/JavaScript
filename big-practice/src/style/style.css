@@ -9,5 +9,10 @@
 /* LAYOUT */
 @import url(./layout/header.css);
 
+/* COMPONENTS */
+@import url(./components/text.css);
+@import url(./components/button.css);
+
 /* PAGE */
 @import url(./pages/style-login.css);
+@import url(./pages/style-dashboard.css);

@@ -1,0 +1,127 @@
+/* STYLE APPLIED TO THE MOBILE */
+.container {
+  margin-top: 55px;
+  display: flex;
+  flex-wrap: no-wrap;
+  overflow-x: auto;
+}
+
+.side-bar {
+  display: none;
+}
+
+.body-content {
+  padding: 12px 20px;
+}
+
+.layout-main {
+  background-color: var(--secondary-color-50);
+  border-radius: 12px;
+  padding: 30px;
+  min-width: 900px;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.menu-btn {
+  width: 174px;
+  margin: 40px 42px 0 24px;
+  letter-spacing: 1px;
+}
+
+.main-title {
+  font-size: var(--font-size-l);
+  line-height: 23px;
+  font-weight: var(--font-weight-m);
+  letter-spacing: 0.5px;
+  padding-bottom: 30px;
+}
+
+.movie-table {
+  width: 100%;
+}
+
+.title-table {
+  display: inline-block;
+  padding-bottom: 28px;
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: var( --font-weight-l);
+  letter-spacing: 0.003em;
+}
+
+.table-header {
+  background: var(--primary-color-50);
+  color: var(--primary-color-300);
+}
+
+.item-header {
+  padding: 20px 13px;
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+  font-weight: var(--font-weight-l);
+  align-items: center;
+  letter-spacing: 0.003em;
+  width: 200px;
+}
+
+.item-header:nth-child(1) {
+  width: 30px;
+}
+
+.item-header:nth-child(4), 
+.item-header:nth-child(5),
+.item-header:nth-child(6) {
+  width: 100px;
+}
+
+.moviesTableBody {
+  text-align: center;
+}
+table tr td {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.content-row:nth-child(even) {
+  background: rgba(243, 246, 249, 0.5);
+}
+
+.plus-btn {
+  float: right;
+  font-size: var(--font-size-l);
+  background: var(--success-color-50);
+  color: var(--secondary-color-50);
+  border-radius: 50%;
+}
+/* STYLE APPLIED TO THE DESKTOP */
+@media (min-width: 1200px) {
+  .side-bar {
+    display: inline-block;
+    width: 240px;
+    height: 100vh;
+    background: rgba(1, 0, 57, 0.04);
+  }
+
+  .body-content {
+    width: 950px;
+    padding: 33px 40px;
+  }
+
+  .menu {
+    margin-bottom: 26px;
+    font-family: var(--secondary-font);
+    font-size: 11px;
+    line-height: 11px;
+    font-weight: var( --font-weight-s);
+    color: var(--primary-color-400);
+  }
+
+  .dashboard-btn {
+    padding: 16px 14px;
+    border-radius: 10px;
+    background: rgba(80, 65, 120, 0.2);
+    border: none;
+  }
+}
+
