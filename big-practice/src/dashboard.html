@@ -10,30 +10,33 @@
   <body>
     <header class="logo-bar dashboard-bar">
       <div class="logo-box">
-        <img src="./assets/logo.png" alt="logo" />
+        <img src="./assets/logo.png" alt="logo"/>
       </div>
-      <div class="avt-box">
-        <img src="./assets/avt.png" alt="hamburger" />
-      </div>
+      <a href="javascript:void(0);" class="avt-box">
+        <img src="./assets/avatar-mock.png" alt="avatar-mock" class="avatar-mock">
+        <p class="account-name">Delicious Burger</p>
+      </a>
     </header>
     <nav class="sidebar">
       <p class="menu">MENU</p>
       <button type="button" class="dashboard-btn">
         <img
-          src="/src/assets/btn-dashboard.png"
+          src="/src/assets/icon-dashboard.png"
           alt="btn-dashboard"
+          class="icon-dashboard"
         />
+        Dashboard
       </button>
     </nav>
     <div class="container">
       <p class="title main-title">Dashboard</p>
       <section class="layout-main">
-        <div class="layout-bar">
+        <div class="overview">
           <p class="title title-table">Overview</p>
-          <button type="button" class="plus-btn">+</button>
+          <button type="button" class="add-btn">+</button>
         </div>
-        <div class="group-table">
-          <table class="movie-table">
+        <div class="table-box">
+          <table class="table">
             <thead class="table-header">
               <tr>
                 <th class="item-header">No</th>
@@ -44,7 +47,7 @@
                 <th class="item-header">Delete</th>
               </tr>
             </thead>
-            <tbody class="moviesTableBody"></tbody>
+            <tbody class="table-list"></tbody>
           </table>
         </div>
       </section>

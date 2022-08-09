@@ -12,6 +12,7 @@
 /* COMPONENTS */
 @import url(./components/text.css);
 @import url(./components/button.css);
+@import url(./components/table.css);
 
 /* PAGE */
 @import url(./pages/style-login.css);

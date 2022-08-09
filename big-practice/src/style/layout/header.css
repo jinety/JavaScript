@@ -16,8 +16,6 @@
 
 .avt-box {
   display: none;
-  padding-right: 47px;
-  padding-top: 13px;
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
@@ -27,9 +25,19 @@
   }
 
   .avt-box {
-    display: inline-block;
-    padding-right: 47px;
-    padding-top: 13px;
+    display: flex;
+    width: 149px;
+    padding: 16px 47px 16px 0;
+    text-decoration: none;
+  }
+
+  .account-name {
+    font-family: var(--secondary-font);
+    font-size: 12px;
+    line-height: 13px;
+    font-weight: var(--font-weight-s);
+    color: var(--primary-color-300);
+    padding: 10px 0 10px 12px;
   }
 }
 /* END HEADER */
