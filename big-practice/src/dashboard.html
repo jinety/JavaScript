@@ -8,26 +8,31 @@
     <title>Dashboard</title>
   </head>
   <body>
-    <section class="logo-bar dashboard-bar">
+    <header class="logo-bar dashboard-bar">
       <div class="logo-box">
         <img src="./assets/logo.png" alt="logo" />
       </div>
-      <div class="hamburger-box">
-        <img src="./assets/hamburger.png" alt="hamburger">
+      <div class="avt-box">
+        <img src="./assets/avt.png" alt="hamburger" />
       </div>
-    </section>
-    <section class="container">
-      <div class="side-bar">
-        <div class="menu-btn">
-          <p class="menu">MENU</p>
-          <button type="button" class="dashboard-btn"><img src="/src/assets/btn-dashboard.png" alt="btn-dashboard" class="icon-dashboard"></button>
-        </div>
-      </div>
-      <div class="body-content">
-        <h1 class="title main-title">Dashboard</h1>
-        <div class="layout-main">
-          <p class="title title-table">Overview </p>
+    </header>
+    <nav class="sidebar">
+      <p class="menu">MENU</p>
+      <button type="button" class="dashboard-btn">
+        <img
+          src="/src/assets/btn-dashboard.png"
+          alt="btn-dashboard"
+        />
+      </button>
+    </nav>
+    <div class="container">
+      <p class="title main-title">Dashboard</p>
+      <section class="layout-main">
+        <div class="layout-bar">
+          <p class="title title-table">Overview</p>
           <button type="button" class="plus-btn">+</button>
+        </div>
+        <div class="group-table">
           <table class="movie-table">
             <thead class="table-header">
               <tr>
@@ -39,12 +44,11 @@
                 <th class="item-header">Delete</th>
               </tr>
             </thead>
-            <tbody class="moviesTableBody">
-            </tbody>
+            <tbody class="moviesTableBody"></tbody>
           </table>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
     <script src="./js/script.js"></script>
   </body>
 </html>

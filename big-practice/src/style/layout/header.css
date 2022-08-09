@@ -2,7 +2,7 @@
 /* STYLE APPLIED TO THE MOBILE */
 .logo-bar {
   position: fixed;
-  top: 0;
+  z-index: 10;
   width: 100%;
   background: var(--secondary-color-50);
   box-shadow: 0px 1px 0px var(--secondary-color-100);
@@ -14,7 +14,7 @@
   padding-left: 25px;
 }
 
-.hamburger-box {
+.avt-box {
   display: none;
   padding-right: 47px;
   padding-top: 13px;
@@ -26,7 +26,7 @@
     padding-left: 45px;
   }
 
-  .hamburger-box {
+  .avt-box {
     display: inline-block;
     padding-right: 47px;
     padding-top: 13px;

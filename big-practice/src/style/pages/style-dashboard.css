@@ -1,50 +1,45 @@
 /* START DASHBOARD */
 /* STYLE APPLIED TO THE MOBILE */
 .container {
-  margin-top: 55px;
-  display: flex;
-  flex-wrap: no-wrap;
-  overflow-x: auto;
+  padding: 55px 16px;
 }
 
-.side-bar {
+.sidebar {
   display: none;
-}
-
-.body-content {
-  padding: 12px 20px;
 }
 
 .layout-main {
   background-color: var(--secondary-color-50);
   border-radius: 12px;
-  padding: 30px;
-  min-width: 900px;
-  overflow: auto;
-  white-space: nowrap;
+  padding: 16px 20px;
 }
 
-.menu-btn {
-  width: 174px;
-  margin: 40px 42px 0 24px;
-  letter-spacing: 1px;
+.group-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.movie-table {
+  min-width: 700px;
+}
+
+.layout-bar {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 28px;
 }
 
 .main-title {
+  padding-top: 16px;
+  padding-bottom: 20px;
   font-size: var(--font-size-l);
   line-height: 23px;
   font-weight: var(--font-weight-m);
   letter-spacing: 0.5px;
-  padding-bottom: 30px;
-}
-
-.movie-table {
-  width: 100%;
 }
 
 .title-table {
   display: inline-block;
-  padding-bottom: 28px;
   font-size: 18px;
   line-height: 27px;
   font-weight: var( --font-weight-l);
@@ -57,23 +52,24 @@
 }
 
 .item-header {
-  padding: 20px 13px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   font-size: var(--font-size-s);
   line-height: var(--line-height-s);
   font-weight: var(--font-weight-l);
   align-items: center;
   letter-spacing: 0.003em;
-  width: 200px;
+  width: 23%;
 }
 
 .item-header:nth-child(1) {
-  width: 30px;
+  width: 6%;
 }
 
 .item-header:nth-child(4), 
 .item-header:nth-child(5),
 .item-header:nth-child(6) {
-  width: 100px;
+  width: 13%;
 }
 
 .moviesTableBody {
@@ -90,29 +86,45 @@ table tr td {
 }
 
 .plus-btn {
-  float: right;
   font-size: var(--font-size-l);
   background: var(--success-color-50);
   color: var(--secondary-color-50);
   border-radius: 50%;
+  border: none;
+  cursor: pointer;
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
-@media (min-width: 1200px) {
-  .side-bar {
+@media (min-width: 1250px) {
+  .sidebar {
+    position: fixed;
     display: inline-block;
-    width: 240px;
+    width: 17%;
+    max-width: 174px;
     height: 100vh;
     background: rgba(1, 0, 57, 0.04);
+    padding: 100px 42px 0 24px;
   }
 
-  .body-content {
-    width: 950px;
-    padding: 33px 40px;
+  .container {
+    width: 74%;
+    display: inline-block;
+    padding-left: 280px;
+    padding-right: 33px;
+  }
+
+  .main-title {
+    padding-top: 33px;
+    padding-bottom: 40px;
+  }
+
+  .layout-main {
+    padding: 30px;
+    padding-bottom: 9px;
   }
 
   .menu {
-    margin-bottom: 26px;
+    padding-bottom: 26px;
     font-family: var(--secondary-font);
     font-size: 11px;
     line-height: 11px;
@@ -125,6 +137,7 @@ table tr td {
     border-radius: 10px;
     background: rgba(80, 65, 120, 0.2);
     border: none;
+    cursor: pointer;
   }
 }
 /* END DASHBOARD */
