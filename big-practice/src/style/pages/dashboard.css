@@ -14,7 +14,7 @@
   padding: 16px 20px;
 }
 
-.overview{
+.overview {
   display: flex;
   justify-content: space-between;
   padding-bottom: 28px;
@@ -37,11 +37,6 @@
   letter-spacing: 0.003em;
 }
 
-.table-dashboard-item-header {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 .add-btn {
   font-size: var(--font-size-l);
   background: var(--success-color-50);
@@ -49,6 +44,10 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
+}
+
+.table-dashboard-wrapper {
+  overflow: auto;
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
@@ -78,35 +77,13 @@
     padding-bottom: 9px;
   }
 
-  .nav-paragraphs {
+  .sidebar-title {
     padding-bottom: 26px;
     font-family: var(--secondary-font);
     font-size: 11px;
     line-height: 11px;
     font-weight: var( --font-weight-s);
     color: var(--primary-color-400);
-  }
-
-  .dashboard-btn {
-    font-family: var(--secondary-font);
-    width: 174px;
-    display: flex;
-    padding: 14px 16px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0.003em;
-    color: #504178;
-  }
-
-  .icon-dashboard {
-    padding-right: 12px;
-  }
-
-  .dashboard-btn:hover {
-    background: rgba(80, 65, 120, 0.2);
   }
 }
 /* END DASHBOARD */

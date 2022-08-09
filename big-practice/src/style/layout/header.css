@@ -10,7 +10,7 @@
   justify-content: space-between;
 }
 
-.logo-wrap {
+.logo-wrapper {
   padding-left: 25px;
 }
 
@@ -20,13 +20,12 @@
 
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1024px) {
-  .logo-wrap {
+  .logo-wrapper {
     padding-left: 45px;
   }
 
   .avt-box {
     display: flex;
-    width: 149px;
     padding: 16px 47px 16px 0;
     text-decoration: none;
   }

@@ -15,5 +15,5 @@
 @import url(./components/table.css);
 
 /* PAGE */
-@import url(./pages/style-login.css);
-@import url(./pages/style-dashboard.css);
+@import url(./pages/login.css);
+@import url(./pages/dashboard.css);

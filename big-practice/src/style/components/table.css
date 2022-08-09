@@ -3,10 +3,6 @@ table tr td {
   padding-bottom: 16px;
 }
 
-.table-wrap {
-  overflow: auto;
-}
-
 .table {
   min-width: 700px;
 }
@@ -22,12 +18,8 @@ table tr td {
   font-weight: var(--font-weight-l);
   align-items: center;
   letter-spacing: 0.003em;
-  width: 5%;
+  padding: 20px 15px;
 } 
-
-.table-item-header:nth-child(1) {
-  width: 2%;
-}
 
 .table-body:nth-child(even) {
   background: rgba(243, 246, 249, 0.5);
