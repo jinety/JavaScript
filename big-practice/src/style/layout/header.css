@@ -1,6 +1,6 @@
 /* START HEADER */
 /* STYLE APPLIED TO THE MOBILE */
-.logo-bar {
+.header-logo {
   position: fixed;
   z-index: 10;
   width: 100%;
@@ -10,7 +10,7 @@
   justify-content: space-between;
 }
 
-.logo-box {
+.logo-wrap {
   padding-left: 25px;
 }
 
@@ -20,7 +20,7 @@
 
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1024px) {
-  .logo-box {
+  .logo-wrap {
     padding-left: 45px;
   }
 

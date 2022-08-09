@@ -14,14 +14,6 @@
   padding: 16px 20px;
 }
 
-.table-box {
-  overflow: auto;
-}
-
-.table {
-  min-width: 700px;
-}
-
 .overview{
   display: flex;
   justify-content: space-between;
@@ -45,32 +37,9 @@
   letter-spacing: 0.003em;
 }
 
-.table-header {
-  background: var(--primary-color-50);
-  color: var(--primary-color-300);
-}
-
-.item-header {
+.table-dashboard-item-header {
   padding-top: 20px;
   padding-bottom: 20px;
-  font-size: var(--font-size-s);
-  line-height: var(--line-height-s);
-  font-weight: var(--font-weight-l);
-  align-items: center;
-  letter-spacing: 0.003em;
-  width: 217px;
-}
-
-.item-header:nth-child(1) {
-  width: 65px;
-}
-
-.movies-list {
-  text-align: center;
-}
-
-.content-row:nth-child(even) {
-  background: rgba(243, 246, 249, 0.5);
 }
 
 .add-btn {
@@ -109,7 +78,7 @@
     padding-bottom: 9px;
   }
 
-  .menu {
+  .nav-paragraphs {
     padding-bottom: 26px;
     font-family: var(--secondary-font);
     font-size: 11px;
