@@ -4,10 +4,6 @@
   padding: 55px 16px;
 }
 
-.sidebar {
-  display: none;
-}
-
 .layout-main {
   background-color: var(--secondary-color-50);
   border-radius: 12px;
@@ -50,17 +46,12 @@
   overflow: auto;
 }
 
+.icon-dashboard {
+  padding-right: 12px;
+}
+
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1250px) {
-  .sidebar {
-    position: fixed;
-    display: inline-block;
-    width: 174px;
-    height: 100vh;
-    background: rgba(1, 0, 57, 0.04);
-    padding: 100px 42px 0 24px;
-  }
-
   .container {
     display: inline-block;
     padding-left: 280px;
