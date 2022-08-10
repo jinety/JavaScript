@@ -16,13 +16,13 @@ const renderTable = () => {
         tableTemplate += ` 
           <tr class="content-row">
             <td>${movie.id}</td>
-            <td>${movie.Name}</td>
-            <td>${movie.Director}</td>
-            <td>${movie.Nation}</td>
-            <td class="td-btn">
+            <td>${movie.name}</td>
+            <td>${movie.director}</td>
+            <td>${movie.nation}</td>
+            <td>
               <button type="button" class="primary-btn" data-id=${movie.id}>Update</button>
             </td>
-            <td class="td-btn">
+            <td>
               <button type="button" class="primary-btn" data-id=${movie.id}>Delete</button>
             </td>
           </tr>`;

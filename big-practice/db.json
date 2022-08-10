@@ -9,9 +9,9 @@
   ],
   "movies": [
     {
-      "Name": "Iron man 1",
-      "Director": "Jon Favreau",
-      "Nation": "USA",
+      "name": "Iron man 1",
+      "director": "Jon Favreau",
+      "nation": "USA",
       "id": 1
     }
   ]
