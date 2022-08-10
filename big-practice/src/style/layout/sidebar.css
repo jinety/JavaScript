@@ -1,0 +1,18 @@
+/* START SIDEBAR */
+/* STYLE APPLIED TO THE MOBILE */
+.sidebar {
+  display: none;
+}
+
+/* STYLE APPLIED TO THE DESKTOP */
+@media (min-width: 1250px) {
+  .sidebar {
+    position: fixed;
+    display: inline-block;
+    width: 174px;
+    height: 100vh;
+    background: rgba(1, 0, 57, 0.04);
+    padding: 100px 42px 0 24px;
+  }     
+}
+/* END SIDEBAR */

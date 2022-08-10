@@ -1,0 +1,80 @@
+/* START DASHBOARD */
+/* STYLE APPLIED TO THE MOBILE */
+.container {
+  padding: 55px 16px;
+}
+
+.layout-main {
+  background-color: var(--secondary-color-50);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.overview {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 28px;
+}
+
+.main-title {
+  padding-top: 16px;
+  padding-bottom: 20px;
+  font-size: var(--font-size-l);
+  line-height: 23px;
+  font-weight: var(--font-weight-m);
+  letter-spacing: 0.5px;
+}
+
+.title-table {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: var( --font-weight-l);
+  letter-spacing: 0.003em;
+}
+
+.add-btn {
+  font-size: var(--font-size-l);
+  background: var(--success-color-50);
+  color: var(--secondary-color-50);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.table-dashboard-wrapper {
+  overflow: auto;
+}
+
+.icon-dashboard {
+  padding-right: 12px;
+}
+
+/* STYLE APPLIED TO THE DESKTOP */
+@media (min-width: 1250px) {
+  .container {
+    display: inline-block;
+    padding-left: 280px;
+    padding-right: 33px;
+  }
+
+  .main-title {
+    padding-top: 33px;
+    padding-bottom: 40px;
+  }
+
+  .layout-main {
+    padding: 30px;
+    padding-bottom: 9px;
+  }
+
+  .sidebar-title {
+    padding-bottom: 26px;
+    font-family: var(--secondary-font);
+    font-size: 11px;
+    line-height: 11px;
+    font-weight: var( --font-weight-s);
+    color: var(--primary-color-400);
+  }
+}
+/* END DASHBOARD */

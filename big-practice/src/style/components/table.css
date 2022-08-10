@@ -1,0 +1,32 @@
+/* START TABLE */
+table tr td {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.table {
+  min-width: 700px;
+}
+
+.table-header {
+  background: var(--primary-color-50);
+  color: var(--primary-color-300);
+}
+
+.table-item-header {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+  font-weight: var(--font-weight-l);
+  align-items: center;
+  letter-spacing: 0.003em;
+  padding: 20px 15px;
+} 
+
+.table-body:nth-child(even) {
+  background: rgba(243, 246, 249, 0.5);
+}
+
+.table-body {
+  text-align: center;
+}
+/* END TABLE */

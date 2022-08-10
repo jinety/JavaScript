@@ -1,21 +1,42 @@
 /* START HEADER */
 /* STYLE APPLIED TO THE MOBILE */
-.logo-bar {
+.site-header {
   position: fixed;
-  top: 0;
+  z-index: 10;
   width: 100%;
   background: var(--secondary-color-50);
   box-shadow: 0px 1px 0px var(--secondary-color-100);
+  display: flex;
+  justify-content: space-between;
 }
 
-.logo-box {
+.logo-wrapper {
   padding-left: 25px;
+}
+
+.avt-box {
+  display: none;
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1024px) {
-  .logo-box {
+  .logo-wrapper {
     padding-left: 45px;
+  }
+
+  .avt-box {
+    display: flex;
+    padding: 16px 47px 16px 0;
+    text-decoration: none;
+  }
+
+  .account-name {
+    font-family: var(--secondary-font);
+    font-size: 12px;
+    line-height: 13px;
+    font-weight: var(--font-weight-s);
+    color: var(--primary-color-300);
+    padding: 10px 0 10px 12px;
   }
 }
 /* END HEADER */
