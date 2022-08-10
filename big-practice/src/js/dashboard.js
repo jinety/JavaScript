@@ -1,6 +1,6 @@
 // Query elements
 const tableBody = document.getElementById('tableBody');
-const accountName = document.getElementById('accountName');
+const accountName = document.querySelector('.account-name');
 const moviesApi = 'http://localhost:3000/movies';
 
 // Display username after successful login
