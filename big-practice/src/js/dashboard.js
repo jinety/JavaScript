@@ -1,6 +1,10 @@
 // Query elements
 const tableBody = document.getElementById('tableBody');
+const accountName = document.getElementById('accountName');
 const moviesApi = 'http://localhost:3000/movies';
+
+// Display username after successful login
+accountName.innerHTML = localStorage.getItem('username');
 
 /**
  * Takes data from the API and displays it on a table in HTML

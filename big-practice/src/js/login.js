@@ -76,6 +76,9 @@ const login = () => {
       } else {
         warnMsg.innerHTML = EmptyText;
 
+        // Save username to localStorage
+        localStorage.setItem('username', userList[0].email);
+
         // Switch to dashboard page
         window.location.href = dashboardPage;
       }
