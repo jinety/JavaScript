@@ -6,5 +6,13 @@
       "isAdmin": true,
       "id": 1
     }
+  ],
+  "movies": [
+    {
+      "name": "Iron man 1",
+      "director": "Jon Favreau",
+      "nation": "USA",
+      "id": 1
+    }
   ]
 }
