@@ -55,11 +55,6 @@
   text-align: right;
 }
 
-.model-show {
-  display: flex;
-  justify-content: center;
-}
-
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1250px) {
   .container {
