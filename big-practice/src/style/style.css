@@ -14,6 +14,7 @@
 @import url(./components/text.css);
 @import url(./components/button.css);
 @import url(./components/table.css);
+@import url(./components/modal-table-add.css);
 
 /* PAGE */
 @import url(./pages/login.css);

@@ -1,6 +1,8 @@
 // Query elements
 const tableBody = document.getElementById('tableBody');
 const accountName = document.querySelector('.account-name');
+const addBtn = document.querySelector('.add-btn');
+const modal = document.querySelector('.modal');
 const moviesApi = 'http://localhost:3000/movies';
 
 // Display username after successful login
@@ -24,10 +26,10 @@ const renderTable = () => {
             <td>${movie.director}</td>
             <td>${movie.nation}</td>
             <td>
-              <button type="button" class="primary-btn" data-id=${movie.id}>Update</button>
+              <button type="button" class="btn primary-btn" data-id=${movie.id}>Update</button>
             </td>
             <td>
-              <button type="button" class="primary-btn" data-id=${movie.id}>Delete</button>
+              <button type="button" class="btn primary-btn" data-id=${movie.id}>Delete</button>
             </td>
           </tr>`;
       });
@@ -36,5 +38,9 @@ const renderTable = () => {
     })
     .catch((error) => alert('An error occurred while getting movie', error));
 };
+
+addBtn.addEventListener('click', () => {
+  modal.classList.add('hide');
+});
 
 renderTable();
