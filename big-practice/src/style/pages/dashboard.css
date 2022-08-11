@@ -33,7 +33,7 @@
   letter-spacing: 0.003em;
 }
 
-.add-btn {
+.btn-show-form-create {
   font-size: var(--font-size-l);
   background: var(--success-color-50);
   color: var(--secondary-color-50);

@@ -1,7 +1,7 @@
 // Query elements
 const tableBody = document.getElementById('tableBody');
 const accountName = document.querySelector('.account-name');
-const addBtn = document.querySelector('.add-btn');
+const btnShowFormCreate = document.querySelector('.btn-show-form-create');
 const modal = document.querySelector('.modal');
 const moviesApi = 'http://localhost:3000/movies';
 
@@ -39,7 +39,7 @@ const renderTable = () => {
     .catch((error) => alert('An error occurred while getting movie', error));
 };
 
-addBtn.addEventListener('click', () => {
+btnShowFormCreate.addEventListener('click', () => {
   modal.classList.add('dashboard-form-appears');
 });
 
