@@ -50,6 +50,22 @@
   padding-right: 12px;
 }
 
+.button-box {
+  text-align: right;
+}
+
+.modal-table-title-wrapper {
+  background: var(--primary-color-50);
+  box-shadow: 0px 1px 0px var(--secondary-color-100);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.dashboard-form-appears {
+  display: flex;
+  justify-content: center;
+}
+
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1250px) {
   .container {

@@ -40,7 +40,7 @@ const renderTable = () => {
 };
 
 addBtn.addEventListener('click', () => {
-  modal.classList.add('hide');
+  modal.classList.add('dashboard-form-appears');
 });
 
 renderTable();
