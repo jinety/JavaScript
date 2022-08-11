@@ -50,6 +50,11 @@
   padding-right: 12px;
 }
 
+.button-box {
+  padding-top: 15px;
+  text-align: right;
+}
+
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1250px) {
   .container {
@@ -75,6 +80,10 @@
     line-height: 11px;
     font-weight: var( --font-weight-s);
     color: var(--primary-color-400);
+  }
+
+  .button-box {
+    padding-top: 20px;
   }
 }
 /* END DASHBOARD */
