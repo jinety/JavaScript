@@ -23,10 +23,11 @@
   border: 1px solid #888;
 }
 
-.modal-table-title {
+.modal-title {
   background: var(--primary-color-50);
   box-shadow: 0px 1px 0px var(--secondary-color-100);
   padding-top: 10px;
   padding-bottom: 10px;
+  font-size: var(--font-size-l);
 }
 /* END MODAL */

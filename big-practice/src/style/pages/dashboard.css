@@ -55,13 +55,9 @@
   text-align: right;
 }
 
-.form-appears {
+.model-show {
   display: flex;
   justify-content: center;
-}
-
-.table-title {
-  font-size: var(--font-size-l);
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
@@ -93,10 +89,6 @@
 
   .button-box {
     padding-top: 20px;
-  }
-
-  .table-title {
-    font-size: 30px;
   }
 }
 /* END DASHBOARD */

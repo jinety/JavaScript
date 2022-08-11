@@ -40,7 +40,7 @@ const renderTable = () => {
 };
 
 addBtn.addEventListener('click', () => {
-  modal.classList.add('form-appears');
+  modal.classList.add('model-show');
 });
 
 renderTable();
