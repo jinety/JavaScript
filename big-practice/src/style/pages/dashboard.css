@@ -33,7 +33,7 @@
   letter-spacing: 0.003em;
 }
 
-.btn-show-form-create {
+.add-btn {
   font-size: var(--font-size-l);
   background: var(--success-color-50);
   color: var(--secondary-color-50);
@@ -51,19 +51,17 @@
 }
 
 .button-box {
+  padding-top: 15px;
   text-align: right;
 }
 
-.modal-table-title-wrapper {
-  background: var(--primary-color-50);
-  box-shadow: 0px 1px 0px var(--secondary-color-100);
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.dashboard-form-appears {
+.form-appears {
   display: flex;
   justify-content: center;
+}
+
+.table-title {
+  font-size: var(--font-size-l);
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
@@ -91,6 +89,14 @@
     line-height: 11px;
     font-weight: var( --font-weight-s);
     color: var(--primary-color-400);
+  }
+
+  .button-box {
+    padding-top: 20px;
+  }
+
+  .table-title {
+    font-size: 30px;
   }
 }
 /* END DASHBOARD */

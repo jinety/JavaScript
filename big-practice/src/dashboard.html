@@ -33,7 +33,7 @@
       <section class="layout-main">
         <div class="overview">
           <p class="title title-table">Overview</p>
-          <button type="button" class="btn btn-show-form-create">+</button>
+          <button type="button" class="btn add-btn">+</button>
         </div>
         <div class="table-dashboard-wrapper">
           <table class="table">
@@ -54,21 +54,21 @@
     </div>
     <div class="modal">
       <div class="modal-content">
-        <form class="formCreateMovies">
-          <div class="modal-table-title-wrapper ">
-            <p class="title modal-table-title">New Movie</p>
+        <div class="modal-table-title">
+          <p class="title table-title">New Movie</p>
+        </div>
+        <form class="form-create-movies">
+          <div class="form-group">
+            <label class="label-input">Name</label>
+            <input type="text" class="form-control" />
           </div>
-          <div class="modal-form-field">
-            <label class="modal-label-input">Name</label>
-            <input type="text" class="modal-data-input">
+          <div class="form-group">
+            <label class="label-input">Director</label>
+            <input type="text" class="form-control" />
           </div>
-          <div class="modal-form-field">
-            <label class="modal-label-input">Director</label>
-            <input type="text" class="modal-data-input">
-          </div>
-          <div class="modal-form-field">
-            <label class="modal-label-input">Nation</label>
-            <input type="text" class="modal-data-input">
+          <div class="form-group">
+            <label class="label-input">Nation</label>
+            <input type="text" class="form-control" />
           </div>
           <div class="button-box">
             <button type="button" class="btn primary-btn">Cancel</button>

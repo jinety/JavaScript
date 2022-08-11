@@ -1,49 +1,37 @@
 /* START FORM */
 /* STYLE APPLIED TO THE MOBILE */
-.formCreateMovies {
+.form-create-movies {
   max-width: 510px;
 }
-.modal-form-field {
-  padding-bottom: 15px;
-}
-  
-.modal-form-field:nth-child(2) {
+
+.form-group {
   padding-top: 15px;
 }
   
-.modal-label-input {
+.label-input {
   font-size: var(--font-size-m);
 }
   
-.modal-data-input {
+.form-control {
   border-radius: 10px;
   display: block;
-  width: calc(100% - 25px);
-  padding: 10px;
+  width: calc(100% - 34px);
+  padding: 15px;
   margin-top: 15px;
   font-size: var(--font-size-s);
 }
+
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1200px) {
-  .modal-table-title {
-    font-size: 30px;
-  }
-
-  .modal-label-input {
+  .label-input {
     font-size: var(--font-size-l);
   }
 
-  .modal-data-input {
-    padding: 15px 20px;
-    width: calc(100% - 45px);
+  .form-control {
     font-size: var(--font-size-m);
   }
 
-  .modal-form-field {
-    padding-bottom: 20px;
-  }
-
-  .modal-form-field:nth-child(2) {
+  .form-group {
     padding-top: 20px;
   }
 }
