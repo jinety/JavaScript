@@ -2,6 +2,11 @@
 /* STYLE APPLIED TO THE MOBILE */
 .modal {
   display: none; 
+}
+
+.modal.modal-show {
+  display: flex;
+  justify-content: center;
   position: fixed;
   z-index: 1;
   padding-top: 100px; 
@@ -29,10 +34,5 @@
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: var(--font-size-l);
-}
-
-.modal-show {
-  display: flex;
-  justify-content: center;
 }
 /* END MODAL */
