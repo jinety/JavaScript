@@ -21,6 +21,11 @@
   font-size: var(--font-size-s);
 }
 
+.form-warn-msg {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1200px) {
   .label-input {

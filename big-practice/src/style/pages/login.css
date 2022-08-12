@@ -57,12 +57,6 @@
   font-weight: var(--font-weight-xl);
 }
 
-.warn-msg {
-  font-size: var(--font-size-s);
-  color: var(--warning-color-50);
-  margin-bottom: 20px;
-}
-
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1024px) {
   .login-form {
@@ -91,11 +85,6 @@
 
   .data-input {
     margin-top: 20px;
-  }
-
-  .warn-msg  {
-    font-size: var(--font-size-m);
-    line-height: var(--line-height-m);
   }
 }
 /* END LOGIN FORM */
