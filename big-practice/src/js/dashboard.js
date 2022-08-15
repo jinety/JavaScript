@@ -1,3 +1,5 @@
+import isValidForm from './validation';
+
 // Query elements
 const tableBody = document.getElementById('tableBody');
 const nameMovieInput = document.getElementById('nameMovie');
@@ -9,11 +11,9 @@ const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
 const modal = document.querySelector('.modal');
 const moviesApi = 'http://localhost:3000/movies';
-const EmptyText = '';
 
 // Messages
 const MESSAGES = {
-  empty: 'Value should be not empty',
   exist: 'Movie name already exists',
 };
 
@@ -27,11 +27,6 @@ const showErrorMessage = (input, msg) => {
 
 // Display username after successful login
 accountName.innerHTML = localStorage.getItem('username');
-
-/**
- *  Checks for an empty value
- */
-const isEmpty = (value) => (!value);
 
 /**
  * Takes data from the API and displays it on a table in HTML
@@ -63,31 +58,6 @@ const renderTable = () => {
     })
     // Display error message when retrieving data from Json server
     .catch((error) => alert('An error occurred while getting movie', error));
-};
-
-const isValidForm = () => {
-  const nameMovie = nameMovieInput.value;
-  const director = directorInput.value;
-  const nation = nationInput.value;
-  let isValid = false;
-
-  if (isEmpty(nameMovie)) {
-    showErrorMessage(nameMovieInput, MESSAGES.empty);
-  } else {
-    isValid = true;
-  }
-  if (isEmpty(director)) {
-    showErrorMessage(directorInput, MESSAGES.empty);
-  } else {
-    isValid = true;
-  }
-  if (isEmpty(nation)) {
-    showErrorMessage(nationInput, MESSAGES.empty);
-  } else {
-    isValid = true;
-  }
-
-  return isValid;
 };
 
 /**
@@ -124,9 +94,6 @@ const handleCreateForm = () => {
     .then((response) => response.json())
     .then((nameMovie) => {
       if (nameMovie.length === 0) {
-        showErrorMessage(nameMovieInput, EmptyText);
-        showErrorMessage(directorInput, EmptyText);
-        showErrorMessage(nationInput, EmptyText);
         const formData = { name, director, nation };
         createMovie(formData);
         modal.classList.remove('modal-show');

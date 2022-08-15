@@ -1,5 +1,7 @@
-const warnMsg = document.getElementById('warnMsg');
-const EmailRegex = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
+const nameMovieInput = document.getElementById('nameMovie');
+const directorInput = document.getElementById('director');
+const nationInput = document.getElementById('nation');
+const EmptyText = '';
 
 // Messages
 const MESSAGES = {
@@ -7,37 +9,48 @@ const MESSAGES = {
   emailWrongFormat: 'Email is invalid format',
   incorrectLoginAccount: 'Email or password is incorrect. Please re-enter',
   notAdminAccount: 'The account is not admin account, please re-enter',
+  empty: 'Value should be not empty',
+};
+
+/**
+ *  Display error message
+ */
+const showErrorMessage = (input, msg) => {
+  const errMessageEl = input.parentElement.querySelector('.warn-msg');
+  errMessageEl.innerHTML = msg;
 };
 
 /**
 *  Checks for an empty value
 */
-const isEmpty = (value) => (!value);
+export const isEmpty = (value) => (!value);
 
-/**
-  * Email check function is not valid
-  *
-  * @param {string} value - Comparative value
-*/
-const isValidEmail = (value) => (EmailRegex.test(value));
+export default function isValidForm() {
+  const nameMovie = nameMovieInput.value;
+  const director = directorInput.value;
+  const nation = nationInput.value;
+  let isValid = false;
 
-/**
-  * Validate form data
-*/
-export default function validateForm(email, password) {
-  let isValidForm = false;
-
-  // Email or password cannot be blank
-  if (isEmpty(email) || isEmpty(password)) {
-    warnMsg.innerHTML = MESSAGES.loginFormEmpty;
-  } else if (!isValidEmail(email)) {
-    // Email is not in the correct format
-    warnMsg.innerHTML = MESSAGES.emailWrongFormat;
+  if (isEmpty(nameMovie)) {
+    showErrorMessage(nameMovieInput, MESSAGES.empty);
   } else {
-    isValidForm = true;
+    isValid = true;
+    showErrorMessage(nameMovieInput, EmptyText);
   }
 
-  return isValidForm;
-}
+  if (isEmpty(director)) {
+    showErrorMessage(directorInput, MESSAGES.empty);
+  } else {
+    isValid = true;
+    showErrorMessage(directorInput, EmptyText);
+  }
 
-// export default validateForm;
+  if (isEmpty(nation)) {
+    showErrorMessage(nationInput, MESSAGES.empty);
+  } else {
+    isValid = true;
+    showErrorMessage(nationInput, EmptyText);
+  }
+
+  return isValid;
+}
