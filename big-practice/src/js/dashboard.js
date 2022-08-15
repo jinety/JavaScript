@@ -22,6 +22,7 @@ const MESSAGES = {
  */
 const showErrorMessage = (input, msg) => {
   const errMessageEl = input.parentElement.querySelector('.warn-msg');
+
   errMessageEl.innerHTML = msg;
 };
 
@@ -56,6 +57,7 @@ const renderTable = () => {
 
       tableBody.innerHTML = tableTemplate;
     })
+
     // Display error message when retrieving data from Json server
     .catch((error) => alert('An error occurred while getting movie', error));
 };
@@ -95,6 +97,7 @@ const handleCreateForm = () => {
     .then((nameMovie) => {
       if (nameMovie.length === 0) {
         const formData = { name, director, nation };
+
         createMovie(formData);
         modal.classList.remove('modal-show');
       } else {

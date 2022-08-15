@@ -14,6 +14,7 @@ const MESSAGES = {
  */
 const showErrorMessage = (input, msg) => {
   const errMessageEl = input.parentElement.querySelector('.warn-msg');
+
   errMessageEl.innerHTML = msg;
 };
 

@@ -18,7 +18,6 @@ const isEmpty = (value) => (!value);
   *
   * @param {string} value - Comparative value
 */
-
 const isValidEmail = (value) => (EmailRegex.test(value));
 
 // Messages
