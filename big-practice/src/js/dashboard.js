@@ -1,5 +1,5 @@
-import isValidForm from './validation';
-import { moviesApi, MESSAGES } from './text';
+import { isEmpty } from './validation';
+import { EmptyText, moviesApi, Messages } from './constant';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
@@ -13,7 +13,10 @@ const addBtn = document.querySelector('.add-btn');
 const modal = document.querySelector('.modal');
 
 /**
- *  Display error message
+ * Display error message
+ *
+ * @param {HtmlInputElement} input - Input element
+ * @param {string} msg - Show message
  */
 const showErrorMessage = (input, msg) => {
   const errMessageEl = input.parentElement.querySelector('.warn-msg');
@@ -32,6 +35,39 @@ const hideModal = () => {
 // Show modal
 const showModal = () => {
   modal.classList.add('modal-show');
+};
+
+const isValidForm = () => {
+  const nameMovie = nameMovieInput.value;
+  const director = directorInput.value;
+  const nation = nationInput.value;
+  let isValid = false;
+
+  // Movie title cannot be blank
+  if (isEmpty(nameMovie)) {
+    showErrorMessage(nameMovieInput, Messages.empty);
+  } else {
+    isValid = true;
+    showErrorMessage(nameMovieInput, EmptyText);
+  }
+
+  // Director cannot be blank
+  if (isEmpty(director)) {
+    showErrorMessage(directorInput, Messages.empty);
+  } else {
+    isValid = true;
+    showErrorMessage(directorInput, EmptyText);
+  }
+
+  // Nation cannot be blank
+  if (isEmpty(nation)) {
+    showErrorMessage(nationInput, Messages.empty);
+  } else {
+    isValid = true;
+    showErrorMessage(nationInput, EmptyText);
+  }
+
+  return isValid;
 };
 
 /**
@@ -106,7 +142,7 @@ const handleCreateForm = () => {
         createMovie(formData);
         hideModal();
       } else {
-        showErrorMessage(nameMovieInput, MESSAGES.exist);
+        showErrorMessage(nameMovieInput, Messages.exist);
       }
     });
 };

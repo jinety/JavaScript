@@ -4,7 +4,7 @@ const moviesApi = 'http://localhost:3000/movies';
 const EmptyText = '';
 
 // Messages
-const MESSAGES = {
+const Messages = {
   loginFormEmpty: 'Please enter all email and password',
   emailWrongFormat: 'Email is invalid format',
   incorrectLoginAccount: 'Email or password is incorrect. Please re-enter',
@@ -13,7 +13,6 @@ const MESSAGES = {
   empty: 'Value should be not empty',
 };
 
-export { EmptyText };
-export { MESSAGES };
-export { moviesApi };
-export { accountApi };
+export {
+  EmptyText, Messages, moviesApi, accountApi,
+};

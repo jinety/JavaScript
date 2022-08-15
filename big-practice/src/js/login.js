@@ -1,30 +1,22 @@
-import { isEmpty } from './validation';
-import { EmptyText, MESSAGES, accountApi } from './text';
+import { isValidEmail, isEmpty } from './validation';
+import { EmptyText, Messages, accountApi } from './constant';
 
 // Query elements
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
-const EmailRegex = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
 const dashboardPage = 'dashboard.html';
-
-/**
-  * Email check function is not valid
-  *
-  * @param {string} value - Comparative value
-*/
-const isValidEmail = (value) => (EmailRegex.test(value));
 
 const validateForm = (email, password) => {
   let isValid = false;
 
   // Email or password cannot be blank
   if (isEmpty(email) || isEmpty(password)) {
-    warnMsg.innerHTML = MESSAGES.loginFormEmpty;
+    warnMsg.innerHTML = Messages.loginFormEmpty;
   } else if (!isValidEmail(email)) {
     // Email is not in the correct format
-    warnMsg.innerHTML = MESSAGES.emailWrongFormat;
+    warnMsg.innerHTML = Messages.emailWrongFormat;
   } else {
     isValid = true;
   }
@@ -52,12 +44,12 @@ const login = () => {
     .then((response) => response.json())
     .then((userList) => {
       if (userList.length === 0) {
-        warnMsg.innerHTML = MESSAGES.incorrectLoginAccount;
+        warnMsg.innerHTML = Messages.incorrectLoginAccount;
       }
 
       // Non-admin account
       if (!userList[0].isAdmin) {
-        warnMsg.innerHTML = MESSAGES.notAdminAccount;
+        warnMsg.innerHTML = Messages.notAdminAccount;
       } else {
         warnMsg.innerHTML = EmptyText;
 
