@@ -5,10 +5,6 @@ const EmptyText = '';
 
 // Messages
 const MESSAGES = {
-  loginFormEmpty: 'Please enter all email and password',
-  emailWrongFormat: 'Email is invalid format',
-  incorrectLoginAccount: 'Email or password is incorrect. Please re-enter',
-  notAdminAccount: 'The account is not admin account, please re-enter',
   empty: 'Value should be not empty',
 };
 
@@ -23,7 +19,7 @@ const showErrorMessage = (input, msg) => {
 /**
 *  Checks for an empty value
 */
-export const isEmpty = (value) => (!value);
+const isEmpty = (value) => (!value);
 
 export default function isValidForm() {
   const nameMovie = nameMovieInput.value;
