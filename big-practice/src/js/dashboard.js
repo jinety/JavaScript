@@ -14,6 +14,7 @@ const EmptyText = '';
 // Messages
 const MESSAGES = {
   empty: 'Value should be not empty',
+  exist: 'Movie name already exists',
 };
 
 /**
@@ -31,37 +32,6 @@ accountName.innerHTML = localStorage.getItem('username');
  *  Checks for an empty value
  */
 const isEmpty = (value) => (!value);
-
-const isValidForm = () => {
-  const nameMovieValue = nameMovieInput.value;
-  const directorValue = directorInput.value;
-  const nationValue = nationInput.value;
-  let isValid = true;
-
-  // Full name is required
-  if (isEmpty(nameMovieValue)) {
-    isValid = false;
-    showErrorMessage(nameMovieInput, MESSAGES.empty);
-  } else {
-    showErrorMessage(nameMovieInput, EmptyText);
-  }
-
-  if (isEmpty(directorValue)) {
-    isValid = false;
-    showErrorMessage(directorInput, MESSAGES.empty);
-  } else {
-    showErrorMessage(directorInput, EmptyText);
-  }
-
-  if (isEmpty(nationValue)) {
-    isValid = false;
-    showErrorMessage(nationInput, MESSAGES.empty);
-  } else {
-    showErrorMessage(nationInput, EmptyText);
-  }
-
-  return isValid;
-};
 
 /**
  * Takes data from the API and displays it on a table in HTML
@@ -95,6 +65,31 @@ const renderTable = () => {
     .catch((error) => alert('An error occurred while getting movie', error));
 };
 
+const isValidForm = () => {
+  const nameMovie = nameMovieInput.value;
+  const director = directorInput.value;
+  const nation = nationInput.value;
+  let isValid = false;
+
+  if (isEmpty(nameMovie)) {
+    showErrorMessage(nameMovieInput, MESSAGES.empty);
+  } else {
+    isValid = true;
+  }
+  if (isEmpty(director)) {
+    showErrorMessage(directorInput, MESSAGES.empty);
+  } else {
+    isValid = true;
+  }
+  if (isEmpty(nation)) {
+    showErrorMessage(nationInput, MESSAGES.empty);
+  } else {
+    isValid = true;
+  }
+
+  return isValid;
+};
+
 /**
  * Create new movie and save to database
  */
@@ -116,20 +111,29 @@ const createMovie = (data) => {
 };
 
 const handleCreateForm = () => {
-  const name = nationInput.value;
+  const name = nameMovieInput.value;
   const director = directorInput.value;
   const nation = nationInput.value;
-  const formData = { name, director, nation };
+  const url = `${moviesApi}?name=${name}`;
 
-  createMovie(formData);
-};
-
-const createForm = () => {
-  if (isValidForm()) {
-    handleCreateForm();
-    renderTable();
-    modal.classList.remove('modal-show');
+  if (!isValidForm()) {
+    return;
   }
+
+  fetch(url, { method: 'GET' })
+    .then((response) => response.json())
+    .then((nameMovie) => {
+      if (nameMovie.length === 0) {
+        showErrorMessage(nameMovieInput, EmptyText);
+        showErrorMessage(directorInput, EmptyText);
+        showErrorMessage(nationInput, EmptyText);
+        const formData = { name, director, nation };
+        createMovie(formData);
+        modal.classList.remove('modal-show');
+      } else {
+        showErrorMessage(nameMovieInput, MESSAGES.exist);
+      }
+    });
 };
 
 addBtn.addEventListener('click', () => {
@@ -137,10 +141,13 @@ addBtn.addEventListener('click', () => {
 });
 
 // New movie will be created when clicking create button
-createBtn.addEventListener('click', createForm);
+createBtn.addEventListener('click', () => {
+  handleCreateForm();
+});
 
 // Exit modal when clicking cancel button
 cancelBtn.addEventListener('click', () => {
   modal.classList.remove('modal-show');
 });
+
 renderTable();
