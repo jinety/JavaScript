@@ -1,4 +1,5 @@
 import isValidForm from './validation';
+import { moviesApi, MESSAGES } from './text';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
@@ -10,12 +11,6 @@ const cancelBtn = document.getElementById('cancelBtn');
 const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
 const modal = document.querySelector('.modal');
-const moviesApi = 'http://localhost:3000/movies';
-
-// Messages
-const MESSAGES = {
-  exist: 'Movie name already exists',
-};
 
 /**
  *  Display error message
@@ -28,6 +23,16 @@ const showErrorMessage = (input, msg) => {
 
 // Display username after successful login
 accountName.innerHTML = localStorage.getItem('username');
+
+// Hide modal
+const hideModal = () => {
+  modal.classList.remove('modal-show');
+};
+
+// Show modal
+const showModal = () => {
+  modal.classList.add('modal-show');
+};
 
 /**
  * Takes data from the API and displays it on a table in HTML
@@ -94,12 +99,12 @@ const handleCreateForm = () => {
 
   fetch(url, { method: 'GET' })
     .then((response) => response.json())
-    .then((nameMovie) => {
-      if (nameMovie.length === 0) {
+    .then((movieList) => {
+      if (movieList.length === 0) {
         const formData = { name, director, nation };
 
         createMovie(formData);
-        modal.classList.remove('modal-show');
+        hideModal();
       } else {
         showErrorMessage(nameMovieInput, MESSAGES.exist);
       }
@@ -107,7 +112,7 @@ const handleCreateForm = () => {
 };
 
 addBtn.addEventListener('click', () => {
-  modal.classList.add('modal-show');
+  showModal();
 });
 
 // New movie will be created when clicking create button
@@ -117,7 +122,7 @@ createBtn.addEventListener('click', () => {
 
 // Exit modal when clicking cancel button
 cancelBtn.addEventListener('click', () => {
-  modal.classList.remove('modal-show');
+  hideModal();
 });
 
 renderTable();

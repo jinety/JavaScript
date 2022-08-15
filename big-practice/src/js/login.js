@@ -1,17 +1,13 @@
+import { isEmpty } from './validation';
+import { EmptyText, MESSAGES, accountApi } from './text';
+
 // Query elements
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
 const EmailRegex = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
-const accountApi = 'http://localhost:3000/accounts';
 const dashboardPage = 'dashboard.html';
-const EmptyText = '';
-
-/**
-*  Checks for an empty value
-*/
-const isEmpty = (value) => (!value);
 
 /**
   * Email check function is not valid
@@ -19,14 +15,6 @@ const isEmpty = (value) => (!value);
   * @param {string} value - Comparative value
 */
 const isValidEmail = (value) => (EmailRegex.test(value));
-
-// Messages
-const MESSAGES = {
-  loginFormEmpty: 'Please enter all email and password',
-  emailWrongFormat: 'Email is invalid format',
-  incorrectLoginAccount: 'Email or password is incorrect. Please re-enter',
-  notAdminAccount: 'The account is not admin account, please re-enter',
-};
 
 const validateForm = (email, password) => {
   let isValid = false;

@@ -1,13 +1,9 @@
+import { EmptyText, MESSAGES } from './text';
+
 // Query elements
 const nameMovieInput = document.getElementById('nameMovie');
 const directorInput = document.getElementById('director');
 const nationInput = document.getElementById('nation');
-const EmptyText = '';
-
-// Messages
-const MESSAGES = {
-  empty: 'Value should be not empty',
-};
 
 /**
  *  Display error message
@@ -55,3 +51,5 @@ export default function isValidForm() {
 
   return isValid;
 }
+
+export { isEmpty };
