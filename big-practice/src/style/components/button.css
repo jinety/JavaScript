@@ -1,5 +1,6 @@
 /* START BUTTON */
-.primary-btn {
+.btn {
+  display: inline-block;
   padding: 10px 20px;
   font-size: var(--font-size-s);
   cursor: pointer;

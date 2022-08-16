@@ -11,6 +11,7 @@ const cancelBtn = document.getElementById('cancelBtn');
 const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
 const modal = document.querySelector('.modal');
+const updateBtn = document.getElementById('updateBtn');
 
 /**
  * Display error message
@@ -24,16 +25,41 @@ const showErrorMessage = (input, msg) => {
   errMessageEl.innerHTML = msg;
 };
 
-// Hide modal
+/**
+ * Hide modal
+ */
 const hideModal = () => {
   modal.classList.remove('modal-show');
 };
 
-// Show modal
+/**
+ * Show modal
+ */
 const showModal = () => {
   modal.classList.add('modal-show');
 };
 
+/**
+ * Hide element
+ *
+ * @param {HtmlInputElement} element - Input element
+ */
+const hideElement = (element) => {
+  element.classList.add('hide');
+};
+
+/**
+ * Show element
+ *
+ * @param {HtmlInputElement} element - Input element
+ */
+const showElement = (element) => {
+  element.classList.remove('hide');
+};
+
+/**
+ * Valid Form
+ */
 const isValidForm = () => {
   const nameMovie = nameMovieInput.value;
   const director = directorInput.value;
@@ -85,15 +111,24 @@ const renderTable = () => {
             <td>${movie.director}</td>
             <td>${movie.nation}</td>
             <td>
-              <button type="button" class="btn primary-btn update-btn" data-id=${movie.id}>Update</button>
+              <button type="button" class="btn table-update-btn" data-id=${movie.id}>Update</button>
             </td>
             <td>
-              <button type="button" class="btn primary-btn" data-id=${movie.id}>Delete</button>
+              <button type="button" class="btn" data-id=${movie.id}>Delete</button>
             </td>
           </tr>`;
       });
 
       tableBody.innerHTML = tableTemplate;
+      const updateButtons = document.querySelectorAll('.table-update-btn');
+
+      updateButtons.forEach((item) => {
+        item.addEventListener('click', () => {
+          showModal();
+          hideElement(createBtn);
+          showElement(updateBtn);
+        });
+      });
     })
 
     // Display error message when retrieving data from Json server
@@ -120,6 +155,9 @@ const createMovie = (data) => {
     .catch((error) => alert('An error occurred while creating movie', error));
 };
 
+/**
+ * Handle create form
+ */
 const handleCreateForm = () => {
   const name = nameMovieInput.value;
   const director = directorInput.value;
@@ -144,8 +182,11 @@ const handleCreateForm = () => {
     });
 };
 
+// Popup to add user when clicking on Add button.
 addBtn.addEventListener('click', () => {
   showModal();
+  hideElement(updateBtn);
+  showElement(createBtn);
 });
 
 // New movie will be created when clicking create button

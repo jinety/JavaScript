@@ -5,6 +5,7 @@
 /* BASE */
 @import url(./base/reset.css);
 @import url(./base/typography.css);
+@import url(./base/common.css);
 
 /* LAYOUT */
 @import url(./layout/header.css);
