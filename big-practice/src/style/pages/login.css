@@ -57,9 +57,7 @@
   font-weight: var(--font-weight-xl);
 }
 
-.warn-msg {
-  font-size: var(--font-size-s);
-  color: var(--warning-color-50);
+.login-warn-msg {
   margin-bottom: 20px;
 }
 
@@ -91,11 +89,6 @@
 
   .data-input {
     margin-top: 20px;
-  }
-
-  .warn-msg  {
-    font-size: var(--font-size-m);
-    line-height: var(--line-height-m);
   }
 }
 /* END LOGIN FORM */

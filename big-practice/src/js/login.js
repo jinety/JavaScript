@@ -1,50 +1,27 @@
+import { isValidEmail, isEmpty } from './validation';
+import { EmptyText, Messages, AccountApi } from './constant';
+
 // Query elements
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
-const accountApi = 'http://localhost:3000/accounts';
-const EmailRegex = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
 const dashboardPage = 'dashboard.html';
-const EmptyText = '';
 
-// Messages
-const MESSAGES = {
-  loginFormEmpty: 'Please enter all email and password',
-  emailWrongFormat: 'Email is invalid format',
-  incorrectLoginAccount: 'Email or password is incorrect. Please re-enter',
-  notAdminAccount: 'The account is not admin account, please re-enter',
-};
-
-/**
- *  Checks for an empty value
- */
-const isEmpty = (value) => (!value);
-
-/**
- * Email check function is not valid
- *
- * @param {string} value - Comparative value
- */
-const isValidEmail = (value) => (EmailRegex.test(value));
-
-/**
- * Validate form data
- */
 const validateForm = (email, password) => {
-  let isValidForm = false;
+  let isValid = false;
 
   // Email or password cannot be blank
   if (isEmpty(email) || isEmpty(password)) {
-    warnMsg.innerHTML = MESSAGES.loginFormEmpty;
+    warnMsg.innerHTML = Messages.loginFormEmpty;
   } else if (!isValidEmail(email)) {
     // Email is not in the correct format
-    warnMsg.innerHTML = MESSAGES.emailWrongFormat;
+    warnMsg.innerHTML = Messages.emailWrongFormat;
   } else {
-    isValidForm = true;
+    isValid = true;
   }
 
-  return isValidForm;
+  return isValid;
 };
 
 /**
@@ -53,7 +30,7 @@ const validateForm = (email, password) => {
 const login = () => {
   const email = emailInput.value;
   const password = passwordInput.value;
-  const url = `${accountApi}?email=${email}&password=${password}`;
+  const url = `${AccountApi}?email=${email}&password=${password}`;
 
   // Validate form data
   const isValidForm = validateForm(email, password);
@@ -67,12 +44,12 @@ const login = () => {
     .then((response) => response.json())
     .then((userList) => {
       if (userList.length === 0) {
-        warnMsg.innerHTML = MESSAGES.incorrectLoginAccount;
+        warnMsg.innerHTML = Messages.incorrectLoginAccount;
       }
 
       // Non-admin account
       if (!userList[0].isAdmin) {
-        warnMsg.innerHTML = MESSAGES.notAdminAccount;
+        warnMsg.innerHTML = Messages.notAdminAccount;
       } else {
         warnMsg.innerHTML = EmptyText;
 

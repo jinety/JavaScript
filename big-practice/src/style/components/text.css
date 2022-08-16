@@ -1,6 +1,19 @@
 /* START TEXT */
+/* STYLE APPLIED TO THE MOBILE */
 .title {
   font-family: var(--secondary-font);
   color: var(--primary-color-300);
+}
+
+.warn-msg {
+  font-size: var(--font-size-s);
+  color: var(--warning-color-50);
+}
+
+/* STYLE APPLIED TO THE DESKTOP */
+@media (min-width: 1024px) {
+  .warn-msg  {
+    font-size: var(--font-size-m);
+  }
 }
 /* END TEXT */

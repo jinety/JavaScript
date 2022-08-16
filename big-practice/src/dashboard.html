@@ -60,23 +60,27 @@
         <form class="form">
           <div class="form-line">
             <label class="label-input">Name</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" id="nameMovie" />
+            <p class="warn-msg form-warn-msg"></p>
           </div>
           <div class="form-line">
             <label class="label-input">Director</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" id="director" />
+            <p class="warn-msg form-warn-msg"></p>
           </div>
           <div class="form-line">
             <label class="label-input">Nation</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" id="nation" />
+            <p class="warn-msg form-warn-msg"></p>
           </div>
           <div class="button-box">
-            <button type="button" class="btn primary-btn">Cancel</button>
-            <button type="button" class="btn primary-btn">Create Movie</button>
+            <button type="button" class="btn primary-btn" id="cancelBtn">Cancel</button>
+            <button type="button" class="btn primary-btn" id="createBtn">Create Movie</button>
           </div>
         </form>
       </div>
     </div>
-    <script src="./js/dashboard.js"></script>
+    
+    <script type="module" src="./js/dashboard.js"></script>
   </body>
 </html>
