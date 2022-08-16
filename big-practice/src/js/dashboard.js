@@ -11,6 +11,7 @@ const cancelBtn = document.getElementById('cancelBtn');
 const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
 const modal = document.querySelector('.modal');
+const updateBtn = document.getElementById('updateBtn');
 
 /**
  * Display error message
@@ -32,6 +33,14 @@ const hideModal = () => {
 // Show modal
 const showModal = () => {
   modal.classList.add('modal-show');
+};
+
+const hideBtn = (button) => {
+  button.classList.add('hide-btn');
+};
+
+const showBtn = (button) => {
+  button.classList.remove('hide-btn');
 };
 
 const isValidForm = () => {
@@ -85,7 +94,7 @@ const renderTable = () => {
             <td>${movie.director}</td>
             <td>${movie.nation}</td>
             <td>
-              <button type="button" class="btn primary-btn update-btn" data-id=${movie.id}>Update</button>
+              <button type="button" class="btn primary-btn table-update-btn" data-id=${movie.id}>Update</button>
             </td>
             <td>
               <button type="button" class="btn primary-btn" data-id=${movie.id}>Delete</button>
@@ -94,6 +103,15 @@ const renderTable = () => {
       });
 
       tableBody.innerHTML = tableTemplate;
+      const updateButtons = document.querySelectorAll('.table-update-btn');
+
+      updateButtons.forEach((item) => {
+        item.addEventListener('click', () => {
+          showModal();
+          hideBtn(createBtn);
+          showBtn(updateBtn);
+        });
+      });
     })
 
     // Display error message when retrieving data from Json server
@@ -146,6 +164,8 @@ const handleCreateForm = () => {
 
 addBtn.addEventListener('click', () => {
   showModal();
+  hideBtn(updateBtn);
+  showBtn(cancelBtn);
 });
 
 // New movie will be created when clicking create button
