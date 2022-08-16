@@ -1,5 +1,5 @@
 /* START BUTTON */
-.primary-btn {
+.btn {
   display: inline-block;
   padding: 10px 20px;
   font-size: var(--font-size-s);
@@ -32,9 +32,5 @@
 
 .sidebar-btn:hover {
   background: rgba(80, 65, 120, 0.2);
-}
-
-.hide-btn {
-  display: none;
 }
 /* END BUTTON */

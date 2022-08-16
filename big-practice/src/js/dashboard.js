@@ -36,11 +36,11 @@ const showModal = () => {
 };
 
 const hideBtn = (button) => {
-  button.classList.add('hide-btn');
+  button.classList.add('hide');
 };
 
 const showBtn = (button) => {
-  button.classList.remove('hide-btn');
+  button.classList.remove('hide');
 };
 
 const isValidForm = () => {
@@ -94,10 +94,10 @@ const renderTable = () => {
             <td>${movie.director}</td>
             <td>${movie.nation}</td>
             <td>
-              <button type="button" class="btn primary-btn table-update-btn" data-id=${movie.id}>Update</button>
+              <button type="button" class="btn table-update-btn" data-id=${movie.id}>Update</button>
             </td>
             <td>
-              <button type="button" class="btn primary-btn" data-id=${movie.id}>Delete</button>
+              <button type="button" class="btn" data-id=${movie.id}>Delete</button>
             </td>
           </tr>`;
       });
@@ -165,7 +165,7 @@ const handleCreateForm = () => {
 addBtn.addEventListener('click', () => {
   showModal();
   hideBtn(updateBtn);
-  showBtn(cancelBtn);
+  showBtn(createBtn);
 });
 
 // New movie will be created when clicking create button
