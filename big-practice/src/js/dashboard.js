@@ -1,5 +1,5 @@
-import { isEmpty } from './validation';
-import { EmptyText, moviesApi, Messages } from './constant';
+import { IsEmpty } from './validation';
+import { EmptyText, MoviesApi, Messages } from './constant';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
@@ -44,7 +44,7 @@ const isValidForm = () => {
   let isValid = false;
 
   // Movie title cannot be blank
-  if (isEmpty(nameMovie)) {
+  if (IsEmpty(nameMovie)) {
     showErrorMessage(nameMovieInput, Messages.empty);
   } else {
     isValid = true;
@@ -52,7 +52,7 @@ const isValidForm = () => {
   }
 
   // Director cannot be blank
-  if (isEmpty(director)) {
+  if (IsEmpty(director)) {
     showErrorMessage(directorInput, Messages.empty);
   } else {
     isValid = true;
@@ -60,7 +60,7 @@ const isValidForm = () => {
   }
 
   // Nation cannot be blank
-  if (isEmpty(nation)) {
+  if (IsEmpty(nation)) {
     showErrorMessage(nationInput, Messages.empty);
   } else {
     isValid = true;
@@ -74,7 +74,7 @@ const isValidForm = () => {
  * Takes data from the API and displays it on a table in HTML
  */
 const renderTable = () => {
-  fetch(moviesApi)
+  fetch(MoviesApi)
     // Parses JSON response into native JavaScript objects
     .then((response) => response.json())
     .then((movies) => {
@@ -88,7 +88,7 @@ const renderTable = () => {
             <td>${movie.director}</td>
             <td>${movie.nation}</td>
             <td>
-              <button type="button" class="btn primary-btn" data-id=${movie.id}>Update</button>
+              <button type="button" class="btn primary-btn update-btn" data-id=${movie.id}>Update</button>
             </td>
             <td>
               <button type="button" class="btn primary-btn" data-id=${movie.id}>Delete</button>
@@ -115,7 +115,7 @@ const createMovie = (data) => {
     body: JSON.stringify(data),
   };
 
-  fetch(moviesApi, option)
+  fetch(MoviesApi, option)
     // Parses JSON response into native JavaScript objects
     .then((response) => response.json())
     .then(() => renderTable())
@@ -127,7 +127,7 @@ const handleCreateForm = () => {
   const name = nameMovieInput.value;
   const director = directorInput.value;
   const nation = nationInput.value;
-  const url = `${moviesApi}?name=${name}`;
+  const url = `${MoviesApi}?name=${name}`;
 
   if (!isValidForm()) {
     return;

@@ -1,6 +1,6 @@
 // Url API
-const accountApi = 'http://localhost:3000/accounts';
-const moviesApi = 'http://localhost:3000/movies';
+const AccountApi = 'http://localhost:3000/accounts';
+const MoviesApi = 'http://localhost:3000/movies';
 const EmptyText = '';
 
 // Messages
@@ -14,5 +14,5 @@ const Messages = {
 };
 
 export {
-  EmptyText, Messages, moviesApi, accountApi,
+  EmptyText, Messages, AccountApi, MoviesApi,
 };

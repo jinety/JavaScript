@@ -1,5 +1,5 @@
-import { isValidEmail, isEmpty } from './validation';
-import { EmptyText, Messages, accountApi } from './constant';
+import { IsValidEmail, IsEmpty } from './validation';
+import { EmptyText, Messages, AccountApi } from './constant';
 
 // Query elements
 const emailInput = document.getElementById('email');
@@ -12,9 +12,9 @@ const validateForm = (email, password) => {
   let isValid = false;
 
   // Email or password cannot be blank
-  if (isEmpty(email) || isEmpty(password)) {
+  if (IsEmpty(email) || IsEmpty(password)) {
     warnMsg.innerHTML = Messages.loginFormEmpty;
-  } else if (!isValidEmail(email)) {
+  } else if (!IsValidEmail(email)) {
     // Email is not in the correct format
     warnMsg.innerHTML = Messages.emailWrongFormat;
   } else {
@@ -30,7 +30,7 @@ const validateForm = (email, password) => {
 const login = () => {
   const email = emailInput.value;
   const password = passwordInput.value;
-  const url = `${accountApi}?email=${email}&password=${password}`;
+  const url = `${AccountApi}?email=${email}&password=${password}`;
 
   // Validate form data
   const isValidForm = validateForm(email, password);

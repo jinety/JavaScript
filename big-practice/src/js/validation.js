@@ -5,11 +5,11 @@ const EmailRegex = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
   *
   * @param {string} value - Comparative value
 */
-const isValidEmail = (value) => (EmailRegex.test(value));
+const IsValidEmail = (value) => (EmailRegex.test(value));
 
 /**
 *  Checks for an empty value
 */
-const isEmpty = (value) => (!value);
+const IsEmpty = (value) => (!value);
 
-export { isValidEmail, isEmpty };
+export { IsValidEmail, IsEmpty };
