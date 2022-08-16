@@ -143,9 +143,9 @@ const renderTable = () => {
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
           showModal();
-          getMovie(item);
           hideElement(createBtn);
           showElement(updateBtn);
+          getMovie(item);
         });
       });
     })
@@ -174,18 +174,14 @@ const createMovie = (data) => {
     .catch((error) => alert('An error occurred while creating movie', error));
 };
 
-const updateForm = () => {
+const updateForm = (data) => {
   const customMovieId = form.getAttribute('data-id');
   const option = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      name: nameMovieInput.value,
-      director: directorInput.value,
-      nation: nationInput.value,
-    }),
+    body: JSON.stringify(data),
   };
 
   fetch(`${MoviesApi}/${customMovieId}`, option)
@@ -224,9 +220,13 @@ const handleCreateForm = () => {
 };
 
 const handleUpdateForm = () => {
-  const customMovieId = form.getAttribute('data-id');
   const name = nameMovieInput.value;
+  const director = directorInput.value;
+  const nation = nationInput.value;
   const url = `${MoviesApi}?name=${name}`;
+  const formData = { name, director, nation };
+  const customMovieId = form.getAttribute('data-id');
+  console.log(url);
 
   if (!isValidForm()) {
     return;
@@ -235,18 +235,9 @@ const handleUpdateForm = () => {
   fetch(url, { method: 'GET' })
     .then((response) => response.json())
     .then((movieList) => {
-      if (movieList.length > 1) {
-        showErrorMessage(nameMovieInput, Messages.exist);
-      }
-
-      if (movieList.length === 0) {
-        updateForm();
-        hideModal();
-      }
-
-      if (movieList[0].id === parseFloat(customMovieId)) {
-        updateForm();
-        hideModal();
+      if (movieList.length === 0 || movieList[0].id === parseFloat(customMovieId)) {
+        updateForm(formData);
+        // hideModal();
       } else {
         showErrorMessage(nameMovieInput, Messages.exist);
       }
