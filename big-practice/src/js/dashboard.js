@@ -12,6 +12,7 @@ const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
 const modal = document.querySelector('.modal');
 const updateBtn = document.getElementById('updateBtn');
+const form = document.querySelector('.form');
 
 /**
  * Display error message
@@ -93,6 +94,23 @@ const isValidForm = () => {
   return isValid;
 };
 
+const getMovie = (item) => {
+  const movieId = item.dataset.id;
+  const options = {
+    method: 'GET',
+  };
+
+  fetch(`${MoviesApi}/${movieId}`, options)
+    .then((response) => response.json())
+    .then((movieData) => {
+      nameMovieInput.value = movieData.name;
+      directorInput.value = movieData.director;
+      nationInput.value = movieData.nation;
+      form.setAttribute('data-id', movieId);
+    })
+    .catch((error) => alert('Error! An error occurred.', error));
+};
+
 /**
  * Takes data from the API and displays it on a table in HTML
  */
@@ -125,6 +143,7 @@ const renderTable = () => {
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
           showModal();
+          getMovie(item);
           hideElement(createBtn);
           showElement(updateBtn);
         });
@@ -155,6 +174,28 @@ const createMovie = (data) => {
     .catch((error) => alert('An error occurred while creating movie', error));
 };
 
+const updateForm = () => {
+  const customMovieId = form.getAttribute('data-id');
+  const option = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: nameMovieInput.value,
+      director: directorInput.value,
+      nation: nationInput.value,
+    }),
+  };
+
+  fetch(`${MoviesApi}/${customMovieId}`, option)
+    // Parses JSON response into native JavaScript objects
+    .then((response) => response.json())
+    .then(() => renderTable())
+    // Show error message when API call is wrong
+    .catch((error) => alert('An error occurred while update movie', error));
+};
+
 /**
  * Handle create form
  */
@@ -182,6 +223,36 @@ const handleCreateForm = () => {
     });
 };
 
+const handleUpdateForm = () => {
+  const customMovieId = form.getAttribute('data-id');
+  const name = nameMovieInput.value;
+  const url = `${MoviesApi}?name=${name}`;
+
+  if (!isValidForm()) {
+    return;
+  }
+
+  fetch(url, { method: 'GET' })
+    .then((response) => response.json())
+    .then((movieList) => {
+      if (movieList.length > 1) {
+        showErrorMessage(nameMovieInput, Messages.exist);
+      }
+
+      if (movieList.length === 0) {
+        updateForm();
+        hideModal();
+      }
+
+      if (movieList[0].id === parseFloat(customMovieId)) {
+        updateForm();
+        hideModal();
+      } else {
+        showErrorMessage(nameMovieInput, Messages.exist);
+      }
+    });
+};
+
 // Popup to add user when clicking on Add button.
 addBtn.addEventListener('click', () => {
   showModal();
@@ -197,6 +268,10 @@ createBtn.addEventListener('click', () => {
 // Exit modal when clicking cancel button
 cancelBtn.addEventListener('click', () => {
   hideModal();
+});
+
+updateBtn.addEventListener('click', () => {
+  handleUpdateForm();
 });
 
 // Display username after successful login
