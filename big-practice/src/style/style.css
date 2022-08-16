@@ -5,6 +5,7 @@
 /* BASE */
 @import url(./base/reset.css);
 @import url(./base/typography.css);
+@import url(./base/common.css);
 
 /* LAYOUT */
 @import url(./layout/header.css);
@@ -16,7 +17,6 @@
 @import url(./components/table.css);
 @import url(./components/modal.css);
 @import url(./components/form.css);
-@import url(./components/constant.css);
 
 /* PAGE */
 @import url(./pages/login.css);
