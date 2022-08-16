@@ -25,24 +25,41 @@ const showErrorMessage = (input, msg) => {
   errMessageEl.innerHTML = msg;
 };
 
-// Hide modal
+/**
+ * Hide modal
+ */
 const hideModal = () => {
   modal.classList.remove('modal-show');
 };
 
-// Show modal
+/**
+ * Show modal
+ */
 const showModal = () => {
   modal.classList.add('modal-show');
 };
 
+/**
+ * Hide element
+ *
+ * @param {HtmlInputElement} element - Input element
+ */
 const hideElement = (element) => {
   element.classList.add('hide');
 };
 
+/**
+ * Show element
+ *
+ * @param {HtmlInputElement} element - Input element
+ */
 const showElement = (element) => {
   element.classList.remove('hide');
 };
 
+/**
+ * Valid Form
+ */
 const isValidForm = () => {
   const nameMovie = nameMovieInput.value;
   const director = directorInput.value;
@@ -138,6 +155,9 @@ const createMovie = (data) => {
     .catch((error) => alert('An error occurred while creating movie', error));
 };
 
+/**
+ * Handle create form
+ */
 const handleCreateForm = () => {
   const name = nameMovieInput.value;
   const director = directorInput.value;
@@ -162,6 +182,7 @@ const handleCreateForm = () => {
     });
 };
 
+// Popup to add user when clicking on Add button.
 addBtn.addEventListener('click', () => {
   showModal();
   hideElement(updateBtn);
