@@ -35,12 +35,12 @@ const showModal = () => {
   modal.classList.add('modal-show');
 };
 
-const hideBtn = (button) => {
-  button.classList.add('hide');
+const hideElement = (element) => {
+  element.classList.add('hide');
 };
 
-const showBtn = (button) => {
-  button.classList.remove('hide');
+const showElement = (element) => {
+  element.classList.remove('hide');
 };
 
 const isValidForm = () => {
@@ -108,8 +108,8 @@ const renderTable = () => {
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
           showModal();
-          hideBtn(createBtn);
-          showBtn(updateBtn);
+          hideElement(createBtn);
+          showElement(updateBtn);
         });
       });
     })
@@ -164,8 +164,8 @@ const handleCreateForm = () => {
 
 addBtn.addEventListener('click', () => {
   showModal();
-  hideBtn(updateBtn);
-  showBtn(createBtn);
+  hideElement(updateBtn);
+  showElement(createBtn);
 });
 
 // New movie will be created when clicking create button

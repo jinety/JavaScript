@@ -16,7 +16,6 @@
 }
 
 .sidebar-btn {
-  display: inline-block;
   font-family: var(--secondary-font);
   width: 174px;
   display: flex;
