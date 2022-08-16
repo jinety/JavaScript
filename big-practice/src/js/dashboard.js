@@ -1,4 +1,4 @@
-import { IsEmpty } from './validation';
+import { isEmpty } from './validation';
 import { EmptyText, MoviesApi, Messages } from './constant';
 
 // Query elements
@@ -24,9 +24,6 @@ const showErrorMessage = (input, msg) => {
   errMessageEl.innerHTML = msg;
 };
 
-// Display username after successful login
-accountName.innerHTML = localStorage.getItem('username');
-
 // Hide modal
 const hideModal = () => {
   modal.classList.remove('modal-show');
@@ -44,7 +41,7 @@ const isValidForm = () => {
   let isValid = false;
 
   // Movie title cannot be blank
-  if (IsEmpty(nameMovie)) {
+  if (isEmpty(nameMovie)) {
     showErrorMessage(nameMovieInput, Messages.empty);
   } else {
     isValid = true;
@@ -52,7 +49,7 @@ const isValidForm = () => {
   }
 
   // Director cannot be blank
-  if (IsEmpty(director)) {
+  if (isEmpty(director)) {
     showErrorMessage(directorInput, Messages.empty);
   } else {
     isValid = true;
@@ -60,7 +57,7 @@ const isValidForm = () => {
   }
 
   // Nation cannot be blank
-  if (IsEmpty(nation)) {
+  if (isEmpty(nation)) {
     showErrorMessage(nationInput, Messages.empty);
   } else {
     isValid = true;
@@ -160,5 +157,8 @@ createBtn.addEventListener('click', () => {
 cancelBtn.addEventListener('click', () => {
   hideModal();
 });
+
+// Display username after successful login
+accountName.innerHTML = localStorage.getItem('username');
 
 renderTable();

@@ -1,4 +1,4 @@
-import { IsValidEmail, IsEmpty } from './validation';
+import { isValidEmail, isEmpty } from './validation';
 import { EmptyText, Messages, AccountApi } from './constant';
 
 // Query elements
@@ -12,9 +12,9 @@ const validateForm = (email, password) => {
   let isValid = false;
 
   // Email or password cannot be blank
-  if (IsEmpty(email) || IsEmpty(password)) {
+  if (isEmpty(email) || isEmpty(password)) {
     warnMsg.innerHTML = Messages.loginFormEmpty;
-  } else if (!IsValidEmail(email)) {
+  } else if (!isValidEmail(email)) {
     // Email is not in the correct format
     warnMsg.innerHTML = Messages.emailWrongFormat;
   } else {
