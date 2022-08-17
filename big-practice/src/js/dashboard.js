@@ -1,5 +1,6 @@
 import { isEmpty } from './validation';
 import { EmptyText, MoviesApi, Messages } from './constant';
+import { getApi, postApi, putApi } from './api-service';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
@@ -95,25 +96,6 @@ const isValidForm = () => {
 };
 
 /**
- * Get movie from database
- */
-const getMovie = (movieId) => {
-  const options = {
-    method: 'GET',
-  };
-
-  fetch(`${MoviesApi}/${movieId}`, options)
-    .then((response) => response.json())
-    .then((movieData) => {
-      nameMovieInput.value = movieData.name;
-      directorInput.value = movieData.director;
-      nationInput.value = movieData.nation;
-      form.setAttribute('data-id', movieId);
-    })
-    .catch((error) => alert('Error! An error occurred.', error));
-};
-
-/**
  * Takes data from the API and displays it on a table in HTML
  */
 const renderTable = () => {
@@ -149,7 +131,12 @@ const renderTable = () => {
           showModal();
           hideElement(createBtn);
           showElement(updateBtn);
-          getMovie(movieId);
+          getApi(`${MoviesApi}/${movieId}`, (movieData) => {
+            nameMovieInput.value = movieData.name;
+            directorInput.value = movieData.director;
+            nationInput.value = movieData.nation;
+            form.setAttribute('data-id', movieId);
+          });
         });
       });
     })
@@ -159,70 +146,27 @@ const renderTable = () => {
 };
 
 /**
- * Create new movie and save to database
- */
-const createMovie = (data) => {
-  const option = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  };
-
-  fetch(MoviesApi, option)
-    // Parses JSON response into native JavaScript objects
-    .then((response) => response.json())
-    .then(() => renderTable())
-    // Show error message when API call is wrong
-    .catch((error) => alert('An error occurred while creating movie', error));
-};
-
-/**
- * Update movie and save to database
- */
-const updateMovie = (id, data) => {
-  const option = {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  };
-
-  fetch(`${MoviesApi}/${id}`, option)
-    // Parses JSON response into native JavaScript objects
-    .then((response) => response.json())
-    .then(() => renderTable())
-    // Show error message when API call is wrong
-    .catch((error) => alert('An error occurred while update movie', error));
-};
-
-/**
  * Handle create form
  */
 const handleCreateForm = () => {
   const name = nameMovieInput.value;
   const director = directorInput.value;
   const nation = nationInput.value;
-  const url = `${MoviesApi}?name=${name}`;
 
   if (!isValidForm()) {
     return;
   }
 
-  fetch(url, { method: 'GET' })
-    .then((response) => response.json())
-    .then((movieList) => {
-      if (movieList.length === 0) {
-        const formData = { name, director, nation };
+  getApi(`${MoviesApi}?name=${name}`, (movieList) => {
+    if (movieList.length === 0) {
+      const formData = { name, director, nation };
 
-        createMovie(formData);
-        hideModal();
-      } else {
-        showErrorMessage(nameMovieInput, Messages.exist);
-      }
-    });
+      postApi(MoviesApi, formData, () => { renderTable(); });
+      hideModal();
+    } else {
+      showErrorMessage(nameMovieInput, Messages.exist);
+    }
+  });
 };
 
 /**
@@ -232,7 +176,6 @@ const handleUpdateForm = () => {
   const name = nameMovieInput.value;
   const director = directorInput.value;
   const nation = nationInput.value;
-  const url = `${MoviesApi}?name=${name}`;
   const formData = { name, director, nation };
   const formMovieId = form.getAttribute('data-id');
 
@@ -240,16 +183,14 @@ const handleUpdateForm = () => {
     return;
   }
 
-  fetch(url, { method: 'GET' })
-    .then((response) => response.json())
-    .then((movieList) => {
-      if (movieList.length === 0 || movieList[0].id === parseFloat(formMovieId)) {
-        updateMovie(formMovieId, formData);
-        hideModal();
-      } else {
-        showErrorMessage(nameMovieInput, Messages.exist);
-      }
-    });
+  getApi(`${MoviesApi}?name=${name}`, (movieList) => {
+    if (movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10)) {
+      putApi(`${MoviesApi}/${formMovieId}`, formData, () => { renderTable(); });
+      hideModal();
+    } else {
+      showErrorMessage(nameMovieInput, Messages.exist);
+    }
+  });
 };
 
 // Popup to add user when clicking on Add button.
