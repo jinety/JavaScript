@@ -1,5 +1,6 @@
 import { isEmpty } from './validation';
 import { EmptyText, MoviesApi, Messages } from './constant';
+import { getApi, postApi, putApi } from './api-service';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
@@ -12,6 +13,7 @@ const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
 const modal = document.querySelector('.modal');
 const updateBtn = document.getElementById('updateBtn');
+const form = document.querySelector('.form');
 
 /**
  * Display error message
@@ -64,29 +66,29 @@ const isValidForm = () => {
   const nameMovie = nameMovieInput.value;
   const director = directorInput.value;
   const nation = nationInput.value;
-  let isValid = false;
+  let isValid = true;
 
   // Movie title cannot be blank
   if (isEmpty(nameMovie)) {
     showErrorMessage(nameMovieInput, Messages.empty);
+    isValid = false;
   } else {
-    isValid = true;
     showErrorMessage(nameMovieInput, EmptyText);
   }
 
   // Director cannot be blank
   if (isEmpty(director)) {
     showErrorMessage(directorInput, Messages.empty);
+    isValid = false;
   } else {
-    isValid = true;
     showErrorMessage(directorInput, EmptyText);
   }
 
   // Nation cannot be blank
   if (isEmpty(nation)) {
     showErrorMessage(nationInput, Messages.empty);
+    isValid = false;
   } else {
-    isValid = true;
     showErrorMessage(nationInput, EmptyText);
   }
 
@@ -124,9 +126,17 @@ const renderTable = () => {
 
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
+          const movieId = item.dataset.id;
+
           showModal();
           hideElement(createBtn);
           showElement(updateBtn);
+          getApi(`${MoviesApi}/${movieId}`, (movieData) => {
+            nameMovieInput.value = movieData.name;
+            directorInput.value = movieData.director;
+            nationInput.value = movieData.nation;
+            form.setAttribute('data-id', movieId);
+          });
         });
       });
     })
@@ -136,50 +146,51 @@ const renderTable = () => {
 };
 
 /**
- * Create new movie and save to database
- */
-const createMovie = (data) => {
-  const option = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  };
-
-  fetch(MoviesApi, option)
-    // Parses JSON response into native JavaScript objects
-    .then((response) => response.json())
-    .then(() => renderTable())
-    // Show error message when API call is wrong
-    .catch((error) => alert('An error occurred while creating movie', error));
-};
-
-/**
  * Handle create form
  */
 const handleCreateForm = () => {
   const name = nameMovieInput.value;
   const director = directorInput.value;
   const nation = nationInput.value;
-  const url = `${MoviesApi}?name=${name}`;
 
   if (!isValidForm()) {
     return;
   }
 
-  fetch(url, { method: 'GET' })
-    .then((response) => response.json())
-    .then((movieList) => {
-      if (movieList.length === 0) {
-        const formData = { name, director, nation };
+  getApi(`${MoviesApi}?name=${name}`, (movieList) => {
+    if (movieList.length === 0) {
+      const formData = { name, director, nation };
 
-        createMovie(formData);
-        hideModal();
-      } else {
-        showErrorMessage(nameMovieInput, Messages.exist);
-      }
-    });
+      postApi(MoviesApi, formData, () => { renderTable(); });
+      hideModal();
+    } else {
+      showErrorMessage(nameMovieInput, Messages.exist);
+    }
+  });
+};
+
+/**
+ * Handle update form
+ */
+const handleUpdateForm = () => {
+  const name = nameMovieInput.value;
+  const director = directorInput.value;
+  const nation = nationInput.value;
+  const formData = { name, director, nation };
+  const formMovieId = form.getAttribute('data-id');
+
+  if (!isValidForm()) {
+    return;
+  }
+
+  getApi(`${MoviesApi}?name=${name}`, (movieList) => {
+    if (movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10)) {
+      putApi(`${MoviesApi}/${formMovieId}`, formData, () => { renderTable(); });
+      hideModal();
+    } else {
+      showErrorMessage(nameMovieInput, Messages.exist);
+    }
+  });
 };
 
 // Popup to add user when clicking on Add button.
@@ -197,6 +208,11 @@ createBtn.addEventListener('click', () => {
 // Exit modal when clicking cancel button
 cancelBtn.addEventListener('click', () => {
   hideModal();
+});
+
+// Movie will be updated when the update button is clicked
+updateBtn.addEventListener('click', () => {
+  handleUpdateForm();
 });
 
 // Display username after successful login
