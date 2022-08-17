@@ -97,8 +97,7 @@ const isValidForm = () => {
 /**
  * Get movie from database
  */
-const getMovie = (idMovie) => {
-  const movieId = idMovie.dataset.id;
+const getMovie = (movieId) => {
   const options = {
     method: 'GET',
   };
@@ -145,10 +144,12 @@ const renderTable = () => {
 
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
+          const movieId = item.dataset.id;
+
           showModal();
           hideElement(createBtn);
           showElement(updateBtn);
-          getMovie(item);
+          getMovie(movieId);
         });
       });
     })
@@ -180,8 +181,7 @@ const createMovie = (data) => {
 /**
  * Update movie and save to database
  */
-const updateMovie = (data) => {
-  const formMovieId = form.getAttribute('data-id');
+const updateMovie = (id, data) => {
   const option = {
     method: 'PUT',
     headers: {
@@ -190,7 +190,7 @@ const updateMovie = (data) => {
     body: JSON.stringify(data),
   };
 
-  fetch(`${MoviesApi}/${formMovieId}`, option)
+  fetch(`${MoviesApi}/${id}`, option)
     // Parses JSON response into native JavaScript objects
     .then((response) => response.json())
     .then(() => renderTable())
@@ -244,7 +244,7 @@ const handleUpdateForm = () => {
     .then((response) => response.json())
     .then((movieList) => {
       if (movieList.length === 0 || movieList[0].id === parseFloat(formMovieId)) {
-        updateMovie(formData);
+        updateMovie(formMovieId, formData);
         hideModal();
       } else {
         showErrorMessage(nameMovieInput, Messages.exist);
