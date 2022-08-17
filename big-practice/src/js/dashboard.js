@@ -269,6 +269,7 @@ cancelBtn.addEventListener('click', () => {
   hideModal();
 });
 
+// Movie will be updated when the update button is clicked
 updateBtn.addEventListener('click', () => {
   handleUpdateForm();
 });
