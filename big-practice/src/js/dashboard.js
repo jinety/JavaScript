@@ -65,37 +65,40 @@ const isValidForm = () => {
   const nameMovie = nameMovieInput.value;
   const director = directorInput.value;
   const nation = nationInput.value;
-  let isValid = false;
+  let isValid = true;
 
   // Movie title cannot be blank
   if (isEmpty(nameMovie)) {
     showErrorMessage(nameMovieInput, Messages.empty);
+    isValid = false;
   } else {
-    isValid = true;
     showErrorMessage(nameMovieInput, EmptyText);
   }
 
   // Director cannot be blank
   if (isEmpty(director)) {
     showErrorMessage(directorInput, Messages.empty);
+    isValid = false;
   } else {
-    isValid = true;
     showErrorMessage(directorInput, EmptyText);
   }
 
   // Nation cannot be blank
   if (isEmpty(nation)) {
     showErrorMessage(nationInput, Messages.empty);
+    isValid = false;
   } else {
-    isValid = true;
     showErrorMessage(nationInput, EmptyText);
   }
 
   return isValid;
 };
 
-const getMovie = (item) => {
-  const movieId = item.dataset.id;
+/**
+ * Get movie from database
+ */
+const getMovie = (idMovie) => {
+  const movieId = idMovie.dataset.id;
   const options = {
     method: 'GET',
   };
@@ -174,8 +177,11 @@ const createMovie = (data) => {
     .catch((error) => alert('An error occurred while creating movie', error));
 };
 
-const updateForm = (data) => {
-  const customMovieId = form.getAttribute('data-id');
+/**
+ * Update movie and save to database
+ */
+const updateMovie = (data) => {
+  const formMovieId = form.getAttribute('data-id');
   const option = {
     method: 'PUT',
     headers: {
@@ -184,7 +190,7 @@ const updateForm = (data) => {
     body: JSON.stringify(data),
   };
 
-  fetch(`${MoviesApi}/${customMovieId}`, option)
+  fetch(`${MoviesApi}/${formMovieId}`, option)
     // Parses JSON response into native JavaScript objects
     .then((response) => response.json())
     .then(() => renderTable())
@@ -219,14 +225,16 @@ const handleCreateForm = () => {
     });
 };
 
+/**
+ * Handle update form
+ */
 const handleUpdateForm = () => {
   const name = nameMovieInput.value;
   const director = directorInput.value;
   const nation = nationInput.value;
   const url = `${MoviesApi}?name=${name}`;
   const formData = { name, director, nation };
-  const customMovieId = form.getAttribute('data-id');
-  console.log(url);
+  const formMovieId = form.getAttribute('data-id');
 
   if (!isValidForm()) {
     return;
@@ -235,9 +243,9 @@ const handleUpdateForm = () => {
   fetch(url, { method: 'GET' })
     .then((response) => response.json())
     .then((movieList) => {
-      if (movieList.length === 0 || movieList[0].id === parseFloat(customMovieId)) {
-        updateForm(formData);
-        // hideModal();
+      if (movieList.length === 0 || movieList[0].id === parseFloat(formMovieId)) {
+        updateMovie(formData);
+        hideModal();
       } else {
         showErrorMessage(nameMovieInput, Messages.exist);
       }
