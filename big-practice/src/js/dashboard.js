@@ -10,7 +10,6 @@ const nameMovieInput = document.getElementById('nameMovie');
 const directorInput = document.getElementById('director');
 const nationInput = document.getElementById('nation');
 const formCreateBtn = document.getElementById('createBtn');
-// const cancelBtn = document.querySelector('.cancel-btn');
 const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
 const formUpdateBtn = document.getElementById('updateBtn');
