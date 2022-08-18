@@ -1,0 +1,21 @@
+/* START MODAL */
+/* STYLE APPLIED TO THE MOBILE */
+.warning-content {
+  text-align: center;
+}
+
+.title-warning {
+  font-size: 30px;
+  font-weight: var(--font-weight-xl);
+  color: var(--warning-color-50);
+  padding-bottom: 15px;
+}
+
+@media (min-width: 1200px) {
+  .title-warning {
+    font-size: var( --font-size-xl);
+    padding-bottom: 20px;
+  }
+}
+/* END MODAL */
+/* STYLE APPLIED TO THE DESKTOP */
