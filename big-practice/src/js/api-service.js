@@ -52,6 +52,23 @@ const putApi = (url, data, handleAfterSuccess) => {
     .catch((error) => alert('An error occurred while update movie', error));
 };
 
+/**
+ * Remove user from json server
+ */
+const deleteApi = (url, handleAfterSuccess) => {
+  // DELETE method implementation
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  fetch(url, options)
+    .then(() => handleAfterSuccess())
+    .catch((error) => alert('An error occurred while removing movie', error));
+};
+
 export {
-  getApi, postApi, putApi,
+  getApi, postApi, putApi, deleteApi,
 };

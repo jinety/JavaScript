@@ -1,7 +1,7 @@
 import { isEmpty } from './validation';
 import { EmptyText, MoviesApi, Messages } from './constant';
 import {
-  getApi, postApi, putApi,
+  getApi, postApi, putApi, deleteApi,
 } from './api-service';
 
 // Query elements
@@ -215,6 +215,16 @@ const handleUpdateForm = () => {
   });
 };
 
+/**
+ * Handle delete movie
+ */
+const handleDeleteMovie = () => {
+  const btnId = deleteBtnWarning.getAttribute('data-id');
+  deleteApi(`${MoviesApi}/${btnId}`, () => {
+    renderTable();
+  });
+};
+
 // Popup to add user when clicking on Add button.
 addBtn.addEventListener('click', () => {
   form.reset();
@@ -234,6 +244,11 @@ cancelBtnForm.addEventListener('click', () => {
   cleanErrorMessage(nameMovieInput);
   cleanErrorMessage(directorInput);
   cleanErrorMessage(nationInput);
+});
+
+// Delete movie
+deleteBtnWarning.addEventListener('click', () => {
+  handleDeleteMovie();
 });
 
 // Exit modal movie when clicking cancel button
