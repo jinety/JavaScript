@@ -54,43 +54,58 @@
     </div>
     <div class="modal modal-form">
       <div class="modal-content">
-        <div class="modal-header">
-          <div class="title modal-title">
-            <p>New Movie</p>
+        <div class="title modal-title">
+          <p>Movie</p>
+        </div>
+        <form class="form">
+          <div class="form-line">
+            <label class="label-input">Name</label>
+            <input type="text" class="form-control" id="nameMovie" />
+            <p class="warn-msg form-warn-msg"></p>
           </div>
-          <form class="form">
-            <div class="form-line">
-              <label class="label-input">Name</label>
-              <input type="text" class="form-control" id="nameMovie" />
-              <p class="warn-msg form-warn-msg"></p>
-            </div>
-            <div class="form-line">
-              <label class="label-input">Director</label>
-              <input type="text" class="form-control" id="director" />
-              <p class="warn-msg form-warn-msg"></p>
-            </div>
-            <div class="form-line">
-              <label class="label-input">Nation</label>
-              <input type="text" class="form-control" id="nation" />
-              <p class="warn-msg form-warn-msg"></p>
-            </div>
-        </div>
-        <div class="modal-body">
-          <div class="warning-content">
-            <p class="title title-warning">Warning!!!</p>
-            <p class="describe-warning">Do you really want to delete this content?</p>
+          <div class="form-line">
+            <label class="label-input">Director</label>
+            <input type="text" class="form-control" id="director" />
+            <p class="warn-msg form-warn-msg"></p>
           </div>
-        </div>
-        <div class="button-box">
-          <button type="button" class="btn primary-btn" id="cancelBtn">Cancel</button>
-          <button type="button" class="btn primary-btn" id="createBtn">Create Movie</button>
-          <button type="button" class="btn primary-btn" id="updateBtn">Update Movie</button>
-          <button type="button" class="btn primary-btn" id="deleteBtn">Delete Movie</button>
-        </div>
+          <div class="form-line">
+            <label class="label-input">Nation</label>
+            <input type="text" class="form-control" id="nation" />
+            <p class="warn-msg form-warn-msg"></p>
+          </div>
         </form>
+        <div class="button-box">
+          <button type="button" class="btn primary-btn cancel-btn">
+            Cancel
+          </button>
+          <button type="button" class="btn primary-btn" id="createBtn">
+            Create Movie
+          </button>
+          <button type="button" class="btn primary-btn" id="updateBtn">
+            Update Movie
+          </button>
+        </div>
       </div>
     </div>
-    
+    <div class="modal modal-warning">
+      <div class="modal-content">
+        <div class="warning-content">
+          <p class="title heading">Warning!!!</p>
+          <p class="describe">
+            Do you really want to delete this content?
+          </p>
+        </div>
+        <div class="button-box">
+          <button type="button" class="btn primary-btn cancel-btn">
+            Cancel
+          </button>
+          <button type="button" class="btn primary-btn" id="deleteBtn">
+            Delete Movie
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="./js/dashboard.js"></script>
   </body>
 </html>

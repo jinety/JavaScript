@@ -7,16 +7,15 @@ const tableBody = document.getElementById('tableBody');
 const nameMovieInput = document.getElementById('nameMovie');
 const directorInput = document.getElementById('director');
 const nationInput = document.getElementById('nation');
-const createBtn = document.getElementById('createBtn');
-const cancelBtn = document.getElementById('cancelBtn');
+const formCreateBtn = document.getElementById('createBtn');
+const cancelBtn = document.querySelector('.cancel-btn');
 const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
 const modal = document.querySelector('.modal');
 const formUpdateBtn = document.getElementById('updateBtn');
 const form = document.querySelector('.form');
-const modalHeader = document.querySelector('.modal-header');
-const modalBody = document.querySelector('.modal-body');
-const formDeleteBtn = document.getElementById('deleteBtn');
+const modalForm = document.querySelector('.modal-form');
+const modalWarning = document.querySelector('.modal-warning');
 
 /**
  * Display error message
@@ -33,15 +32,15 @@ const showErrorMessage = (input, msg) => {
 /**
  * Hide modal
  */
-const hideModal = () => {
-  modal.classList.remove('modal-show');
+const hideModal = (hide) => {
+  hide.classList.remove('modal-show');
 };
 
 /**
  * Show modal
  */
-const showModal = () => {
-  modal.classList.add('modal-show');
+const showModal = (show) => {
+  show.classList.add('modal-show');
 };
 
 /**
@@ -132,28 +131,21 @@ const renderTable = () => {
         item.addEventListener('click', () => {
           const movieId = item.dataset.id;
 
-          showModal();
-          hideElement(modalBody);
-          showElement(modalHeader);
+          showModal(modalForm);
           getApi(`${MoviesApi}/${movieId}`, (movieData) => {
             nameMovieInput.value = movieData.name;
             directorInput.value = movieData.director;
             nationInput.value = movieData.nation;
             form.setAttribute('data-id', movieId);
           });
-          hideElement(createBtn);
-          hideElement(formDeleteBtn);
+          hideElement(formCreateBtn);
           showElement(formUpdateBtn);
         });
       });
 
       deleteButtons.forEach((item) => {
         item.addEventListener('click', () => {
-          showModal();
-          hideElement(modalHeader);
-          showElement(modalBody);
-          hideElement(formUpdateBtn);
-          showElement(formDeleteBtn);
+          showModal(modalWarning);
         });
       });
     })
@@ -212,22 +204,22 @@ const handleUpdateForm = () => {
 
 // Popup to add user when clicking on Add button.
 addBtn.addEventListener('click', () => {
-  showModal();
-  hideElement(modalBody);
-  showElement(modalHeader);
+  form.reset();
+  showModal(modal);
+  hideElement(modalWarning);
+  showElement(modalForm);
   hideElement(formUpdateBtn);
-  hideElement(formDeleteBtn);
-  showElement(createBtn);
+  showElement(formCreateBtn);
 });
 
 // New movie will be created when clicking create button
-createBtn.addEventListener('click', () => {
+formCreateBtn.addEventListener('click', () => {
   handleCreateForm();
 });
 
 // Exit modal when clicking cancel button
 cancelBtn.addEventListener('click', () => {
-  hideModal();
+  hideModal(modal);
 });
 
 // Movie will be updated when the update button is clicked
