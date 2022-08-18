@@ -17,8 +17,8 @@ const formUpdateBtn = document.getElementById('updateBtn');
 const form = document.querySelector('.form');
 const modalForm = document.querySelector('.modal-form');
 const modalWarning = document.querySelector('.modal-warning');
-const cancelBtnForm = form.parentElement.querySelector('.cancel-btn');
-const cancelBtnWarning = document.querySelector('.content').parentElement.querySelector('.cancel-btn');
+const cancelBtnForm = document.querySelector('.modal-form .button-box .cancel-btn');
+const cancelBtnWarning = document.querySelector('.modal-warning .button-box .cancel-btn');
 
 /**
  * Display error message
