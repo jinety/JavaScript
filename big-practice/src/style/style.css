@@ -17,6 +17,7 @@
 @import url(./components/table.css);
 @import url(./components/modal.css);
 @import url(./components/form.css);
+@import url(./components/warning.css);
 
 /* PAGE */
 @import url(./pages/login.css);

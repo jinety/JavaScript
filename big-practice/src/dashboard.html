@@ -52,10 +52,10 @@
         </div>
       </section>
     </div>
-    <div class="modal">
+    <div class="modal modal-form">
       <div class="modal-content">
         <div class="title modal-title">
-          <p>New Movie</p>
+          <p>Movie</p>
         </div>
         <form class="form">
           <div class="form-line">
@@ -73,15 +73,39 @@
             <input type="text" class="form-control" id="nation" />
             <p class="warn-msg form-warn-msg"></p>
           </div>
-          <div class="button-box">
-            <button type="button" class="btn primary-btn" id="cancelBtn">Cancel</button>
-            <button type="button" class="btn primary-btn" id="createBtn">Create Movie</button>
-            <button type="button" class="btn primary-btn" id="updateBtn">Update Movie</button>
-          </div>
         </form>
+        <div class="button-box">
+          <button type="button" class="btn primary-btn cancel-btn">
+            Cancel
+          </button>
+          <button type="button" class="btn primary-btn" id="createBtn">
+            Create Movie
+          </button>
+          <button type="button" class="btn primary-btn" id="updateBtn">
+            Update Movie
+          </button>
+        </div>
       </div>
     </div>
-    
+    <div class="modal modal-warning">
+      <div class="modal-content">
+        <div class="content">
+          <p class="title heading">Warning!!!</p>
+          <p class="describe">
+            Do you really want to delete this content?
+          </p>
+        </div>
+        <div class="button-box">
+          <button type="button" class="btn primary-btn cancel-btn">
+            Cancel
+          </button>
+          <button type="button" class="btn primary-btn delete-button">
+            Delete Movie
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="./js/dashboard.js"></script>
   </body>
 </html>

@@ -1,19 +1,24 @@
 import { isEmpty } from './validation';
 import { EmptyText, MoviesApi, Messages } from './constant';
-import { getApi, postApi, putApi } from './api-service';
+import {
+  getApi, postApi, putApi,
+} from './api-service';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
 const nameMovieInput = document.getElementById('nameMovie');
 const directorInput = document.getElementById('director');
 const nationInput = document.getElementById('nation');
-const createBtn = document.getElementById('createBtn');
-const cancelBtn = document.getElementById('cancelBtn');
+const formCreateBtn = document.getElementById('createBtn');
 const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
-const modal = document.querySelector('.modal');
-const updateBtn = document.getElementById('updateBtn');
+const formUpdateBtn = document.getElementById('updateBtn');
 const form = document.querySelector('.form');
+const modalForm = document.querySelector('.modal-form');
+const modalWarning = document.querySelector('.modal-warning');
+const cancelBtnForm = document.querySelector('.modal-form .button-box .cancel-btn');
+const cancelBtnWarning = document.querySelector('.modal-warning .button-box .cancel-btn');
+const deleteBtnWarning = document.querySelector('.delete-button');
 
 /**
  * Display error message
@@ -30,15 +35,15 @@ const showErrorMessage = (input, msg) => {
 /**
  * Hide modal
  */
-const hideModal = () => {
-  modal.classList.remove('modal-show');
+const hideModal = (element) => {
+  element.classList.remove('modal-show');
 };
 
 /**
  * Show modal
  */
-const showModal = () => {
-  modal.classList.add('modal-show');
+const showModal = (element) => {
+  element.classList.add('modal-show');
 };
 
 /**
@@ -57,6 +62,13 @@ const hideElement = (element) => {
  */
 const showElement = (element) => {
   element.classList.remove('hide');
+};
+
+/**
+ * Clean error message
+ */
+const cleanErrorMessage = (element) => {
+  showErrorMessage(element, EmptyText);
 };
 
 /**
@@ -116,27 +128,37 @@ const renderTable = () => {
               <button type="button" class="btn table-update-btn" data-id=${movie.id}>Update</button>
             </td>
             <td>
-              <button type="button" class="btn" data-id=${movie.id}>Delete</button>
+              <button type="button" class="btn table-delete-btn" data-id=${movie.id}>Delete</button>
             </td>
           </tr>`;
       });
 
       tableBody.innerHTML = tableTemplate;
       const updateButtons = document.querySelectorAll('.table-update-btn');
+      const deleteButtons = document.querySelectorAll('.table-delete-btn');
 
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
           const movieId = item.dataset.id;
 
-          showModal();
-          hideElement(createBtn);
-          showElement(updateBtn);
+          showModal(modalForm);
           getApi(`${MoviesApi}/${movieId}`, (movieData) => {
             nameMovieInput.value = movieData.name;
             directorInput.value = movieData.director;
             nationInput.value = movieData.nation;
             form.setAttribute('data-id', movieId);
           });
+          hideElement(formCreateBtn);
+          showElement(formUpdateBtn);
+        });
+      });
+
+      deleteButtons.forEach((item) => {
+        item.addEventListener('click', () => {
+          const movieId = item.dataset.id;
+
+          showModal(modalWarning);
+          deleteBtnWarning.setAttribute('data-id', movieId);
         });
       });
     })
@@ -195,24 +217,34 @@ const handleUpdateForm = () => {
 
 // Popup to add user when clicking on Add button.
 addBtn.addEventListener('click', () => {
-  showModal();
-  hideElement(updateBtn);
-  showElement(createBtn);
+  form.reset();
+  showModal(modalForm);
+  hideElement(formUpdateBtn);
+  showElement(formCreateBtn);
 });
 
 // New movie will be created when clicking create button
-createBtn.addEventListener('click', () => {
+formCreateBtn.addEventListener('click', () => {
   handleCreateForm();
 });
 
 // Exit modal when clicking cancel button
-cancelBtn.addEventListener('click', () => {
-  hideModal();
+cancelBtnForm.addEventListener('click', () => {
+  hideModal(modalForm);
+  cleanErrorMessage(nameMovieInput);
+  cleanErrorMessage(directorInput);
+  cleanErrorMessage(nationInput);
+});
+
+// Exit modal movie when clicking cancel button
+cancelBtnWarning.addEventListener('click', () => {
+  hideModal(modalWarning);
 });
 
 // Movie will be updated when the update button is clicked
-updateBtn.addEventListener('click', () => {
+formUpdateBtn.addEventListener('click', () => {
   handleUpdateForm();
+  hideModal(modalWarning);
 });
 
 // Display username after successful login
