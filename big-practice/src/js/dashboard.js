@@ -18,6 +18,7 @@ const modalForm = document.querySelector('.modal-form');
 const modalWarning = document.querySelector('.modal-warning');
 const cancelBtnForm = document.querySelector('.modal-form .button-box .cancel-btn');
 const cancelBtnWarning = document.querySelector('.modal-warning .button-box .cancel-btn');
+const deleteBtnWarning = document.querySelector('.delete-button');
 
 /**
  * Display error message
@@ -154,7 +155,10 @@ const renderTable = () => {
 
       deleteButtons.forEach((item) => {
         item.addEventListener('click', () => {
+          const movieId = item.dataset.id;
+
           showModal(modalWarning);
+          deleteBtnWarning.setAttribute('data-id', movieId);
         });
       });
     })
@@ -195,7 +199,7 @@ const handleUpdateForm = () => {
   const director = directorInput.value;
   const nation = nationInput.value;
   const formData = { name, director, nation };
-  const formMovieId = document.querySelector('.form').getAttribute('data-id');
+  const formMovieId = form.getAttribute('data-id');
 
   if (!isValidForm()) {
     return;
@@ -240,6 +244,7 @@ cancelBtnWarning.addEventListener('click', () => {
 // Movie will be updated when the update button is clicked
 formUpdateBtn.addEventListener('click', () => {
   handleUpdateForm();
+  hideModal(modalWarning);
 });
 
 // Display username after successful login
