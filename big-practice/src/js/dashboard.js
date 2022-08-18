@@ -10,14 +10,15 @@ const nameMovieInput = document.getElementById('nameMovie');
 const directorInput = document.getElementById('director');
 const nationInput = document.getElementById('nation');
 const formCreateBtn = document.getElementById('createBtn');
-const cancelBtn = document.querySelector('.cancel-btn');
+// const cancelBtn = document.querySelector('.cancel-btn');
 const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
 const formUpdateBtn = document.getElementById('updateBtn');
 const form = document.querySelector('.form');
 const modalForm = document.querySelector('.modal-form');
 const modalWarning = document.querySelector('.modal-warning');
-const warningCancelBtn = document.getElementById('cancelBtn');
+const cancelBtnForm = form.parentElement.querySelector('.cancel-btn');
+const cancelBtnWarning = document.querySelector('.content').parentElement.querySelector('.cancel-btn');
 
 /**
  * Display error message
@@ -195,7 +196,7 @@ const handleUpdateForm = () => {
   const director = directorInput.value;
   const nation = nationInput.value;
   const formData = { name, director, nation };
-  const formMovieId = form.getAttribute('data-id');
+  const formMovieId = document.querySelector('.form').getAttribute('data-id');
 
   if (!isValidForm()) {
     return;
@@ -225,15 +226,15 @@ formCreateBtn.addEventListener('click', () => {
 });
 
 // Exit modal when clicking cancel button
-cancelBtn.addEventListener('click', () => {
+cancelBtnForm.addEventListener('click', () => {
   hideModal(modalForm);
   cleanErrorMessage(nameMovieInput);
   cleanErrorMessage(directorInput);
   cleanErrorMessage(nationInput);
 });
 
-// Exit modal warning when clicking cancel button
-warningCancelBtn.addEventListener('click', () => {
+// Exit modal movie when clicking cancel button
+cancelBtnWarning.addEventListener('click', () => {
   hideModal(modalWarning);
 });
 
