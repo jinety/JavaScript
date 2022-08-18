@@ -32,15 +32,15 @@ const showErrorMessage = (input, msg) => {
 /**
  * Hide modal
  */
-const hideModal = (hide) => {
-  hide.classList.remove('modal-show');
+const hideModal = (hideModel) => {
+  hideModel.classList.remove('modal-show');
 };
 
 /**
  * Show modal
  */
-const showModal = (show) => {
-  show.classList.add('modal-show');
+const showModal = (showModel) => {
+  showModel.classList.add('modal-show');
 };
 
 /**
@@ -205,9 +205,7 @@ const handleUpdateForm = () => {
 // Popup to add user when clicking on Add button.
 addBtn.addEventListener('click', () => {
   form.reset();
-  showModal(modal);
-  hideElement(modalWarning);
-  showElement(modalForm);
+  showModal(modalForm);
   hideElement(formUpdateBtn);
   showElement(formCreateBtn);
 });
@@ -220,6 +218,9 @@ formCreateBtn.addEventListener('click', () => {
 // Exit modal when clicking cancel button
 cancelBtn.addEventListener('click', () => {
   hideModal(modal);
+  showErrorMessage(nameMovieInput, EmptyText);
+  showErrorMessage(directorInput, EmptyText);
+  showErrorMessage(nationInput, EmptyText);
 });
 
 // Movie will be updated when the update button is clicked
