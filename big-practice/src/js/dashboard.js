@@ -1,6 +1,8 @@
 import { isEmpty } from './validation';
 import { EmptyText, MoviesApi, Messages } from './constant';
-import { getApi, postApi, putApi } from './api-service';
+import {
+  getApi, postApi, putApi,
+} from './api-service';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
@@ -8,14 +10,13 @@ const nameMovieInput = document.getElementById('nameMovie');
 const directorInput = document.getElementById('director');
 const nationInput = document.getElementById('nation');
 const formCreateBtn = document.getElementById('createBtn');
-const cancelBtn = document.querySelector('.cancel-btn');
+const cancelBtn = document.querySelectorAll('.cancel-btn');
 const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
 const formUpdateBtn = document.getElementById('updateBtn');
 const form = document.querySelector('.form');
 const modalForm = document.querySelector('.modal-form');
 const modalWarning = document.querySelector('.modal-warning');
-const warningCancelBtn = document.querySelector('.warning-cancel-btn');
 
 /**
  * Display error message
@@ -216,16 +217,14 @@ formCreateBtn.addEventListener('click', () => {
 });
 
 // Exit modal when clicking cancel button
-cancelBtn.addEventListener('click', () => {
-  hideModal(modalForm);
-  showErrorMessage(nameMovieInput, EmptyText);
-  showErrorMessage(directorInput, EmptyText);
-  showErrorMessage(nationInput, EmptyText);
-});
-
-// Exit modal warning when clicking cancel button
-warningCancelBtn.addEventListener('click', () => {
-  hideModal(modalWarning);
+cancelBtn.forEach((element) => {
+  element.addEventListener('click', () => {
+    hideModal(modalForm);
+    hideModal(modalWarning);
+    showErrorMessage(nameMovieInput, EmptyText);
+    showErrorMessage(directorInput, EmptyText);
+    showErrorMessage(nationInput, EmptyText);
+  });
 });
 
 // Movie will be updated when the update button is clicked

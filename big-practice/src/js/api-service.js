@@ -52,4 +52,6 @@ const putApi = (url, data, handleAfterSuccess) => {
     .catch((error) => alert('An error occurred while update movie', error));
 };
 
-export { getApi, postApi, putApi };
+export {
+  getApi, postApi, putApi,
+};
