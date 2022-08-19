@@ -34,6 +34,8 @@ const showErrorMessage = (input, msg) => {
 
 /**
  * Hide modal
+ *
+ * @param {HtmlInputElement} element - Input element
  */
 const hideModal = (element) => {
   element.classList.remove('modal-show');
@@ -41,6 +43,8 @@ const hideModal = (element) => {
 
 /**
  * Show modal
+ *
+ * @param {HtmlInputElement} element - Input element
  */
 const showModal = (element) => {
   element.classList.add('modal-show');
@@ -66,6 +70,8 @@ const showElement = (element) => {
 
 /**
  * Clean error message
+ *
+ * @param {HtmlInputElement} element - Input element
  */
 const cleanErrorMessage = (element) => {
   showErrorMessage(element, EmptyText);
@@ -220,6 +226,7 @@ const handleUpdateForm = () => {
  */
 const handleDeleteMovie = () => {
   const btnId = deleteBtnWarning.getAttribute('data-id');
+
   deleteApi(`${MoviesApi}/${btnId}`, () => {
     renderTable();
   });

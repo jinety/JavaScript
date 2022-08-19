@@ -57,14 +57,14 @@ const putApi = (url, data, handleAfterSuccess) => {
  */
 const deleteApi = (url, handleAfterSuccess) => {
   // DELETE method implementation
-  const options = {
+  const option = {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  fetch(url, options)
+  fetch(url, option)
     .then(() => handleAfterSuccess())
     .catch((error) => alert('An error occurred while removing movie', error));
 };
