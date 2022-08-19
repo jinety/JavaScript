@@ -35,7 +35,7 @@ const showErrorMessage = (input, msg) => {
 /**
  * Hide modal
  *
- * @param {HtmlInputElement} element - Input element
+ * @param {element} element - Element
  */
 const hideModal = (element) => {
   element.classList.remove('modal-show');
@@ -44,7 +44,7 @@ const hideModal = (element) => {
 /**
  * Show modal
  *
- * @param {HtmlInputElement} element - Input element
+ * @param {element} element - Element
  */
 const showModal = (element) => {
   element.classList.add('modal-show');
@@ -53,7 +53,7 @@ const showModal = (element) => {
 /**
  * Hide element
  *
- * @param {HtmlInputElement} element - Input element
+ * @param {element} element - Element
  */
 const hideElement = (element) => {
   element.classList.add('hide');
@@ -62,7 +62,7 @@ const hideElement = (element) => {
 /**
  * Show element
  *
- * @param {HtmlInputElement} element - Input element
+ * @param {element} element - Element
  */
 const showElement = (element) => {
   element.classList.remove('hide');
@@ -71,7 +71,7 @@ const showElement = (element) => {
 /**
  * Clean error message
  *
- * @param {HtmlInputElement} element - Input element
+ * @param {element} element - Element
  */
 const cleanErrorMessage = (element) => {
   showErrorMessage(element, EmptyText);
@@ -225,9 +225,9 @@ const handleUpdateForm = () => {
  * Handle delete movie
  */
 const handleDeleteMovie = () => {
-  const btnId = deleteBtnWarning.getAttribute('data-id');
+  const deleteBtnWarningId = deleteBtnWarning.getAttribute('data-id');
 
-  deleteApi(`${MoviesApi}/${btnId}`, () => {
+  deleteApi(`${MoviesApi}/${deleteBtnWarningId}`, () => {
     renderTable();
   });
 };
