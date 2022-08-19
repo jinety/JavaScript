@@ -1,7 +1,7 @@
 import { isEmpty } from './validation';
 import { EmptyText, MoviesApi, Messages } from './constant';
 import {
-  getApi, postApi, putApi,
+  getApi, postApi, putApi, deleteApi,
 } from './api-service';
 
 // Query elements
@@ -34,6 +34,8 @@ const showErrorMessage = (input, msg) => {
 
 /**
  * Hide modal
+ *
+ * @param {element} element - Element of modal
  */
 const hideModal = (element) => {
   element.classList.remove('modal-show');
@@ -41,6 +43,8 @@ const hideModal = (element) => {
 
 /**
  * Show modal
+ *
+ * @param {element} element - Element of modal
  */
 const showModal = (element) => {
   element.classList.add('modal-show');
@@ -49,7 +53,7 @@ const showModal = (element) => {
 /**
  * Hide element
  *
- * @param {HtmlInputElement} element - Input element
+ * @param {element} element - Element
  */
 const hideElement = (element) => {
   element.classList.add('hide');
@@ -58,7 +62,7 @@ const hideElement = (element) => {
 /**
  * Show element
  *
- * @param {HtmlInputElement} element - Input element
+ * @param {element} element - Element
  */
 const showElement = (element) => {
   element.classList.remove('hide');
@@ -66,6 +70,8 @@ const showElement = (element) => {
 
 /**
  * Clean error message
+ *
+ * @param {HtmlInputElement} element - Element input
  */
 const cleanErrorMessage = (element) => {
   showErrorMessage(element, EmptyText);
@@ -184,7 +190,7 @@ const handleCreateForm = () => {
       const formData = { name, director, nation };
 
       postApi(MoviesApi, formData, () => { renderTable(); });
-      hideModal();
+      hideModal(modalForm);
     } else {
       showErrorMessage(nameMovieInput, Messages.exist);
     }
@@ -208,10 +214,21 @@ const handleUpdateForm = () => {
   getApi(`${MoviesApi}?name=${name}`, (movieList) => {
     if (movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10)) {
       putApi(`${MoviesApi}/${formMovieId}`, formData, () => { renderTable(); });
-      hideModal();
+      hideModal(modalForm);
     } else {
       showErrorMessage(nameMovieInput, Messages.exist);
     }
+  });
+};
+
+/**
+ * Handle delete movie
+ */
+const handleDeleteMovie = () => {
+  const deleteBtnWarningId = deleteBtnWarning.getAttribute('data-id');
+
+  deleteApi(`${MoviesApi}/${deleteBtnWarningId}`, () => {
+    renderTable();
   });
 };
 
@@ -234,6 +251,12 @@ cancelBtnForm.addEventListener('click', () => {
   cleanErrorMessage(nameMovieInput);
   cleanErrorMessage(directorInput);
   cleanErrorMessage(nationInput);
+});
+
+// Delete movie from database and table when clicking delete movie button
+deleteBtnWarning.addEventListener('click', () => {
+  handleDeleteMovie();
+  hideModal(modalWarning);
 });
 
 // Exit modal movie when clicking cancel button
