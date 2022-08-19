@@ -35,7 +35,7 @@ const showErrorMessage = (input, msg) => {
 /**
  * Hide modal
  *
- * @param {element} element - Element
+ * @param {element} element - Element of modal
  */
 const hideModal = (element) => {
   element.classList.remove('modal-show');
@@ -44,7 +44,7 @@ const hideModal = (element) => {
 /**
  * Show modal
  *
- * @param {element} element - Element
+ * @param {element} element - Element of modal
  */
 const showModal = (element) => {
   element.classList.add('modal-show');
@@ -71,7 +71,7 @@ const showElement = (element) => {
 /**
  * Clean error message
  *
- * @param {element} element - Element
+ * @param {HtmlInputElement} element - Element input
  */
 const cleanErrorMessage = (element) => {
   showErrorMessage(element, EmptyText);
@@ -253,7 +253,7 @@ cancelBtnForm.addEventListener('click', () => {
   cleanErrorMessage(nationInput);
 });
 
-// Delete movie
+// Delete movie from database and table when clicking delete movie button
 deleteBtnWarning.addEventListener('click', () => {
   handleDeleteMovie();
   hideModal(modalWarning);

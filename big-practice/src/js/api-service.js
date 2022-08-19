@@ -53,7 +53,7 @@ const putApi = (url, data, handleAfterSuccess) => {
 };
 
 /**
- * Remove user from json server
+ * Remove movie from json server
  */
 const deleteApi = (url, handleAfterSuccess) => {
   // DELETE method implementation
