@@ -184,7 +184,7 @@ const handleCreateForm = () => {
       const formData = { name, director, nation };
 
       postApi(MoviesApi, formData, () => { renderTable(); });
-      hideModal();
+      hideModal(modalForm);
     } else {
       showErrorMessage(nameMovieInput, Messages.exist);
     }
@@ -208,7 +208,7 @@ const handleUpdateForm = () => {
   getApi(`${MoviesApi}?name=${name}`, (movieList) => {
     if (movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10)) {
       putApi(`${MoviesApi}/${formMovieId}`, formData, () => { renderTable(); });
-      hideModal();
+      hideModal(modalForm);
     } else {
       showErrorMessage(nameMovieInput, Messages.exist);
     }
@@ -249,6 +249,7 @@ cancelBtnForm.addEventListener('click', () => {
 // Delete movie
 deleteBtnWarning.addEventListener('click', () => {
   handleDeleteMovie();
+  hideModal(modalWarning);
 });
 
 // Exit modal movie when clicking cancel button
