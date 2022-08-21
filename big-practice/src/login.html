@@ -8,7 +8,7 @@
     <title>Login</title>
   </head>
   <body class="section-body">
-    <header class="header-logo">
+    <header class="site-header">
       <div class="logo-wrapper">
         <img src="./assets/logo.png" alt="logo" />
       </div>
@@ -17,6 +17,9 @@
       <div class="login-header">
         <p class="login-title">Welcome back</p>
         <p class="login-content">Welcome back please enter your details</p>
+      </div>
+      <div class="warn-msg-container">
+        <p class="warn-msg login-warn-msg" id="warnMsg"></p>
       </div>
       <div class="form-field">
         <label class="input-label">Email</label>
@@ -36,7 +39,6 @@
           id="password"
         />
       </div>
-      <p class="warn-msg login-warn-msg" id="warnMsg"></p>
       <button type="button" class="login-btn" id="loginBtn">Sign in</button>
     </div>
 

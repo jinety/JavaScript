@@ -8,6 +8,12 @@ const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
 const dashboardPage = 'dashboard.html';
 
+/**
+ * Validate form
+ *
+ * @param {string} email Email entered from input
+ * @param {string} password Password entered from input
+ */
 const validateForm = (email, password) => {
   let isValid = false;
 
@@ -45,23 +51,26 @@ const login = () => {
     .then((userList) => {
       if (userList.length === 0) {
         warnMsg.innerHTML = Messages.incorrectLoginAccount;
+        return;
       }
 
       // Non-admin account
       if (!userList[0].isAdmin) {
         warnMsg.innerHTML = Messages.notAdminAccount;
-      } else {
-        warnMsg.innerHTML = EmptyText;
-
-        // Save username to localStorage
-        localStorage.setItem('username', userList[0].email);
-
-        // Switch to dashboard page
-        window.location.href = dashboardPage;
+        return;
       }
+
+      warnMsg.innerHTML = EmptyText;
+
+      // Save username to localStorage
+      localStorage.setItem('username', userList[0].email);
+
+      // Switch to dashboard page
+      window.location.href = dashboardPage;
     });
 };
 
+// Click login button if successful will go to dashboard page
 loginBtn.addEventListener('click', () => {
   login();
 });

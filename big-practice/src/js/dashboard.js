@@ -16,9 +16,11 @@ const formUpdateBtn = document.getElementById('updateBtn');
 const form = document.querySelector('.form');
 const modalForm = document.querySelector('.modal-form');
 const modalWarning = document.querySelector('.modal-warning');
-const cancelBtnForm = document.querySelector('.modal-form .button-box .cancel-btn');
-const cancelBtnWarning = document.querySelector('.modal-warning .button-box .cancel-btn');
-const deleteBtnWarning = document.querySelector('.delete-button');
+const formCancelBtn = document.querySelector('.modal-form .button-box .cancel-btn');
+const warningCancelBtn = document.querySelector('.modal-warning .button-box .cancel-btn');
+const warningDeleteBtn = document.querySelector('.delete-button');
+const logoutBtn = document.querySelector('.logout-btn');
+const loginPage = 'login.html';
 
 /**
  * Display error message
@@ -114,6 +116,35 @@ const isValidForm = () => {
 };
 
 /**
+ * Modal form update will appear when clicking the update button in the table
+ *
+ * @param {element} item - Table update button
+ */
+const tableUpdateBtn = (item) => {
+  const movieId = item.dataset.id;
+
+  showModal(modalForm);
+  getApi(`${MoviesApi}/${movieId}`, (movieData) => {
+    nameMovieInput.value = movieData.name;
+    directorInput.value = movieData.director;
+    nationInput.value = movieData.nation;
+    form.setAttribute('data-id', movieId);
+  });
+};
+
+/**
+ * Modal warning will appear when clicking delete button in the table
+ *
+ * @param {element} item - Table delete button
+ */
+const tableDeleteBtn = (item) => {
+  const movieId = item.dataset.id;
+
+  showModal(modalWarning);
+  warningDeleteBtn.setAttribute('data-id', movieId);
+};
+
+/**
  * Takes data from the API and displays it on a table in HTML
  */
 const renderTable = () => {
@@ -145,15 +176,7 @@ const renderTable = () => {
 
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
-          const movieId = item.dataset.id;
-
-          showModal(modalForm);
-          getApi(`${MoviesApi}/${movieId}`, (movieData) => {
-            nameMovieInput.value = movieData.name;
-            directorInput.value = movieData.director;
-            nationInput.value = movieData.nation;
-            form.setAttribute('data-id', movieId);
-          });
+          tableUpdateBtn(item);
           hideElement(formCreateBtn);
           showElement(formUpdateBtn);
         });
@@ -161,10 +184,7 @@ const renderTable = () => {
 
       deleteButtons.forEach((item) => {
         item.addEventListener('click', () => {
-          const movieId = item.dataset.id;
-
-          showModal(modalWarning);
-          deleteBtnWarning.setAttribute('data-id', movieId);
+          tableDeleteBtn(item);
         });
       });
     })
@@ -225,7 +245,7 @@ const handleUpdateForm = () => {
  * Handle delete movie
  */
 const handleDeleteMovie = () => {
-  const deleteBtnWarningId = deleteBtnWarning.getAttribute('data-id');
+  const deleteBtnWarningId = warningDeleteBtn.getAttribute('data-id');
 
   deleteApi(`${MoviesApi}/${deleteBtnWarningId}`, () => {
     renderTable();
@@ -246,7 +266,7 @@ formCreateBtn.addEventListener('click', () => {
 });
 
 // Exit modal when clicking cancel button
-cancelBtnForm.addEventListener('click', () => {
+formCancelBtn.addEventListener('click', () => {
   hideModal(modalForm);
   cleanErrorMessage(nameMovieInput);
   cleanErrorMessage(directorInput);
@@ -254,13 +274,13 @@ cancelBtnForm.addEventListener('click', () => {
 });
 
 // Delete movie from database and table when clicking delete movie button
-deleteBtnWarning.addEventListener('click', () => {
+warningDeleteBtn.addEventListener('click', () => {
   handleDeleteMovie();
   hideModal(modalWarning);
 });
 
 // Exit modal movie when clicking cancel button
-cancelBtnWarning.addEventListener('click', () => {
+warningCancelBtn.addEventListener('click', () => {
   hideModal(modalWarning);
 });
 
@@ -268,6 +288,15 @@ cancelBtnWarning.addEventListener('click', () => {
 formUpdateBtn.addEventListener('click', () => {
   handleUpdateForm();
   hideModal(modalWarning);
+});
+
+// Clicking on the logout button will log out of your account and return to the login page
+logoutBtn.addEventListener('click', () => {
+  // Remove username from localStorage
+  localStorage.removeItem('username');
+
+  // Switch to login page
+  window.location.href = loginPage;
 });
 
 // Display username after successful login

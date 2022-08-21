@@ -24,7 +24,7 @@
 }
 
 .form-warn-msg {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
@@ -39,5 +39,9 @@
 
   .form-line {
     padding-top: 20px;
+  }
+
+  .form-warn-msg {
+    margin-top: 15px;
   }
 }

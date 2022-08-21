@@ -7,12 +7,18 @@
   padding: 0 10px;
 }
 
+.warn-msg-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .form-field { 
  margin-bottom: 35px;
 }
 
 .login-header {
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .login-title {
@@ -26,7 +32,6 @@
   font-size: var(--font-size-s);
   line-height: var(--line-height-s);
   font-weight: var(--font-weight-s);
-  margin-bottom: 15px;
 }
 
 .input-label {
@@ -55,10 +60,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: var(--font-weight-xl);
-}
-
-.login-warn-msg {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
@@ -71,6 +73,10 @@
    margin-bottom: 53px;
   }
 
+  .login-header {
+    margin-bottom: 24px;
+  }
+
   .login-title {
     font-size: var(--line-height-l);
     line-height: var(--line-height-l);
@@ -79,7 +85,6 @@
   .login-content {
     font-size: var(--font-size-m);
     line-height: var(--line-height-m);
-    margin-bottom: 24px;
   }
 
   .login-btn {

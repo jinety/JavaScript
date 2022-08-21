@@ -5,6 +5,7 @@ table tr td {
 }
 
 .table {
+  width: 100%;
   min-width: 700px;
 }
 
