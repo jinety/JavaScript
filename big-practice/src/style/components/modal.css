@@ -28,7 +28,6 @@
 }
 
 .modal-title {
-  background: var(--primary-color-50);
   box-shadow: 0px 1px 0px var(--secondary-color-100);
   padding-top: 10px;
   padding-bottom: 10px;

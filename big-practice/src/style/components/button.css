@@ -29,6 +29,13 @@
   color: #504178;
 }
 
+.logout-btn {
+  background: var(--secondary-color-50);
+  cursor: pointer;
+  border: none;
+  height: 70px;
+}
+
 .sidebar-btn:hover {
   background: rgba(80, 65, 120, 0.2);
 }
