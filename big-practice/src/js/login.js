@@ -65,7 +65,7 @@ const login = () => {
       // Save username to localStorage
       localStorage.setItem('username', userList[0].email);
 
-      // Switch to dashboard page
+     // Switch to dashboard page
       window.location.href = dashboardPage;
     });
 };
@@ -74,3 +74,9 @@ const login = () => {
 loginBtn.addEventListener('click', () => {
   login();
 });
+
+// If there is data in localStorage, then prevent returning to login page from dashboard by typing login.html in url bar
+if (localStorage.getItem('username')) {
+  window.location.href = dashboardPage;
+  return;
+}

@@ -299,6 +299,12 @@ logoutBtn.addEventListener('click', () => {
   window.location.href = loginPage;
 });
 
+// If there is no data in localStorage then allow from the dashboard to return to the login page by typing login.html in the url bar
+if (!localStorage.getItem('username')) {
+  window.location.href = loginPage;
+  return;
+}
+
 // Display username after successful login
 accountName.innerHTML = localStorage.getItem('username');
 

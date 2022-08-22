@@ -12,11 +12,16 @@
 }
 
 .logo-wrapper {
-  padding-left: 25px;
+  padding: 7px 0px 7px 25px;
 }
 
 .avt-box {
   display: none;
+}
+
+.icon-logout {
+  width: 100%;
+  height: 100%;
 }
 
 /* STYLE APPLIED TO THE DESKTOP */
@@ -28,7 +33,7 @@
 
   .avt-box {
     display: flex;
-    padding: 16px 47px 16px 0;
+    padding: 16px 0;
     text-decoration: none;
   }
 
@@ -39,11 +44,6 @@
     font-weight: var(--font-weight-s);
     color: var(--primary-color-300);
     padding: 10px 0 10px 12px;
-  }
-
-  .icon-logout {
-    width: 100%;
-    height: 100%;
   }
 }
 /* END HEADER */
