@@ -53,4 +53,3 @@ Before you continue, ensure you meet the following requirements:
 ## Author
 **Hoa Nguyen**
 * Email: <vhoa1000@gmail.com>
-  
