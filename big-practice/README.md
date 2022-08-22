@@ -48,7 +48,7 @@ Before you continue, ensure you meet the following requirements:
   ```
 * Step 7: Open browser with the link below
   ```
-  http://localhost:1234
+  http://localhost:1234/login.html
   ```
 ## Author
 **Hoa Nguyen**
