@@ -34,6 +34,7 @@
   font-size: var(--font-size-l);
 }
 
+/* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1200px) {
   .modal {
     padding-top: 20px;
