@@ -26,7 +26,7 @@ const isValidateForm = (email, password) => {
   }
 
   return isValid;
-}
+};
 
 /**
  * Validate form
@@ -34,14 +34,14 @@ const isValidateForm = (email, password) => {
  * @param {string} email Email entered from input
  * @param {string} password Password entered from input
  */
-const validateForm = (email, password) => { 
+const validateForm = (email, password) => {
   // Email or password cannot be blank
   if (isEmpty(email) || isEmpty(password)) {
     warnMsg.innerHTML = MESSAGES.loginFormEmpty;
   } else if (!isValidEmail(email)) {
     // Email is not in the correct format
     warnMsg.innerHTML = MESSAGES.emailWrongFormat;
-  } 
+  }
 };
 
 /**
@@ -76,7 +76,7 @@ const login = () => {
       // Save username to localStorage
       localStorage.setItem('username', userList[0].email);
 
-     // Switch to dashboard page
+      // Switch to dashboard page
       window.location.href = dashboardPage;
     });
 };
@@ -86,7 +86,7 @@ loginBtn.addEventListener('click', () => {
   login();
 });
 
-// If there is data in localStorage, then prevent returning to login page from dashboard by typing login.html in url bar
+// Prevent returning to login page if there is data in localStorage
 if (localStorage.getItem('username')) {
   window.location.href = dashboardPage;
   return;
