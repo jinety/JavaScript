@@ -1,5 +1,5 @@
 import { isEmpty } from './validation';
-import { EmptyText, MoviesApi, Messages } from './constant';
+import { EMPTY_TEXT, MOVIES_API, MESSAGES } from './constant';
 import {
   getApi, postApi, putApi, deleteApi,
 } from './api-service';
@@ -76,7 +76,7 @@ const showElement = (element) => {
  * @param {HtmlInputElement} element - Element input
  */
 const cleanErrorMessage = (element) => {
-  showErrorMessage(element, EmptyText);
+  showErrorMessage(element, EMPTY_TEXT);
 };
 
 /**
@@ -90,26 +90,26 @@ const isValidForm = () => {
 
   // Movie title cannot be blank
   if (isEmpty(nameMovie)) {
-    showErrorMessage(nameMovieInput, Messages.empty);
+    showErrorMessage(nameMovieInput, MESSAGES.empty);
     isValid = false;
   } else {
-    showErrorMessage(nameMovieInput, EmptyText);
+    showErrorMessage(nameMovieInput, EMPTY_TEXT);
   }
 
   // Director cannot be blank
   if (isEmpty(director)) {
-    showErrorMessage(directorInput, Messages.empty);
+    showErrorMessage(directorInput, MESSAGES.empty);
     isValid = false;
   } else {
-    showErrorMessage(directorInput, EmptyText);
+    showErrorMessage(directorInput, EMPTY_TEXT);
   }
 
   // Nation cannot be blank
   if (isEmpty(nation)) {
-    showErrorMessage(nationInput, Messages.empty);
+    showErrorMessage(nationInput, MESSAGES.empty);
     isValid = false;
   } else {
-    showErrorMessage(nationInput, EmptyText);
+    showErrorMessage(nationInput, EMPTY_TEXT);
   }
 
   return isValid;
@@ -124,7 +124,7 @@ const tableUpdateBtn = (item) => {
   const movieId = item.dataset.id;
 
   showModal(modalForm);
-  getApi(`${MoviesApi}/${movieId}`, (movieData) => {
+  getApi(`${MOVIES_API}/${movieId}`, (movieData) => {
     nameMovieInput.value = movieData.name;
     directorInput.value = movieData.director;
     nationInput.value = movieData.nation;
@@ -148,7 +148,7 @@ const tableDeleteBtn = (item) => {
  * Takes data from the API and displays it on a table in HTML
  */
 const renderTable = () => {
-  fetch(MoviesApi)
+  fetch(MOVIES_API)
     // Parses JSON response into native JavaScript objects
     .then((response) => response.json())
     .then((movies) => {
@@ -205,14 +205,14 @@ const handleCreateForm = () => {
     return;
   }
 
-  getApi(`${MoviesApi}?name=${name}`, (movieList) => {
+  getApi(`${MOVIES_API}?name=${name}`, (movieList) => {
     if (movieList.length === 0) {
       const formData = { name, director, nation };
 
-      postApi(MoviesApi, formData, () => { renderTable(); });
+      postApi(MOVIES_API, formData, () => { renderTable(); });
       hideModal(modalForm);
     } else {
-      showErrorMessage(nameMovieInput, Messages.exist);
+      showErrorMessage(nameMovieInput, MESSAGES.exist);
     }
   });
 };
@@ -231,12 +231,14 @@ const handleUpdateForm = () => {
     return;
   }
 
-  getApi(`${MoviesApi}?name=${name}`, (movieList) => {
+  getApi(`${MOVIES_API}?name=${name}`, (movieList) => {
+    // const a = movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10);
+    // if (a)
     if (movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10)) {
-      putApi(`${MoviesApi}/${formMovieId}`, formData, () => { renderTable(); });
+      putApi(`${MOVIES_API}/${formMovieId}`, formData, () => { renderTable(); });
       hideModal(modalForm);
     } else {
-      showErrorMessage(nameMovieInput, Messages.exist);
+      showErrorMessage(nameMovieInput, MESSAGES.exist);
     }
   });
 };
@@ -247,7 +249,7 @@ const handleUpdateForm = () => {
 const handleDeleteMovie = () => {
   const deleteBtnWarningId = warningDeleteBtn.getAttribute('data-id');
 
-  deleteApi(`${MoviesApi}/${deleteBtnWarningId}`, () => {
+  deleteApi(`${MOVIES_API}/${deleteBtnWarningId}`, () => {
     renderTable();
   });
 };
