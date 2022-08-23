@@ -9,25 +9,39 @@ const loginBtn = document.getElementById('loginBtn');
 const dashboardPage = 'dashboard.html';
 
 /**
+ * Is validate form
+ *
+ * @param {string} email Email entered from input
+ * @param {string} password Password entered from input
+ */
+const isValidateForm = (email, password) => {
+  let isValid = false;
+
+  if (isEmpty(email) || isEmpty(password)) {
+    isValid = false;
+  } else if (!isValidEmail(email)) {
+    isValid = false;
+  } else {
+    isValid = true;
+  }
+
+  return isValid;
+}
+
+/**
  * Validate form
  *
  * @param {string} email Email entered from input
  * @param {string} password Password entered from input
  */
-const validateForm = (email, password) => {
-  let isValid = false;
-
+const validateForm = (email, password) => { 
   // Email or password cannot be blank
   if (isEmpty(email) || isEmpty(password)) {
     warnMsg.innerHTML = MESSAGES.loginFormEmpty;
   } else if (!isValidEmail(email)) {
     // Email is not in the correct format
     warnMsg.innerHTML = MESSAGES.emailWrongFormat;
-  } else {
-    isValid = true;
-  }
-
-  return isValid;
+  } 
 };
 
 /**
@@ -38,10 +52,7 @@ const login = () => {
   const password = passwordInput.value;
   const url = `${ACCOUNT_API}?email=${email}&password=${password}`;
 
-  // Validate form data
-  const isValidForm = validateForm(email, password);
-
-  if (!isValidForm) {
+  if (!isValidateForm(email, password) && !validateForm(email, password)) {
     return;
   }
 

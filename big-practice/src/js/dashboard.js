@@ -80,7 +80,7 @@ const cleanErrorMessage = (element) => {
 };
 
 /**
- * Valid Form
+ * Is valid Form
  */
 const isValidForm = () => {
   const nameMovie = nameMovieInput.value;
@@ -90,30 +90,45 @@ const isValidForm = () => {
 
   // Movie title cannot be blank
   if (isEmpty(nameMovie)) {
-    showErrorMessage(nameMovieInput, MESSAGES.empty);
     isValid = false;
+  } 
+
+  // Director cannot be blank
+  if (isEmpty(director)) {
+    isValid = false;
+  } 
+
+  // Nation cannot be blank
+  if (isEmpty(nation)) {
+    isValid = false;
+  } 
+
+  return isValid;
+};
+
+const validForm = () => {
+  const nameMovie = nameMovieInput.value;
+  const director = directorInput.value;
+  const nation = nationInput.value;
+
+  if (isEmpty(nameMovie)) {
+    showErrorMessage(nameMovieInput, MESSAGES.empty);
   } else {
     showErrorMessage(nameMovieInput, EMPTY_TEXT);
   }
 
-  // Director cannot be blank
   if (isEmpty(director)) {
     showErrorMessage(directorInput, MESSAGES.empty);
-    isValid = false;
   } else {
     showErrorMessage(directorInput, EMPTY_TEXT);
   }
 
-  // Nation cannot be blank
   if (isEmpty(nation)) {
     showErrorMessage(nationInput, MESSAGES.empty);
-    isValid = false;
   } else {
     showErrorMessage(nationInput, EMPTY_TEXT);
   }
-
-  return isValid;
-};
+}
 
 /**
  * Modal form update will appear when clicking the update button in the table
@@ -201,7 +216,7 @@ const handleCreateForm = () => {
   const director = directorInput.value;
   const nation = nationInput.value;
 
-  if (!isValidForm()) {
+  if (!isValidForm() && !validForm()) {
     return;
   }
 
@@ -227,7 +242,7 @@ const handleUpdateForm = () => {
   const formData = { name, director, nation };
   const formMovieId = form.getAttribute('data-id');
 
-  if (!isValidForm()) {
+  if (!isValidForm() && !validForm()) {
     return;
   }
 
