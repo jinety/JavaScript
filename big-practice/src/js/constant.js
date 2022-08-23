@@ -1,10 +1,10 @@
 // Url API
-const AccountApi = 'http://localhost:3000/accounts';
-const MoviesApi = 'http://localhost:3000/movies';
-const EmptyText = '';
+const ACCOUNT_API = 'http://localhost:3000/accounts';
+const MOVIES_API = 'http://localhost:3000/movies';
+const EMPTY_TEXT = '';
 
 // Messages
-const Messages = {
+const MESSAGES = {
   loginFormEmpty: 'Please enter all email and password',
   emailWrongFormat: 'Email is invalid format',
   incorrectLoginAccount: 'Email or password is incorrect. Please re-enter',
@@ -14,5 +14,5 @@ const Messages = {
 };
 
 export {
-  EmptyText, Messages, AccountApi, MoviesApi,
+  EMPTY_TEXT, MESSAGES, ACCOUNT_API, MOVIES_API,
 };

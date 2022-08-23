@@ -1,5 +1,5 @@
 import { isValidEmail, isEmpty } from './validation';
-import { EmptyText, Messages, AccountApi } from './constant';
+import { EMPTY_TEXT, MESSAGES, ACCOUNT_API } from './constant';
 
 // Query elements
 const emailInput = document.getElementById('email');
@@ -19,10 +19,10 @@ const validateForm = (email, password) => {
 
   // Email or password cannot be blank
   if (isEmpty(email) || isEmpty(password)) {
-    warnMsg.innerHTML = Messages.loginFormEmpty;
+    warnMsg.innerHTML = MESSAGES.loginFormEmpty;
   } else if (!isValidEmail(email)) {
     // Email is not in the correct format
-    warnMsg.innerHTML = Messages.emailWrongFormat;
+    warnMsg.innerHTML = MESSAGES.emailWrongFormat;
   } else {
     isValid = true;
   }
@@ -36,7 +36,7 @@ const validateForm = (email, password) => {
 const login = () => {
   const email = emailInput.value;
   const password = passwordInput.value;
-  const url = `${AccountApi}?email=${email}&password=${password}`;
+  const url = `${ACCOUNT_API}?email=${email}&password=${password}`;
 
   // Validate form data
   const isValidForm = validateForm(email, password);
@@ -50,17 +50,17 @@ const login = () => {
     .then((response) => response.json())
     .then((userList) => {
       if (userList.length === 0) {
-        warnMsg.innerHTML = Messages.incorrectLoginAccount;
+        warnMsg.innerHTML = MESSAGES.incorrectLoginAccount;
         return;
       }
 
       // Non-admin account
       if (!userList[0].isAdmin) {
-        warnMsg.innerHTML = Messages.notAdminAccount;
+        warnMsg.innerHTML = MESSAGES.notAdminAccount;
         return;
       }
 
-      warnMsg.innerHTML = EmptyText;
+      warnMsg.innerHTML = EMPTY_TEXT;
 
       // Save username to localStorage
       localStorage.setItem('username', userList[0].email);
