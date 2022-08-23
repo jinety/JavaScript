@@ -232,8 +232,6 @@ const handleUpdateForm = () => {
   }
 
   getApi(`${MOVIES_API}?name=${name}`, (movieList) => {
-    // const a = movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10);
-    // if (a)
     if (movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10)) {
       putApi(`${MOVIES_API}/${formMovieId}`, formData, () => { renderTable(); });
       hideModal(modalForm);
