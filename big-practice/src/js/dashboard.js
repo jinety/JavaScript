@@ -81,8 +81,8 @@ const cleanErrorMessage = (element) => {
 
 /**
  * Validate form
- *
- * @param {*} data
+ * 
+ * @param {object} data - The data object contains all the input elements
  */
 const validateForm = (data) => {
   const formValidation = {
@@ -90,25 +90,12 @@ const validateForm = (data) => {
     error: {},
   };
 
-  if (isEmpty(data.name)) {
-    formValidation.error.movie = MESSAGES.empty;
-    formValidation.isValid = false;
-  } else {
-    formValidation.error.movie = EMPTY_TEXT;
-  }
-
-  if (isEmpty(data.director)) {
-    formValidation.error.director = MESSAGES.empty;
-    formValidation.isValid = false;
-  } else {
-    formValidation.error.director = EMPTY_TEXT;
-  }
-
-  if (isEmpty(data.nation)) {
-    formValidation.error.nation = MESSAGES.empty;
-    formValidation.isValid = false;
-  } else {
-    formValidation.error.nation = EMPTY_TEXT;
+  // Iterate all properties in object
+  for(const property in data) {
+    if (isEmpty(`${data[property]}`)) {
+      formValidation.isValid = false;
+      formValidation.error.msg = MESSAGES.empty;
+    }
   }
 
   return formValidation;
@@ -204,9 +191,9 @@ const handleCreateForm = () => {
   const validate = validateForm(data);
 
   if (!validate.isValid) {
-    showErrorMessage(nameMovieInput, validate.error.movie);
-    showErrorMessage(directorInput, validate.error.director);
-    showErrorMessage(nationInput, validate.error.nation);
+    showErrorMessage(nameMovieInput, validate.error.msg);
+    showErrorMessage(directorInput, validate.error.msg);
+    showErrorMessage(nationInput, validate.error.msg);
     return;
   }
 
@@ -233,6 +220,9 @@ const handleUpdateForm = () => {
   const formMovieId = form.getAttribute('data-id');
 
   if (!validate.isValid) {
+    showErrorMessage(nameMovieInput, validate.error.msg);
+    showErrorMessage(directorInput, validate.error.msg);
+    showErrorMessage(nationInput, validate.error.msg);
     return;
   }
 

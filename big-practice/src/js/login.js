@@ -8,6 +8,11 @@ const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
 const dashboardPage = 'dashboard.html';
 
+/**
+ * Validate form login
+ * 
+ * @param {object} data - The data object contains all the input elements
+ */
 const validateFormLogin = (data) => {
   let formValidation = {
     isValid: false,
