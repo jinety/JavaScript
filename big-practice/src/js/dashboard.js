@@ -79,57 +79,11 @@ const cleanErrorMessage = (element) => {
   showErrorMessage(element, EMPTY_TEXT);
 };
 
-// /**
-//  * Is valid Form
-//  */
-// const isValidForm = () => {
-//   const nameMovie = nameMovieInput.value;
-//   const director = directorInput.value;
-//   const nation = nationInput.value;
-//   let isValid = true;
-
-//   // Movie title cannot be blank
-//   if (isEmpty(nameMovie)) {
-//     isValid = false;
-//   }
-
-//   // Director cannot be blank
-//   if (isEmpty(director)) {
-//     isValid = false;
-//   }
-
-//   // Nation cannot be blank
-//   if (isEmpty(nation)) {
-//     isValid = false;
-//   }
-
-//   return isValid;
-// };
-
-// const validForm = () => {
-//   const nameMovie = nameMovieInput.value;
-//   const director = directorInput.value;
-//   const nation = nationInput.value;
-
-//   if (isEmpty(nameMovie)) {
-//     showErrorMessage(nameMovieInput, MESSAGES.empty);
-//   } else {
-//     showErrorMessage(nameMovieInput, EMPTY_TEXT);
-//   }
-
-//   if (isEmpty(director)) {
-//     showErrorMessage(directorInput, MESSAGES.empty);
-//   } else {
-//     showErrorMessage(directorInput, EMPTY_TEXT);
-//   }
-
-//   if (isEmpty(nation)) {
-//     showErrorMessage(nationInput, MESSAGES.empty);
-//   } else {
-//     showErrorMessage(nationInput, EMPTY_TEXT);
-//   }
-// };
-
+/**
+ * Validate form
+ * 
+ * @param {*} data 
+ */
 const validateForm = (data) => {
   let formValidation = {
     isValid: true,
@@ -270,19 +224,21 @@ const handleCreateForm = () => {
  * Handle update form
  */
 const handleUpdateForm = () => {
-  const name = nameMovieInput.value;
-  const director = directorInput.value;
-  const nation = nationInput.value;
-  const formData = { name, director, nation };
+  const data = {
+    name: nameMovieInput.value,
+    director: directorInput.value,
+    nation: nationInput.value
+  };
+  const validate = validateForm(data);
   const formMovieId = form.getAttribute('data-id');
 
-  if (!isValidForm()) {
+  if (!validate.isValid) {
     return;
   }
 
-  getApi(`${MOVIES_API}?name=${name}`, (movieList) => {
+  getApi(`${MOVIES_API}?name=${data.name}`, (movieList) => {
     if (movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10)) {
-      putApi(`${MOVIES_API}/${formMovieId}`, formData, () => { renderTable(); });
+      putApi(`${MOVIES_API}/${formMovieId}`, data, () => { renderTable(); });
       hideModal(modalForm);
     } else {
       showErrorMessage(nameMovieInput, MESSAGES.exist);

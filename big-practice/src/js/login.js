@@ -8,51 +8,36 @@ const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
 const dashboardPage = 'dashboard.html';
 
-/**
- * Is validate form
- *
- * @param {string} email Email entered from input
- * @param {string} password Password entered from input
- */
-const isValidateForm = (email, password) => {
-  let isValid = false;
+const validateFormLogin = (data) => {
+  let formValidation = {
+    isValid: false,
+    error: {},
+  };
 
-  if (isEmpty(email) || isEmpty(password)) {
-    isValid = false;
-  } else if (!isValidEmail(email)) {
-    isValid = false;
+  if (isEmpty(data.email) || isEmpty(data.password)) {
+    formValidation.error.warnMsg = MESSAGES.loginFormEmpty
+  } else if (!isValidEmail(data.email)) {
+    formValidation.error.warnMsg = MESSAGES.emailWrongFormat
   } else {
-    isValid = true;
+    formValidation.isValid = true;
   }
 
-  return isValid;
-};
-
-/**
- * Validate form
- *
- * @param {string} email Email entered from input
- * @param {string} password Password entered from input
- */
-const validateForm = (email, password) => {
-  // Email or password cannot be blank
-  if (isEmpty(email) || isEmpty(password)) {
-    warnMsg.innerHTML = MESSAGES.loginFormEmpty;
-  } else if (!isValidEmail(email)) {
-    // Email is not in the correct format
-    warnMsg.innerHTML = MESSAGES.emailWrongFormat;
-  }
-};
+  return formValidation;
+}
 
 /**
  * Handling account login to dashboard
  */
 const login = () => {
-  const email = emailInput.value;
-  const password = passwordInput.value;
-  const url = `${ACCOUNT_API}?email=${email}&password=${password}`;
-
-  if (!isValidateForm(email, password) && !validateForm(email, password)) {
+  const data = {
+    email: emailInput.value,
+    password: passwordInput.value,
+  };
+  const validate = validateFormLogin(data);
+  const url = `${ACCOUNT_API}?email=${data.email}&password=${data.password}`;
+  console.log(validate)
+  if (!validate.isValid) {
+    warnMsg.innerHTML = validate.error.warnMsg;
     return;
   }
 
