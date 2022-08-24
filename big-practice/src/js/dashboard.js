@@ -81,11 +81,11 @@ const cleanErrorMessage = (element) => {
 
 /**
  * Validate form
- * 
- * @param {*} data 
+ *
+ * @param {*} data
  */
 const validateForm = (data) => {
-  let formValidation = {
+  const formValidation = {
     isValid: true,
     error: {},
   };
@@ -112,7 +112,7 @@ const validateForm = (data) => {
   }
 
   return formValidation;
-}
+};
 
 /**
  * Modal form update will appear when clicking the update button in the table
@@ -199,14 +199,14 @@ const handleCreateForm = () => {
   const data = {
     name: nameMovieInput.value,
     director: directorInput.value,
-    nation: nationInput.value
+    nation: nationInput.value,
   };
   const validate = validateForm(data);
 
   if (!validate.isValid) {
-    showErrorMessage(nameMovieInput, validate.error.movie)
-    showErrorMessage(directorInput, validate.error.director)
-    showErrorMessage(nationInput, validate.error.nation)
+    showErrorMessage(nameMovieInput, validate.error.movie);
+    showErrorMessage(directorInput, validate.error.director);
+    showErrorMessage(nationInput, validate.error.nation);
     return;
   }
 
@@ -227,7 +227,7 @@ const handleUpdateForm = () => {
   const data = {
     name: nameMovieInput.value,
     director: directorInput.value,
-    nation: nationInput.value
+    nation: nationInput.value,
   };
   const validate = validateForm(data);
   const formMovieId = form.getAttribute('data-id');
