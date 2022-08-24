@@ -80,39 +80,38 @@ const cleanErrorMessage = (element) => {
 };
 
 /**
- * Valid Form
+ * Validate form
+ *
+ * @param {*} data
  */
-const isValidForm = () => {
-  const nameMovie = nameMovieInput.value;
-  const director = directorInput.value;
-  const nation = nationInput.value;
-  let isValid = true;
+const validateForm = (data) => {
+  const formValidation = {
+    isValid: true,
+    error: {},
+  };
 
-  // Movie title cannot be blank
-  if (isEmpty(nameMovie)) {
-    showErrorMessage(nameMovieInput, MESSAGES.empty);
-    isValid = false;
+  if (isEmpty(data.name)) {
+    formValidation.error.movie = MESSAGES.empty;
+    formValidation.isValid = false;
   } else {
-    showErrorMessage(nameMovieInput, EMPTY_TEXT);
+    formValidation.error.movie = EMPTY_TEXT;
   }
 
-  // Director cannot be blank
-  if (isEmpty(director)) {
-    showErrorMessage(directorInput, MESSAGES.empty);
-    isValid = false;
+  if (isEmpty(data.director)) {
+    formValidation.error.director = MESSAGES.empty;
+    formValidation.isValid = false;
   } else {
-    showErrorMessage(directorInput, EMPTY_TEXT);
+    formValidation.error.director = EMPTY_TEXT;
   }
 
-  // Nation cannot be blank
-  if (isEmpty(nation)) {
-    showErrorMessage(nationInput, MESSAGES.empty);
-    isValid = false;
+  if (isEmpty(data.nation)) {
+    formValidation.error.nation = MESSAGES.empty;
+    formValidation.isValid = false;
   } else {
-    showErrorMessage(nationInput, EMPTY_TEXT);
+    formValidation.error.nation = EMPTY_TEXT;
   }
 
-  return isValid;
+  return formValidation;
 };
 
 /**
@@ -197,19 +196,23 @@ const renderTable = () => {
  * Handle create form
  */
 const handleCreateForm = () => {
-  const name = nameMovieInput.value;
-  const director = directorInput.value;
-  const nation = nationInput.value;
+  const data = {
+    name: nameMovieInput.value,
+    director: directorInput.value,
+    nation: nationInput.value,
+  };
+  const validate = validateForm(data);
 
-  if (!isValidForm()) {
+  if (!validate.isValid) {
+    showErrorMessage(nameMovieInput, validate.error.movie);
+    showErrorMessage(directorInput, validate.error.director);
+    showErrorMessage(nationInput, validate.error.nation);
     return;
   }
 
-  getApi(`${MOVIES_API}?name=${name}`, (movieList) => {
+  getApi(`${MOVIES_API}?name=${data.name}`, (movieList) => {
     if (movieList.length === 0) {
-      const formData = { name, director, nation };
-
-      postApi(MOVIES_API, formData, () => { renderTable(); });
+      postApi(MOVIES_API, data, () => { renderTable(); });
       hideModal(modalForm);
     } else {
       showErrorMessage(nameMovieInput, MESSAGES.exist);
@@ -221,19 +224,21 @@ const handleCreateForm = () => {
  * Handle update form
  */
 const handleUpdateForm = () => {
-  const name = nameMovieInput.value;
-  const director = directorInput.value;
-  const nation = nationInput.value;
-  const formData = { name, director, nation };
+  const data = {
+    name: nameMovieInput.value,
+    director: directorInput.value,
+    nation: nationInput.value,
+  };
+  const validate = validateForm(data);
   const formMovieId = form.getAttribute('data-id');
 
-  if (!isValidForm()) {
+  if (!validate.isValid) {
     return;
   }
 
-  getApi(`${MOVIES_API}?name=${name}`, (movieList) => {
+  getApi(`${MOVIES_API}?name=${data.name}`, (movieList) => {
     if (movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10)) {
-      putApi(`${MOVIES_API}/${formMovieId}`, formData, () => { renderTable(); });
+      putApi(`${MOVIES_API}/${formMovieId}`, data, () => { renderTable(); });
       hideModal(modalForm);
     } else {
       showErrorMessage(nameMovieInput, MESSAGES.exist);
@@ -299,7 +304,7 @@ logoutBtn.addEventListener('click', () => {
   window.location.href = loginPage;
 });
 
-// If there is no data in localStorage then allow from the dashboard to return to the login page by typing login.html in the url bar
+// Allow return to login page if localStorage has no data
 if (!localStorage.getItem('username')) {
   window.location.href = loginPage;
   return;
