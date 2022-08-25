@@ -84,19 +84,35 @@ const cleanErrorMessage = (element) => {
  * 
  * @param {object} data - The data object contains all the input elements
  */
-const validateForm = (data) => {
+const validateForm = (data, config) => {
   const formValidation = {
     isValid: true,
-    error: {},
-  };
+    errors: {
+      name: EMPTY_TEXT,
+      director: EMPTY_TEXT,
+      nation: EMPTY_TEXT,
+    },
+  }; 
 
-  // Iterate all properties in object
-  for(const property in data) {
-    if (isEmpty(`${data[property]}`)) {
-      formValidation.isValid = false;
-      formValidation.error.msg = MESSAGES.empty;
-    }
+  Object.keys(data).forEach((key) => {
+  
+    // key ~ 'name'
+  const value = data[key];
+
+  // Config.name
+  if (config[key]) {
+    // ['empty']
+    config[key].forEach((validationType) => {
+      
+      // ValidationType ~ 'empty'
+      if (validationType === 'empty' && isEmpty(value)) {
+        // ValidationForm.errors.name ='SHould not be empty'
+        formValidation.errors[key] = MESSAGES.empty;
+        formValidation.isValid = false;
+      }
+    });
   }
+  });
 
   return formValidation;
 };
@@ -186,14 +202,19 @@ const handleCreateForm = () => {
   const data = {
     name: nameMovieInput.value,
     director: directorInput.value,
-    nation: nationInput.value,
+    nation: nationInput.value
   };
-  const validate = validateForm(data);
+  const config = {
+    name: ['empty'],
+    director: ['empty'],
+    nation: ['empty']
+  }
+  const validate = validateForm(data, config);
 
   if (!validate.isValid) {
-    showErrorMessage(nameMovieInput, validate.error.msg);
-    showErrorMessage(directorInput, validate.error.msg);
-    showErrorMessage(nationInput, validate.error.msg);
+    showErrorMessage(nameMovieInput, validate.errors.name);
+    showErrorMessage(directorInput, validate.errors.director);
+    showErrorMessage(nationInput, validate.errors.nation);
     return;
   }
 
@@ -214,15 +235,20 @@ const handleUpdateForm = () => {
   const data = {
     name: nameMovieInput.value,
     director: directorInput.value,
-    nation: nationInput.value,
+    nation: nationInput.value
   };
-  const validate = validateForm(data);
+  const config = {
+    name: ['empty'],
+    director: ['empty'],
+    nation: ['empty']
+  }
+  const validate = validateForm(data, config);
   const formMovieId = form.getAttribute('data-id');
 
   if (!validate.isValid) {
-    showErrorMessage(nameMovieInput, validate.error.msg);
-    showErrorMessage(directorInput, validate.error.msg);
-    showErrorMessage(nationInput, validate.error.msg);
+    showErrorMessage(nameMovieInput, validate.errors.name);
+    showErrorMessage(directorInput, validate.errors.director);
+    showErrorMessage(nationInput, validate.errors.nation);
     return;
   }
 

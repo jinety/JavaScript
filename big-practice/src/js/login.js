@@ -13,22 +13,38 @@ const dashboardPage = 'dashboard.html';
  * 
  * @param {object} data - The data object contains all the input elements
  */
-const validateFormLogin = (data) => {
+const validateFormLogin = (data, config) => {
   let formValidation = {
-    isValid: false,
-    error: {},
+    isValid: true,
+    errors: {
+      warnMsg: EMPTY_TEXT,
+    },
   };
+  // Point to the key in the data object
+  Object.keys(data).forEach((key) => {
+    const value = data[key];
 
-  if (isEmpty(data.email) || isEmpty(data.password)) {
-    formValidation.error.warnMsg = MESSAGES.loginFormEmpty
-  } else if (!isValidEmail(data.email)) {
-    formValidation.error.warnMsg = MESSAGES.emailWrongFormat
-  } else {
-    formValidation.isValid = true;
-  }
+    // Config.email
+    if(config[key]) {
+      // Loop to get to the objects in the array
+      config[key].forEach((validationType) => {
+        // If there is an empty word, continue to consider the isEmpty condition
+        if (validationType === 'empty' && isEmpty(value)) {
+          formValidation.errors.warnMsg = MESSAGES.loginFormEmpty;
+          formValidation.isValid = false;
+        } 
+        
+        // If there is an format word, continue to consider the isValidEmail condition
+        if (validationType === 'format' && !isValidEmail(value)) {
+          formValidation.errors.warnMsg = MESSAGES.emailWrongFormat;
+          formValidation.isValid = false;
+        }
+      })
+    }
+  })
 
   return formValidation;
-}
+};
 
 /**
  * Handling account login to dashboard
@@ -38,11 +54,15 @@ const login = () => {
     email: emailInput.value,
     password: passwordInput.value,
   };
-  const validate = validateFormLogin(data);
+  const config = {
+    email: ['empty', 'format'],
+    password: ['empty']
+  }
+  const validate = validateFormLogin(data, config);
   const url = `${ACCOUNT_API}?email=${data.email}&password=${data.password}`;
-  console.log(validate)
+  console.log(validate);
   if (!validate.isValid) {
-    warnMsg.innerHTML = validate.error.warnMsg;
+    warnMsg.innerHTML = validate.errors.warnMsg;
     return;
   }
 
