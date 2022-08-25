@@ -94,6 +94,7 @@ const validateForm = (data, config) => {
     },
   }; 
 
+  // Point to the key in the data object
   Object.keys(data).forEach((key) => {
   
     // key ~ 'name'
@@ -101,12 +102,11 @@ const validateForm = (data, config) => {
 
   // Config.name
   if (config[key]) {
-    // ['empty']
-    config[key].forEach((validationType) => {
+    // Loop to get to the objects in the array
+    config[key].forEach((corroborationType) => {
       
-      // ValidationType ~ 'empty'
-      if (validationType === 'empty' && isEmpty(value)) {
-        // ValidationForm.errors.name ='SHould not be empty'
+      // If there is an empty word, continue to consider the isEmpty condition
+      if (corroborationType === 'empty' && isEmpty(value)) {
         formValidation.errors[key] = MESSAGES.empty;
         formValidation.isValid = false;
       }

@@ -27,15 +27,15 @@ const validateFormLogin = (data, config) => {
     // Config.email
     if(config[key]) {
       // Loop to get to the objects in the array
-      config[key].forEach((validationType) => {
+      config[key].forEach((corroborationType) => {
         // If there is an empty word, continue to consider the isEmpty condition
-        if (validationType === 'empty' && isEmpty(value)) {
+        if (corroborationType === 'empty' && isEmpty(value)) {
           formValidation.errors.warnMsg = MESSAGES.loginFormEmpty;
           formValidation.isValid = false;
         } 
         
         // If there is an format word, continue to consider the isValidEmail condition
-        if (validationType === 'format' && !isValidEmail(value)) {
+        if (corroborationType === 'formatEmail' && !isValidEmail(value)) {
           formValidation.errors.warnMsg = MESSAGES.emailWrongFormat;
           formValidation.isValid = false;
         }
@@ -55,7 +55,7 @@ const login = () => {
     password: passwordInput.value,
   };
   const config = {
-    email: ['empty', 'format'],
+    email: ['empty', 'formatEmail'],
     password: ['empty']
   }
   const validate = validateFormLogin(data, config);
