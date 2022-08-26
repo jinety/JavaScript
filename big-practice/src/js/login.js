@@ -1,4 +1,4 @@
-import { isValidEmail, isEmpty } from './validation';
+import { validateForm } from './validation';
 import { EMPTY_TEXT, MESSAGES, ACCOUNT_API } from './constant';
 
 // Query elements
@@ -7,44 +7,6 @@ const passwordInput = document.getElementById('password');
 const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
 const dashboardPage = 'dashboard.html';
-
-/**
- * Validate form login
- * 
- * @param {object} data - The data object contains all the input elements
- */
-const validateFormLogin = (data, config) => {
-  let formValidation = {
-    isValid: true,
-    errors: {
-      warnMsg: EMPTY_TEXT,
-    },
-  };
-  // Point to the key in the data object
-  Object.keys(data).forEach((key) => {
-    const value = data[key];
-
-    // Config.email
-    if(config[key]) {
-      // Loop to get to the objects in the array
-      config[key].forEach((corroborationType) => {
-        // If there is an empty word, continue to consider the isEmpty condition
-        if (corroborationType === 'empty' && isEmpty(value)) {
-          formValidation.errors.warnMsg = MESSAGES.loginFormEmpty;
-          formValidation.isValid = false;
-        } 
-        
-        // If there is an format word, continue to consider the isValidEmail condition
-        if (corroborationType === 'formatEmail' && !isValidEmail(value)) {
-          formValidation.errors.warnMsg = MESSAGES.emailWrongFormat;
-          formValidation.isValid = false;
-        }
-      })
-    }
-  })
-
-  return formValidation;
-};
 
 /**
  * Handling account login to dashboard
@@ -58,9 +20,9 @@ const login = () => {
     email: ['empty', 'formatEmail'],
     password: ['empty']
   }
-  const validate = validateFormLogin(data, config);
+  const validate = validateForm(data, config);
   const url = `${ACCOUNT_API}?email=${data.email}&password=${data.password}`;
-  console.log(validate);
+
   if (!validate.isValid) {
     warnMsg.innerHTML = validate.errors.warnMsg;
     return;

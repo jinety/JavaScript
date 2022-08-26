@@ -1,4 +1,4 @@
-import { isEmpty } from './validation';
+import { isEmpty, validateForm } from './validation';
 import { EMPTY_TEXT, MOVIES_API, MESSAGES } from './constant';
 import {
   getApi, postApi, putApi, deleteApi,
@@ -77,44 +77,6 @@ const showElement = (element) => {
  */
 const cleanErrorMessage = (element) => {
   showErrorMessage(element, EMPTY_TEXT);
-};
-
-/**
- * Validate form
- * 
- * @param {object} data - The data object contains all the input elements
- */
-const validateForm = (data, config) => {
-  const formValidation = {
-    isValid: true,
-    errors: {
-      name: EMPTY_TEXT,
-      director: EMPTY_TEXT,
-      nation: EMPTY_TEXT,
-    },
-  }; 
-
-  // Point to the key in the data object
-  Object.keys(data).forEach((key) => {
-  
-    // key ~ 'name'
-  const value = data[key];
-
-  // Config.name
-  if (config[key]) {
-    // Loop to get to the objects in the array
-    config[key].forEach((corroborationType) => {
-      
-      // If there is an empty word, continue to consider the isEmpty condition
-      if (corroborationType === 'empty' && isEmpty(value)) {
-        formValidation.errors[key] = MESSAGES.empty;
-        formValidation.isValid = false;
-      }
-    });
-  }
-  });
-
-  return formValidation;
 };
 
 /**
