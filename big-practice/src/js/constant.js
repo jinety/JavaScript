@@ -1,8 +1,8 @@
-import { localHost } from './url-api';
+import { LOCAL_HOST } from './environment';
 
 // Url API
-const ACCOUNT_API = `${localHost}/accounts`;
-const MOVIES_API = `${localHost}/movies`;
+const ACCOUNT_API = `${LOCAL_HOST}/accounts`;
+const MOVIES_API = `${LOCAL_HOST}/movies`;
 const EMPTY_TEXT = '';
 
 // Messages
