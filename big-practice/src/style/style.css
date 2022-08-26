@@ -2,14 +2,14 @@
 @import url(./abstracts/font.css);
 @import url(./abstracts/color.css);
 
-/* BASE */
-@import url(./base/reset.css);
-@import url(./base/typography.css);
-@import url(./base/common.css);
+/* BASES */
+@import url(./bases/reset.css);
+@import url(./bases/typography.css);
+@import url(./bases/common.css);
 
-/* LAYOUT */
-@import url(./layout/header.css);
-@import url(./layout/sidebar.css);
+/* LAYOUTS */
+@import url(./layouts/header.css);
+@import url(./layouts/sidebar.css);
 
 /* COMPONENTS */
 @import url(./components/text.css);
@@ -19,6 +19,6 @@
 @import url(./components/form.css);
 @import url(./components/warning.css);
 
-/* PAGE */
+/* PAGES */
 @import url(./pages/login.css);
 @import url(./pages/dashboard.css);
