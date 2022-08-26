@@ -124,10 +124,10 @@ const renderTable = () => {
       });
 
       tableBody.innerHTML = tableTemplate;
-      const updateButtons = document.querySelectorAll('.table-update-btn');
-      const deleteButtons = document.querySelectorAll('.table-delete-btn');
+      const tableUpdateBtns = document.querySelectorAll('.table .table-update-btn');
+      const tableDeleteBtns = document.querySelectorAll('.table .table-delete-btn');
 
-      updateButtons.forEach((item) => {
+      tableUpdateBtns.forEach((item) => {
         item.addEventListener('click', () => {
           tableUpdateBtn(item);
           hideElement(modalFormCreateBtn);
@@ -135,7 +135,7 @@ const renderTable = () => {
         });
       });
 
-      deleteButtons.forEach((item) => {
+      tableDeleteBtns.forEach((item) => {
         item.addEventListener('click', () => {
           tableDeleteBtn(item);
         });
@@ -205,6 +205,7 @@ const handleUpdateForm = () => {
 
   getApi(`${MOVIES_API}?name=${data.name}`, (movieList) => {
     const moviesDoNotExist = movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10);
+    
     if (moviesDoNotExist) {
       putApi(`${MOVIES_API}/${formMovieId}`, data, () => { renderTable(); });
       hideModal(modalForm);
