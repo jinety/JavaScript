@@ -1,8 +1,9 @@
-import { isEmpty, validateForm } from './validation';
+import { validateForm } from './validation';
 import { EMPTY_TEXT, MOVIES_API, MESSAGES } from './constant';
 import {
   getApi, postApi, putApi, deleteApi,
 } from './api-service';
+import { showErrorMessage } from './show-message'; 
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
@@ -21,18 +22,6 @@ const warningCancelBtn = document.querySelector('.modal-warning .button-box .can
 const warningDeleteBtn = document.querySelector('.delete-button');
 const logoutBtn = document.querySelector('.logout-btn');
 const loginPage = 'login.html';
-
-/**
- * Display error message
- *
- * @param {HtmlInputElement} input - Input element
- * @param {string} msg - Show message
- */
-const showErrorMessage = (input, msg) => {
-  const errMessageEl = input.parentElement.querySelector('.warn-msg');
-
-  errMessageEl.innerHTML = msg;
-};
 
 /**
  * Hide modal

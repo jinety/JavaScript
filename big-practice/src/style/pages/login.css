@@ -63,6 +63,10 @@
   margin-bottom: 30px;
 }
 
+.login-warn-msg {
+  margin-top: 15px;
+}
+
 /* STYLE APPLIED TO THE DESKTOP */
 @media (min-width: 1024px) {
   .login-form {
@@ -93,6 +97,10 @@
   }
 
   .data-input {
+    margin-top: 20px;
+  }
+
+  .login-warn-msg {
     margin-top: 20px;
   }
 }

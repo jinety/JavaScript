@@ -5,7 +5,6 @@ const EMPTY_TEXT = '';
 
 // Messages
 const MESSAGES = {
-  loginFormEmpty: 'Please enter all email and password',
   emailWrongFormat: 'Email is invalid format',
   incorrectLoginAccount: 'Email or password is incorrect. Please re-enter',
   notAdminAccount: 'The account is not admin account, please re-enter',

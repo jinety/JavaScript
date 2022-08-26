@@ -1,10 +1,10 @@
 import { validateForm } from './validation';
 import { EMPTY_TEXT, MESSAGES, ACCOUNT_API } from './constant';
+import { showErrorMessage } from './show-message'; 
 
 // Query elements
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
-const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
 const dashboardPage = 'dashboard.html';
 
@@ -24,7 +24,8 @@ const login = () => {
   const url = `${ACCOUNT_API}?email=${data.email}&password=${data.password}`;
 
   if (!validate.isValid) {
-    warnMsg.innerHTML = validate.errors.warnMsg;
+    showErrorMessage(emailInput, validate.errors.email);
+    showErrorMessage(passwordInput, validate.errors.password);
     return;
   }
 
@@ -33,17 +34,20 @@ const login = () => {
     .then((response) => response.json())
     .then((userList) => {
       if (userList.length === 0) {
-        warnMsg.innerHTML = MESSAGES.incorrectLoginAccount;
+        showErrorMessage(emailInput, MESSAGES.incorrectLoginAccount);
+        showErrorMessage(passwordInput, MESSAGES.incorrectLoginAccount);
         return;
       }
 
       // Non-admin account
       if (!userList[0].isAdmin) {
-        warnMsg.innerHTML = MESSAGES.notAdminAccount;
+        showErrorMessage(emailInput, MESSAGES.notAdminAccount);
+        showErrorMessage(passwordInput, MESSAGES.notAdminAccount);
         return;
       }
 
-      warnMsg.innerHTML = EMPTY_TEXT;
+      showErrorMessage(emailInput, EMPTY_TEXT);
+      showErrorMessage(passwordInput, EMPTY_TEXT);
 
       // Save username to localStorage
       localStorage.setItem('username', userList[0].email);

@@ -26,7 +26,8 @@ const validateForm = (data, config) => {
   const formValidation = {
     isValid: true,
     errors: {
-      warnMsg: EMPTY_TEXT,
+      email: EMPTY_TEXT,
+      password: EMPTY_TEXT,
       name: EMPTY_TEXT,
       director: EMPTY_TEXT,
       nation: EMPTY_TEXT,
@@ -42,14 +43,13 @@ const validateForm = (data, config) => {
       config[key].forEach((validationType) => {
         // If there is an empty word, continue to consider the isEmpty condition
         if (validationType === 'empty' && isEmpty(value)) {
-          formValidation.errors.warnMsg = MESSAGES.loginFormEmpty;
           formValidation.errors[key] = MESSAGES.empty;
           formValidation.isValid = false;
         }
 
         // If there is an format word, continue to consider the isValidEmail condition
         if (validationType === 'formatEmail' && !isValidEmail(value)) {
-          formValidation.errors.warnMsg = MESSAGES.emailWrongFormat;
+          formValidation.errors[key] = MESSAGES.emailWrongFormat;
           formValidation.isValid = false;
         }
       });
