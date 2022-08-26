@@ -11,15 +11,15 @@ const nameMovieInput = document.getElementById('nameMovie');
 const directorInput = document.getElementById('director');
 const nationInput = document.getElementById('nation');
 const accountName = document.querySelector('.account-name');
-const addBtn = document.querySelector('.add-btn');
 const form = document.querySelector('.form');
 const modalForm = document.querySelector('.modal-form');
 const modalWarning = document.querySelector('.modal-warning');
-const formCreateBtn = document.querySelector('.modal-form .create-btn');
-const formUpdateBtn = document.querySelector('.modal-form .update-btn');
-const formCancelBtn = document.querySelector('.modal-form .cancel-btn');
-const confirmationCancelBtn = document.querySelector('.modal-warning .cancel-btn');
-const confirmationDeleteBtn = document.querySelector('.modal-warning .delete-btn');
+const layoutMainAddBtn = document.querySelector('.layout-main .add-btn');
+const modalFormCreateBtn = document.querySelector('.modal-form .create-btn');
+const modalFormUpdateBtn = document.querySelector('.modal-form .update-btn');
+const modalFormCancelBtn = document.querySelector('.modal-form .cancel-btn');
+const modalWarningCancelBtn = document.querySelector('.modal-warning .cancel-btn');
+const modalWarningDeleteBtn = document.querySelector('.modal-warning .delete-btn');
 const logoutBtn = document.querySelector('.site-header .logout-btn');
 const loginPage = 'login.html';
 
@@ -94,7 +94,7 @@ const tableDeleteBtn = (item) => {
   const movieId = item.dataset.id;
 
   showModal(modalWarning);
-  confirmationDeleteBtn.setAttribute('data-id', movieId);
+  modalWarningDeleteBtn.setAttribute('data-id', movieId);
 };
 
 /**
@@ -130,8 +130,8 @@ const renderTable = () => {
       updateButtons.forEach((item) => {
         item.addEventListener('click', () => {
           tableUpdateBtn(item);
-          hideElement(formCreateBtn);
-          showElement(formUpdateBtn);
+          hideElement(modalFormCreateBtn);
+          showElement(modalFormUpdateBtn);
         });
       });
 
@@ -218,7 +218,7 @@ const handleUpdateForm = () => {
  * Handle delete movie
  */
 const handleDeleteMovie = () => {
-  const deleteBtnWarningId = confirmationDeleteBtn.getAttribute('data-id');
+  const deleteBtnWarningId = modalWarningDeleteBtn.getAttribute('data-id');
 
   deleteApi(`${MOVIES_API}/${deleteBtnWarningId}`, () => {
     renderTable();
@@ -226,20 +226,20 @@ const handleDeleteMovie = () => {
 };
 
 // Popup to add user when clicking on Add button.
-addBtn.addEventListener('click', () => {
+layoutMainAddBtn.addEventListener('click', () => {
   form.reset();
   showModal(modalForm);
-  hideElement(formUpdateBtn);
-  showElement(formCreateBtn);
+  hideElement(modalFormUpdateBtn);
+  showElement(modalFormCreateBtn);
 });
 
 // New movie will be created when clicking create button
-formCreateBtn.addEventListener('click', () => {
+modalFormCreateBtn.addEventListener('click', () => {
   handleCreateForm();
 });
 
 // Exit modal when clicking cancel button
-formCancelBtn.addEventListener('click', () => {
+modalFormCancelBtn.addEventListener('click', () => {
   hideModal(modalForm);
   cleanErrorMessage(nameMovieInput);
   cleanErrorMessage(directorInput);
@@ -247,18 +247,18 @@ formCancelBtn.addEventListener('click', () => {
 });
 
 // Delete movie from database and table when clicking delete movie button
-confirmationDeleteBtn.addEventListener('click', () => {
+modalWarningDeleteBtn.addEventListener('click', () => {
   handleDeleteMovie();
   hideModal(modalWarning);
 });
 
 // Exit modal movie when clicking cancel button
-confirmationCancelBtn.addEventListener('click', () => {
+modalWarningCancelBtn.addEventListener('click', () => {
   hideModal(modalWarning);
 });
 
 // Movie will be updated when the update button is clicked
-formUpdateBtn.addEventListener('click', () => {
+modalFormUpdateBtn.addEventListener('click', () => {
   handleUpdateForm();
   hideModal(modalWarning);
 });
