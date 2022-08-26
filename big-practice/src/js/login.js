@@ -1,6 +1,6 @@
 import { validateForm } from './validation';
 import { EMPTY_TEXT, MESSAGES, ACCOUNT_API } from './constant';
-import { showErrorMessage } from './show-message'; 
+import { showErrorMessage } from './show-message';
 
 // Query elements
 const emailInput = document.getElementById('email');
@@ -18,8 +18,8 @@ const login = () => {
   };
   const config = {
     email: ['empty', 'formatEmail'],
-    password: ['empty']
-  }
+    password: ['empty'],
+  };
   const validate = validateForm(data, config);
   const url = `${ACCOUNT_API}?email=${data.email}&password=${data.password}`;
 
@@ -34,14 +34,12 @@ const login = () => {
     .then((response) => response.json())
     .then((userList) => {
       if (userList.length === 0) {
-        showErrorMessage(emailInput, MESSAGES.incorrectLoginAccount);
         showErrorMessage(passwordInput, MESSAGES.incorrectLoginAccount);
         return;
       }
 
       // Non-admin account
       if (!userList[0].isAdmin) {
-        showErrorMessage(emailInput, MESSAGES.notAdminAccount);
         showErrorMessage(passwordInput, MESSAGES.notAdminAccount);
         return;
       }

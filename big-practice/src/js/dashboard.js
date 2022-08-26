@@ -3,7 +3,7 @@ import { EMPTY_TEXT, MOVIES_API, MESSAGES } from './constant';
 import {
   getApi, postApi, putApi, deleteApi,
 } from './api-service';
-import { showErrorMessage } from './show-message'; 
+import { showErrorMessage } from './show-message';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
@@ -153,13 +153,13 @@ const handleCreateForm = () => {
   const data = {
     name: nameMovieInput.value,
     director: directorInput.value,
-    nation: nationInput.value
+    nation: nationInput.value,
   };
   const config = {
     name: ['empty'],
     director: ['empty'],
-    nation: ['empty']
-  }
+    nation: ['empty'],
+  };
   const validate = validateForm(data, config);
 
   if (!validate.isValid) {
@@ -186,13 +186,13 @@ const handleUpdateForm = () => {
   const data = {
     name: nameMovieInput.value,
     director: directorInput.value,
-    nation: nationInput.value
+    nation: nationInput.value,
   };
   const config = {
     name: ['empty'],
     director: ['empty'],
-    nation: ['empty']
-  }
+    nation: ['empty'],
+  };
   const validate = validateForm(data, config);
   const formMovieId = form.getAttribute('data-id');
 

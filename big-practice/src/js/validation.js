@@ -20,18 +20,12 @@ const isEmpty = (value) => (!value);
  * Validate form
  *
  * @param {object} data - The data object contains all the input elements
- * @param {object} config - Contains information for input checking
+ * @param {object} config - Here I have config object containing ['name', 'formatEmail'] I use this to check for null condition or wrong format in input
  */
 const validateForm = (data, config) => {
   const formValidation = {
     isValid: true,
-    errors: {
-      email: EMPTY_TEXT,
-      password: EMPTY_TEXT,
-      name: EMPTY_TEXT,
-      director: EMPTY_TEXT,
-      nation: EMPTY_TEXT,
-    },
+    errors: {},
   };
 
   // Point to the key in the data object
@@ -43,15 +37,18 @@ const validateForm = (data, config) => {
       config[key].forEach((validationType) => {
         // If there is an empty word, continue to consider the isEmpty condition
         if (validationType === 'empty' && isEmpty(value)) {
-          formValidation.errors[key] = MESSAGES.empty;
           formValidation.isValid = false;
+          formValidation.errors[key] = MESSAGES.empty;
+          return;
         }
 
         // If there is an format word, continue to consider the isValidEmail condition
-        if (validationType === 'formatEmail' && !isValidEmail(value)) {
+        if (validationType === 'formatEmail' && isValidEmail(value)) {
+          formValidation.isValid = true;
           formValidation.errors[key] = MESSAGES.emailWrongFormat;
-          formValidation.isValid = false;
         }
+
+        formValidation.errors[key] = EMPTY_TEXT;
       });
     }
   });
