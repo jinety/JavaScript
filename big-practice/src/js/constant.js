@@ -1,6 +1,8 @@
+import { LOCAL_HOST } from './environment';
+
 // Url API
-const ACCOUNT_API = 'http://localhost:3000/accounts';
-const MOVIES_API = 'http://localhost:3000/movies';
+const ACCOUNT_API = `${LOCAL_HOST}/accounts`;
+const MOVIES_API = `${LOCAL_HOST}/movies`;
 const EMPTY_TEXT = '';
 
 // Messages
