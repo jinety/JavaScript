@@ -18,8 +18,8 @@ const form = document.querySelector('.form');
 const modalForm = document.querySelector('.modal-form');
 const modalWarning = document.querySelector('.modal-warning');
 const formCancelBtn = document.querySelector('.modal-form .button-box .cancel-btn');
-const warningCancelBtn = document.querySelector('.modal-warning .button-box .cancel-btn');
-const warningDeleteBtn = document.querySelector('.delete-button');
+const contentCancelBtn = document.querySelector('.modal-warning .button-box .cancel-btn');
+const contentDeleteBtn = document.querySelector('.delete-btn');
 const logoutBtn = document.querySelector('.logout-btn');
 const loginPage = 'login.html';
 
@@ -94,7 +94,7 @@ const tableDeleteBtn = (item) => {
   const movieId = item.dataset.id;
 
   showModal(modalWarning);
-  warningDeleteBtn.setAttribute('data-id', movieId);
+  contentDeleteBtn.setAttribute('data-id', movieId);
 };
 
 /**
@@ -204,7 +204,8 @@ const handleUpdateForm = () => {
   }
 
   getApi(`${MOVIES_API}?name=${data.name}`, (movieList) => {
-    if (movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10)) {
+    const checkIDMovie = movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10);
+    if (checkIDMovie) {
       putApi(`${MOVIES_API}/${formMovieId}`, data, () => { renderTable(); });
       hideModal(modalForm);
     } else {
@@ -217,7 +218,7 @@ const handleUpdateForm = () => {
  * Handle delete movie
  */
 const handleDeleteMovie = () => {
-  const deleteBtnWarningId = warningDeleteBtn.getAttribute('data-id');
+  const deleteBtnWarningId = contentDeleteBtn.getAttribute('data-id');
 
   deleteApi(`${MOVIES_API}/${deleteBtnWarningId}`, () => {
     renderTable();
@@ -246,13 +247,13 @@ formCancelBtn.addEventListener('click', () => {
 });
 
 // Delete movie from database and table when clicking delete movie button
-warningDeleteBtn.addEventListener('click', () => {
+contentDeleteBtn.addEventListener('click', () => {
   handleDeleteMovie();
   hideModal(modalWarning);
 });
 
 // Exit modal movie when clicking cancel button
-warningCancelBtn.addEventListener('click', () => {
+contentCancelBtn.addEventListener('click', () => {
   hideModal(modalWarning);
 });
 
