@@ -10,17 +10,17 @@ const tableBody = document.getElementById('tableBody');
 const nameMovieInput = document.getElementById('nameMovie');
 const directorInput = document.getElementById('director');
 const nationInput = document.getElementById('nation');
-const formCreateBtn = document.getElementById('createBtn');
 const accountName = document.querySelector('.account-name');
 const addBtn = document.querySelector('.add-btn');
-const formUpdateBtn = document.getElementById('updateBtn');
 const form = document.querySelector('.form');
 const modalForm = document.querySelector('.modal-form');
 const modalWarning = document.querySelector('.modal-warning');
-const formCancelBtn = document.querySelector('.modal-form .button-box .cancel-btn');
-const contentCancelBtn = document.querySelector('.modal-warning .button-box .cancel-btn');
-const contentDeleteBtn = document.querySelector('.delete-btn');
-const logoutBtn = document.querySelector('.logout-btn');
+const formCreateBtn = document.querySelector('.modal-form .create-btn');
+const formUpdateBtn = document.querySelector('.modal-form .update-btn');
+const formCancelBtn = document.querySelector('.modal-form .cancel-btn');
+const confirmationCancelBtn = document.querySelector('.modal-warning .cancel-btn');
+const confirmationDeleteBtn = document.querySelector('.modal-warning .delete-btn');
+const logoutBtn = document.querySelector('.site-header .logout-btn');
 const loginPage = 'login.html';
 
 /**
@@ -94,7 +94,7 @@ const tableDeleteBtn = (item) => {
   const movieId = item.dataset.id;
 
   showModal(modalWarning);
-  contentDeleteBtn.setAttribute('data-id', movieId);
+  confirmationDeleteBtn.setAttribute('data-id', movieId);
 };
 
 /**
@@ -204,8 +204,8 @@ const handleUpdateForm = () => {
   }
 
   getApi(`${MOVIES_API}?name=${data.name}`, (movieList) => {
-    const checkIDMovie = movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10);
-    if (checkIDMovie) {
+    const moviesDoNotExist = movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10);
+    if (moviesDoNotExist) {
       putApi(`${MOVIES_API}/${formMovieId}`, data, () => { renderTable(); });
       hideModal(modalForm);
     } else {
@@ -218,7 +218,7 @@ const handleUpdateForm = () => {
  * Handle delete movie
  */
 const handleDeleteMovie = () => {
-  const deleteBtnWarningId = contentDeleteBtn.getAttribute('data-id');
+  const deleteBtnWarningId = confirmationDeleteBtn.getAttribute('data-id');
 
   deleteApi(`${MOVIES_API}/${deleteBtnWarningId}`, () => {
     renderTable();
@@ -247,13 +247,13 @@ formCancelBtn.addEventListener('click', () => {
 });
 
 // Delete movie from database and table when clicking delete movie button
-contentDeleteBtn.addEventListener('click', () => {
+confirmationDeleteBtn.addEventListener('click', () => {
   handleDeleteMovie();
   hideModal(modalWarning);
 });
 
 // Exit modal movie when clicking cancel button
-contentCancelBtn.addEventListener('click', () => {
+confirmationCancelBtn.addEventListener('click', () => {
   hideModal(modalWarning);
 });
 
