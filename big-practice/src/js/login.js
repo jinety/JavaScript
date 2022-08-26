@@ -6,6 +6,7 @@ import { showErrorMessage } from './show-message';
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('loginBtn');
+const generalWarnMsg = document.querySelector('.general-warn-msg-container');
 const dashboardPage = 'dashboard.html';
 
 /**
@@ -34,13 +35,13 @@ const login = () => {
     .then((response) => response.json())
     .then((userList) => {
       if (userList.length === 0) {
-        showErrorMessage(passwordInput, MESSAGES.incorrectLoginAccount);
+        showErrorMessage(generalWarnMsg, MESSAGES.incorrectLoginAccount);
         return;
       }
 
       // Non-admin account
       if (!userList[0].isAdmin) {
-        showErrorMessage(passwordInput, MESSAGES.notAdminAccount);
+        showErrorMessage(generalWarnMsg, MESSAGES.notAdminAccount);
         return;
       }
 

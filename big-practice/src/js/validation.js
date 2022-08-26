@@ -20,7 +20,7 @@ const isEmpty = (value) => (!value);
  * Validate form
  *
  * @param {object} data - The data object contains all the input elements
- * @param {object} config - Here I have config object containing ['name', 'formatEmail'] I use this to check for null condition or wrong format in input
+ * @param {object} config - EX: config = { name: ['empty'], password: ['passwordFormat'] }
  */
 const validateForm = (data, config) => {
   const formValidation = {
