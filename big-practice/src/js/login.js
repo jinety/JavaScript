@@ -1,29 +1,13 @@
-import { isValidEmail, isEmpty } from './validation';
+import { validateForm } from './validation';
 import { EMPTY_TEXT, MESSAGES, ACCOUNT_API } from './constant';
+import { showErrorMessage } from './show-message';
 
 // Query elements
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
-const warnMsg = document.getElementById('warnMsg');
 const loginBtn = document.getElementById('loginBtn');
+const generalWarnMsg = document.querySelector('.general-warn-msg');
 const dashboardPage = 'dashboard.html';
-
-const validateFormLogin = (data) => {
-  let formValidation = {
-    isValid: false,
-    error: {},
-  };
-
-  if (isEmpty(data.email) || isEmpty(data.password)) {
-    formValidation.error.warnMsg = MESSAGES.loginFormEmpty
-  } else if (!isValidEmail(data.email)) {
-    formValidation.error.warnMsg = MESSAGES.emailWrongFormat
-  } else {
-    formValidation.isValid = true;
-  }
-
-  return formValidation;
-}
 
 /**
  * Handling account login to dashboard
@@ -33,11 +17,16 @@ const login = () => {
     email: emailInput.value,
     password: passwordInput.value,
   };
-  const validate = validateFormLogin(data);
+  const config = {
+    email: ['empty', 'formatEmail'],
+    password: ['empty'],
+  };
+  const validate = validateForm(data, config);
   const url = `${ACCOUNT_API}?email=${data.email}&password=${data.password}`;
-  console.log(validate)
+
   if (!validate.isValid) {
-    warnMsg.innerHTML = validate.error.warnMsg;
+    showErrorMessage(emailInput, validate.errors.email);
+    showErrorMessage(passwordInput, validate.errors.password);
     return;
   }
 
@@ -46,17 +35,19 @@ const login = () => {
     .then((response) => response.json())
     .then((userList) => {
       if (userList.length === 0) {
-        warnMsg.innerHTML = MESSAGES.incorrectLoginAccount;
+        showErrorMessage(generalWarnMsg, MESSAGES.incorrectLoginAccount);
         return;
       }
 
       // Non-admin account
       if (!userList[0].isAdmin) {
-        warnMsg.innerHTML = MESSAGES.notAdminAccount;
+        showErrorMessage(generalWarnMsg, MESSAGES.notAdminAccount);
         return;
       }
 
-      warnMsg.innerHTML = EMPTY_TEXT;
+      showErrorMessage(emailInput, EMPTY_TEXT);
+      showErrorMessage(passwordInput, EMPTY_TEXT);
+      showErrorMessage(generalWarnMsg, EMPTY_TEXT);
 
       // Save username to localStorage
       localStorage.setItem('username', userList[0].email);

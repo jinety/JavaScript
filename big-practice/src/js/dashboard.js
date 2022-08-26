@@ -1,8 +1,9 @@
-import { isEmpty } from './validation';
+import { validateForm } from './validation';
 import { EMPTY_TEXT, MOVIES_API, MESSAGES } from './constant';
 import {
   getApi, postApi, putApi, deleteApi,
 } from './api-service';
+import { showErrorMessage } from './show-message';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
@@ -21,18 +22,6 @@ const warningCancelBtn = document.querySelector('.modal-warning .button-box .can
 const warningDeleteBtn = document.querySelector('.delete-button');
 const logoutBtn = document.querySelector('.logout-btn');
 const loginPage = 'login.html';
-
-/**
- * Display error message
- *
- * @param {HtmlInputElement} input - Input element
- * @param {string} msg - Show message
- */
-const showErrorMessage = (input, msg) => {
-  const errMessageEl = input.parentElement.querySelector('.warn-msg');
-
-  errMessageEl.innerHTML = msg;
-};
 
 /**
  * Hide modal
@@ -77,41 +66,6 @@ const showElement = (element) => {
  */
 const cleanErrorMessage = (element) => {
   showErrorMessage(element, EMPTY_TEXT);
-};
-
-/**
- * Validate form
- *
- * @param {*} data
- */
-const validateForm = (data) => {
-  const formValidation = {
-    isValid: true,
-    error: {},
-  };
-
-  if (isEmpty(data.name)) {
-    formValidation.error.movie = MESSAGES.empty;
-    formValidation.isValid = false;
-  } else {
-    formValidation.error.movie = EMPTY_TEXT;
-  }
-
-  if (isEmpty(data.director)) {
-    formValidation.error.director = MESSAGES.empty;
-    formValidation.isValid = false;
-  } else {
-    formValidation.error.director = EMPTY_TEXT;
-  }
-
-  if (isEmpty(data.nation)) {
-    formValidation.error.nation = MESSAGES.empty;
-    formValidation.isValid = false;
-  } else {
-    formValidation.error.nation = EMPTY_TEXT;
-  }
-
-  return formValidation;
 };
 
 /**
@@ -201,12 +155,17 @@ const handleCreateForm = () => {
     director: directorInput.value,
     nation: nationInput.value,
   };
-  const validate = validateForm(data);
+  const config = {
+    name: ['empty'],
+    director: ['empty'],
+    nation: ['empty'],
+  };
+  const validate = validateForm(data, config);
 
   if (!validate.isValid) {
-    showErrorMessage(nameMovieInput, validate.error.movie);
-    showErrorMessage(directorInput, validate.error.director);
-    showErrorMessage(nationInput, validate.error.nation);
+    showErrorMessage(nameMovieInput, validate.errors.name);
+    showErrorMessage(directorInput, validate.errors.director);
+    showErrorMessage(nationInput, validate.errors.nation);
     return;
   }
 
@@ -229,10 +188,18 @@ const handleUpdateForm = () => {
     director: directorInput.value,
     nation: nationInput.value,
   };
-  const validate = validateForm(data);
+  const config = {
+    name: ['empty'],
+    director: ['empty'],
+    nation: ['empty'],
+  };
+  const validate = validateForm(data, config);
   const formMovieId = form.getAttribute('data-id');
 
   if (!validate.isValid) {
+    showErrorMessage(nameMovieInput, validate.errors.name);
+    showErrorMessage(directorInput, validate.errors.director);
+    showErrorMessage(nationInput, validate.errors.nation);
     return;
   }
 
