@@ -47,6 +47,7 @@ const login = () => {
 
       showErrorMessage(emailInput, EMPTY_TEXT);
       showErrorMessage(passwordInput, EMPTY_TEXT);
+      showErrorMessage(generalWarnMsg, EMPTY_TEXT);
 
       // Save username to localStorage
       localStorage.setItem('username', userList[0].email);
