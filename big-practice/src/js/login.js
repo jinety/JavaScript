@@ -6,7 +6,7 @@ import { showErrorMessage } from './show-message';
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('loginBtn');
-const generalWarnMsg = document.querySelector('.general-warn-msg-container');
+const generalWarnMsg = document.querySelector('.general-warn-msg');
 const dashboardPage = 'dashboard.html';
 
 /**
