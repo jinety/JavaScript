@@ -2,18 +2,18 @@
 const getRequest = async (url) => {
   const res = await fetch(url);
   if (res.ok) { 
-      return res.json();
+    return res.json();
   } else {
-      throw new Error("Bad response");
+    throw new Error("Bad response");
   }
 }
 
 const getData = async (url) => {
   try {
-      const data = await getRequest(url);
-      console.log(data);
+    const data = await getRequest(url);
+    console.log(data);
   } catch(e) {
-      console.log(e);
+    console.log(e);
   }
 }
 
