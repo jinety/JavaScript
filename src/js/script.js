@@ -1,15 +1,15 @@
 //=========================== ASYNC/AWAIT ==================================
-const getRequest = async (url) => {
+async function getRequest(url) {
   const response = await fetch(url);
 
   if (response.ok) { 
-    return res.json();
+    return response.json();
   } else {
     throw new Error("Bad response");
   }
 }
 
-const getData = async (url) => {
+async function getData(url) {
   try {
     const data = await getRequest(url);
 
@@ -39,14 +39,14 @@ car.name = 'Toyota';
 car.color = 'Red';
 
 // Inheritance
-class newCar extends Car {
+class NewCar extends Car {
   // Override
   showMsg() {
     console.log(`Car ${car.name} it's my favorite car`);
   }
 }
 
-let myCar = new newCar();
+let myCar = new NewCar();
 
 // Pack
 myCar.showMsg(); 
@@ -61,12 +61,14 @@ class Cat {
   }
 }
 
+let cat = new Cat('lion');
+
 class Lion extends Cat {
   speak() {
-    super.speak();
-    console.log(`${this.name} roars`)
+    console.log(`${Lion.name} roars`)
   }
 }
 
-let lion = new Lion('lion');
+let lion = new Lion();
+
 lion.speak();
