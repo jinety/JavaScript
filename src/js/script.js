@@ -1,6 +1,7 @@
 //=========================== ASYNC/AWAIT ==================================
 const getRequest = async (url) => {
   const res = await fetch(url);
+  
   if (res.ok) { 
     return res.json();
   } else {
