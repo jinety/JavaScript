@@ -1,25 +1,18 @@
 //=========================== ASYNC/AWAIT ==================================
-async function getRequest(url) {
+async function getData() {
+  const url = 'http://localhost:3000/posts';
   const response = await fetch(url);
 
-  if (response.ok) { 
+  if (response.ok) {
     return response.json();
   } else {
-    throw new Error("Bad response");
+    return `HTTP error: ${response.status}`;
   }
 }
 
-async function getData(url) {
-  try {
-    const data = await getRequest(url);
-
-    console.log(data);
-  } catch(error) {
-    console.log(error);
-  }
-}
-
-getData('http://localhost:3000/posts');
+getData().then(data => {
+  console.log(data);
+});
 
 //============================= CLASS ====================================
  
@@ -39,14 +32,14 @@ car.name = 'Toyota';
 car.color = 'Red';
 
 // Inheritance
-class NewCar extends Car {
+class MyCar extends Car {
   // Override
   showMsg() {
     console.log(`Car ${car.name} it's my favorite car`);
   }
 }
 
-let myCar = new NewCar();
+let myCar = new MyCar();
 
 // Pack
 myCar.showMsg(); 
@@ -57,17 +50,24 @@ class Cat {
   }
 
   speak() {
-    console.log(`${this.name} makes a noise`)
+    console.log(`${this.name} makes a noise`);
+  }
+}
+
+class Lion extends Cat {
+  constructor(name) {
+    super(name)
+    this.name = 'lion';
+  }
+
+  speak() {
+    console.log(`${this.name} roars`);
   }
 }
 
 let cat = new Cat('lion');
 
-class Lion extends Cat {
-  speak() {
-    console.log(`${Lion.name} roars`)
-  }
-}
+cat.speak();
 
 let lion = new Lion();
 
