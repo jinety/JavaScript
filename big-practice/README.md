@@ -1,4 +1,4 @@
-# Big practice
+# Practice four
 > Dashboard admin website.
 
 Build a website with functions to login, view, add, update and delete users
@@ -10,25 +10,19 @@ Before you continue, ensure you meet the following requirements:
 * You have installed the latest VScode.
 * Use the latest browser version (Chrome, Firefox, MS Edge)
 ### Requirement
-* Understand & apply knowledge HTML/CSS/JavaScript 
-* DOM manipulation, form validation
-* Understand how asynchronous code works & apply in practice (API call or any place we can mock API in code).
-* Get familiar with DevTools (e.g Google Chrome DevTools) for debugging issues (breakpoint, log, etc..).
+* Understand & apply knowledge JavaScript 
+  * Apply async/await
+  * Apply class
 ### Technologies
-* HTML5
-* CSS3
 * JavaScript
-* DOM
-* Parcel
-* Json server
 ### Executing program
 * Step 1: Clone repository 
   ```
   git clone https://github.com/jinety/JavaScript
   ```
-* Step 2: Checkout branch `feature/big-practice`
+* Step 2: Checkout branch `feature/practice-four`
   ```
-  git checkout feature/big-practice
+  git checkout feature/practice-four
   ```
 * Step 3: Change directory to big-practice folder 
   ```
@@ -48,7 +42,7 @@ Before you continue, ensure you meet the following requirements:
   ```
 * Step 7: Open browser with the link below
   ```
-  http://localhost:1234/login.html
+  http://localhost:1234/index.html
   ```
 ## Author
 **Hoa Nguyen**
