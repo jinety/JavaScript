@@ -4,7 +4,7 @@
 const getApi = (url, handleAfterSuccess) => {
   // GET method implementation
   const options = {
-    method: 'GET',
+    method: "GET",
   };
 
   fetch(url, options)
@@ -12,7 +12,7 @@ const getApi = (url, handleAfterSuccess) => {
     .then((response) => response.json())
     .then((data) => { handleAfterSuccess(data); })
     // Show error message when API call is wrong
-    .catch((error) => alert('Error! An error occurred.', error));
+    .catch((error) => alert("Error! An error occurred.", error));
 };
 
 /**
@@ -21,9 +21,9 @@ const getApi = (url, handleAfterSuccess) => {
 const postApi = (url, data, handleAfterSuccess) => {
   // POST method implementation
   const option = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   };
@@ -33,7 +33,7 @@ const postApi = (url, data, handleAfterSuccess) => {
     .then((response) => response.json())
     .then(() => handleAfterSuccess())
     // Show error message when API call is wrong
-    .catch((error) => alert('An error occurred while creating movie', error));
+    .catch((error) => alert("An error occurred while creating movie", error));
 };
 
 /**
@@ -42,9 +42,9 @@ const postApi = (url, data, handleAfterSuccess) => {
 const putApi = (url, data, handleAfterSuccess) => {
   // PUT method implementation
   const option = {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   };
@@ -54,7 +54,7 @@ const putApi = (url, data, handleAfterSuccess) => {
     .then((response) => response.json())
     .then(() => handleAfterSuccess())
     // Show error message when API call is wrong
-    .catch((error) => alert('An error occurred while update movie', error));
+    .catch((error) => alert("An error occurred while update movie", error));
 };
 
 /**
@@ -63,16 +63,16 @@ const putApi = (url, data, handleAfterSuccess) => {
 const deleteApi = (url, handleAfterSuccess) => {
   // DELETE method implementation
   const option = {
-    method: 'DELETE',
+    method: "DELETE",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
   fetch(url, option)
     .then(() => handleAfterSuccess())
     // Show error message when API call is wrong
-    .catch((error) => alert('An error occurred while removing movie', error));
+    .catch((error) => alert("An error occurred while removing movie", error));
 };
 
 export {
