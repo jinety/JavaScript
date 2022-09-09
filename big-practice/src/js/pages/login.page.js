@@ -89,7 +89,6 @@ const loginController = new Login(
   new Validation(),
   new Messages(),
   new ShowMessage(),
-  new UrlApi(),
 );
 
 loginController.bindLogin();
