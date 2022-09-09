@@ -5,8 +5,8 @@ export class ShowMessage {
   * @param {HtmlInputElement} input - Input element
   * @param {string} msg - Show message
   */
-  showErrorMessage(input, msg) {
-    this.errMessageEl = input.parentElement.querySelector(".warn-msg");
+  static showErrorMessage(input, msg) {
+    this.errMessageEl = input.parentElement.querySelector('.warn-msg');
 
     this.errMessageEl.innerHTML = msg;
   }

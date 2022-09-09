@@ -1,18 +1,14 @@
-import { Messages } from "../constants/message.constant";
+import { MESSAGES, EMPTY_TEXT } from '../constants/message.constant';
+import { EMAIL_REGEX } from '../constants/regex.constant';
 
-export class Validation {
-  constructor() {
-    this.EmailRegex = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
-    this.Empty = "";
-  }
-
+export class FormValidate {
   /**
   * Email check function is not valid
   *
   * @param {string} value - Comparative value
   */
-  isValidEmail(value) {
-    if (this.EmailRegex.test(value)) {
+  static isValidEmail(value) {
+    if (EMAIL_REGEX.test(value)) {
       return false;
     }
 
@@ -24,8 +20,8 @@ export class Validation {
   *
   * @param {string} value - Comparative value
   */
-  isEmpty(value) {
-    if (value === this.Empty) {
+  static isEmpty(value) {
+    if (!value) {
       return true;
     }
 
@@ -38,7 +34,7 @@ export class Validation {
   * @param {object} data - The data object contains all the input elements
   * @param {object} config - EX: config = { name: ['empty'], password: ['passwordFormat'] }
   */
-  validateForm(data, config) {
+  static validateForm(data, config) {
     const formValidation = {
       isValid: true,
       errors: {},
@@ -52,19 +48,19 @@ export class Validation {
       if (config[key]) {
         config[key].forEach((validationType) => {
           // If there is an empty word, continue to consider the isEmpty condition
-          if (validationType === "empty" && this.isEmpty(value)) {
+          if (validationType === 'empty' && this.isEmpty(value)) {
             formValidation.isValid = false;
-            formValidation.errors[key] = Messages.EMPTY;
+            formValidation.errors[key] = MESSAGES.empty;
             return;
           }
 
           // If there is an format word, continue to consider the isValidEmail condition
-          if (validationType === "formatEmail" && this.isValidEmail(value)) {
+          if (validationType === 'formatEmail' && this.isValidEmail(value)) {
             formValidation.isValid = true;
-            formValidation.errors[key] = Messages.EMAIL_WRONG_FORMAT;
+            formValidation.errors[key] = MESSAGES.emailWrongFormat;
           }
 
-          formValidation.errors[key] = Messages.EMPTY_TEXT;
+          formValidation.errors[key] = EMPTY_TEXT;
         });
       }
     });

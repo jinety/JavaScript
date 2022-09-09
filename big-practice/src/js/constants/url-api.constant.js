@@ -1,9 +1,6 @@
-export class UrlApi {
-  constructor() {
-    // Url API
-    this.ACCOUNT_API = "http://localhost:3000/accounts";
-    this.MOVIES_API = "http://localhost:3000/movies";
-  }
+import { LOCAL_HOST } from './environment';
 
-  static ACCOUNT_API = "http://localhost:3000/accounts";
-}
+const ACCOUNT_API = `${LOCAL_HOST}/accounts`;
+const MOVIES_API = `${LOCAL_HOST}/movies`;
+
+export { ACCOUNT_API, MOVIES_API };

@@ -1,5 +1,3 @@
-export class Environment {
-  constructor() {
-    this.LOCAL_HOST = "http://localhost:3000";
-  }
-}
+const LOCAL_HOST = 'http://localhost:3000';
+
+export { LOCAL_HOST };
