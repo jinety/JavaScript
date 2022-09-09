@@ -2,7 +2,7 @@ export class ApiService {
   /**
   * Get by calling API
   */
-  static async getApi(url, handleAfterSuccess) {
+  static async getApi(url) {
     try {
       // GET method implementation
       this.options = {
@@ -11,7 +11,6 @@ export class ApiService {
 
       this.res = await fetch(url, this.options);
       this.result = await this.res.json();
-      handleAfterSuccess(this.result);
     } catch (error) {
       alert('Error! An error occurred.', error);
     }

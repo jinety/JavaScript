@@ -1,4 +1,4 @@
-export class ShowMessage {
+export class Document {
   /**
   * Display error message
   *

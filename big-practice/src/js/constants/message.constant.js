@@ -6,5 +6,5 @@ const MESSAGES = {
   exist: 'Movie name already exists',
   empty: 'Value should be not empty',
 };
-
-export { EMPTY_TEXT, MESSAGES };
+const DASHBOARD_PAGE = 'dashboard.html';
+export { EMPTY_TEXT, MESSAGES, DASHBOARD_PAGE };
