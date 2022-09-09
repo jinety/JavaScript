@@ -6,6 +6,11 @@ export class Validation {
     this.Empty = "";
   }
 
+  /**
+  * Email check function is not valid
+  *
+  * @param {string} value - Comparative value
+  */
   isValidEmail(value) {
     if (this.EmailRegex.test(value)) {
       return false;
@@ -14,6 +19,11 @@ export class Validation {
     return true;
   }
 
+  /**
+  * Checks for an empty value
+  *
+  * @param {string} value - Comparative value
+  */
   isEmpty(value) {
     if (value === this.Empty) {
       return true;
@@ -22,6 +32,12 @@ export class Validation {
     return false;
   }
 
+  /**
+  * Validate form
+  *
+  * @param {object} data - The data object contains all the input elements
+  * @param {object} config - EX: config = { name: ['empty'], password: ['passwordFormat'] }
+  */
   validateForm(data, config) {
     const formValidation = {
       isValid: true,
@@ -38,21 +54,19 @@ export class Validation {
           // If there is an empty word, continue to consider the isEmpty condition
           if (validationType === "empty" && this.isEmpty(value)) {
             formValidation.isValid = false;
-            formValidation.errors[key] = Messages.empty;
+            formValidation.errors[key] = Messages.EMPTY;
             return;
           }
 
           // If there is an format word, continue to consider the isValidEmail condition
           if (validationType === "formatEmail" && this.isValidEmail(value)) {
             formValidation.isValid = true;
-            formValidation.errors[key] = Messages.emailWrongFormat;
+            formValidation.errors[key] = Messages.EMAIL_WRONG_FORMAT;
           }
 
           formValidation.errors[key] = Messages.EMPTY_TEXT;
         });
       }
-
-      console.log(formValidation);
     });
 
     return formValidation;

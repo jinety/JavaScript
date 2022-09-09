@@ -2,18 +2,16 @@
 
 export class Messages {
   constructor() {
-    // Url API
-    this.ACCOUNT_API = "http://localhost:3000/accounts";
-    this.MOVIES_API = "http://localhost:3000/movies";
+    // Messages
     this.EMPTY_TEXT = "";
-    this.emailWrongFormat = "Email is invalid format";
-    this.incorrectLoginAccount = "Email or password is incorrect. Please re-enter";
-    this.notAdminAccount = "The account is not admin account, please re-enter";
-    this.exist = "Movie name already exists";
-    this.empty = "Value should be not empty";
+    this.INCORRECT_LOGIN_ACCOUNT = "Email or password is incorrect. Please re-enter";
+    this.NOT_ADMIN_ACCOUNT = "The account is not admin account, please re-enter";
+    this.EXIST = "Movie name already exists";
+    this.EMAIL_WRONG_FORMAT = "Email is invalid format";
+    this.EMPTY = "Value should be not empty";
   }
 
-  static emailWrongFormat = "Email is invalid format";
+  static EMPTY = "Value should be not empty";
 
-  static empty = "Value should be not empty";
+  static NOT_ADMIN_ACCOUNT = "The account is not admin account, please re-enter";
 }
