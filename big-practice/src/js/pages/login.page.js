@@ -1,5 +1,5 @@
 import { formValidate } from '../validates/form.validate';
-import { apiService } from '../services/api.service';
+import { apiService } from '../service/api.service';
 import { DocumentHelper } from '../helpers/document.helper';
 import { ACCOUNTS_API } from '../constants/url-api.constant';
 import { MESSAGES, EMPTY_TEXT } from '../constants/message.constant';
@@ -7,11 +7,8 @@ import { DASHBOARD_PAGE, USERNAME_KEY } from '../constants/app.constant';
 
 class Login {
   loginBtn = document.getElementById('loginBtn');
-
   emailInput = document.getElementById('email');
-
   passwordInput = document.getElementById('password');
-
   generalWarnMsg = document.querySelector('.general-warn-msg');
 
   /**
@@ -99,3 +96,4 @@ class Login {
 const loginPage = new Login();
 
 loginPage.addLoginEvent();
+loginPage.getDataLocal();

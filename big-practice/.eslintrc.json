@@ -13,6 +13,7 @@
   "rules": {
     "semi": ["error", "always"],
     "import/prefer-default-export": "off",
-    "quotes": ["error", "single", { "avoidEscape": true }]
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }]
   }
 }
