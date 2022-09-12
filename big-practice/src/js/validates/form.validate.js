@@ -13,13 +13,12 @@ class FormValidate {
     }
 
     return true;
-
   }
 
   /**
    * Checks for an empty value
    *
-   * @param {*} value
+   * @param {string} value - Comparative value
    */
   isEmpty(value) {
     if (!value) {
@@ -27,7 +26,6 @@ class FormValidate {
     }
 
     return false;
-
   }
 
   /**
@@ -55,7 +53,6 @@ class FormValidate {
             formValidation.errors[key] = MESSAGES.empty;
 
             return;
-
           }
 
           // If there is an format word, continue to consider the isValidEmail condition
@@ -70,7 +67,6 @@ class FormValidate {
     });
 
     return formValidation;
-
   }
 }
 

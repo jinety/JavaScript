@@ -1,18 +1,18 @@
 import { formValidate } from '../validates/form.validate';
 import { apiService } from '../services/api.service';
-import { DocumentHelper } from '../helpers/show-message.helper';
+import { DocumentHelper } from '../helpers/document.helper';
 import { ACCOUNTS_API } from '../constants/url-api.constant';
 import { MESSAGES, EMPTY_TEXT } from '../constants/message.constant';
 import { DASHBOARD_PAGE, USERNAME_KEY } from '../constants/app.constant';
 
 class Login {
-  constructor() {
-    // Query elements
-    this.emailInput = document.getElementById('email');
-    this.passwordInput = document.getElementById('password');
-    this.loginBtn = document.getElementById('loginBtn');
-    this.generalWarnMsg = document.querySelector('.general-warn-msg');
-  }
+  loginBtn = document.getElementById('loginBtn');
+
+  emailInput = document.getElementById('email');
+
+  passwordInput = document.getElementById('password');
+
+  generalWarnMsg = document.querySelector('.general-warn-msg');
 
   /**
    * Handling account login to dashboard
@@ -34,46 +34,47 @@ class Login {
       DocumentHelper.showErrorMessage(this.passwordInput, validate.errors.password);
 
       return;
-
     }
 
-    const movieList = await apiService.get(url);
+    try {
+      const userList = await apiService.get(url);
 
-    // IncorrectLoginAccount
-    if (movieList.length === 0) {
-      DocumentHelper.showErrorMessage(
-        this.generalWarnMsg,
-        MESSAGES.incorrectLoginAccount,
-      );
+      // IncorrectLoginAccount
+      if (userList.length === 0) {
+        DocumentHelper.showErrorMessage(
+          this.generalWarnMsg,
+          MESSAGES.incorrectLoginAccount,
+        );
+        DocumentHelper.showErrorMessage(this.emailInput, EMPTY_TEXT);
+        DocumentHelper.showErrorMessage(this.passwordInput, EMPTY_TEXT);
+
+        return;
+      }
+
+      // Non-admin account
+      if (!userList[0].isAdmin) {
+        DocumentHelper.showErrorMessage(
+          this.generalWarnMsg,
+          MESSAGES.notAdminAccount,
+        );
+        DocumentHelper.showErrorMessage(this.emailInput, EMPTY_TEXT);
+        DocumentHelper.showErrorMessage(this.passwordInput, EMPTY_TEXT);
+
+        return;
+      }
+
       DocumentHelper.showErrorMessage(this.emailInput, EMPTY_TEXT);
       DocumentHelper.showErrorMessage(this.passwordInput, EMPTY_TEXT);
+      DocumentHelper.showErrorMessage(this.generalWarnMsg, EMPTY_TEXT);
 
-      return;
+      // Save username to localStorage
+      localStorage.setItem(USERNAME_KEY, userList[0].email);
 
+      // Switch to dashboard page
+      window.location.href = DASHBOARD_PAGE;
+    } catch {
+      DocumentHelper.showErrorMessage(this.generalWarnMsg, MESSAGES.getAccountErr);
     }
-
-    // Non-admin account
-    if (!movieList[0].isAdmin) {
-      DocumentHelper.showErrorMessage(
-        this.generalWarnMsg,
-        MESSAGES.notAdminAccount,
-      );
-      DocumentHelper.showErrorMessage(this.emailInput, EMPTY_TEXT);
-      DocumentHelper.showErrorMessage(this.passwordInput, EMPTY_TEXT);
-
-      return;
-
-    }
-
-    DocumentHelper.showErrorMessage(this.emailInput, EMPTY_TEXT);
-    DocumentHelper.showErrorMessage(this.passwordInput, EMPTY_TEXT);
-    DocumentHelper.showErrorMessage(this.generalWarnMsg, EMPTY_TEXT);
-
-    // Save username to localStorage
-    localStorage.setItem(USERNAME_KEY, movieList[0].email);
-
-    // Switch to dashboard page
-    window.location.href = DASHBOARD_PAGE;
   }
 
   /**

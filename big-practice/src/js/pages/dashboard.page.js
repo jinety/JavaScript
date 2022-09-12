@@ -3,7 +3,7 @@ import { EMPTY_TEXT, MOVIES_API, MESSAGES } from '../constants/message.constant'
 import {
   getApi, postApi, putApi, deleteApi,
 } from '../services/api.service';
-import { showErrorMessage } from '../helpers/show-message.helper';
+import { showErrorMessage } from '../helpers/document.helper';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
