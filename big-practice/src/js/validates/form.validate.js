@@ -13,6 +13,7 @@ class FormValidate {
     }
 
     return true;
+
   }
 
   /**
@@ -26,6 +27,7 @@ class FormValidate {
     }
 
     return false;
+
   }
 
   /**
@@ -51,7 +53,9 @@ class FormValidate {
           if (validationType === 'empty' && this.isEmpty(value)) {
             formValidation.isValid = false;
             formValidation.errors[key] = MESSAGES.empty;
+
             return;
+
           }
 
           // If there is an format word, continue to consider the isValidEmail condition
@@ -66,6 +70,7 @@ class FormValidate {
     });
 
     return formValidation;
+
   }
 }
 

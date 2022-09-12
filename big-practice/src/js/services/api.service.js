@@ -8,11 +8,10 @@ class ApiService {
       const options = {
         method: 'GET',
       };
-
       const res = await fetch(url, options);
-      const result = await res.json();
 
-      return result;
+      return res.json();
+
     } catch (error) {
       alert('Error! An error occurred.', error);
     }
@@ -31,14 +30,14 @@ class ApiService {
         },
         body: JSON.stringify(data),
       };
-
       const res = await fetch(url, option);
-      const result = await res.json();
 
-      return result;
+      return res.json();
+
     } catch (error) {
       alert('An error occurred while creating movie', error);
     }
+
   }
 
   /**
@@ -54,14 +53,14 @@ class ApiService {
         },
         body: JSON.stringify(data),
       };
-
       const res = await fetch(url, option);
-      const result = await res.json();
 
-      return result;
+      return res.json();
+
     } catch (error) {
       alert('An error occurred while update movie', error);
     }
+
   }
 
   /**
@@ -76,14 +75,14 @@ class ApiService {
           'Content-Type': 'application/json',
         },
       };
-
       const res = await fetch(url, option);
-      const result = await res.json();
 
-      return result;
+      return res.json();
+
     } catch (error) {
       alert('An error occurred while removing movie', error);
     }
+
   }
 }
 
