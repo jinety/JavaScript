@@ -7,4 +7,4 @@ const MESSAGES = {
   empty: 'Value should be not empty',
 };
 
-export { EMPTY_TEXT, MESSAGES, DASHBOARD_PAGE };
+export { EMPTY_TEXT, MESSAGES };
