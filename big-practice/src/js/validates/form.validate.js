@@ -1,13 +1,13 @@
 import { MESSAGES, EMPTY_TEXT } from '../constants/message.constant';
 import { EMAIL_REGEX } from '../constants/regex.constant';
 
-export class FormValidate {
+class FormValidate {
   /**
-  * Email check function is not valid
-  *
-  * @param {string} value - Comparative value
-  */
-  static isValidEmail(value) {
+   * Email check function is not valid
+   *
+   * @param {string} value - Comparative value
+   */
+  isValidEmail(value) {
     if (EMAIL_REGEX.test(value)) {
       return false;
     }
@@ -16,11 +16,11 @@ export class FormValidate {
   }
 
   /**
-  * Checks for an empty value
-  *
-  * @param {string} value - Comparative value
-  */
-  static isEmpty(value) {
+   * Checks for an empty value
+   *
+   * @param {*} value
+   */
+  isEmpty(value) {
     if (!value) {
       return true;
     }
@@ -29,12 +29,12 @@ export class FormValidate {
   }
 
   /**
-  * Validate form
-  *
-  * @param {object} data - The data object contains all the input elements
-  * @param {object} config - EX: config = { name: ['empty'], password: ['passwordFormat'] }
-  */
-  static validateForm(data, config) {
+   * Validate form
+   *
+   * @param {object} data - The data object contains all the input elements
+   * @param {object} config - EX: config = { name: ['empty'], password: ['passwordFormat'] }
+   */
+  validateForm(data, config) {
     const formValidation = {
       isValid: true,
       errors: {},
@@ -68,3 +68,5 @@ export class FormValidate {
     return formValidation;
   }
 }
+
+export const formValidate = new FormValidate();

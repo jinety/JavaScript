@@ -2,7 +2,7 @@ import { Validation } from '../validates/form.validate';
 import { EMPTY_TEXT, MOVIES_API, MESSAGES } from '../constants/message.constant';
 import {
   getApi, postApi, putApi, deleteApi,
-} from '../services/api-service.service';
+} from '../services/api.service';
 import { showErrorMessage } from '../helpers/show-message.helper';
 
 // Query elements

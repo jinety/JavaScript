@@ -13,6 +13,6 @@
   "rules": {
     "semi": ["error", "always"],
     "import/prefer-default-export": "off",
-    "quotes": ["error", "double"]
+    "quotes": ["error", "single", { "avoidEscape": true }]
   }
 }
