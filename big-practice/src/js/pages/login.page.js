@@ -86,7 +86,7 @@ class Login {
   /**
    * Prevent returning to login page if there is data in localStorage
    */
-  goToDashboardPage() {
+  checkUserLogin() {
     if (localStorage.getItem(USERNAME_KEY)) {
       window.location.href = DASHBOARD_PAGE;
     }
@@ -96,4 +96,4 @@ class Login {
 const loginPage = new Login();
 
 loginPage.addLoginEvent();
-loginPage.goToDashboardPage();
+loginPage.checkUserLogin();
