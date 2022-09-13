@@ -1,10 +1,12 @@
 import { formValidate } from '../validates/form.validate';
+import { apiService } from '../service/api.service';
+import { DocumentHelper } from '../helpers/document.helper';
+import { HidingElement } from '../helpers/hiding-element.helper';
+import { HidingModal } from '../helpers/hiding-modal.helper';
+import { ShowElement } from '../helpers/showing-element.helper';
+import { ShowingModal } from '../helpers/showing-modal.helper';
 import { MOVIES_API } from '../constants/url-api.constant';
 import { EMPTY_TEXT, MESSAGES } from '../constants/message.constant';
-import {
-  get, post, put, remove,
-} from '../service/api.service';
-import { DocumentHelper } from '../helpers/document.helper';
 import { USERNAME_KEY, LOGIN_PAGE } from '../constants/app.constant';
 
 class Dashboard {
@@ -24,51 +26,6 @@ class Dashboard {
   modalWarningCancelBtn = document.querySelector('.modal-warning .cancel-btn');
   modalWarningDeleteBtn = document.querySelector('.modal-warning .delete-btn');
   logoutBtn = document.querySelector('.site-header .logout-btn');
-
-  /**
- * Hide modal
- *
- * @param {element} element - Element of modal
- */
-  hideModal(element) {
-    element.classList.remove('modal-show');
-  }
-
-  /**
-   * Show modal
-   *
-   * @param {element} element - Element of modal
-   */
-  showModal(element) {
-    element.classList.add('modal-show');
-  }
-
-  /**
-   * Hide element
-   *
-   * @param {element} element - Element
-   */
-  hideElement(element) {
-    element.classList.add('hide');
-  }
-
-  /**
-   * Show element
-   *
-   * @param {element} element - Element
-   */
-  showElement(element) {
-    element.classList.remove('hide');
-  }
-
-  /**
-   * Clean error message
-   *
-   * @param {HtmlInputElement} element - Element input
-   */
-  cleanErrorMessage(element) {
-    DocumentHelper.showErrorMessage(element, EMPTY_TEXT);
-  }
 
   // /**
   //  * Modal form update will appear when clicking the update button in the table
@@ -125,7 +82,6 @@ class Dashboard {
       });
 
       this.tableBody.innerHTML = tableTemplate;
-      // return result;
     } catch (error) {
       alert('An error occurred while getting movie', error);
     }
@@ -250,7 +206,7 @@ class Dashboard {
   // });
 
   // Clicking on the logout button will log out of your account and return to the login page
-  logoutPage() {
+  handleUserLogout() {
     this.logoutBtn.addEventListener('click', () => {
       // Remove username from localStorage
       localStorage.removeItem('username');
@@ -263,7 +219,7 @@ class Dashboard {
   checkUserLogin() {
     // Allow return to login page if localStorage has no data
     if (!localStorage.getItem(USERNAME_KEY)) {
-      // window.location.href = LOGIN_PAGE;
+      window.location.href = LOGIN_PAGE;
       return;
     }
   }
@@ -279,4 +235,4 @@ const dashboardPage = new Dashboard();
 dashboardPage.checkUserLogin();
 dashboardPage.showUserName();
 dashboardPage.renderTable();
-dashboardPage.logoutPage();
+dashboardPage.handleUserLogout();
