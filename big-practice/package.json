@@ -2,18 +2,20 @@
   "name": "big-practice",
   "version": "1.0.0",
   "source": [
-    "src/login.html",
+    "src/index.html",
     "src/dashboard.html"
   ],
   "scripts": {
     "server": "npx json-server --watch ./db.json",
-    "start": "parcel src/login.html src/dashboard.html"
+    "start": "parcel src/index.html src/dashboard.html"
   },
-  "author": "Hoa Nguyen <vhoa1000@gmail.com>",
   "devDependencies": {
-    "eslint": "^8.22.0",
+    "eslint": "^8.23.0",
+    "parcel": "^2.7.0"
+  },
+  "dependencies": {
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "parcel": "^2.6.2"
+    "eslint-plugin-markdown": "^3.0.0"
   }
 }

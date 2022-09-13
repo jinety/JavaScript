@@ -1,9 +1,9 @@
-import { validateForm } from './validation';
-import { EMPTY_TEXT, MOVIES_API, MESSAGES } from './constant';
+import { Validation } from '../validates/form.validate';
+import { EMPTY_TEXT, MOVIES_API, MESSAGES } from '../constants/message.constant';
 import {
   getApi, postApi, putApi, deleteApi,
-} from './api-service';
-import { showErrorMessage } from './show-message';
+} from '../service/api.service';
+import { showErrorMessage } from '../helpers/document.helper';
 
 // Query elements
 const tableBody = document.getElementById('tableBody');
@@ -160,7 +160,7 @@ const handleCreateForm = () => {
     director: ['empty'],
     nation: ['empty'],
   };
-  const validate = validateForm(data, config);
+  const validate = Validation.validateForm(data, config);
 
   if (!validate.isValid) {
     showErrorMessage(nameMovieInput, validate.errors.name);
