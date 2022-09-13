@@ -21,4 +21,22 @@ export class DocumentHelper {
   cleanErrorMessage(element) {
     this.showErrorMessage(element, EMPTY_TEXT);
   }
+
+  /**
+   * Hide element
+   *
+   * @param {ElementCSSInlineStyle} element - Element
+   */
+  static hideElement(element) {
+    element.classList.add('hide');
+  }
+
+  /**
+   * Show element
+   *
+   * @param {ElementCSSInlineStyle} element - Element
+   */
+  static showElement(element) {
+    element.classList.remove('hide');
+  }
 }

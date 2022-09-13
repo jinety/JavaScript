@@ -1,10 +1,7 @@
 import { formValidate } from '../validates/form.validate';
 import { apiService } from '../service/api.service';
 import { DocumentHelper } from '../helpers/document.helper';
-import { HidingElement } from '../helpers/hiding-element.helper';
-import { HidingModal } from '../helpers/hiding-modal.helper';
-import { ShowElement } from '../helpers/showing-element.helper';
-import { ShowingModal } from '../helpers/showing-modal.helper';
+import { ModalHelper } from '../helpers/modal.helper';
 import { MOVIES_API } from '../constants/url-api.constant';
 import { EMPTY_TEXT, MESSAGES } from '../constants/message.constant';
 import { USERNAME_KEY, LOGIN_PAGE } from '../constants/app.constant';
@@ -26,6 +23,13 @@ class Dashboard {
   modalWarningCancelBtn = document.querySelector('.modal-warning .cancel-btn');
   modalWarningDeleteBtn = document.querySelector('.modal-warning .delete-btn');
   logoutBtn = document.querySelector('.site-header .logout-btn');
+
+  constructor() {
+    this.checkUserLogin();
+    this.showUserName();
+    this.renderTable();
+    this.handleUserLogout();
+  }
 
   // /**
   //  * Modal form update will appear when clicking the update button in the table
@@ -61,8 +65,7 @@ class Dashboard {
    */
   async renderTable() {
     try {
-      const res = await fetch(MOVIES_API);
-      const result = await res.json();
+      const result = await apiService.get(MOVIES_API);
       let tableTemplate = '';
 
       result.forEach((movie) => {
@@ -205,8 +208,11 @@ class Dashboard {
   //   hideModal(modalWarning);
   // });
 
-  // Clicking on the logout button will log out of your account and return to the login page
+  /**
+   * Handling user logout
+   */
   handleUserLogout() {
+    // Clicking on the logout button will log out of your account and return to the login page
     this.logoutBtn.addEventListener('click', () => {
       // Remove username from localStorage
       localStorage.removeItem('username');
@@ -216,23 +222,22 @@ class Dashboard {
     });
   }
 
+  /**
+   * Check user login
+   */
   checkUserLogin() {
     // Allow return to login page if localStorage has no data
     if (!localStorage.getItem(USERNAME_KEY)) {
       window.location.href = LOGIN_PAGE;
-      return;
     }
   }
 
+  /**
+   * Display username after successful login
+   */
   showUserName() {
-    // Display username after successful login
     this.accountName.innerHTML = localStorage.getItem('username');
   }
 }
 
 const dashboardPage = new Dashboard();
-
-dashboardPage.checkUserLogin();
-dashboardPage.showUserName();
-dashboardPage.renderTable();
-dashboardPage.handleUserLogout();
