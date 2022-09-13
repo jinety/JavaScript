@@ -89,6 +89,7 @@ class Login {
   checkUserLogin() {
     if (localStorage.getItem(USERNAME_KEY)) {
       window.location.href = DASHBOARD_PAGE;
+      return;
     }
   }
 }

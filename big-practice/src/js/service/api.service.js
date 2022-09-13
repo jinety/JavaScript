@@ -49,7 +49,7 @@ class ApiService {
   /**
    * Remove by calling API
    */
-  async delete(url) {
+  async remove(url) {
     // DELETE method implementation
     const option = {
       method: 'DELETE',
