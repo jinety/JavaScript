@@ -1,6 +1,6 @@
 export class MovieTemplate {
-  static renderTable(move) {
-    const test = `
+  static renderTableRow(move) {
+    const tableRow = `
     <tr class="content-row">
       <td>${move.id}</td>
       <td>${move.name}</td>
@@ -14,6 +14,6 @@ export class MovieTemplate {
       </td>
     </tr>`;
 
-    return test;
+    return tableRow;
   }
 }

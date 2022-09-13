@@ -70,7 +70,7 @@ class Dashboard {
       let tableTemplate = '';
 
       result.forEach((movie) => {
-        tableTemplate += MovieTemplate.renderTable(movie);
+        tableTemplate += MovieTemplate.renderTableRow(movie);
       });
 
       this.tableBody.innerHTML = tableTemplate;
