@@ -3,13 +3,18 @@ import { apiService } from '../service/api.service';
 import { DocumentHelper } from '../helpers/document.helper';
 import { ACCOUNTS_API } from '../constants/url-api.constant';
 import { MESSAGES, EMPTY_TEXT } from '../constants/message.constant';
-import { DASHBOARD_PAGE, USERNAME_KEY } from '../constants/app.constant';
+import { DASHBOARD_PAGE, USERNAME_KEY, LOGIN_PAGE } from '../constants/app.constant';
 
 class Login {
   loginBtn = document.getElementById('loginBtn');
   emailInput = document.getElementById('email');
   passwordInput = document.getElementById('password');
   generalWarnMsg = document.querySelector('.general-warn-msg');
+
+  constructor() {
+    this.addLoginEvent();
+    this.checkUserLogin();
+  }
 
   /**
    * Handling account login to dashboard
@@ -94,6 +99,3 @@ class Login {
 }
 
 const loginPage = new Login();
-
-loginPage.addLoginEvent();
-loginPage.checkUserLogin();
