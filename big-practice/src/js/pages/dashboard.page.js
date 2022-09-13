@@ -2,6 +2,7 @@ import { formValidate } from '../validates/form.validate';
 import { apiService } from '../service/api.service';
 import { DocumentHelper } from '../helpers/document.helper';
 import { ModalHelper } from '../helpers/modal.helper';
+import { MovieTemplate } from '../templates/movie.template';
 import { MOVIES_API } from '../constants/url-api.constant';
 import { EMPTY_TEXT, MESSAGES } from '../constants/message.constant';
 import { USERNAME_KEY, LOGIN_PAGE } from '../constants/app.constant';
@@ -27,7 +28,7 @@ class Dashboard {
   constructor() {
     this.checkUserLogin();
     this.showUserName();
-    this.renderTable();
+    this.handleRenderTable();
     this.handleUserLogout();
   }
 
@@ -61,27 +62,15 @@ class Dashboard {
   // }
 
   /**
-   * Takes data from the API and displays it on a table in HTML
+   * Handling getting data from the API and displaying it on a table in HTML
    */
-  async renderTable() {
+  async handleRenderTable() {
     try {
       const result = await apiService.get(MOVIES_API);
       let tableTemplate = '';
 
       result.forEach((movie) => {
-        tableTemplate += `
-          <tr class="content-row">
-            <td>${movie.id}</td>
-            <td>${movie.name}</td>
-            <td>${movie.director}</td>
-            <td>${movie.nation}</td>
-            <td>
-              <button type="button" class="btn table-update-btn" data-id=${movie.id}>Update</button>
-            </td>
-            <td>
-              <button type="button" class="btn table-delete-btn" data-id=${movie.id}>Delete</button>
-            </td>
-          </tr>`;
+        tableTemplate += MovieTemplate.renderTable(movie);
       });
 
       this.tableBody.innerHTML = tableTemplate;
@@ -209,7 +198,7 @@ class Dashboard {
   // });
 
   /**
-   * Handling user logout
+   * Handle user logout when user clicks logout button
    */
   handleUserLogout() {
     // Clicking on the logout button will log out of your account and return to the login page
@@ -223,7 +212,7 @@ class Dashboard {
   }
 
   /**
-   * Check user login
+   * Check if logged in user information is in localStorage
    */
   checkUserLogin() {
     // Allow return to login page if localStorage has no data

@@ -25,7 +25,7 @@ export class DocumentHelper {
   /**
    * Hide element
    *
-   * @param {ElementCSSInlineStyle} element - Element
+   * @param {HTMLElement} element - Element
    */
   static hideElement(element) {
     element.classList.add('hide');
@@ -34,7 +34,7 @@ export class DocumentHelper {
   /**
    * Show element
    *
-   * @param {ElementCSSInlineStyle} element - Element
+   * @param {HTMLElement} element - Element
    */
   static showElement(element) {
     element.classList.remove('hide');
