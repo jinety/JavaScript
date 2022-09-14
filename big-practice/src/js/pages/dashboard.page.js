@@ -35,6 +35,13 @@ class Dashboard {
     this.handleRenderTable();
   }
 
+  resetForm() {
+    this.form.reset();
+    DocumentHelper.cleanErrorMessage(this.nameMovieInput);
+    DocumentHelper.cleanErrorMessage(this.directorInput);
+    DocumentHelper.cleanErrorMessage(this.nationInput);
+  }
+
   // /**
   //  * Modal form update will appear when clicking the update button in the table
   //  *
@@ -110,7 +117,13 @@ class Dashboard {
 
       if (movieList.length === 0) {
         await apiService.post(MOVIES_API, data);
-        await this.handleRenderTable();
+        const result = await apiService.get(MOVIES_API);
+        const newRow = this.tableBody.insertRow();
+
+        result.forEach((movie) => {
+          newRow.innerHTML = MovieTemplate.renderTableRow(movie);
+        });
+
         ModalHelper.hideModal(this.modalForm);
       } else {
         DocumentHelper.showErrorMessage(this.nameMovieInput, MESSAGES.exist);
@@ -173,7 +186,6 @@ class Dashboard {
   handleLayoutMainAddBtn() {
     // Popup to add user when clicking on Add button.
     this.layoutMainAddBtn.addEventListener('click', () => {
-      this.form.reset();
       ModalHelper.showModal(this.modalForm);
       DocumentHelper.hideElement(this.modalFormUpdateBtn);
       DocumentHelper.showElement(this.modalFormCreateBtn);
@@ -197,9 +209,7 @@ class Dashboard {
     // Exit modal when clicking cancel button
     this.modalFormCancelBtn.addEventListener('click', () => {
       ModalHelper.hideModal(this.modalForm);
-      DocumentHelper.cleanErrorMessage(this.nameMovieInput);
-      DocumentHelper.cleanErrorMessage(this.directorInput);
-      DocumentHelper.cleanErrorMessage(this.nationInput);
+      this.resetForm();
     });
   }
 
