@@ -18,7 +18,7 @@ export class DocumentHelper {
     *
     * @param {HtmlInputElement} element - Element input
     */
-  cleanErrorMessage(element) {
+  static cleanErrorMessage(element) {
     this.showErrorMessage(element, EMPTY_TEXT);
   }
 

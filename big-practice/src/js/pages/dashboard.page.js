@@ -28,8 +28,11 @@ class Dashboard {
   constructor() {
     this.checkUserLogin();
     this.showUserName();
-    this.handleRenderTable();
     this.handleUserLogout();
+    this.handleLayoutMainAddBtn();
+    this.handleModalFormCreateBtn();
+    this.handleModalFormCancelBtn();
+    this.handleRenderTable();
   }
 
   // /**
@@ -79,38 +82,43 @@ class Dashboard {
     }
   }
 
-  // /**
-  //  * Handle create form
-  //  */
-  // handleCreateForm() {
-  //   const data = {
-  //     name: nameMovieInput.value,
-  //     director: directorInput.value,
-  //     nation: nationInput.value,
-  //   };
-  //   const config = {
-  //     name: ['empty'],
-  //     director: ['empty'],
-  //     nation: ['empty'],
-  //   };
-  //   const validate = Validation.validateForm(data, config);
+  /**
+   * Handling create form  by calling API
+   */
+  async handleCreateForm() {
+    try {
+      const data = {
+        name: this.nameMovieInput.value,
+        director: this.directorInput.value,
+        nation: this.nationInput.value,
+      };
+      const config = {
+        name: ['empty'],
+        director: ['empty'],
+        nation: ['empty'],
+      };
+      const validate = formValidate.validateForm(data, config);
 
-  //   if (!validate.isValid) {
-  //     showErrorMessage(nameMovieInput, validate.errors.name);
-  //     showErrorMessage(directorInput, validate.errors.director);
-  //     showErrorMessage(nationInput, validate.errors.nation);
-  //     return;
-  //   }
+      if (!validate.isValid) {
+        DocumentHelper.showErrorMessage(this.nameMovieInput, validate.errors.name);
+        DocumentHelper.showErrorMessage(this.directorInput, validate.errors.director);
+        DocumentHelper.showErrorMessage(this.nationInput, validate.errors.nation);
+        return;
+      }
 
-  //   getApi(`${MOVIES_API}?name=${data.name}`, (movieList) => {
-  //     if (movieList.length === 0) {
-  //       postApi(MOVIES_API, data, () => { renderTable(); });
-  //       hideModal(modalForm);
-  //     } else {
-  //       showErrorMessage(nameMovieInput, MESSAGES.exist);
-  //     }
-  //   });
-  // }
+      const movieList = await apiService.get(`${MOVIES_API}?name=${data.name}`);
+
+      if (movieList.length === 0) {
+        await apiService.post(MOVIES_API, data);
+        await this.handleRenderTable();
+        ModalHelper.hideModal(this.modalForm);
+      } else {
+        DocumentHelper.showErrorMessage(this.nameMovieInput, MESSAGES.exist);
+      }
+    } catch (error) {
+      alert('An error occurred while creating a new movie', error);
+    }
+  }
 
   // /**
   //  * Handle update form
@@ -159,26 +167,41 @@ class Dashboard {
   //   });
   // }
 
-  // // Popup to add user when clicking on Add button.
-  // this.layoutMainAddBtn.addEventListener('click', () => {
-  //   form.reset();
-  //   showModal(modalForm);
-  //   hideElement(modalFormUpdateBtn);
-  //   showElement(modalFormCreateBtn);
-  // });
+  /**
+   * Handle modal appearance when user clicks add button
+   */
+  handleLayoutMainAddBtn() {
+    // Popup to add user when clicking on Add button.
+    this.layoutMainAddBtn.addEventListener('click', () => {
+      this.form.reset();
+      ModalHelper.showModal(this.modalForm);
+      DocumentHelper.hideElement(this.modalFormUpdateBtn);
+      DocumentHelper.showElement(this.modalFormCreateBtn);
+    });
+  }
 
-  // New movie will be created when clicking create button
-  // modalFormCreateBtn.addEventListener('click', () => {
-  //   handleCreateForm();
-  // });
+  /**
+   * Handle creating new movie when user clicks create movie button
+   */
+  handleModalFormCreateBtn() {
+    // New movie will be created when clicking create button
+    this.modalFormCreateBtn.addEventListener('click', async () => {
+      await this.handleCreateForm();
+    });
+  }
 
-  // // Exit modal when clicking cancel button
-  // modalFormCancelBtn.addEventListener('click', () => {
-  //   hideModal(modalForm);
-  //   cleanErrorMessage(nameMovieInput);
-  //   cleanErrorMessage(directorInput);
-  //   cleanErrorMessage(nationInput);
-  // });
+  /**
+   * Handle modal exit when user clicks cancel button
+   */
+  handleModalFormCancelBtn() {
+    // Exit modal when clicking cancel button
+    this.modalFormCancelBtn.addEventListener('click', () => {
+      ModalHelper.hideModal(this.modalForm);
+      DocumentHelper.cleanErrorMessage(this.nameMovieInput);
+      DocumentHelper.cleanErrorMessage(this.directorInput);
+      DocumentHelper.cleanErrorMessage(this.nationInput);
+    });
+  }
 
   // // Delete movie from database and table when clicking delete movie button
   // modalWarningDeleteBtn.addEventListener('click', () => {
