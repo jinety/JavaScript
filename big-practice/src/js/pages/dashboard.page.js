@@ -110,19 +110,17 @@ class Dashboard {
         DocumentHelper.showErrorMessage(this.nameMovieInput, validate.errors.name);
         DocumentHelper.showErrorMessage(this.directorInput, validate.errors.director);
         DocumentHelper.showErrorMessage(this.nationInput, validate.errors.nation);
+
         return;
       }
 
       const movieList = await apiService.get(`${MOVIES_API}?name=${data.name}`);
 
       if (movieList.length === 0) {
-        await apiService.post(MOVIES_API, data);
-        const result = await apiService.get(MOVIES_API);
+        const newMovie = await apiService.post(MOVIES_API, data);
         const newRow = this.tableBody.insertRow();
 
-        result.forEach((movie) => {
-          newRow.innerHTML = MovieTemplate.renderTableRow(movie);
-        });
+        newRow.innerHTML = MovieTemplate.renderTableRow(newMovie);
 
         ModalHelper.hideModal(this.modalForm);
       } else {
