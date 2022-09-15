@@ -4,7 +4,7 @@ import { DocumentHelper } from '../helpers/document.helper';
 import { ModalHelper } from '../helpers/modal.helper';
 import { MovieTemplate } from '../templates/movie.template';
 import { MOVIES_API } from '../constants/url-api.constant';
-import { EMPTY_TEXT, MESSAGES } from '../constants/message.constant';
+import { MESSAGES } from '../constants/message.constant';
 import { USERNAME_KEY, LOGIN_PAGE } from '../constants/app.constant';
 
 class Dashboard {
@@ -32,6 +32,7 @@ class Dashboard {
     this.handleLayoutMainAddBtn();
     this.handleModalFormCreateBtn();
     this.handleModalFormCancelBtn();
+    this.handleModalFormUpdateBtn();
     this.handleRenderTable();
   }
 
@@ -42,22 +43,33 @@ class Dashboard {
     DocumentHelper.cleanErrorMessage(this.nationInput);
   }
 
-  // /**
-  //  * Modal form update will appear when clicking the update button in the table
-  //  *
-  //  * @param {element} item - Table update button
-  //  */
-  // tableUpdateBtn(item) {
+  /**
+   * Modal form update will appear when clicking the update button in the table
+   *
+   * @param {element} item - Table update button
+   */
+  // async tableUpdateBtn(item) {
   //   const movieId = item.dataset.id;
 
-  //   showModal(modalForm);
-  //   getApi(`${MOVIES_API}/${movieId}`, (movieData) => {
-  //     nameMovieInput.value = movieData.name;
-  //     directorInput.value = movieData.director;
-  //     nationInput.value = movieData.nation;
-  //     form.setAttribute('data-id', movieId);
-  //   });
+  //   ModalHelper.showModal(this.modalForm);
+  //   const movieData = await apiService.get(`${MOVIES_API}/${movieId}`);
+
+  //   this.nameMovieInput.value = movieData.name;
+  //   this.directorInput.value = movieData.director;
+  //   this.nationInput.value = movieData.nation;
+  //   this.form.setAttribute('data-id', movieId);
   // }
+
+  async tableUpdateBtn(item) {
+    const movieId = item.dataset.id;
+
+    ModalHelper.showModal(this.modalForm);
+    const movieData = await apiService.get(`${MOVIES_API}/${movieId}`);
+    this.nameMovieInput.value = movieData.name;
+    this.directorInput.value = movieData.director;
+    this.nationInput.value = movieData.nation;
+    this.form.setAttribute('data-id', movieId);
+  }
 
   // /**
   //  * Modal warning will appear when clicking delete button in the table
@@ -69,6 +81,16 @@ class Dashboard {
 
   //   showModal(modalWarning);
   //   modalWarningDeleteBtn.setAttribute('data-id', movieId);
+  // }
+
+  // handleTableUpdateButtons() {
+  //   MovieTemplate.test().forEach((item) => {
+  //     item.addEventListener('click', async () => {
+  //       await this.tableUpdateBtn(item);
+  //       DocumentHelper.hideElement(this.modalFormCreateBtn);
+  //       DocumentHelper.showElement(this.modalFormUpdateBtn);
+  //     });
+  //   });
   // }
 
   /**
@@ -84,6 +106,14 @@ class Dashboard {
       });
 
       this.tableBody.innerHTML = tableTemplate;
+      const updateButtons = document.querySelectorAll('.table .table-update-btn');
+      updateButtons.forEach((item) => {
+        item.addEventListener('click', async () => {
+          await this.tableUpdateBtn(item);
+          DocumentHelper.hideElement(this.modalFormCreateBtn);
+          DocumentHelper.showElement(this.modalFormUpdateBtn);
+        });
+      });
     } catch (error) {
       alert('An error occurred while getting movie', error);
     }
@@ -131,41 +161,47 @@ class Dashboard {
     }
   }
 
-  // /**
-  //  * Handle update form
-  //  */
-  // handleUpdateForm() {
-  //   const data = {
-  //     name: nameMovieInput.value,
-  //     director: directorInput.value,
-  //     nation: nationInput.value,
-  //   };
-  //   const config = {
-  //     name: ['empty'],
-  //     director: ['empty'],
-  //     nation: ['empty'],
-  //   };
-  //   const validate = validateForm(data, config);
-  //   const formMovieId = form.getAttribute('data-id');
+  /**
+   * Handle update form
+   */
+  async handleUpdateForm() {
+    try {
+      const data = {
+        name: this.nameMovieInput.value,
+        director: this.directorInput.value,
+        nation: this.nationInput.value,
+      };
+      const config = {
+        name: ['empty'],
+        director: ['empty'],
+        nation: ['empty'],
+      };
+      const validate = formValidate.validateForm(data, config);
+      const formMovieId = this.form.getAttribute('data-id');
 
-  //   if (!validate.isValid) {
-  //     showErrorMessage(nameMovieInput, validate.errors.name);
-  //     showErrorMessage(directorInput, validate.errors.director);
-  //     showErrorMessage(nationInput, validate.errors.nation);
-  //     return;
-  //   }
+      if (!validate.isValid) {
+        DocumentHelper.showErrorMessage(this.nameMovieInput, validate.errors.name);
+        DocumentHelper.showErrorMessage(this.directorInput, validate.errors.director);
+        DocumentHelper.showErrorMessage(this.nationInput, validate.errors.nation);
 
-  //   getApi(`${MOVIES_API}?name=${data.name}`, (movieList) => {
-  //     const moviesDoNotExist = movieList.length === 0 || movieList[0].id === parseInt(formMovieId, 10);
+        return;
+      }
 
-  //     if (moviesDoNotExist) {
-  //       putApi(`${MOVIES_API}/${formMovieId}`, data, () => { renderTable(); });
-  //       hideModal(modalForm);
-  //     } else {
-  //       showErrorMessage(nameMovieInput, MESSAGES.exist);
-  //     }
-  //   });
-  // }
+      const movieList = await apiService.get(`${MOVIES_API}?name=${data.name}`);
+      const moviesDoNotExist = movieList.length === 0
+        || movieList[0].id === parseInt(formMovieId, 10);
+
+      if (moviesDoNotExist) {
+        await apiService.put(`${MOVIES_API}/${formMovieId}`, data);
+        await this.handleRenderTable();
+        ModalHelper.hideModal(this.modalForm);
+      } else {
+        DocumentHelper.showErrorMessage(this.nameMovieInput, MESSAGES.exist);
+      }
+    } catch (error) {
+      alert('Something went wrong while updating the movie', error);
+    }
+  }
 
   // /**
   //  * Handle delete movie
@@ -222,11 +258,13 @@ class Dashboard {
   //   hideModal(modalWarning);
   // });
 
-  // // Movie will be updated when the update button is clicked
-  // modalFormUpdateBtn.addEventListener('click', () => {
-  //   handleUpdateForm();
-  //   hideModal(modalWarning);
-  // });
+  handleModalFormUpdateBtn() {
+    // Movie will be updated when the update button is clicked
+    this.modalFormUpdateBtn.addEventListener('click', async () => {
+      await this.handleUpdateForm();
+      ModalHelper.hideModal(this.modalWarning);
+    });
+  }
 
   /**
    * Handle user logout when user clicks logout button
