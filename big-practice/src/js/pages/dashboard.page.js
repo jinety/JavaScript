@@ -162,7 +162,7 @@ class Dashboard {
   }
 
   /**
-   * Handle update form
+   * Handle update form by calling API
    */
   async handleUpdateForm() {
     try {
@@ -191,6 +191,7 @@ class Dashboard {
       const moviesDoNotExist = movieList.length === 0
         || movieList[0].id === parseInt(formMovieId, 10);
 
+      // Check if the movie exists or not
       if (moviesDoNotExist) {
         await apiService.put(`${MOVIES_API}/${formMovieId}`, data);
         await this.handleRenderTable();
