@@ -18,7 +18,7 @@ class Dashboard {
   form = document.querySelector('.form');
   modalForm = document.querySelector('.modal-form');
   modalWarning = document.querySelector('.modal-warning');
-  layoutMainAddBtn = document.querySelector('.layout-main .add-btn');
+  addBtn = document.querySelector('.layout-main .add-btn');
   modalFormCreateBtn = document.querySelector('.modal-form .create-btn');
   modalFormUpdateBtn = document.querySelector('.modal-form .update-btn');
   modalFormCancelBtn = document.querySelector('.modal-form .cancel-btn');
@@ -30,7 +30,7 @@ class Dashboard {
     this.checkUserLogin();
     this.showUserName();
     this.handleUserLogout();
-    this.showModalFormCreateMovie();
+    this.showCreatingMovieModal();
     this.handleCreateNewMovie();
     this.cancelModalForm();
     this.handleUpdateMovie();
@@ -49,7 +49,7 @@ class Dashboard {
    *
    * @param {element} item - Table update button
    */
-  async handleTableUpdate(item) {
+  async showUpdateMovieModal(item) {
     const movieId = item.dataset.id;
     const movieData = await apiService.get(`${MOVIES_API}/${movieId}`);
 
@@ -63,11 +63,11 @@ class Dashboard {
   /**
    * Query to all update buttons in the table
    */
-  queryUpdateButtons() {
+  handleUpdateButtons() {
     const updateButtons = document.querySelectorAll('.table .table-update-btn');
     updateButtons.forEach((item) => {
       item.addEventListener('click', async () => {
-        await this.handleTableUpdate(item);
+        await this.showUpdateMovieModal(item);
         DocumentHelper.hideElement(this.modalFormCreateBtn);
         DocumentHelper.showElement(this.modalFormUpdateBtn);
       });
@@ -99,7 +99,7 @@ class Dashboard {
       });
 
       this.tableBody.innerHTML = tableTemplate;
-      this.queryUpdateButtons();
+      this.handleUpdateButtons();
     } catch (error) {
       alert('An error occurred while getting movie', error);
     }
@@ -183,7 +183,7 @@ class Dashboard {
         const updateMovie = await apiService.put(`${MOVIES_API}/${formMovieId}`, data);
 
         updateRow.innerHTML = MovieTemplate.renderTableRow(updateMovie);
-        this.queryUpdateButtons();
+        this.handleUpdateButtons();
         ModalHelper.hideModal(this.modalForm);
       } else {
         DocumentHelper.showErrorMessage(this.nameMovieInput, MESSAGES.movieExist);
@@ -207,9 +207,9 @@ class Dashboard {
   /**
    * Handle modal appearance when user clicks add button
    */
-  showModalFormCreateMovie() {
+  showCreatingMovieModal() {
     // Popup to add user when clicking on Add button.
-    this.layoutMainAddBtn.addEventListener('click', () => {
+    this.addBtn.addEventListener('click', () => {
       this.form.reset();
       ModalHelper.showModal(this.modalForm);
       DocumentHelper.hideElement(this.modalFormUpdateBtn);
