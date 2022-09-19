@@ -3,6 +3,7 @@ import { apiService } from '../service/api.service';
 import { DocumentHelper } from '../helpers/document.helper';
 import { ModalHelper } from '../helpers/modal.helper';
 import { MovieTemplate } from '../templates/movie.template';
+import { Parse } from '../helpers/parse.helper';
 import { MOVIES_API } from '../constants/url-api.constant';
 import { MESSAGES } from '../constants/message.constant';
 import { USERNAME_KEY, LOGIN_PAGE } from '../constants/app.constant';
@@ -29,10 +30,10 @@ class Dashboard {
     this.checkUserLogin();
     this.showUserName();
     this.handleUserLogout();
-    this.handleLayoutMainAddBtn();
-    this.handleModalFormCreateBtn();
-    this.handleModalFormCancelBtn();
-    this.handleModalFormUpdateBtn();
+    this.handleLayoutMainAdd();
+    this.handleModalFormCreate();
+    this.handleModalFormCancel();
+    this.handleModalFormUpdate();
     this.handleRenderTable();
   }
 
@@ -48,23 +49,11 @@ class Dashboard {
    *
    * @param {element} item - Table update button
    */
-  // async tableUpdateBtn(item) {
-  //   const movieId = item.dataset.id;
-
-  //   ModalHelper.showModal(this.modalForm);
-  //   const movieData = await apiService.get(`${MOVIES_API}/${movieId}`);
-
-  //   this.nameMovieInput.value = movieData.name;
-  //   this.directorInput.value = movieData.director;
-  //   this.nationInput.value = movieData.nation;
-  //   this.form.setAttribute('data-id', movieId);
-  // }
-
-  async tableUpdateBtn(item) {
+  async handleTableUpdate(item) {
     const movieId = item.dataset.id;
+    const movieData = await apiService.get(`${MOVIES_API}/${movieId}`);
 
     ModalHelper.showModal(this.modalForm);
-    const movieData = await apiService.get(`${MOVIES_API}/${movieId}`);
     this.nameMovieInput.value = movieData.name;
     this.directorInput.value = movieData.director;
     this.nationInput.value = movieData.nation;
@@ -83,16 +72,6 @@ class Dashboard {
   //   modalWarningDeleteBtn.setAttribute('data-id', movieId);
   // }
 
-  // handleTableUpdateButtons() {
-  //   MovieTemplate.test().forEach((item) => {
-  //     item.addEventListener('click', async () => {
-  //       await this.tableUpdateBtn(item);
-  //       DocumentHelper.hideElement(this.modalFormCreateBtn);
-  //       DocumentHelper.showElement(this.modalFormUpdateBtn);
-  //     });
-  //   });
-  // }
-
   /**
    * Handling getting data from the API and displaying it on a table in HTML
    */
@@ -107,9 +86,10 @@ class Dashboard {
 
       this.tableBody.innerHTML = tableTemplate;
       const updateButtons = document.querySelectorAll('.table .table-update-btn');
+
       updateButtons.forEach((item) => {
         item.addEventListener('click', async () => {
-          await this.tableUpdateBtn(item);
+          await this.handleTableUpdate(item);
           DocumentHelper.hideElement(this.modalFormCreateBtn);
           DocumentHelper.showElement(this.modalFormUpdateBtn);
         });
@@ -189,12 +169,25 @@ class Dashboard {
 
       const movieList = await apiService.get(`${MOVIES_API}?name=${data.name}`);
       const moviesDoNotExist = movieList.length === 0
-        || movieList[0].id === parseInt(formMovieId, 10);
+        || movieList[0].id === Parse.parseInt(formMovieId);
 
       // Check if the movie exists or not
       if (moviesDoNotExist) {
-        await apiService.put(`${MOVIES_API}/${formMovieId}`, data);
-        await this.handleRenderTable();
+        const rowUpdate = document.querySelector(`[data-id="${formMovieId}"]`);
+        const movieUpdate = await apiService.put(`${MOVIES_API}/${formMovieId}`, data);
+
+        rowUpdate.innerHTML = MovieTemplate.renderTableRow(movieUpdate);
+        const updateButtons = document.querySelectorAll('.table .table-update-btn');
+
+        updateButtons.forEach((item) => {
+          item.addEventListener('click', async () => {
+            await this.handleTableUpdate(item);
+            DocumentHelper.hideElement(this.modalFormCreateBtn);
+            DocumentHelper.showElement(this.modalFormUpdateBtn);
+          });
+        });
+
+        // await this.handleRenderTable();
         ModalHelper.hideModal(this.modalForm);
       } else {
         DocumentHelper.showErrorMessage(this.nameMovieInput, MESSAGES.exist);
@@ -218,7 +211,7 @@ class Dashboard {
   /**
    * Handle modal appearance when user clicks add button
    */
-  handleLayoutMainAddBtn() {
+  handleLayoutMainAdd() {
     // Popup to add user when clicking on Add button.
     this.layoutMainAddBtn.addEventListener('click', () => {
       ModalHelper.showModal(this.modalForm);
@@ -230,7 +223,7 @@ class Dashboard {
   /**
    * Handle creating new movie when user clicks create movie button
    */
-  handleModalFormCreateBtn() {
+  handleModalFormCreate() {
     // New movie will be created when clicking create button
     this.modalFormCreateBtn.addEventListener('click', async () => {
       await this.handleCreateForm();
@@ -240,7 +233,7 @@ class Dashboard {
   /**
    * Handle modal exit when user clicks cancel button
    */
-  handleModalFormCancelBtn() {
+  handleModalFormCancel() {
     // Exit modal when clicking cancel button
     this.modalFormCancelBtn.addEventListener('click', () => {
       ModalHelper.hideModal(this.modalForm);
@@ -259,7 +252,7 @@ class Dashboard {
   //   hideModal(modalWarning);
   // });
 
-  handleModalFormUpdateBtn() {
+  handleModalFormUpdate() {
     // Movie will be updated when the update button is clicked
     this.modalFormUpdateBtn.addEventListener('click', async () => {
       await this.handleUpdateForm();
