@@ -186,7 +186,7 @@ class Dashboard {
         this.queryUpdateButtons();
         ModalHelper.hideModal(this.modalForm);
       } else {
-        DocumentHelper.showErrorMessage(this.nameMovieInput, MESSAGES.exist);
+        DocumentHelper.showErrorMessage(this.nameMovieInput, MESSAGES.movieExist);
       }
     } catch (error) {
       alert('Something went wrong while updating the movie', error);
