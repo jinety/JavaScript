@@ -3,6 +3,7 @@ import { apiService } from '../service/api.service';
 import { DocumentHelper } from '../helpers/document.helper';
 import { ModalHelper } from '../helpers/modal.helper';
 import { MovieTemplate } from '../templates/movie.template';
+import { Parse } from '../helpers/parse.helper';
 import { MOVIES_API } from '../constants/url-api.constant';
 import { MESSAGES } from '../constants/message.constant';
 import { USERNAME_KEY, LOGIN_PAGE } from '../constants/app.constant';
@@ -48,18 +49,6 @@ class Dashboard {
    *
    * @param {element} item - Table update button
    */
-  // async tableUpdateBtn(item) {
-  //   const movieId = item.dataset.id;
-
-  //   ModalHelper.showModal(this.modalForm);
-  //   const movieData = await apiService.get(`${MOVIES_API}/${movieId}`);
-
-  //   this.nameMovieInput.value = movieData.name;
-  //   this.directorInput.value = movieData.director;
-  //   this.nationInput.value = movieData.nation;
-  //   this.form.setAttribute('data-id', movieId);
-  // }
-
   async tableUpdateBtn(item) {
     const movieId = item.dataset.id;
 
@@ -189,12 +178,15 @@ class Dashboard {
 
       const movieList = await apiService.get(`${MOVIES_API}?name=${data.name}`);
       const moviesDoNotExist = movieList.length === 0
-        || movieList[0].id === parseInt(formMovieId, 10);
+        || movieList[0].id === Parse.parseInt(formMovieId);
 
       // Check if the movie exists or not
       if (moviesDoNotExist) {
-        await apiService.put(`${MOVIES_API}/${formMovieId}`, data);
-        await this.handleRenderTable();
+        const rowUpdate = document.querySelector(`[data-id="${formMovieId}"]`);
+        console.log(rowUpdate);
+        const dataMovieUpdate = await apiService.put(`${MOVIES_API}/${formMovieId}`, data);
+        rowUpdate.innerHTML = MovieTemplate.renderTableRow(dataMovieUpdate);
+        // await this.handleRenderTable();
         ModalHelper.hideModal(this.modalForm);
       } else {
         DocumentHelper.showErrorMessage(this.nameMovieInput, MESSAGES.exist);

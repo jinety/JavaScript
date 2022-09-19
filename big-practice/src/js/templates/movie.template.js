@@ -1,7 +1,7 @@
 export class MovieTemplate {
   static renderTableRow(move) {
     const tableRow = `
-    <tr class="content-row">
+    <tr class="content-row" data-id=${move.id}>
       <td>${move.id}</td>
       <td>${move.name}</td>
       <td>${move.director}</td>
