@@ -32,8 +32,10 @@ class Dashboard {
     this.handleUserLogout();
     this.showCreatingMovieModal();
     this.addEventForCreateButton();
-    this.cancelModalForm();
     this.addEventForUpdateButton();
+    this.cancelModalForm();
+    this.addEventForDeleteButton();
+    this.cancelModalWarning();
     this.handleRenderTable();
   }
 
@@ -65,6 +67,7 @@ class Dashboard {
    */
   handleUpdateButtons() {
     const updateButtons = document.querySelectorAll('.table .table-update-btn');
+
     updateButtons.forEach((item) => {
       item.addEventListener('click', async () => {
         await this.showUpdateMovieModal(item);
@@ -74,17 +77,30 @@ class Dashboard {
     });
   }
 
-  // /**
-  //  * Modal warning will appear when clicking delete button in the table
-  //  *
-  //  * @param {element} item - Table delete button
-  //  */
-  // tableDeleteBtn(item) {
-  //   const movieId = item.dataset.id;
+  /**
+   * Modal warning will appear when clicking delete button in the table
+   *
+   * @param {element} item - Table delete button
+   */
+  showDeleteMovieModal(item) {
+    const movieId = item.dataset.id;
 
-  //   showModal(modalWarning);
-  //   modalWarningDeleteBtn.setAttribute('data-id', movieId);
-  // }
+    ModalHelper.showModal(this.modalWarning);
+    this.modalWarningDeleteBtn.setAttribute('data-id', movieId);
+  }
+
+  /**
+   * Query to all delete buttons in the table
+   */
+  handleDeleteButtons() {
+    const tableDeleteButtons = document.querySelectorAll('.table .table-delete-btn');
+
+    tableDeleteButtons.forEach((item) => {
+      item.addEventListener('click', () => {
+        this.showDeleteMovieModal(item);
+      });
+    });
+  }
 
   /**
    * Handling getting data from the API and displaying it on a table in HTML
@@ -100,6 +116,7 @@ class Dashboard {
 
       this.tableBody.innerHTML = tableTemplate;
       this.handleUpdateButtons();
+      this.handleDeleteButtons();
     } catch (error) {
       alert('An error occurred while getting movie', error);
     }
@@ -184,6 +201,7 @@ class Dashboard {
 
         updateRow.innerHTML = MovieTemplate.renderTableRow(updateMovie);
         this.handleUpdateButtons();
+        this.handleDeleteButtons();
         ModalHelper.hideModal(this.modalForm);
       } else {
         DocumentHelper.showErrorMessage(this.nameMovieInput, MESSAGES.movieExist);
@@ -193,16 +211,16 @@ class Dashboard {
     }
   }
 
-  // /**
-  //  * Handle delete movie
-  //  */
-  // handleDeleteMovie() {
-  //   const deleteBtnWarningId = modalWarningDeleteBtn.getAttribute('data-id');
+  /**
+   * Handle movie by calling API
+   */
+  async handleDeleteMovie() {
+    const deleteBtnWarningId = this.modalWarningDeleteBtn.getAttribute('data-id');
+    const deleteRow = document.querySelector(`[data-id="${deleteBtnWarningId}"]`);
 
-  //   deleteApi(`${MOVIES_API}/${deleteBtnWarningId}`, () => {
-  //     renderTable();
-  //   });
-  // }
+    await apiService.delete(`${MOVIES_API}/${deleteBtnWarningId}`);
+    deleteRow.remove();
+  }
 
   /**
    * Handle modal appearance when user clicks add button
@@ -238,16 +256,24 @@ class Dashboard {
     });
   }
 
-  // // Delete movie from database and table when clicking delete movie button
-  // modalWarningDeleteBtn.addEventListener('click', () => {
-  //   handleDeleteMovie();
-  //   hideModal(modalWarning);
-  // });
+  /**
+   * Handle the deletion of the movie when the user presses the delete button
+   */
+  addEventForDeleteButton() {
+    this.modalWarningDeleteBtn.addEventListener('click', async () => {
+      await this.handleDeleteMovie();
+      ModalHelper.hideModal(this.modalWarning);
+    });
+  }
 
-  // // Exit modal movie when clicking cancel button
-  // modalWarningCancelBtn.addEventListener('click', () => {
-  //   hideModal(modalWarning);
-  // });
+  /**
+   * Handle modal warning exit when user clicks cancel button
+   */
+  cancelModalWarning() {
+    this.modalWarningCancelBtn.addEventListener('click', () => {
+      ModalHelper.hideModal(this.modalWarning);
+    });
+  }
 
   /**
    * Handle updating movie to table when user clicks on update button
