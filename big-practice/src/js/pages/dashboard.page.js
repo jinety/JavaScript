@@ -154,7 +154,6 @@ class Dashboard {
         const newRow = this.tableBody.insertRow();
 
         newRow.innerHTML = MovieTemplate.renderTableRow(newMovie);
-
         ModalHelper.hideModal(this.modalForm);
       } else {
         DocumentHelper.showErrorMessage(this.nameMovieInput, MESSAGES.movieExist);
