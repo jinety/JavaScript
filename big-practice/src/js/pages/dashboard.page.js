@@ -31,9 +31,9 @@ class Dashboard {
     this.showUserName();
     this.handleUserLogout();
     this.showCreatingMovieModal();
-    this.createNewMovie();
+    this.addEventForCreateButton();
     this.cancelModalForm();
-    this.updateMovie();
+    this.addEventForUpdateButton();
     this.handleRenderTable();
   }
 
@@ -220,7 +220,7 @@ class Dashboard {
   /**
    * Handle creating new movie when user clicks create movie button
    */
-  createNewMovie() {
+  addEventForCreateButton() {
     // New movie will be created when clicking create button
     this.modalFormCreateBtn.addEventListener('click', async () => {
       await this.handleCreateForm();
@@ -252,7 +252,7 @@ class Dashboard {
   /**
    * Handle updating movie to table when user clicks on update button
    */
-  updateMovie() {
+  addEventForUpdateButton() {
     // Movie will be updated when the update button is clicked
     this.modalFormUpdateBtn.addEventListener('click', async () => {
       await this.handleUpdateForm();
