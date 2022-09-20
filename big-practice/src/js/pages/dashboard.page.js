@@ -153,6 +153,12 @@ class Dashboard {
         const newMovie = await apiService.post(MOVIES_API, data);
         const newRow = this.tableBody.insertRow();
 
+        // Add class for new row
+        newRow.className = 'content-row';
+
+        // Set attribute for new row
+        newRow.setAttribute('data-id', newMovie.id);
+
         newRow.innerHTML = MovieTemplate.renderTableRow(newMovie);
         ModalHelper.hideModal(this.modalForm);
       } else {
