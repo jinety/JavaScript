@@ -1,7 +1,7 @@
 export class ParseHelper {
   static parseInt(value) {
-    const stringAnalysis = parseInt(value, 10);
+    const number = parseInt(value);
 
-    return stringAnalysis;
+    return number;
   }
 }
