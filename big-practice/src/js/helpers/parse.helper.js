@@ -1,7 +1,10 @@
 export class ParseHelper {
+  /**
+   * Parses a string and returns an integer
+   *
+   * @param {string} value - String value
+   */
   static parseInt(value) {
-    const number = parseInt(value);
-
-    return number;
+    return parseInt(value);
   }
 }
