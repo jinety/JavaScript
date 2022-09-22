@@ -35,7 +35,6 @@ class FormValidate {
     // Point to the key in the data object
     Object.keys(data).forEach((key) => {
       const value = data[key];
-      console.log(value, this.isValidEmail(value));
 
       // There is a key in the config
       if (config[key]) {
@@ -48,8 +47,8 @@ class FormValidate {
           }
 
           // If there is an format word, continue to consider the isValidEmail condition
-          if (validationType === 'formatEmail' && this.isValidEmail(value)) {
-            formValidation.isValid = true;
+          if (validationType === 'formatEmail' && !this.isValidEmail(value)) {
+            formValidation.isValid = false;
             formValidation.errors[key] = MESSAGES.emailWrongFormat;
             return;
           }
