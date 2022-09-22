@@ -55,6 +55,8 @@ class FormValidate {
           if (validationType === 'formatEmail' && this.isValidEmail(value)) {
             formValidation.isValid = false;
             formValidation.errors[key] = MESSAGES.emailWrongFormat;
+
+            return;
           }
 
           formValidation.errors[key] = EMPTY_TEXT;
