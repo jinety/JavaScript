@@ -8,11 +8,7 @@ class FormValidate {
    * @param {string} value - Comparative value
    */
   isValidEmail(value) {
-    if (EMAIL_REGEX.test(value)) {
-      return false;
-    }
-
-    return true;
+    return EMAIL_REGEX.test(value);
   }
 
   /**
@@ -21,11 +17,7 @@ class FormValidate {
    * @param {string} value - Comparative value
    */
   isEmpty(value) {
-    if (!value) {
-      return true;
-    }
-
-    return false;
+    return !value;
   }
 
   /**
@@ -56,9 +48,11 @@ class FormValidate {
           }
 
           // If there is an format word, continue to consider the isValidEmail condition
-          if (validationType === 'formatEmail' && this.isValidEmail(value)) {
-            formValidation.isValid = true;
+          if (validationType === 'formatEmail' && !this.isValidEmail(value)) {
+            formValidation.isValid = false;
             formValidation.errors[key] = MESSAGES.emailWrongFormat;
+
+            return;
           }
 
           formValidation.errors[key] = EMPTY_TEXT;
