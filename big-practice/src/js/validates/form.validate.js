@@ -8,9 +8,7 @@ class FormValidate {
    * @param {string} value - Comparative value
    */
   isValidEmail(value) {
-    if (!EMAIL_REGEX.test(value)) {
-      return value;
-    }
+    return !EMAIL_REGEX.test(value);
   }
 
   /**
@@ -19,9 +17,7 @@ class FormValidate {
    * @param {string} value - Comparative value
    */
   isEmpty(value) {
-    if (!value) {
-      return !value;
-    }
+    return !value;
   }
 
   /**
