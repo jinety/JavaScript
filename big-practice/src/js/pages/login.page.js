@@ -73,7 +73,7 @@ class Login {
       localStorage.setItem(USERNAME_KEY, userList[0].email);
 
       // Switch to dashboard page
-      window.location.href = DASHBOARD_PAGE;
+      // window.location.href = DASHBOARD_PAGE;
     } catch {
       DocumentHelper.showErrorMessage(this.generalWarnMsg, MESSAGES.getAccountErr);
     }
