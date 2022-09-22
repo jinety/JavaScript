@@ -43,6 +43,7 @@ class FormValidate {
           if (validationType === 'empty' && this.isEmpty(value)) {
             formValidation.isValid = false;
             formValidation.errors[key] = MESSAGES.empty;
+
             return;
           }
 
@@ -50,6 +51,7 @@ class FormValidate {
           if (validationType === 'formatEmail' && !this.isValidEmail(value)) {
             formValidation.isValid = false;
             formValidation.errors[key] = MESSAGES.emailWrongFormat;
+
             return;
           }
 
