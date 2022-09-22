@@ -37,7 +37,7 @@ class Login {
     }
 
     try {
-      const userList = await AccountService.getAccount(data);
+      const userList = await AccountService.getAccount(data.email, data.password);
 
       // IncorrectLoginAccount
       if (userList.length === 0) {
