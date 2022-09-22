@@ -1,9 +1,8 @@
 import { formValidate } from '../validates/form.validate';
-import { apiService } from '../service/api.service';
 import { DocumentHelper } from '../helpers/document.helper';
-import { ACCOUNTS_API } from '../constants/url-api.constant';
+import { AccountService } from '../service/account.service';
 import { MESSAGES, EMPTY_TEXT } from '../constants/message.constant';
-import { DASHBOARD_PAGE, USERNAME_KEY, LOGIN_PAGE } from '../constants/app.constant';
+import { DASHBOARD_PAGE, USERNAME_KEY } from '../constants/app.constant';
 
 class Login {
   loginBtn = document.getElementById('loginBtn');
@@ -29,7 +28,6 @@ class Login {
       password: ['empty'],
     };
     const validate = formValidate.validateForm(data, config);
-    const url = `${ACCOUNTS_API}?email=${data.email}&password=${data.password}`;
 
     if (!validate.isValid) {
       DocumentHelper.showErrorMessage(this.emailInput, validate.errors.email);
@@ -39,7 +37,7 @@ class Login {
     }
 
     try {
-      const userList = await apiService.get(url);
+      const userList = await AccountService.getLoginUser(data.email, data.password);
 
       // IncorrectLoginAccount
       if (userList.length === 0) {
