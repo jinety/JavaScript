@@ -35,6 +35,7 @@ class FormValidate {
     // Point to the key in the data object
     Object.keys(data).forEach((key) => {
       const value = data[key];
+      console.log(value, this.isValidEmail(value));
 
       // There is a key in the config
       if (config[key]) {
