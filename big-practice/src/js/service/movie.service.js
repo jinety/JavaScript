@@ -14,7 +14,7 @@ export class MovieService {
    *
    * @param {string} name - Movie name
    */
-  static async getAllName(name) {
+  static async getAllByName(name) {
     return await apiService.get(`${MOVIES_API}?name=${name}`);
   }
 
