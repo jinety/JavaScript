@@ -45,4 +45,8 @@ export class MovieService {
   static async update(id, data) {
     return apiService.put(`${MOVIES_API}/${id}`, data);
   }
+
+  static async delete(id) {
+    return await apiService.delete(`${MOVIES_API}/${id}`);
+  }
 }
