@@ -224,7 +224,7 @@ class Dashboard {
     const deleteBtnWarningId = this.modalWarningDeleteBtn.getAttribute('data-id');
     const deleteRow = document.querySelector(`[data-id="${deleteBtnWarningId}"]`);
 
-    await apiService.delete(`${MOVIES_API}/${deleteBtnWarningId}`);
+    await MovieService.delete(deleteBtnWarningId);
     deleteRow.remove();
   }
 

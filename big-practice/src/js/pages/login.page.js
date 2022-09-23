@@ -1,6 +1,6 @@
 import { formValidate } from '../validates/form.validate';
 import { DocumentHelper } from '../helpers/document.helper';
-import { AccountService } from '../service/account.service';
+import { AccountService } from '../service/account.service.js';
 import { MESSAGES, EMPTY_TEXT } from '../constants/message.constant';
 import { DASHBOARD_PAGE, USERNAME_KEY } from '../constants/app.constant';
 
