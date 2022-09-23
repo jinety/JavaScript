@@ -28,12 +28,21 @@ export class MovieService {
   }
 
   /**
+   * Get movie by id in database
+   *
+   * @param {*} id - Id of the movie in the database
+   */
+  static async getById(id) {
+    return await apiService.get(`${MOVIES_API}/${id}`);
+  }
+
+  /**
    * Update movie in database
    *
    * @param {*} id - Id of the movie in the database
    * @param {*} data - The object contains the information of the movie
    */
-  static async putById(id, data) {
+  static async update(id, data) {
     return apiService.put(`${MOVIES_API}/${id}`, data);
   }
 }
