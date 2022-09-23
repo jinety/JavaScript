@@ -4,6 +4,7 @@ import { DocumentHelper } from '../helpers/document.helper';
 import { ModalHelper } from '../helpers/modal.helper';
 import { MovieTemplate } from '../templates/movie.template';
 import { ParseHelper } from '../helpers/parse.helper';
+import { MovieService } from '../service/movie.service';
 import { MOVIES_API } from '../constants/url-api.constant';
 import { MESSAGES } from '../constants/message.constant';
 import { USERNAME_KEY, LOGIN_PAGE } from '../constants/app.constant';
@@ -107,7 +108,7 @@ class Dashboard {
    */
   async handleRenderTable() {
     try {
-      const result = await apiService.get(MOVIES_API);
+      const result = await MovieService.getAllMovies();
       let tableTemplate = '';
 
       result.forEach((movie) => {
