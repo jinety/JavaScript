@@ -30,7 +30,7 @@ export class MovieService {
   /**
    * Get movie by id in database
    *
-   * @param {*} id - Id of the movie in the database
+   * @param {number} id - Id of the movie in the database
    */
   static async getById(id) {
     return await apiService.get(`${MOVIES_API}/${id}`);
@@ -39,13 +39,18 @@ export class MovieService {
   /**
    * Update movie in database
    *
-   * @param {*} id - Id of the movie in the database
-   * @param {*} data - The object contains the information of the movie
+   * @param {number} id - Id of the movie in the database
+   * @param {string} data - The object contains the information of the movie
    */
   static async update(id, data) {
     return apiService.put(`${MOVIES_API}/${id}`, data);
   }
 
+  /**
+   * Remove movie from database
+   *
+   * @param {number} id - Id of the movie in the database
+   */
   static async delete(id) {
     return await apiService.delete(`${MOVIES_API}/${id}`);
   }
