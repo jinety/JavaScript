@@ -21,4 +21,8 @@ export class MovieService {
   static async post(data) {
     return await apiService.post(MOVIES_API, data);
   }
+
+  static async putById(id, data) {
+    return apiService.put(`${MOVIES_API}/${id}`, data);
+  }
 }

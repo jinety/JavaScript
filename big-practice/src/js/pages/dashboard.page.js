@@ -196,14 +196,14 @@ class Dashboard {
         return;
       }
 
-      const movieList = await apiService.get(`${MOVIES_API}?name=${data.name}`);
+      const movieList = await MovieService.getByName(data.name);
       const isValidMovie = movieList.length === 0
         || movieList[0].id === ParseHelper.parseInt(formMovieId);
 
       // Check if the movie exists or not
       if (isValidMovie) {
         const updateRow = document.querySelector(`[data-id="${formMovieId}"]`);
-        const updateMovie = await apiService.put(`${MOVIES_API}/${formMovieId}`, data);
+        const updateMovie = await MovieService.putById(formMovieId, data);
 
         updateRow.innerHTML = MovieTemplate.renderTableRow(updateMovie);
         this.handleUpdateButtons();
