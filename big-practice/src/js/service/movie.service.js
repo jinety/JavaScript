@@ -3,11 +3,9 @@ import { apiService } from './api.service';
 
 export class MovieService {
   /**
-   * Get all the movies in the server
+   * Get all movies in the database
    */
   static async getAllMovies() {
-    const movies = await apiService.get(MOVIES_API);
-
-    return movies;
+    return await apiService.get(MOVIES_API);
   }
 }
