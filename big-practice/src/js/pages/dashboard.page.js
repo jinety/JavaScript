@@ -148,7 +148,7 @@ class Dashboard {
         return;
       }
 
-      const movieList = await MovieService.get(data.name);
+      const movieList = await MovieService.getAllName(data.name);
 
       if (movieList.length === 0) {
         const newMovie = await MovieService.post(data);
@@ -196,7 +196,7 @@ class Dashboard {
         return;
       }
 
-      const movieList = await MovieService.get(data.name);
+      const movieList = await MovieService.getAllName(data.name);
       const isValidMovie = movieList.length === 0
         || movieList[0].id === ParseHelper.parseInt(formMovieId);
 
