@@ -151,7 +151,7 @@ class Dashboard {
       const movieList = await MovieService.getByName(data.name);
 
       if (movieList.length === 0) {
-        const newMovie = await apiService.post(MOVIES_API, data);
+        const newMovie = await MovieService.post(data);
         const newRow = this.tableBody.insertRow();
 
         // Add class for new row
