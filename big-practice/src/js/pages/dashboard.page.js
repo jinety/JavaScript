@@ -108,7 +108,7 @@ class Dashboard {
    */
   async handleRenderTable() {
     try {
-      const result = await MovieService.getAllMovies();
+      const result = await MovieService.getMovies();
       let tableTemplate = '';
 
       result.forEach((movie) => {

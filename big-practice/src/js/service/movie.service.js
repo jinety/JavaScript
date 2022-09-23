@@ -5,7 +5,7 @@ export class MovieService {
   /**
    * Get all movies in the database
    */
-  static async getAllMovies() {
+  static async getMovies() {
     return await apiService.get(MOVIES_API);
   }
 }
