@@ -54,7 +54,7 @@ class Dashboard {
    */
   async showUpdateMovieModal(item) {
     const movieId = item.dataset.id;
-    const movieData = await apiService.get(`${MOVIES_API}/${movieId}`);
+    const movieData = await MovieService.getById(movieId);
 
     ModalHelper.showModal(this.modalForm);
     this.nameMovieInput.value = movieData.name;
@@ -148,7 +148,7 @@ class Dashboard {
         return;
       }
 
-      const movieList = await MovieService.getByName(data.name);
+      const movieList = await MovieService.getAllByName(data.name);
 
       if (movieList.length === 0) {
         const newMovie = await MovieService.post(data);
@@ -196,14 +196,14 @@ class Dashboard {
         return;
       }
 
-      const movieList = await apiService.get(`${MOVIES_API}?name=${data.name}`);
+      const movieList = await MovieService.getAllByName(data.name);
       const isValidMovie = movieList.length === 0
         || movieList[0].id === ParseHelper.parseInt(formMovieId);
 
       // Check if the movie exists or not
       if (isValidMovie) {
         const updateRow = document.querySelector(`[data-id="${formMovieId}"]`);
-        const updateMovie = await apiService.put(`${MOVIES_API}/${formMovieId}`, data);
+        const updateMovie = await MovieService.update(formMovieId, data);
 
         updateRow.innerHTML = MovieTemplate.renderTableRow(updateMovie);
         this.handleUpdateButtons();
