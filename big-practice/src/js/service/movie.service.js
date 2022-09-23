@@ -8,4 +8,13 @@ export class MovieService {
   static async getAll() {
     return await apiService.get(MOVIES_API);
   }
+
+  /**
+   * Get movie by name in database
+   *
+   * @param {string} name
+   */
+  static async getByName(name) {
+    return await apiService.get(`${MOVIES_API}?name=${name}`);
+  }
 }

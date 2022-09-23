@@ -148,7 +148,7 @@ class Dashboard {
         return;
       }
 
-      const movieList = await apiService.get(`${MOVIES_API}?name=${data.name}`);
+      const movieList = await MovieService.getByName(data.name);
 
       if (movieList.length === 0) {
         const newMovie = await apiService.post(MOVIES_API, data);
