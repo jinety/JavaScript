@@ -8,4 +8,8 @@ export class MovieService {
   static async getAll() {
     return await apiService.get(MOVIES_API);
   }
+
+  static async getByName(name) {
+    return await apiService.get(`${MOVIES_API}?name=${name}`);
+  }
 }
