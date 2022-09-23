@@ -17,4 +17,8 @@ export class MovieService {
   static async getByName(name) {
     return await apiService.get(`${MOVIES_API}?name=${name}`);
   }
+
+  static async post(data) {
+    return await apiService.post(MOVIES_API, data);
+  }
 }
